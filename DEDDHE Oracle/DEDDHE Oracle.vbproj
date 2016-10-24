@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F3C2AA77-8A69-4639-A356-2FD0CB2EF3C4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>DEDDHE_Oracle.My.MyApplication</StartupObject>
+    <RootNamespace>DEDDHE_Oracle</RootNamespace>
+    <AssemblyName>DEDDHE Oracle</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>DEDDHE Oracle.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>DEDDHE Oracle.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Other\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathParserNet">
+      <HintPath>..\..\..\..\..\Dropbox\Visual Studio\Code Pre-Made\DLLs\MathParserNet\MathParserNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.interop.access.dao, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 11.0\Visual Studio Tools for Office\PIA\Office14\Microsoft.Office.interop.access.dao.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\..\..\..\..\Dropbox\Visual Studio\Code Pre-Made\DLLs\Windows API Code Pack 1.1\binaries\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\..\..\..\Dropbox\Visual Studio\Code Pre-Made\DLLs\Windows API Code Pack 1.1\binaries\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OSVersionInfoDLL">
+      <HintPath>..\..\..\..\..\Dropbox\Visual Studio\Code Pre-Made\DLLs\OSVersionInfoDLL 1.0\OSVersionInfoDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="RDotNet">
+      <HintPath>..\..\..\..\..\Dropbox\Visual Studio\Code Pre-Made\DLLs\R.NET 1.5.0\RDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="RDotNet.NativeLibrary">
+      <HintPath>..\..\..\..\..\Dropbox\Visual Studio\Code Pre-Made\DLLs\R.NET 1.5.0\RDotNet.NativeLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="frmMain.designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Other\modGlobal.vb" />
+    <Compile Include="Standards\Classes\clsDataGridViewPrinter.vb" />
+    <Compile Include="Standards\Classes\clsDisplayResolutions.vb" />
+    <Compile Include="Standards\Classes\clsFullScreen.vb" />
+    <Compile Include="Standards\Classes\clsNotifier.vb" />
+    <Compile Include="Standards\Forms\dlgTypeBox.designer.vb">
+      <DependentUpon>dlgTypeBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\dlgTypeBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmAbout.designer.vb">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmCrashLog.designer.vb">
+      <DependentUpon>frmCrashLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmCrashLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmDatabaseMaintenance.designer.vb">
+      <DependentUpon>frmDatabaseMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmDatabaseMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmDataGridView.designer.vb">
+      <DependentUpon>frmDataGridView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmDataGridView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmFindR.designer.vb">
+      <DependentUpon>frmFindR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmFindR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmFirstTime.designer.vb">
+      <DependentUpon>frmFirstTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmFirstTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmHelp.designer.vb">
+      <DependentUpon>frmHelp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmHelp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmLicenseViewer.Designer.vb">
+      <DependentUpon>frmLicenseViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmLicenseViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmPleaseWait.designer.vb">
+      <DependentUpon>frmPleaseWait.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmPleaseWait.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmPresentation.designer.vb">
+      <DependentUpon>frmPresentation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmPresentation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSettings.designer.vb">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSkinCreator.designer.vb">
+      <DependentUpon>frmSkinCreator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSkinCreator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSplashScreen.designer.vb">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSuggestionAndComplaint.designer.vb">
+      <DependentUpon>frmSuggestionAndComplaint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmSuggestionAndComplaint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Forms\frmToastNotification.designer.vb">
+      <DependentUpon>frmToastNotification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Standards\Forms\frmToastNotification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Standards\Modules\modChangeLanguage.vb" />
+    <Compile Include="Standards\Modules\modChangeResolution.vb" />
+    <Compile Include="Standards\Modules\modCommon.vb" />
+    <Compile Include="Standards\Modules\modDatabase.vb" />
+    <Compile Include="Standards\Modules\modIO.vb" />
+    <Compile Include="Standards\Modules\modKeyboard.vb" />
+    <Compile Include="Standards\Modules\modMath.vb" />
+    <Compile Include="Standards\Modules\modR.vb" />
+    <Compile Include="Standards\Modules\modSkin.vb" />
+    <Compile Include="Standards\Modules\modUpdate.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\dlgTypeBox.resx">
+      <DependentUpon>dlgTypeBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmAbout.resx">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmCrashLog.resx">
+      <DependentUpon>frmCrashLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmDatabaseMaintenance.resx">
+      <DependentUpon>frmDatabaseMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmDataGridView.resx">
+      <DependentUpon>frmDataGridView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmFindR.resx">
+      <DependentUpon>frmFindR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmFirstTime.resx">
+      <DependentUpon>frmFirstTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmHelp.resx">
+      <DependentUpon>frmHelp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmLicenseViewer.resx">
+      <DependentUpon>frmLicenseViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmPleaseWait.resx">
+      <DependentUpon>frmPleaseWait.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmPresentation.resx">
+      <DependentUpon>frmPresentation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmSettings.resx">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmSkinCreator.resx">
+      <DependentUpon>frmSkinCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmSuggestionAndComplaint.resx">
+      <DependentUpon>frmSuggestionAndComplaint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Standards\Forms\frmToastNotification.resx">
+      <DependentUpon>frmToastNotification.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Other\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
