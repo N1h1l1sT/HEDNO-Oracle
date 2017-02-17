@@ -4,7 +4,7 @@ Option Strict On
 Public Class frmAbout
     Public strLanguage_About() As String
 
-    Private Sub About_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub About_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
         Try
 
             'initialization
@@ -35,7 +35,7 @@ Public Class frmAbout
         End Try
     End Sub
 
-    Private Sub cmdExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdExit.Click
+    Private Sub cmdExit_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cmdExit.Click
         Close()
         Exit Sub
     End Sub

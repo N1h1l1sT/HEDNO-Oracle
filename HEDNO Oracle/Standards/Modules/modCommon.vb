@@ -13,7 +13,7 @@
 'i.e.      :        0xE01010B0A3
 
 'Prevent Form from Closing (add code, don't go to "form_Closing" event cuz this is different)
-'Private Shadows Sub FormClosing(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+'Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
 '    e.Cancel = True
 'End Sub
 
@@ -552,27 +552,41 @@ Module modCommon
         End Try
     End Function
 
-    Public Function GetSubstrAfterString(ByVal StrToBeSearched() As String, ByVal StrToGetSubstrAfter As String, Optional ByVal ResultIfStrNotFound As String = "", Optional ByVal StartsWith As Boolean = False, Optional ByVal LastIndexOfInsteadOfFirst As Boolean = False) As String
+    ''' <summary>
+    ''' CASE SENSITIVE (unless otherwise specified): Gets a rest of the line from a string array extracted from the line that contains the specific string (StrToGetSubstrAfter).
+    ''' </summary>
+    ''' <param name="StrToBeSearched"></param>
+    ''' <param name="StrToGetSubstrAfter"></param>
+    ''' <param name="ResultIfStrNotFound"></param>
+    ''' <param name="StartsWith"></param>
+    ''' <param name="LastIndexOfInsteadOfFirst"></param>
+    ''' <param name="RowIndex"></param>
+    ''' <param name="StrIndexInRow"></param>
+    ''' <returns></returns>
+    Public Function GetSubstrAfterString(ByVal StrToBeSearched() As String, ByVal StrToGetSubstrAfter As String, Optional ByVal ResultIfStrNotFound As String = "", Optional ByVal StartsWith As Boolean = False, Optional ByVal LastIndexOfInsteadOfFirst As Boolean = False, Optional ByRef RowIndex As Integer = -1, Optional ByRef StrIndexInRow As Integer = -1, Optional ByVal IgnoreCase As Boolean = False) As String
         Dim strResult As String = ResultIfStrNotFound
+        Dim MyStringComparison As StringComparison = StringComparison.InvariantCulture
 
         For i = 0 To StrToBeSearched.Length - 1
             If StrToBeSearched(i).Contains(StrToGetSubstrAfter) Then
                 Dim Index As Integer = -1
 
-                If Not StartsWith AndAlso Not LastIndexOfInsteadOfFirst Then '                                                              Anywhere in the string, first occurance
-                    Index = StrToBeSearched(i).IndexOf(StrToGetSubstrAfter) + StrToGetSubstrAfter.Length
+                If Not StartsWith AndAlso Not LastIndexOfInsteadOfFirst Then '                                                                               Anywhere in the string, first occurrence
+                    Index = StrToBeSearched(i).IndexOf(StrToGetSubstrAfter, MyStringComparison) + StrToGetSubstrAfter.Length
 
-                ElseIf StartsWith AndAlso StrToBeSearched(i).StartsWith(StrToGetSubstrAfter) AndAlso Not LastIndexOfInsteadOfFirst Then '   Start of the string, first occurance
+                ElseIf StartsWith AndAlso StrToBeSearched(i).StartsWith(StrToGetSubstrAfter, MyStringComparison) AndAlso Not LastIndexOfInsteadOfFirst Then 'Start of the string, first occurrence
                     Index = StrToGetSubstrAfter.Length
 
-                ElseIf Not StartsWith AndAlso LastIndexOfInsteadOfFirst Then '                                                              Anywhere in the string, Last occurance
-                    Index = StrToBeSearched(i).LastIndexOf(StrToGetSubstrAfter) + StrToGetSubstrAfter.Length
+                ElseIf Not StartsWith AndAlso LastIndexOfInsteadOfFirst Then '                                                                               Anywhere in the string, Last occurrence
+                    Index = StrToBeSearched(i).LastIndexOf(StrToGetSubstrAfter, MyStringComparison) + StrToGetSubstrAfter.Length
 
-                ElseIf StartsWith AndAlso StrToBeSearched(i).StartsWith(StrToGetSubstrAfter) AndAlso LastIndexOfInsteadOfFirst Then '       Start of the string, Last occurance
-                    Index = StrToBeSearched(i).LastIndexOf(StrToGetSubstrAfter) + StrToGetSubstrAfter.Length
+                ElseIf StartsWith AndAlso StrToBeSearched(i).StartsWith(StrToGetSubstrAfter) AndAlso LastIndexOfInsteadOfFirst Then '                        Start of the string, Last occurrence
+                    Index = StrToBeSearched(i).LastIndexOf(StrToGetSubstrAfter, MyStringComparison) + StrToGetSubstrAfter.Length
                 End If
 
                 If Index <> -1 Then
+                    RowIndex = i
+                    StrIndexInRow = Index
                     strResult = StrToBeSearched(i).Substring(Index)
                     Exit For
                 End If
@@ -4322,15 +4336,16 @@ begin:
     End Function
 
 
-    Public Function SpaceAString(ByVal StringToSpace As String, ByVal ItemMaxLength As Integer, Optional ByVal RemOnExcess As String = "None") As String
+    Public Function SpaceAString(ByVal StringToSpace As String, ByVal ItemMaxLength As Integer, Optional ByVal RemOnExcess As String = "None", Optional ByVal PrefixInsteadOfSuffix As Boolean = False) As String
         Dim sbResult As New StringBuilder
         sbResult.Append(StringToSpace)
 
         If StringToSpace.Length < ItemMaxLength Then
-            For i As Integer = StringToSpace.Length To ItemMaxLength - 1
-                sbResult.Append(" ")
-            Next
-
+            If Not PrefixInsteadOfSuffix Then
+                sbResult.Insert(sbResult.Length, " ", ItemMaxLength - StringToSpace.Length)
+            Else
+                sbResult.Insert(0, " ", ItemMaxLength - StringToSpace.Length)
+            End If
         ElseIf StringToSpace.Length > ItemMaxLength Then
             If RemOnExcess.ToLower = "top" OrElse RemOnExcess.ToLower = "begin" OrElse RemOnExcess.ToLower = "beginning" OrElse RemOnExcess.ToLower = "left" Then
                 sbResult.Remove(0, StringToSpace.Length - ItemMaxLength)

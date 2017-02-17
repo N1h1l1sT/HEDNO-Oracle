@@ -260,7 +260,7 @@ Public NotInheritable Class clsNotifier
     ''' <summary>
     ''' Animates the form automatically when it is loaded.
     ''' </summary>
-    Private Sub Form_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles _form.Load
+    Private Sub Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles _form.Load
         'MDI child forms do not support transparency so do not try to use the Blend method.
         If _form.MdiParent Is Nothing OrElse _method <> AnimationMethod.Blend Then
             'Activate the form.
@@ -273,7 +273,7 @@ Public NotInheritable Class clsNotifier
     ''' <summary>
     ''' Animates the form automatically when it is shown or hidden.
     ''' </summary>
-    Private Sub Form_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles _form.VisibleChanged
+    Private Sub Form_VisibleChanged(ByVal sender As Object, ByVal e As EventArgs) Handles _form.VisibleChanged
         'Do not attempt to animate MDI child forms while showing or hiding as they do not behave as expected.
         If _form.MdiParent Is Nothing Then
             Dim flags As Integer = _method Or _direction

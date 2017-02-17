@@ -92,7 +92,7 @@ Public Class frmToastNotification
 #End Region 'Methods
 
 #Region " Event Handlers "
-    Private Sub ToastForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ToastForm_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
         'Display the form just above the system tray.
         Me.Location = New Point(Screen.PrimaryScreen.WorkingArea.Width - Me.Width - 5,
                                 Screen.PrimaryScreen.WorkingArea.Height - Me.Height - 5)
@@ -116,7 +116,7 @@ Public Class frmToastNotification
         tmrLifeTimer.Start()
     End Sub
 
-    Private Sub ToastForm_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub ToastForm_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
         'Prevent the form taking focus when it is initially shown.
         If Not Me.allowFocus Then
             'Activate the window that previously had the focus.
@@ -124,7 +124,7 @@ Public Class frmToastNotification
         End If
     End Sub
 
-    Private Sub ToastForm_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+    Private Sub ToastForm_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Shown
         'Once the animation has completed the form can receive focus.
         Me.allowFocus = True
 

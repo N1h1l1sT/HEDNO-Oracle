@@ -153,7 +153,7 @@ Public Class dlgTypeBox
         End Try
     End Sub
 
-    Private Sub TypeBox_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub TypeBox_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
         Call Typebox_Language(Me)
 
         Call frmSkin(Me, False)
@@ -2987,7 +2987,7 @@ Public Class dlgTypeBox
     End Sub
 #End Region
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles OK_Button.Click
         Try
             If TypeBoxMode = TypeMode._Text Then
                 If AllowNothingAsResult OrElse strUserInput.Length > 0 Then
@@ -3336,12 +3336,12 @@ Public Class dlgTypeBox
 
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles Cancel_Button.Click
         DialogResult = DialogResult.Cancel
         Close()
     End Sub
 
-    Private Sub dtFrom_ValueChanged(sender As System.Object, e As System.EventArgs) Handles dtFrom.ValueChanged
+    Private Sub dtFrom_ValueChanged(sender As System.Object, e As EventArgs) Handles dtFrom.ValueChanged
         If dtFrom.Value > dtTo.Value Then
             dtTo.Value = dtFrom.Value.Date
             'If DateFormat.Contains("HH") AndAlso dtFrom.Value.Hour = 0 Then
@@ -3356,7 +3356,7 @@ Public Class dlgTypeBox
         End If
     End Sub
 
-    Private Sub dtTo_ValueChanged(sender As System.Object, e As System.EventArgs) Handles dtTo.ValueChanged
+    Private Sub dtTo_ValueChanged(sender As System.Object, e As EventArgs) Handles dtTo.ValueChanged
         'Dim TimeDifference As TimeSpan
         If dtTo.Value < dtFrom.Value Then
             dtFrom.Value = dtTo.Value
@@ -3379,7 +3379,7 @@ Public Class dlgTypeBox
         Throw New InvalidOperationException("Use ShowDialog to display this dialogue")
     End Sub
 
-    Private Sub lblInfo_SizeChanged(sender As Object, e As System.EventArgs) Handles lblInfo.SizeChanged, lblInfo.TextChanged
+    Private Sub lblInfo_SizeChanged(sender As Object, e As EventArgs) Handles lblInfo.SizeChanged, lblInfo.TextChanged
         Dim ProposedWidth As Integer
 
         If lblInfo.Width + lblInfo.Location.X > Width Then
@@ -3394,7 +3394,7 @@ Public Class dlgTypeBox
 
     End Sub
 
-    Private Sub lblValidRange_SizeChanged(sender As Object, e As System.EventArgs) Handles lblValidRange.SizeChanged
+    Private Sub lblValidRange_SizeChanged(sender As Object, e As EventArgs) Handles lblValidRange.SizeChanged
         Dim ProposedWidth As Integer
 
         If lblValidRange.Width + lblValidRange.Location.X > tlpButtons.Location.X - 8 Then
@@ -3408,7 +3408,7 @@ Public Class dlgTypeBox
         End If
     End Sub
 
-    Private Sub lblMaxLength_SizeChanged(sender As Object, e As System.EventArgs) Handles lblPerLineBounds.SizeChanged
+    Private Sub lblMaxLength_SizeChanged(sender As Object, e As EventArgs) Handles lblPerLineBounds.SizeChanged
         Dim ProposedWidth As Integer
 
         If lblPerLineBounds.Width + lblPerLineBounds.Location.X > tlpButtons.Location.X - 8 Then

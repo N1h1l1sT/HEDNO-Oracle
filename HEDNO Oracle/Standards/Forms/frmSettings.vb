@@ -160,7 +160,7 @@ Public Class frmSettings
 
     End Sub
 
-    Private Sub cmdDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdDefault.Click
+    Private Sub cmdDefault_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cmdDefault.Click
         Try
             If MsgBox(strLanguage_Settings(8) & vbCrLf & vbCrLf & strLanguage_Settings(9), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then 'Are you sure you want to reset the settings?
                 File.Delete(strSettingsIni)
@@ -174,7 +174,7 @@ Public Class frmSettings
         End Try
     End Sub
 
-    Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
         'initialization
         Try
             isLoading = True
@@ -303,7 +303,7 @@ Public Class frmSettings
         End Try
     End Sub
 
-    Private Sub cmdCurrent_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCurrent.Click
+    Private Sub cmdCurrent_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cmdCurrent.Click
         Try
             'Disabling the program until the search sequence is finished
             Enabled = False
@@ -671,7 +671,7 @@ Public Class frmSettings
         End Try
     End Sub
 
-    Private Sub cmdApply_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdApply.Click
+    Private Sub cmdApply_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cmdApply.Click
         Try
             'Disabling the program until the search sequence is finished
             Enabled = False
@@ -1123,7 +1123,7 @@ Public Class frmSettings
     End Sub
 
 #Region "Standard: SelectedIndex/Text Changed"
-    Private Sub cbLanguage_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbLanguage.SelectedIndexChanged
+    Private Sub cbLanguage_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbLanguage.SelectedIndexChanged
         If Not isLoading Then
             Try
                 cmdApply.Enabled = True
@@ -1136,35 +1136,35 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub cbSkin_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbSkin.SelectedIndexChanged
+    Private Sub cbSkin_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbSkin.SelectedIndexChanged
         If Not isLoading Then
             cmdApply.Enabled = True
             cbSkin.Tag = "1"
         End If
     End Sub
 
-    Private Sub btnSkinAdvanced_Click(sender As System.Object, e As System.EventArgs) Handles btnSkinAdvanced.Click
+    Private Sub btnSkinAdvanced_Click(sender As System.Object, e As EventArgs) Handles btnSkinAdvanced.Click
         ShowForm(frmSkinCreator)
     End Sub
 
-    Private Sub cbStartWithWin_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbStartWithWin.SelectedIndexChanged
+    Private Sub cbStartWithWin_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbStartWithWin.SelectedIndexChanged
         If Not isLoading Then
             cmdApply.Enabled = True
             cbStartWithWin.Tag = "1"
         End If
     End Sub
 
-    Private Sub txtDelayTime_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDelayTime.Click
+    Private Sub txtDelayTime_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles txtDelayTime.Click
         txtDelayTime.Text = ""
     End Sub
 
-    Private Sub txtDelayTime_LostFocus(sender As Object, e As System.EventArgs) Handles txtDelayTime.LostFocus
+    Private Sub txtDelayTime_LostFocus(sender As Object, e As EventArgs) Handles txtDelayTime.LostFocus
         If txtDelayTime.Text = "" Then
             txtDelayTime.Text = strLanguage_Settings(3) 'Unknown
         End If
     End Sub
 
-    Private Sub txtDelayTime_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDelayTime.TextChanged
+    Private Sub txtDelayTime_TextChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles txtDelayTime.TextChanged
         If Not isLoading Then
 
             If txtDelayTime.Text <> "" Then
@@ -1188,21 +1188,21 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub cbShowStartupForm_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbShowStartupForm.SelectedIndexChanged
+    Private Sub cbShowStartupForm_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbShowStartupForm.SelectedIndexChanged
         If Not isLoading Then
             cmdApply.Enabled = True
             cbShowStartupForm.Tag = "1"
         End If
     End Sub
 
-    Private Sub cbCheckForNewVersion_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbCheckForNewVersion.SelectedIndexChanged
+    Private Sub cbCheckForNewVersion_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbCheckForNewVersion.SelectedIndexChanged
         If Not isLoading Then
             cmdApply.Enabled = True
             cbCheckForNewVersion.Tag = "1"
         End If
     End Sub
 
-    Private Sub btnBrowseDBPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseDBPath.Click
+    Private Sub btnBrowseDBPath_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnBrowseDBPath.Click
         ofdFileBrowser.FileName = Nothing
         ofdFileBrowser.InitialDirectory = strDatabaseDir
         ofdFileBrowser.DefaultExt = ".accdb"
@@ -1214,21 +1214,21 @@ Public Class frmSettings
 
     End Sub
 
-    Private Sub txtDBFile_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDBFile.TextChanged
+    Private Sub txtDBFile_TextChanged(sender As System.Object, e As EventArgs) Handles txtDBFile.TextChanged
         If Not isLoading Then
             cmdApply.Enabled = True
             txtDBFile.Tag = "1"
         End If
     End Sub
 
-    Private Sub txtDBpass_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDBpass.TextChanged
+    Private Sub txtDBpass_TextChanged(sender As System.Object, e As EventArgs) Handles txtDBpass.TextChanged
         If Not isLoading AndAlso txtDBpass.Enabled = True Then
             cmdApply.Enabled = True
             txtDBpass.Tag = "1"
         End If
     End Sub
 
-    Private Sub cbAccessType_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbAccessType.SelectedIndexChanged
+    Private Sub cbAccessType_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbAccessType.SelectedIndexChanged
         If cbAccessType.SelectedIndex <> -1 Then
 
             If Not isLoading Then
@@ -1274,14 +1274,14 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub cbSplitDbEveryMonth_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbSplitDbEveryMonth.SelectedIndexChanged
+    Private Sub cbSplitDbEveryMonth_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbSplitDbEveryMonth.SelectedIndexChanged
         If Not isLoading Then
             cmdApply.Enabled = True
             cbSplitDbEveryMonth.Tag = "1"
         End If
     End Sub
 
-    Private Sub btnDatabaseTables_Click(sender As System.Object, e As System.EventArgs) Handles btnDatabaseTables.Click
+    Private Sub btnDatabaseTables_Click(sender As System.Object, e As EventArgs) Handles btnDatabaseTables.Click
         Dim Tables() As String = {}
         Dim CurrentTables() As String = Nothing
 
@@ -1292,7 +1292,7 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub txtDatabaseTables_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDatabaseTables.TextChanged
+    Private Sub txtDatabaseTables_TextChanged(sender As System.Object, e As EventArgs) Handles txtDatabaseTables.TextChanged
         If Not isLoading AndAlso txtDatabaseTables.Enabled = True Then
             cmdApply.Enabled = True
             txtDatabaseTables.Tag = "1"
@@ -1370,7 +1370,7 @@ Public Class frmSettings
 
 #End Region
 
-    Private Sub cmdExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdExit.Click
+    Private Sub cmdExit_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cmdExit.Click
         Close()
         Exit Sub
     End Sub

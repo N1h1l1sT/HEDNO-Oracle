@@ -6,7 +6,7 @@ Public Class frmHelp
     Public strLanguage_frmHelp() As String
     Dim CommandsFiles() As String = {}
 
-    Private Sub frmHelp_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmHelp_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
         Call Help_Language(Me)
 
         frmSkin(Me)
@@ -31,11 +31,11 @@ Public Class frmHelp
 
     End Sub
 
-    Private Sub lsbCommands_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsbCommands.SelectedIndexChanged
+    Private Sub lsbCommands_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles lsbCommands.SelectedIndexChanged
         If lsbCommands.SelectedIndex <> -1 Then wbUseage.Navigate(strLanguageFolders & CurrentLanguage & "\Help\" & lsbCommands.SelectedItem.ToString & ".html")
     End Sub
 
-    Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
+    Private Sub btnClose_Click(sender As System.Object, e As EventArgs) Handles btnClose.Click
         Close()
     End Sub
 

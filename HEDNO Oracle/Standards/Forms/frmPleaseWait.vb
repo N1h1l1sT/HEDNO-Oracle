@@ -20,7 +20,7 @@ Public Class frmPleaseWait
     Private Shared Function FlashWindow(ByVal hwnd As IntPtr, ByVal bInvert As Boolean) As Boolean
     End Function
 
-    Private Sub frmPleaseWait_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmPleaseWait_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
         Try
             Call PleaseWait_Language(Me)
 
@@ -45,7 +45,7 @@ Public Class frmPleaseWait
         tmrFlashWindowTimer.Enabled = True
     End Sub
 
-    Private Sub tmrPleaseWaitDots_Tick(sender As System.Object, e As System.EventArgs) Handles tmrPleaseWaitDots.Tick
+    Private Sub tmrPleaseWaitDots_Tick(sender As System.Object, e As EventArgs) Handles tmrPleaseWaitDots.Tick
 
         If TimerCount = 96 Then
             HasAlreadyFinishedOnce = True

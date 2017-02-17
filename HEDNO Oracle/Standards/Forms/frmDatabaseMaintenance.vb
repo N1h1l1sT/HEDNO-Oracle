@@ -5,7 +5,7 @@ Public Class frmDatabaseMaintenance
     Public strLanguage_DatabaseMaintenance_Tips() As String
 
 
-    Private Sub frmDatabaseMaintenance_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmDatabaseMaintenance_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
         Try
             Call DatabaseMaintenance_Language(Me)
             frmSkin(Me, False)
@@ -69,7 +69,7 @@ Public Class frmDatabaseMaintenance
 
     End Sub
 
-    Private Sub btnClearAll_Click(sender As System.Object, e As System.EventArgs) Handles btnClearAll.Click
+    Private Sub btnClearAll_Click(sender As System.Object, e As EventArgs) Handles btnClearAll.Click
         Select Case CurDBType
             Case DBType.Access97to2003, DBType.Access2007to2016
                 If Not isAccessDBBusy Then
@@ -101,7 +101,7 @@ Public Class frmDatabaseMaintenance
         End Select
     End Sub
 
-    Private Sub btnClearProds_Click(sender As System.Object, e As System.EventArgs) Handles btnClearSingleTable.Click
+    Private Sub btnClearProds_Click(sender As System.Object, e As EventArgs) Handles btnClearSingleTable.Click
         Select Case CurDBType
             Case DBType.Access97to2003, DBType.Access2007to2016
                 If Not isAccessDBBusy Then
@@ -152,7 +152,7 @@ Public Class frmDatabaseMaintenance
         End Select
     End Sub
 
-    Private Sub btnExit_Click(sender As System.Object, e As System.EventArgs) Handles btnExit.Click
+    Private Sub btnExit_Click(sender As System.Object, e As EventArgs) Handles btnExit.Click
         Close()
     End Sub
 

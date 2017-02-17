@@ -606,7 +606,7 @@ Partial Class frmMain
         Me.lblFuncInProgress.AutoSize = True
         Me.lblFuncInProgress.BackColor = System.Drawing.Color.Black
         Me.lblFuncInProgress.ForeColor = System.Drawing.Color.Cyan
-        Me.lblFuncInProgress.Location = New System.Drawing.Point(3, 0)
+        Me.lblFuncInProgress.Location = New System.Drawing.Point(15, 9)
         Me.lblFuncInProgress.Name = "lblFuncInProgress"
         Me.lblFuncInProgress.Size = New System.Drawing.Size(118, 13)
         Me.lblFuncInProgress.TabIndex = 7
@@ -723,7 +723,6 @@ Partial Class frmMain
         '
         'tmrFunctInProgress
         '
-        Me.tmrFunctInProgress.Enabled = True
         Me.tmrFunctInProgress.Interval = 1000
         '
         'frmMain

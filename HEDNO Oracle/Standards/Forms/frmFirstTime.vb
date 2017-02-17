@@ -11,7 +11,7 @@ Public Class frmFirstTime
     Dim ReadingTime As Integer = 3
     Dim isFirstTime As Boolean = isFirstTimeRun()
 
-    Private Sub frmFirstTime_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmFirstTime_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
         Call FirstTime_Language(Me)
 
         Call frmSkin(Me)
@@ -25,7 +25,7 @@ Public Class frmFirstTime
         End If
     End Sub
 
-    Private Sub tmrNext_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrNext.Tick
+    Private Sub tmrNext_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles tmrNext.Tick
         ReadingTime = ReadingTime - 1
         btnNext.Text = "(" & ReadingTime & ")" & strLanguage_FirstTime(2).Substring(3) ' &Next
         If ReadingTime = 0 Then
@@ -36,7 +36,7 @@ Public Class frmFirstTime
 
     End Sub
 
-    Private Sub btnNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNext.Click
+    Private Sub btnNext_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnNext.Click
         If isFirstTime Then
             Visible = False
 

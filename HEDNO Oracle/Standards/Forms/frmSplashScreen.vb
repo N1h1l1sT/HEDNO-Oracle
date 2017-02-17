@@ -29,7 +29,7 @@ Public NotInheritable Class frmSplashScreen
     '    Y = MousePosition.Y - Me.Location.Y
     'End Sub
 
-    Private Sub frmSplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmSplashScreen_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         On Error Resume Next
         If My.Application.Info.Title <> "" Then
             lblApplicationTitle.Text = My.Application.Info.Title

@@ -403,7 +403,7 @@ Module modDatabase
 
                         IF (NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE ('[' + name + ']' = @<%= DatabaseName %>DBName OR name = @<%= DatabaseName %>DBName)))
                         BEGIN
-	                        CREATE DATABASE [<%= DatabaseName %>]
+                            CREATE DATABASE [<%= DatabaseName %>]
                         END
                     </SQL>.Value, SQLConn)
                 SQLCmd.ExecuteNonQuery()
@@ -604,6 +604,235 @@ Module modDatabase
             ErrorMessage = ex.ToString
             Return False
         End Try
+    End Function
+#End Region
+
+#Region "DeleteSQLColumn"
+    Public Function DeleteSQLView(ByVal SQLViewName As String) As Boolean
+        Return DeleteSQLView(SQLConn, SQLViewName, DatabaseName)
+    End Function
+    Public Function DeleteSQLView(ByVal SQLConn As SqlConnection, ByVal SQLViewName As String, ByVal DatabaseName As String, Optional ByRef ErrorMessage As String = "") As Boolean
+        Try
+            'Making sure there's a SQLConn, else returning false as the Query cannot be executed
+            If SQLConn IsNot Nothing Then
+                Dim Result As Boolean = False
+                'Provided there's a SQLConn, getting its state to restore it at the end.
+                'If the connection is closed, we're temporarily opening it to execute the query
+                Dim OriginalSQLConnState As ConnectionState = SQLConn.State
+                If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+
+                Result = ExecuteSQLQuery(SQLConn,
+                    <SQL>
+                    USE <%= DatabaseName %>
+                    DROP VIEW dbo.[<%= SQLViewName %>]
+                    </SQL>.Value, ErrorMessage)
+
+                If OriginalSQLConnState = ConnectionState.Closed Then SQLConn.Close()
+                Return Result
+
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            ErrorMessage = ex.ToString
+            Return False
+        End Try
+    End Function
+#End Region
+
+#Region "SQLColumnsExist"
+    Public Function SQLColumnsExist(ByVal SQLTableName As String, ByVal SQLColumnsNames() As String, ByRef ColumnsExist As List(Of Boolean)) As Boolean
+        Return SQLColumnsExist(SQLConn, DatabaseName, SQLTableName, SQLColumnsNames, ColumnsExist)
+    End Function
+    Public Function SQLColumnsExist(ByVal SQLConn As SqlConnection, ByVal DatabaseName As String, ByVal SQLTableName As String, SQLColumnsNames() As String, ByRef ColumnsExist As List(Of Boolean), Optional ByRef ErrorMessage As String = "", Optional ByRef Succeeded As Boolean = False) As Boolean
+        Dim Result As Boolean = False
+        ColumnsExist = New List(Of Boolean)
+
+        Try
+            'Making sure there's a SQLConn, else returning false as the Query cannot be executed
+            If SQLConn IsNot Nothing Then
+                'Provided there's a SQLConn, getting its state to restore it at the end.
+                'If the connection is closed, we're temporarily opening it to execute the query
+                Dim OriginalSQLConnState As ConnectionState = SQLConn.State
+                If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+
+                For Each SQLColumnName In SQLColumnsNames
+                    Dim tmpErrorMessage As String = String.Empty
+                    Dim tmpSucceeded As Boolean = True
+                    ColumnsExist.Add(SQLColumnExists(SQLConn, DatabaseName, SQLTableName, SQLColumnName, tmpErrorMessage, tmpSucceeded))
+                    Result = Result And ColumnsExist.Item(ColumnsExist.Count - 1)
+                    Succeeded = Succeeded And tmpSucceeded
+                    If tmpErrorMessage <> String.Empty Then ErrorMessage &= SQLTableName & ":" & vbCrLf & tmpErrorMessage
+                Next
+
+                If OriginalSQLConnState = ConnectionState.Closed Then SQLConn.Close()
+                Succeeded = True
+
+            Else
+                Succeeded = False
+            End If
+
+        Catch ex As Exception
+            ErrorMessage = ex.ToString
+            Succeeded = False
+        End Try
+        Return Result
+    End Function
+#End Region
+
+#Region "SQLColumnExists"
+    Public Function SQLColumnExists(ByVal SQLTableName As String, ByVal SQLColumnName As String) As Boolean
+        Return SQLColumnExists(SQLConn, DatabaseName, SQLTableName, SQLColumnName)
+    End Function
+    Public Function SQLColumnExists(ByVal SQLConn As SqlConnection, ByVal DatabaseName As String, ByVal SQLTableName As String, SQLColumnName As String, Optional ByRef ErrorMessage As String = "", Optional ByRef Succeeded As Boolean = False) As Boolean
+        Dim Result As Boolean = False
+        Try
+            'Making sure there's a SQLConn, else returning false as the Query cannot be executed
+            If SQLConn IsNot Nothing Then
+                'Provided there's a SQLConn, getting its state to restore it at the end.
+                'If the connection is closed, we're temporarily opening it to execute the query
+                Dim OriginalSQLConnState As ConnectionState = SQLConn.State
+                If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+
+                Result = If((CInt(ExecuteSQLScalar(SQLConn, <SQL>
+                                                            USE [<%= DatabaseName %>]
+                                                            SELECT CASE
+                                                                WHEN EXISTS (SELECT *
+                                                                             FROM sys.columns
+                                                                             WHERE (Name = N'<%= SQLColumnName %>') AND (Object_ID = Object_ID(N'<%= SQLTableName %>'))
+                                                                             )
+                                                                THEN 1
+                                                                ELSE 0
+                                                            END  AS GeoLocXExists
+                                                            </SQL>.Value)) = 1), True, False)
+
+                If OriginalSQLConnState = ConnectionState.Closed Then SQLConn.Close()
+                Succeeded = True
+
+            Else
+                Succeeded = False
+            End If
+
+        Catch ex As Exception
+            ErrorMessage = ex.ToString
+            Succeeded = False
+        End Try
+        Return Result
+    End Function
+#End Region
+
+#Region "SQLTableExists"
+    Public Function SQLTableExists(ByVal SQLTableName As String) As Boolean
+        Return SQLTableExists(SQLConn, DatabaseName, SQLTableName)
+    End Function
+    Public Function SQLTableExists(ByVal SQLConn As SqlConnection, ByVal DatabaseName As String, ByVal SQLTableName As String, Optional ByRef ErrorMessage As String = "", Optional ByRef Succeeded As Boolean = False) As Boolean
+        Dim Result As Boolean = False
+        Try
+            'Making sure there's a SQLConn, else returning false as the Query cannot be executed
+            If SQLConn IsNot Nothing Then
+                'Provided there's a SQLConn, getting its state to restore it at the end.
+                'If the connection is closed, we're temporarily opening it to execute the query
+                Dim OriginalSQLConnState As ConnectionState = SQLConn.State
+                If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+
+                Result = If((CInt(ExecuteSQLScalar(SQLConn, <SQL>
+                                                            USE [<%= DatabaseName %>]
+                                                            SELECT CASE
+                                                                WHEN EXISTS (SELECT *
+                                                                              FROM sys.columns
+                                                                              WHERE Object_ID = Object_ID(N'<%= SQLTableName %>')
+                                                                              )
+                                                                THEN 1
+                                                                ELSE 0
+                                                            END  AS TableExists
+                                                            </SQL>.Value)) = 1), True, False)
+
+                If OriginalSQLConnState = ConnectionState.Closed Then SQLConn.Close()
+                Succeeded = True
+
+            Else
+                Succeeded = False
+            End If
+
+        Catch ex As Exception
+            ErrorMessage = ex.ToString
+            Succeeded = False
+        End Try
+        Return Result
+    End Function
+#End Region
+
+#Region "SQLViewExists"
+    Public Function SQLViewExists(ByVal SQLViewName As String) As Boolean
+        Return SQLViewExists(SQLConn, DatabaseName, SQLViewName)
+    End Function
+    Public Function SQLViewExists(ByVal SQLConn As SqlConnection, ByVal DatabaseName As String, ByVal SQLViewName As String, Optional ByRef ErrorMessage As String = "", Optional ByRef Succeeded As Boolean = False) As Boolean
+        Dim Result As Boolean = False
+        Try
+            'Making sure there's a SQLConn, else returning false as the Query cannot be executed
+            If SQLConn IsNot Nothing Then
+                'Provided there's a SQLConn, getting its state to restore it at the end.
+                'If the connection is closed, we're temporarily opening it to execute the query
+                Dim OriginalSQLConnState As ConnectionState = SQLConn.State
+                If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+
+                Result = If((CInt(ExecuteSQLScalar(SQLConn, <SQL>
+                                                                USE [<%= DatabaseName %>]
+                                                                SELECT CASE
+                                                                    WHEN EXISTS (SELECT *
+                                                                                    FROM sys.views
+                                                                                    WHERE name = N'<%= SQLViewName %>'
+                                                                                    )
+                                                                    THEN 1
+                                                                    ELSE 0
+                                                                END  AS TableExists
+                                                            </SQL>.Value,,)) = 1), True, False)
+
+                If OriginalSQLConnState = ConnectionState.Closed Then SQLConn.Close()
+                Succeeded = True
+
+            Else
+                Succeeded = False
+            End If
+
+        Catch ex As Exception
+            ErrorMessage = ex.ToString
+            Succeeded = False
+        End Try
+        Return Result
+    End Function
+#End Region
+
+#Region "ExecuteSQLScalar"
+    Public Function ExecuteSQLScalar(ByVal QueryString As String) As Object
+        Return ExecuteSQLScalar(SQLConn, QueryString)
+    End Function
+    Public Function ExecuteSQLScalar(ByVal SQLConn As SqlConnection, ByVal QueryString As String, Optional ByRef ErrorMessage As String = "", Optional ByRef Succeeded As Boolean = False) As Object
+        Dim Result As Object = Nothing
+        Try
+            'Making sure there's a SQLConn, else returning false as the Query cannot be executed
+            If SQLConn IsNot Nothing Then
+                'Provided there's a SQLConn, getting its state to restore it at the end.
+                'If the connection is closed, we're temporarily opening it to execute the query
+                Dim OriginalSQLConnState As ConnectionState = SQLConn.State
+                If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+
+                Dim SQLCmd As New SqlCommand(QueryString, SQLConn)
+                Result = SQLCmd.ExecuteScalar()
+
+                If OriginalSQLConnState = ConnectionState.Closed Then SQLConn.Close()
+                Succeeded = True
+
+            Else
+                Succeeded = False
+            End If
+
+        Catch ex As Exception
+            ErrorMessage = ex.ToString
+            Succeeded = False
+        End Try
+        Return Result
     End Function
 #End Region
 

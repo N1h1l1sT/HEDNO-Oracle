@@ -14,7 +14,7 @@ Public Class frmDataGridView
     Dim MyDataGridViewPrinter As clsDataGridViewPrinter
     Dim CurrentColumnIndex As Integer = -1
 
-    Private Sub frmZToday_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmDataGridView_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
         Try
             dgvDataGrid.AutoGenerateColumns = True
             Call DataGridView_Language(Me)
@@ -99,21 +99,21 @@ Public Class frmDataGridView
         End If
     End Sub
 
-    Private Sub dgvDataGrid_DataSourceChanged(sender As Object, e As System.EventArgs) Handles dgvDataGrid.DataSourceChanged
+    Private Sub dgvDataGrid_DataSourceChanged(sender As Object, e As EventArgs) Handles dgvDataGrid.DataSourceChanged
         Try
             Call DataGridView_Language(Me)
-            If dgvDataGrid.ColumnCount > 0 Then lblRowsCount.Text = strLanguage_DataGridView(12) & dgvDataGrid.RowCount 'Rows Count: 
-            lblSelectedColumns.Text = strLanguage_DataGridView(13) & dgvDataGrid.ColumnCount 'Columns Count: 
+            If dgvDataGrid.ColumnCount > 0 Then lblRowsCount.Text = strLanguage_DataGridView(12) & dgvDataGrid.RowCount 'Rows Count:
+            lblSelectedColumns.Text = strLanguage_DataGridView(13) & dgvDataGrid.ColumnCount 'Columns Count:
         Catch ex As Exception
         End Try
     End Sub
 
-    Private Sub dgvDataGrid_SelectionChanged(sender As Object, e As System.EventArgs) Handles dgvDataGrid.SelectionChanged
+    Private Sub dgvDataGrid_SelectionChanged(sender As Object, e As EventArgs) Handles dgvDataGrid.SelectionChanged
         If Not IsNothing(strLanguage_DataGridView) Then
             If dgvDataGrid.SelectedCells.Count > 0 Then
 
-                lblCurRow.Text = strLanguage_DataGridView(14) & dgvDataGrid.SelectedCells(dgvDataGrid.SelectedCells.Count - 1).RowIndex.ToString 'Current Row: 
-                lblCurColumn.Text = strLanguage_DataGridView(15) & dgvDataGrid.SelectedCells(dgvDataGrid.SelectedCells.Count - 1).ColumnIndex.ToString 'Current Column: 
+                lblCurRow.Text = strLanguage_DataGridView(14) & dgvDataGrid.SelectedCells(dgvDataGrid.SelectedCells.Count - 1).RowIndex.ToString 'Current Row:
+                lblCurColumn.Text = strLanguage_DataGridView(15) & dgvDataGrid.SelectedCells(dgvDataGrid.SelectedCells.Count - 1).ColumnIndex.ToString 'Current Column:
 
                 Dim MoneyOfssLbl As Double = 0
                 Dim Swarm As Integer = 0
@@ -125,13 +125,13 @@ Public Class frmDataGridView
                     End If
                 Next
 
-                lblSum.Text = String.Format("{0}{1:n2}", strLanguage_DataGridView(5), MoneyOfssLbl) 'Sum: 
+                lblSum.Text = String.Format("{0}{1:n2}", strLanguage_DataGridView(5), MoneyOfssLbl) 'Sum:
                 lblAverage.Text = String.Format("{0}{1:n2}", strLanguage_DataGridView(3), MoneyOfssLbl / Swarm) ' Average:
-                lblSelectedCells.Text = strLanguage_DataGridView(6) & dgvDataGrid.SelectedCells.Count 'Selected Cells: 
+                lblSelectedCells.Text = strLanguage_DataGridView(6) & dgvDataGrid.SelectedCells.Count 'Selected Cells:
             End If
 
-            lblSelectedRows.Text = strLanguage_DataGridView(7) & dgvDataGrid.SelectedRows.Count 'Selected Rows: 
-            lblSelectedColumns.Text = strLanguage_DataGridView(8) & dgvDataGrid.SelectedColumns.Count 'Selected Columns: 
+            lblSelectedRows.Text = strLanguage_DataGridView(7) & dgvDataGrid.SelectedRows.Count 'Selected Rows:
+            lblSelectedColumns.Text = strLanguage_DataGridView(8) & dgvDataGrid.SelectedColumns.Count 'Selected Columns:
         End If
 
     End Sub
@@ -144,11 +144,11 @@ Public Class frmDataGridView
     End Sub
 
 #Region "Other Code"
-    Private Sub mniSaveAs_Click(sender As System.Object, e As System.EventArgs) Handles mniSaveAs.Click
+    Private Sub mniSaveAs_Click(sender As System.Object, e As EventArgs) Handles mniSaveAs.Click
         Call SaveAs()
     End Sub
 
-    Private Sub mniSave_Click(sender As System.Object, e As System.EventArgs) Handles mniSave.Click
+    Private Sub mniSave_Click(sender As System.Object, e As EventArgs) Handles mniSave.Click
         If LastSaveFile = String.Empty Then
             Call SaveAs()
         Else
@@ -159,14 +159,14 @@ Public Class frmDataGridView
         End If
     End Sub
 
-    Private Sub mniExit_Click(sender As System.Object, e As System.EventArgs) Handles mniExit.Click
+    Private Sub mniExit_Click(sender As System.Object, e As EventArgs) Handles mniExit.Click
         Close()
     End Sub
 
-    Private Sub frmZStatisticsSheet_VisibleChanged(sender As Object, e As System.EventArgs) Handles Me.VisibleChanged
+    Private Sub frmDataGridView_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         Try
-            lblRowsCount.Text = strLanguage_DataGridView(12) & dgvDataGrid.RowCount 'Rows Count: 
-            lblColumnsCount.Text = strLanguage_DataGridView(13) & dgvDataGrid.ColumnCount 'Columns Count: 
+            lblRowsCount.Text = strLanguage_DataGridView(12) & dgvDataGrid.RowCount 'Rows Count:
+            lblColumnsCount.Text = strLanguage_DataGridView(13) & dgvDataGrid.ColumnCount 'Columns Count:
         Catch ex As Exception
         End Try
     End Sub
@@ -178,7 +178,7 @@ Public Class frmDataGridView
         End If
     End Sub
 
-    Private Sub mniPrintPreview_Click(sender As System.Object, e As System.EventArgs) Handles mniPrintPreview.Click
+    Private Sub mniPrintPreview_Click(sender As System.Object, e As EventArgs) Handles mniPrintPreview.Click
         If SetupThePrinting() Then
             Dim MyPrintPreviewDialog As New PrintPreviewDialog
             MyPrintPreviewDialog.Document = MyPrintDocument
@@ -192,7 +192,7 @@ Public Class frmDataGridView
     End Sub
 
 
-    Private Sub mniPrintTool_Click(sender As System.Object, e As System.EventArgs) Handles mniPrintTool.Click
+    Private Sub mniPrintTool_Click(sender As System.Object, e As EventArgs) Handles mniPrintTool.Click
         If SetupThePrinting() Then
             MyPrintDocument.Print()
         End If
@@ -223,6 +223,10 @@ Public Class frmDataGridView
         End If
         Return True
     End Function
+
+    Private Sub v(sender As Object, e As System.ComponentModel.CancelEventArgs)
+
+    End Sub
 
 #End Region
 

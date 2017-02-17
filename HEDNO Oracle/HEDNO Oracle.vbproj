@@ -120,10 +120,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="frmDataSummaryVisualiser.Designer.vb">
+      <DependentUpon>frmDataSummaryVisualiser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataSummaryVisualiser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateSQLView.Designer.vb">
+      <DependentUpon>frmCreateSQLView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateSQLView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPreProcessing.Designer.vb">
+      <DependentUpon>frmPreProcessing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPreProcessing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVariableInfoVisualiser.Designer.vb">
+      <DependentUpon>frmVariableInfoVisualiser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmVariableInfoVisualiser.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -254,8 +278,20 @@
     <Compile Include="Standards\Modules\modUpdate.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmDataSummaryVisualiser.resx">
+      <DependentUpon>frmDataSummaryVisualiser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateSQLView.resx">
+      <DependentUpon>frmCreateSQLView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPreProcessing.resx">
+      <DependentUpon>frmPreProcessing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVariableInfoVisualiser.resx">
+      <DependentUpon>frmVariableInfoVisualiser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

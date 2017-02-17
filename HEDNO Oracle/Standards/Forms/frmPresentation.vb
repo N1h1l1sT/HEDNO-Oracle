@@ -28,7 +28,7 @@ Public Class frmPresentation
 
     Dim isFormResizing As Boolean = False
 
-    Private Sub frmPresentation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmPresentation_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
         Try
             Call Presentation_Language(Me)
@@ -238,7 +238,7 @@ Public Class frmPresentation
         End Try
     End Sub
 
-    Private Sub btnPrevious_Click(sender As System.Object, e As System.EventArgs) Handles btnPrevious.Click
+    Private Sub btnPrevious_Click(sender As System.Object, e As EventArgs) Handles btnPrevious.Click
         If WorkingOnImages Then
             Call GoToPreviousImage()
             btnPrevious.Focus()
@@ -411,7 +411,7 @@ Public Class frmPresentation
 
     End Sub
 
-    Private Sub btnNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNext.Click
+    Private Sub btnNext_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnNext.Click
         If WorkingOnImages Then
             Call GoToNextImage()
             btnNext.Focus()
@@ -584,7 +584,7 @@ Public Class frmPresentation
 
     End Sub
 
-    Private Sub picInfo_Resize(sender As Object, e As System.EventArgs) Handles picInfo.BackgroundImageChanged
+    Private Sub picInfo_Resize(sender As Object, e As EventArgs) Handles picInfo.BackgroundImageChanged
         If Not isFormResizing AndAlso picInfo.BackgroundImage IsNot Nothing Then
 
             Dim ProposedWidth As Integer = picInfo.Location.X + picInfo.BackgroundImage.Size.Width + 28
@@ -632,16 +632,16 @@ Public Class frmPresentation
 
     End Sub
 
-    Private Sub frmPresentation_ResizeBegin(sender As Object, e As System.EventArgs) Handles Me.ResizeBegin
+    Private Sub frmPresentation_ResizeBegin(sender As Object, e As EventArgs) Handles Me.ResizeBegin
         isFormResizing = True
         picInfo.BackgroundImageLayout = ImageLayout.Stretch
     End Sub
 
-    Private Sub frmPresentation_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd
+    Private Sub frmPresentation_ResizeEnd(sender As Object, e As EventArgs) Handles Me.ResizeEnd
         isFormResizing = False
     End Sub
 
-    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnExit.Click
         Close()
     End Sub
 

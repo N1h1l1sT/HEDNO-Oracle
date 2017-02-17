@@ -7,7 +7,7 @@ Public Class frmSuggestionAndComplaint
     Public lstFirstCategory As New List(Of String)
     Public lstSecondCategory As New List(Of String)
 
-    Private Sub frmSuggestionAndComplaint_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmSuggestionAndComplaint_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
         Try
             Call SuggestionAndComplaint_Language(Me)
             frmSkin(Me, False)
@@ -17,7 +17,7 @@ Public Class frmSuggestionAndComplaint
         End Try
     End Sub
 
-    Private Sub cbType_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbType.SelectedIndexChanged
+    Private Sub cbType_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbType.SelectedIndexChanged
         If cbType.SelectedIndex <> -1 Then
             Call DisableNeeded()
 
@@ -83,7 +83,7 @@ Public Class frmSuggestionAndComplaint
         End If
     End Sub
 
-    Private Sub cbCategory_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbCategory.SelectedIndexChanged
+    Private Sub cbCategory_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbCategory.SelectedIndexChanged
         Call DisableNeeded()
         cbCategory.Enabled = True
 
@@ -93,7 +93,7 @@ Public Class frmSuggestionAndComplaint
         End If
     End Sub
 
-    Private Sub btnNext_Click(sender As System.Object, e As System.EventArgs) Handles btnNext.Click
+    Private Sub btnNext_Click(sender As System.Object, e As EventArgs) Handles btnNext.Click
         If MsgBox(strLanguage_SuggestionAndComplaint(26), MsgBoxStyle.YesNoCancel) = MsgBoxResult.Yes Then 'Are you sure you want to proceed?
             btnNext.Enabled = False
             btnCancel.Enabled = False
@@ -155,15 +155,15 @@ Public Class frmSuggestionAndComplaint
         End If
     End Sub
 
-    Private Sub txtName_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtName.TextChanged
+    Private Sub txtName_TextChanged(sender As System.Object, e As EventArgs) Handles txtName.TextChanged
         DisableNeeded()
     End Sub
 
-    Private Sub txtEmail_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtEmail.TextChanged
+    Private Sub txtEmail_TextChanged(sender As System.Object, e As EventArgs) Handles txtEmail.TextChanged
         DisableNeeded()
     End Sub
 
-    Private Sub txtMessage_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtMessage.TextChanged
+    Private Sub txtMessage_TextChanged(sender As System.Object, e As EventArgs) Handles txtMessage.TextChanged
         DisableNeeded()
     End Sub
 

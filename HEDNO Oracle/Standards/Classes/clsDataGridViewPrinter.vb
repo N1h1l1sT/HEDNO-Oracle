@@ -167,14 +167,14 @@ Public Class clsDataGridViewPrinter
         ' Printing the page number (if isWithPaging is set to true)
         If IsWithPaging Then
             PageNumber = (PageNumber + 1)
-            Dim PageString As String = (strModLanguage(61) + PageNumber.ToString) 'Page: 
+            Dim PageString As String = (strModLanguage(61) + PageNumber.ToString) 'Page:
             Dim PageStringFormat As StringFormat = New StringFormat
             PageStringFormat.Trimming = StringTrimming.Word
             PageStringFormat.FormatFlags = (StringFormatFlags.NoWrap _
                         Or (StringFormatFlags.LineLimit Or StringFormatFlags.NoClip))
             PageStringFormat.Alignment = StringAlignment.Far
             Dim PageStringFont As Font = New Font("Tahoma", 8, FontStyle.Regular, GraphicsUnit.Point)
-            Dim PageStringRectangle As RectangleF = New RectangleF(CType(LeftMargin, Single), CurrentY, (CType(PageWidth, Single) _
+            Dim PageStringRectangle As RectangleF = New RectangleF(LeftMargin, CurrentY, (PageWidth _
                             - (CType(RightMargin, Single) - CType(LeftMargin, Single))), g.MeasureString(PageString, PageStringFont).Height)
             g.DrawString(PageString, PageStringFont, New SolidBrush(Color.Black), PageStringRectangle, PageStringFormat)
             CurrentY = (CurrentY + g.MeasureString(PageString, PageStringFont).Height)
@@ -223,7 +223,7 @@ Public Class clsDataGridViewPrinter
         If (HeaderFont Is Nothing) Then
             HeaderFont = TheDataGridView.DefaultCellStyle.Font
         End If
-        ' Calculating and drawing the HeaderBounds        
+        ' Calculating and drawing the HeaderBounds
         Dim HeaderBounds As RectangleF = New RectangleF(CurrentX, CurrentY, mColumnPointsWidth(mColumnPoint), RowHeaderHeight)
         g.FillRectangle(HeaderBackBrush, HeaderBounds)
         ' Setting the format that will be used to print each cell of the header row
@@ -315,7 +315,7 @@ Public Class clsDataGridViewPrinter
                                 - mColumnPointsWidth(mColumnPoint)) _
                                 / 2.0!))
                 End If
-                ' Calculating the entire CurrentRow bounds                
+                ' Calculating the entire CurrentRow bounds
                 RowBounds = New RectangleF(CurrentX, CurrentY, mColumnPointsWidth(mColumnPoint), RowsHeight(CurrentRow))
                 ' Filling the back of the CurrentRow
                 If ((CurrentRow Mod 2) _
@@ -324,7 +324,7 @@ Public Class clsDataGridViewPrinter
                 Else
                     g.FillRectangle(RowAlternatingBackBrush, RowBounds)
                 End If
-                ' Printing each visible cell of the CurrentRow                
+                ' Printing each visible cell of the CurrentRow
                 Dim CurrentCell As Integer = CType(mColumnPoints(mColumnPoint).GetValue(0), Integer)
                 Do While (CurrentCell < CType(mColumnPoints(mColumnPoint).GetValue(1), Integer))
                     If Not TheDataGridView.Columns(CurrentCell).Visible Then

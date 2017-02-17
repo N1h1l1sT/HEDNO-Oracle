@@ -432,4 +432,46 @@ Module modChangeLanguage
     '==END OF STANDARD LANGUAGE FUNCTION==
     '=====================================
 
+    Public Sub PreProcessing_Language(ByVal frm As frmPreProcessing)
+        With frm
+            Dim strLanguage_PreProcessing() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_PreProcessing)
+            On Error Resume Next
+
+            '.Text = strLanguage_PreProcessing(1) '
+
+        End With
+    End Sub
+
+    Public Sub CreateSQLView_Language(ByVal frm As frmCreateSQLView)
+        With frm
+            Dim strLanguage_CreateSQLView() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_CreateSQLView)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub DataSummaryVisualiser_Language(ByVal frm As frmDataSummaryVisualiser)
+        With frm
+            Dim strLanguage_DataSummaryVisualiser() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_DataSummaryVisualiser)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub VariableInfoVisualiser_Language(ByVal frm As frmVariableInfoVisualiser)
+        With frm
+            Dim strLanguage_VariableInfoVisualiser() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_DataSummaryVisualiser)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+
+
 End Module

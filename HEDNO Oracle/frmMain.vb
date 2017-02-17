@@ -29,8 +29,6 @@ Public Class frmMain
 
     Public CommandsDefaultText As String
 
-    Dim ConnectedToSQLServer As Boolean = False
-
     Dim FormStatefrmMain As New FormState
     Dim LastWindowState As FormWindowState = WindowState 'Used on Resize Event
     Dim PreviousWindowState As FormWindowState = WindowState 'Used on "Show/Hide" (Tray Menu)
@@ -45,9 +43,6 @@ Public Class frmMain
     '=============================
     '==END OF STANDARD VARIABLES==
     '=============================
-
-    'Informing the User
-    Dim FuncInProgress As New List(Of String)
 
     'Colouring
     Dim GeoLocateRect As New Rectangle(0, 0, 0, 0)
@@ -129,7 +124,7 @@ Public Class frmMain
     '   If the New line starts With "{U}" Then assume the New line
     '   If the New line's schema is the same is the old, assume the old line
     '   Else, assume the New line
-    Private Async Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Async Sub frmMain_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
         isProgramStartingUp = True
 
         Try
@@ -369,8 +364,9 @@ Public Class frmMain
             '==FIRST TIME RUN==
             '==================
             If isFirstTimeRun() Then
-                Dim FirstTimeForm As New frmFirstTime
-                FirstTimeForm.TopMost = True
+                Dim FirstTimeForm As New frmFirstTime With {
+                    .TopMost = True
+                }
                 FirstTimeForm.ShowDialog()
                 If FirstTimeForm.LicenseAccepted = True Then
                     Dim AppDataSettings() As String = {""}
@@ -498,7 +494,7 @@ Public Class frmMain
 
             Try
                 If RDotNet_Initialization() Then
-                    RSource(strFunctions & "Initialisation.R",, {"{0}", RowsPerRead.ToString,
+                    RSource(strFunctions & "[Initialisation].R",, {"{0}", RowsPerRead.ToString,
                                                                  "{1}", """" & strXDF & """",
                                                                  "{2}", RSQLConnStr}, False)
                 End If
@@ -506,6 +502,8 @@ Public Class frmMain
                 Notify(ex.ToString, Color.Red, Color.Black, 10)
                 CreateCrashFile(ex)
             End Try
+
+            tmrFunctInProgress.Enabled = True
 
             '============================
             '==BEGIN STANDARD PROCEDURE==
@@ -566,7 +564,7 @@ Public Class frmMain
 
 #Region "Standard Stuff"
 
-    Private Async Sub btnEnter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGo.Click
+    Private Async Sub btnEnter_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cmdGo.Click
         Dim DoNotEraseTextInTheEnd As Boolean
         tmrUnknownCmd.Enabled = False
         intTimerUnknownCmd = 0
@@ -964,15 +962,15 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub mnuAbout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mniAbout.Click
+    Private Sub mnuAbout_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mniAbout.Click
         ShowForm(frmAbout)
     End Sub
 
-    Private Sub mniDirectoryPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mniProgramsDir.Click
+    Private Sub mniDirectoryPath_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mniProgramsDir.Click
         RunOpenDir(strExplorerExe, My.Application.Info.DirectoryPath)
     End Sub
 
-    Private Sub mnuDBdir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mniDatabaseDir.Click
+    Private Sub mnuDBdir_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mniDatabaseDir.Click
         If strSettings(18).Substring("018DataBaseDir=".Length).ToLower = "default" Then
             RunOpenDir(strExplorerExe, strDatabaseDir)
         Else
@@ -980,55 +978,55 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mniExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mniExit.Click
+    Private Sub mniExit_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mniExit.Click
         CloseForm(Me, strLanguage_Main(11)) 'Are you sure you want to exit?
     End Sub
 
-    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnExit.Click
         CloseForm(Me, strLanguage_Main(11)) 'Are you sure you want to exit?
     End Sub
 
-    Private Sub mnuSettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mniSettings.Click
+    Private Sub mnuSettings_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mniSettings.Click
         ShowForm(frmSettings)
     End Sub
 
-    Private Sub mniCredits_Click(sender As System.Object, e As System.EventArgs) Handles mniCredits.Click
+    Private Sub mniCredits_Click(sender As System.Object, e As EventArgs) Handles mniCredits.Click
         RunOpenDir(strCredits)
     End Sub
 
-    Private Sub mniProgramWebsite_Click(sender As System.Object, e As System.EventArgs) Handles mniProgramWebsite.Click
+    Private Sub mniProgramWebsite_Click(sender As System.Object, e As EventArgs) Handles mniProgramWebsite.Click
         RunOpenDir(strExplorerExe, My.Settings.ProgrammeWebsite)
     End Sub
 
-    Private Sub mniProgrammerWebsite_Click(sender As System.Object, e As System.EventArgs) Handles mniProgrammerWebsite.Click
+    Private Sub mniProgrammerWebsite_Click(sender As System.Object, e As EventArgs) Handles mniProgrammerWebsite.Click
         RunOpenDir(strExplorerExe, My.Settings.ProgrammersWebsite)
     End Sub
 
-    Private Sub mniEULA_Click(sender As System.Object, e As System.EventArgs) Handles mniEULA.Click
+    Private Sub mniEULA_Click(sender As System.Object, e As EventArgs) Handles mniEULA.Click
         RunOpenDir(strEULA)
     End Sub
 
-    Private Sub mniChangeLog_Click(sender As System.Object, e As System.EventArgs) Handles mniChangeLog.Click
+    Private Sub mniChangeLog_Click(sender As System.Object, e As EventArgs) Handles mniChangeLog.Click
         RunOpenDir(strChangeLog)
     End Sub
 
-    Private Sub mniShowWelcomeScreen_Click(sender As System.Object, e As System.EventArgs) Handles mniShowWelcomeScreen.Click
+    Private Sub mniShowWelcomeScreen_Click(sender As System.Object, e As EventArgs) Handles mniShowWelcomeScreen.Click
         ShowForm(frmFirstTime)
     End Sub
 
-    Private Sub mniShowPresentation_Click(sender As System.Object, e As System.EventArgs) Handles mniShowPresentation.Click
+    Private Sub mniShowPresentation_Click(sender As System.Object, e As EventArgs) Handles mniShowPresentation.Click
         ShowForm(frmPresentation)
     End Sub
 
-    Private Sub DatabaseMaintenanceToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles mniDatabaseMaintenance.Click
+    Private Sub DatabaseMaintenanceToolStripMenuItem_Click(sender As System.Object, e As EventArgs) Handles mniDatabaseMaintenance.Click
         ShowForm(frmDatabaseMaintenance)
     End Sub
 
-    Private Sub mniHelp_Click(sender As System.Object, e As System.EventArgs) Handles mniHelp.Click
+    Private Sub mniHelp_Click(sender As System.Object, e As EventArgs) Handles mniHelp.Click
         ShowForm(frmHelp)
     End Sub
 
-    Private Sub tmrUnknownCmd_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrUnknownCmd.Tick
+    Private Sub tmrUnknownCmd_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles tmrUnknownCmd.Tick
 
         lblUnknownCmd.Text = strLanguage_Main(31) 'Unknown Command
         tmrUnknownCmd.Interval = 300
@@ -1087,64 +1085,65 @@ Public Class frmMain
     End Sub
 
     <DebuggerStepThrough>
-    Private Sub txtCommands_LostFocus(sender As Object, e As System.EventArgs) Handles txtCommands.LostFocus
+    Private Sub txtCommands_LostFocus(sender As Object, e As EventArgs) Handles txtCommands.LostFocus
         If txtCommands.Text = String.Empty Then txtCommands.Text = CommandsDefaultText
     End Sub
 
-    Private Sub txtCommands_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCommands.Click
+    Private Sub txtCommands_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles txtCommands.Click
         txtCommands.Text = ""
     End Sub
 
-    Private Sub txtCommands_GotFocus(sender As Object, e As System.EventArgs) Handles txtCommands.GotFocus
+    Private Sub txtCommands_GotFocus(sender As Object, e As EventArgs) Handles txtCommands.GotFocus
         If txtCommands.Text = CommandsDefaultText Then
             txtCommands.Text = String.Empty
             txtCommands.Focus()
         End If
     End Sub
 
-    Private Sub mniSuggestOrComplain_Click(sender As System.Object, e As System.EventArgs) Handles mniSuggestOrComplain.Click
+    Private Sub mniSuggestOrComplain_Click(sender As System.Object, e As EventArgs) Handles mniSuggestOrComplain.Click
         ShowForm(frmSuggestionAndComplaint)
     End Sub
 
-    Private Sub cmdSettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdSettings.Click
+    Private Sub cmdSettings_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cmdSettings.Click
         ShowForm(frmSettings)
     End Sub
 
-    Private Sub cmdHelp_Click(sender As System.Object, e As System.EventArgs) Handles cmdHelp.Click
+    Private Sub cmdHelp_Click(sender As System.Object, e As EventArgs) Handles cmdHelp.Click
         ShowForm(frmHelp)
     End Sub
 
-    Private Sub mniOpenSettingsFile_Click(sender As System.Object, e As System.EventArgs) Handles mniOpenSettingsFile.Click
+    Private Sub mniOpenSettingsFile_Click(sender As System.Object, e As EventArgs) Handles mniOpenSettingsFile.Click
         If MsgBox(strLanguage_Main(34) & vbCrLf & vbCrLf & strLanguage_Main(35), MsgBoxStyle.YesNoCancel) = MsgBoxResult.Yes Then RunOpenDir(strSettingsIni)
     End Sub
 
-    Private Sub mniExtrasDir_Click(sender As System.Object, e As System.EventArgs) Handles mniExtrasDir.Click
+    Private Sub mniExtrasDir_Click(sender As System.Object, e As EventArgs) Handles mniExtrasDir.Click
         RunOpenDir(strExtras)
     End Sub
 
-    Private Sub mniLanguageDir_Click(sender As System.Object, e As System.EventArgs) Handles mniLanguageDir.Click
+    Private Sub mniLanguageDir_Click(sender As System.Object, e As EventArgs) Handles mniLanguageDir.Click
         RunOpenDir(strLanguageFolders)
     End Sub
 
-    Private Sub mniSettingsDir_Click(sender As System.Object, e As System.EventArgs) Handles mniSettingsDir.Click
+    Private Sub mniSettingsDir_Click(sender As System.Object, e As EventArgs) Handles mniSettingsDir.Click
         RunOpenDir(strSettingsPath)
     End Sub
 
-    Private Sub mniSkinDir_Click(sender As System.Object, e As System.EventArgs) Handles mniSkinDir.Click
+    Private Sub mniSkinDir_Click(sender As System.Object, e As EventArgs) Handles mniSkinDir.Click
         RunOpenDir(strSkin)
     End Sub
 
-    Private Sub mniCompanySite_Click(sender As System.Object, e As System.EventArgs) Handles mniCompanySite.Click
+    Private Sub mniCompanySite_Click(sender As System.Object, e As EventArgs) Handles mniCompanySite.Click
         RunOpenDir(strExplorerExe, My.Settings.CompanyWebsite)
     End Sub
 
-    Private Sub mniProgramDocuments_Click(sender As System.Object, e As System.EventArgs) Handles mniProgramDocuments.Click
+    Private Sub mniProgramDocuments_Click(sender As System.Object, e As EventArgs) Handles mniProgramDocuments.Click
         RunOpenDir(strDocumentsProgDir)
     End Sub
 
     Private Sub mniLicenses_Click(sender As Object, e As EventArgs) Handles mniLicenses.Click
-        Dim frm As New frmLicenseViewer
-        frm.AlreadyAcceptedAll = True
+        Dim frm As New frmLicenseViewer With {
+            .AlreadyAcceptedAll = True
+        }
         frm.Show()
     End Sub
 
@@ -1334,31 +1333,9 @@ Public Class frmMain
             FuncInProgress.Add("Creating Geo-Location Columns")
             If ConnectedToSQLServer = True Then
                 If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
-                Dim TableExistsSQLCmd As New SqlCommand(<SQL>
-                                                        USE [<%= DatabaseName %>]
-                                                        SELECT CASE
-                                                            WHEN EXISTS (SELECT *
-                                                                          FROM sys.columns
-                                                                          WHERE Object_ID = Object_ID(N'<%= TablevErga %>')
-                                                                          )
-                                                            THEN 1
-                                                            ELSE 0
-                                                        END  AS TableExists
-                                                    </SQL>.Value, SQLConn)
-                Dim TableExists As Boolean = If((CInt(TableExistsSQLCmd.ExecuteScalar()) = 1), True, False)
+                Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevErga)
                 If TableExists Then
-                    Dim GeoLocXExistsSQLCmd As New SqlCommand(<SQL>
-                                                            USE [<%= DatabaseName %>]
-                                                            SELECT CASE
-                                                                WHEN EXISTS (SELECT *
-                                                                             FROM sys.columns
-                                                                             WHERE (Name = N'<%= ColvGeoLocX %>') AND (Object_ID = Object_ID(N'<%= TablevErga %>'))
-                                                                             )
-                                                                THEN 1
-                                                                ELSE 0
-                                                            END  AS GeoLocXExists
-                                                         </SQL>.Value, SQLConn)
-                    Dim GeoLocXExists As Boolean = If((CInt(GeoLocXExistsSQLCmd.ExecuteScalar()) = 1), True, False)
+                    Dim GeoLocXExists As Boolean = SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocX)
                     If Not GeoLocXExists Then
                         Dim curSQLCmd As New SqlCommand(<SQL>
                                                         USE [<%= DatabaseName %>]
@@ -1368,18 +1345,7 @@ Public Class frmMain
                         curSQLCmd.ExecuteNonQuery()
                     End If
 
-                    Dim GeoLocYExistsSQLCmd As New SqlCommand(<SQL>
-                                                            USE [<%= DatabaseName %>]
-                                                            SELECT CASE
-                                                                WHEN EXISTS (SELECT *
-                                                                             FROM sys.columns
-                                                                             WHERE (Name = N'<%= ColvGeoLocY %>') AND (Object_ID = Object_ID(N'<%= TablevErga %>'))
-                                                                             )
-                                                                THEN 1
-                                                                ELSE 0
-                                                            END  AS GeoLocYExists
-                                                         </SQL>.Value, SQLConn)
-                    Dim GeoLocYExists As Boolean = If((CInt(GeoLocYExistsSQLCmd.ExecuteScalar()) = 1), True, False)
+                    Dim GeoLocYExists As Boolean = SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocY)
                     If Not GeoLocYExists Then
                         Dim curSQLCmd As New SqlCommand(<SQL>
                                                         USE [<%= DatabaseName %>]
@@ -1414,237 +1380,244 @@ Public Class frmMain
     End Sub
 
     Private Async Sub GeoLocateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniGeoLocate.Click
-        If FuncInProgress.Count = 0 Then
-            FuncInProgress.Add("Geo-Locating")
+        Try
+            Dim Proceed As MsgBoxResult = MsgBox("The Geo-Location procedure is about to begin, proceed?", MsgBoxStyle.YesNo)
+            If Proceed = vbYes Then
+                If FuncInProgress.Count = 0 Then
+                    FuncInProgress.Add("Geo-Locating")
 
-            If mniGeoLocate.Text = "&Geo-Locate" AndAlso blbtnGeoLocateContinue Then
-                'Creating the Red padding so that it's easy for one to spot which button is currently doing (the) work (and to push it again if one wants to stop it)
-                mniGeoLocate.Text = "&Stop GeoLocating"
-                'GeoLocateRect = New Rectangle(pnlMain.Location.X + gbFunctions.Location.X + pnlFunctions.Location.X + btnGeoLocate.Location.X - 8,
-                '                              pnlMain.Location.Y + gbFunctions.Location.Y + pnlFunctions.Location.Y + btnGeoLocate.Location.Y - 8,
-                '                              btnGeoLocate.Width + 16,
-                '                              btnGeoLocate.Height + 16)
-                'Me.Refresh()
+                    If mniGeoLocate.Text = "&Geo-Locate" AndAlso blbtnGeoLocateContinue Then
+                        'Creating the Red padding so that it's easy for one to spot which button is currently doing (the) work (and to push it again if one wants to stop it)
+                        mniGeoLocate.Text = "&Stop GeoLocating"
+                        'GeoLocateRect = New Rectangle(pnlMain.Location.X + gbFunctions.Location.X + pnlFunctions.Location.X + btnGeoLocate.Location.X - 8,
+                        '                              pnlMain.Location.Y + gbFunctions.Location.Y + pnlFunctions.Location.Y + btnGeoLocate.Location.Y - 8,
+                        '                              btnGeoLocate.Width + 16,
+                        '                              btnGeoLocate.Height + 16)
+                        'Me.Refresh()
 
-                If ConnectedToSQLServer = True Then
-                    If GeoLocationAPILink <> "" Then
-                        If GeoLocAPIKey <> "" Then
-                            pbGeneralProgress.Style = ProgressBarStyle.Marquee
-                            pbGeneralProgress.MarqueeAnimationSpeed = 10
-                            pbGeneralProgress.Minimum = 0
-                            pbGeneralProgress.Maximum = 1
-                            pbGeneralProgress.Value = 1
-                            pbGeneralProgress.Visible = True
-                            pbGeneralProgress.BringToFront()
-                            tmrUpdatePB.Enabled = True
-
-                            If ErrorsOnUpdateCount < 5 Then
-                                Dim RowsToGeoLCount As Integer = 0
-                                Dim DlClinet As New WebClient
-
-                                Dim dtVErga As New DataTable
-                                Dim SQLAdaptrVErga As SqlDataAdapter = Nothing
-
-                                Dim CityName As String = String.Empty
-                                Try
-                                    'Getting the IDs and city name from SQL View
-                                    SQLAdaptrVErga = New SqlDataAdapter(<SQL>
-                                                                       USE [<%= DatabaseName %>]
-                                                                       SELECT [<%= ColvID_Erga %>], [<%= ColvCityName %>], [<%= ColvGeoLocX %>]
-                                                                       FROM [dbo].[<%= TablevErga %>]
-                                                                       WHERE [<%= ColvGeoLocX %>] IS NULL AND [<%= ColvCityName %>] IS NOT NULL
-                                                                    </SQL>.Value, SQLConn)
-                                    SQLAdaptrVErga.Fill(dtVErga)
-                                    RowsToGeoLCount = dtVErga.Rows.Count
-                                    'Starting the Progress Bar
-                                    pbGeneralProgress.Style = ProgressBarStyle.Blocks
-                                    pbGeneralProgress.Minimum = 0
-                                    pbGeneralProgress.Maximum = RowsToGeoLCount
-                                    pbGeneralProgress.Value = 0
-                                    pbGeneralValue = 0
-
-                                    If RowsToGeoLCount > 0 Then
-                                        Dim strJSON As String
-                                        Dim joGeoLoc As JObject
-                                        Await Task.Run(
-                                            Sub()
-                                                Dim ShowErrorDialogInError As Boolean = True
-                                                For Each row As DataRow In dtVErga.Rows
-                                                    If blbtnGeoLocateContinue Then
-                                                        pbGeneralValue += 1
-
-                                                        Dim LongitudeX As String = String.Empty
-                                                        Dim LatitudeY As String = String.Empty
-                                                        CityName = CStr(row(columnName:=ColvCityName))
-
-                                                        Dim dtAlreadyFoundCityGeoLoc As New DataTable
-                                                        Dim SQLAdptAlreadyFoundCity As New SqlDataAdapter(<SQL>
-                                                                                                        USE [<%= DatabaseName %>]
-                                                                                                        SELECT TOP 1 [<%= ColvGeoLocX %>], [<%= ColvGeoLocY %>]
-                                                                                                        FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
-                                                                                                        WHERE [<%= TablevErga %>].[<%= ColvCityName %>] = N'<%= CityName.Replace("'", "''") %>' --Because some entries contain the character "'", which messes with the SQL Query.
-                                                                                                      </SQL>.Value, SQLConn)
-                                                        SQLAdptAlreadyFoundCity.Fill(dtAlreadyFoundCityGeoLoc)
-
-                                                        If dtAlreadyFoundCityGeoLoc.Rows.Count > 0 AndAlso Not IsDBNull(dtAlreadyFoundCityGeoLoc(0)(ColGeoLocX)) AndAlso Not IsDBNull(dtAlreadyFoundCityGeoLoc(0)(ColGeoLocY)) Then
-                                                            LongitudeX = CDbl(dtAlreadyFoundCityGeoLoc.Rows(0)(ColGeoLocX)).ToString 'To ensure that it is a number. If it is not then an error will be thrown,
-                                                            LatitudeY = CDbl(dtAlreadyFoundCityGeoLoc.Rows(0)(ColGeoLocY)).ToString 'and the procedure will cease without saving the non-number to the DB
-
-                                                        Else
-                                                            'Initialise
-                                                            Dim Tries As Integer = 0
-                                                            strJSON = String.Empty
-                                                            joGeoLoc = Nothing
-
-                                                            'Download the JSON GeoLocation from the API and convert it to a JSON Object.
-                                                            'If something goes wrong try again pausing each time
-                                                            Dim tmpJSONObjectNames As New List(Of String)
-                                                            Do Until Tries >= 5
-                                                                Try
-                                                                    Dim CityNameHasChanged As Boolean = False
-                                                                    Dim tmpCityName As String = CityName.ToLower
-                                                                    For i As Integer = 0 To CityOrigName.Count - 1 'The list has to already be in lowercase letters (programmatically)!
-                                                                        If tmpCityName = CityOrigName(i) AndAlso CityCorrespName(i) <> "" Then
-                                                                            tmpCityName = CityCorrespName(i)
-                                                                            CityNameHasChanged = True
-                                                                            Exit For
-                                                                        End If
-                                                                    Next
-
-                                                                    If CityNameHasChanged Then
-                                                                        'From "Agios Nikolaos" to "Agios%20Nikolaos
-                                                                        strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", tmpCityName.Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
-                                                                    Else
-                                                                        'From "Agios Nikolaos" to "Agios%20Nikolaos,%20Ελλάδα"
-                                                                        strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", (CityName & CityFieldSuffix).Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
-                                                                    End If
-                                                                    joGeoLoc = JObject.Parse(strJSON)
-                                                                    Tries = 5
-
-                                                                    tmpJSONObjectNames = joGeoLoc.Properties.Select(Function(x) x.Name).ToList
-                                                                    If tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) Then
-                                                                        WriteToLog("Try No.:" & Tries.ToString & ", error_message: " & CStr(joGeoLoc(ErrorMessageIdentifierInJSON)))
-                                                                        If ShowErrorDialogInError Then
-                                                                            Dim UserResult = MsgBox("The API returned the Error: " & CStr(joGeoLoc(ErrorMessageIdentifierInJSON)) & vbCrLf & "Do you want to stop this procedure?" & vbCrLf & "'Yes' will stop the procedure, 'No' will let it continue ignoring future warning, 'Cancel' will ask for a new API key in case there is something wrong with the current one.", MsgBoxStyle.YesNoCancel)
-                                                                            If UserResult = vbYes Then
-                                                                                Exit For
-                                                                            ElseIf UserResult = vbNo Then
-                                                                                ShowErrorDialogInError = False
-                                                                            Else
-                                                                                TypeBox("Type in a valid Google Geolocation API", GeoLocAPIKey, False,,,,,,,, {GeoLocAPIKey})
-                                                                            End If
-                                                                        End If
-                                                                    End If
-
-                                                                Catch exc As Exception
-                                                                    If Tries >= 5 Then
-                                                                        Throw New Exception(exc.Message, exc.InnerException)
-                                                                    Else
-                                                                        Tries += 1
-                                                                        WriteToLog("Try No.:" & Tries.ToString & ", Exception: " & exc.Message)
-                                                                        Thread.Sleep(2000) 'APIs can reject it if it's tried to connect too many times per second. Waiting 2 seconds allows the API to 'calm itself down'
-                                                                    End If
-                                                                End Try
-                                                            Loop
-
-                                                            Try
-                                                                If joGeoLoc("results").HasValues Then
-                                                                    LongitudeX = CDbl(joGeoLoc("results")(0)("geometry")("location")("lng")).ToString 'To ensure that it is a number. If it is not then an error will be thrown,
-                                                                    LatitudeY = CDbl(joGeoLoc("results")(0)("geometry")("location")("lat")).ToString 'and the procedure will cease without saving the non-number to the DB
-                                                                ElseIf Not tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) Or
-                                                                        (tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) AndAlso Not joGeoLoc(ErrorMessageIdentifierInJSON).ToString.ToLower = APIExceededQuotaError.ToLower) Then
-                                                                    LongitudeX = "-1"
-                                                                    LatitudeY = "-1"
-                                                                End If
-                                                            Catch ex As Exception
-                                                            End Try
-
-                                                        End If
-
-                                                        'No matter how the Geolocation was loaded, now push it into the Database
-                                                        If LatitudeY <> String.Empty AndAlso LongitudeX <> String.Empty Then 'If they are numbers, then save them
-                                                            'Dim SQLCmd As New SqlCommand(<SQL>  USE [<%= DatabaseName %>];
-                                                            '                                    UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
-                                                            '                                    SET [<%= ColGeoLocX %>] = <%= LongitudeX %>,
-                                                            '                                        [<%= ColGeoLocY %>] = <%= LatitudeY %>
-                                                            '                                    WHERE [<%= TableErga %>].[<%= ColID_Erga %>] = N'<%= row(columnName:=ColvID_Erga) %>';
-                                                            '                             </SQL>.Value, SQLConn)
-                                                            'SQLCmd.ExecuteNonQuery()
-                                                            ExecuteSQLQuery(<SQL>  USE [<%= DatabaseName %>];
-                                                                                            UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
-                                                                                            SET [<%= ColGeoLocX %>] = <%= LongitudeX %>,
-                                                                                                [<%= ColGeoLocY %>] = <%= LatitudeY %>
-                                                                                            WHERE [<%= TableErga %>].[<%= ColID_Erga %>] = N'<%= row(columnName:=ColvID_Erga) %>';
-                                                                                     </SQL>.Value)
-                                                        End If
-
-                                                    Else
-                                                        Exit For
-                                                    End If
-                                                Next
-                                            End Sub)
-                                    End If
-
-                                    SQLAdaptrVErga.Dispose()
-
-                                    If blbtnGeoLocateContinue Then
-                                        Notify("Procedure Successful!", Color.Cyan, Color.Black, 25)
-                                    Else
-                                        Notify("Procedure Cancelled!", Color.Red, Color.Black, 25)
-                                    End If
-
-                                Catch ex As WebException
-                                    ErrorsOnUpdateCount += 1
-                                    Notify("Something went wrong whilst trying to download the Geo-Location of [" & CityName & "]" & vbCrLf & "Either your internet is down, or the API is unresponsive" & vbCrLf & ex.ToString, Color.Red, Color.Black, 25)
-
-                                Catch ex As Exception
-                                    ErrorsOnUpdateCount += 1
-                                    Notify("Something went wrong whilst trying to push the Geo-Location of [" & CityName & "]" & " to the SQL Server!", Color.Red, Color.Black, 25)
-
-                                Finally
-                                    pbGeneralValue = 0
+                        If ConnectedToSQLServer = True Then
+                            If GeoLocationAPILink <> "" Then
+                                If GeoLocAPIKey <> "" Then
                                     pbGeneralProgress.Style = ProgressBarStyle.Marquee
                                     pbGeneralProgress.MarqueeAnimationSpeed = 10
                                     pbGeneralProgress.Minimum = 0
                                     pbGeneralProgress.Maximum = 1
                                     pbGeneralProgress.Value = 1
-                                    pbGeneralProgress.Visible = False
-                                    tmrUpdatePB.Enabled = False
-                                End Try
+                                    pbGeneralProgress.Visible = True
+                                    pbGeneralProgress.BringToFront()
+                                    tmrUpdatePB.Enabled = True
+
+                                    If ErrorsOnUpdateCount < 5 Then
+                                        Dim RowsToGeoLCount As Integer = 0
+                                        Dim DlClinet As New WebClient
+
+                                        Dim dtVErga As New DataTable
+                                        Dim SQLAdaptrVErga As SqlDataAdapter = Nothing
+
+                                        Dim CityName As String = String.Empty
+                                        Try
+                                            'Getting the IDs and city name from SQL View
+                                            SQLAdaptrVErga = New SqlDataAdapter(<SQL>
+                                                                       USE [<%= DatabaseName %>]
+                                                                       SELECT [<%= ColvID_Erga %>], [<%= ColvCityName %>], [<%= ColvGeoLocX %>]
+                                                                       FROM [dbo].[<%= TablevErga %>]
+                                                                       WHERE [<%= ColvGeoLocX %>] IS NULL AND [<%= ColvCityName %>] IS NOT NULL
+                                                                    </SQL>.Value, SQLConn)
+                                            SQLAdaptrVErga.Fill(dtVErga)
+                                            RowsToGeoLCount = dtVErga.Rows.Count
+                                            'Starting the Progress Bar
+                                            pbGeneralProgress.Style = ProgressBarStyle.Blocks
+                                            pbGeneralProgress.Minimum = 0
+                                            pbGeneralProgress.Maximum = RowsToGeoLCount
+                                            pbGeneralProgress.Value = 0
+                                            pbGeneralValue = 0
+
+                                            If RowsToGeoLCount > 0 Then
+                                                Dim strJSON As String
+                                                Dim joGeoLoc As JObject
+                                                Await Task.Run(
+                                                    Sub()
+                                                        Dim ShowErrorDialogInError As Boolean = True
+                                                        For Each row As DataRow In dtVErga.Rows
+                                                            If blbtnGeoLocateContinue Then
+                                                                pbGeneralValue += 1
+
+                                                                Dim LongitudeX As String = String.Empty
+                                                                Dim LatitudeY As String = String.Empty
+                                                                CityName = CStr(row(columnName:=ColvCityName))
+
+                                                                Dim dtAlreadyFoundCityGeoLoc As New DataTable
+                                                                Dim SQLAdptAlreadyFoundCity As New SqlDataAdapter(<SQL>
+                                                                                                        USE [<%= DatabaseName %>]
+                                                                                                        SELECT TOP 1 [<%= ColvGeoLocX %>], [<%= ColvGeoLocY %>]
+                                                                                                        FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                                                        WHERE [<%= TablevErga %>].[<%= ColvCityName %>] = N'<%= CityName.Replace("'", "''") %>' --Because some entries contain the character "'", which messes with the SQL Query.
+                                                                                                      </SQL>.Value, SQLConn)
+                                                                SQLAdptAlreadyFoundCity.Fill(dtAlreadyFoundCityGeoLoc)
+
+                                                                If dtAlreadyFoundCityGeoLoc.Rows.Count > 0 AndAlso Not IsDBNull(dtAlreadyFoundCityGeoLoc(0)(ColGeoLocX)) AndAlso Not IsDBNull(dtAlreadyFoundCityGeoLoc(0)(ColGeoLocY)) Then
+                                                                    LongitudeX = CDbl(dtAlreadyFoundCityGeoLoc.Rows(0)(ColGeoLocX)).ToString 'To ensure that it is a number. If it is not then an error will be thrown,
+                                                                    LatitudeY = CDbl(dtAlreadyFoundCityGeoLoc.Rows(0)(ColGeoLocY)).ToString 'and the procedure will cease without saving the non-number to the DB
+
+                                                                Else
+                                                                    'Initialise
+                                                                    Dim Tries As Integer = 0
+                                                                    strJSON = String.Empty
+                                                                    joGeoLoc = Nothing
+
+                                                                    'Download the JSON GeoLocation from the API and convert it to a JSON Object.
+                                                                    'If something goes wrong try again pausing each time
+                                                                    Dim tmpJSONObjectNames As New List(Of String)
+                                                                    Do Until Tries >= 5
+                                                                        Try
+                                                                            Dim CityNameHasChanged As Boolean = False
+                                                                            Dim tmpCityName As String = CityName.ToLower
+                                                                            For i As Integer = 0 To CityOrigName.Count - 1 'The list has to already be in lowercase letters (programmatically)!
+                                                                                If tmpCityName = CityOrigName(i) AndAlso CityCorrespName(i) <> "" Then
+                                                                                    tmpCityName = CityCorrespName(i)
+                                                                                    CityNameHasChanged = True
+                                                                                    Exit For
+                                                                                End If
+                                                                            Next
+
+                                                                            If CityNameHasChanged Then
+                                                                                'From "Agios Nikolaos" to "Agios%20Nikolaos
+                                                                                strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", tmpCityName.Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
+                                                                            Else
+                                                                                'From "Agios Nikolaos" to "Agios%20Nikolaos,%20Ελλάδα"
+                                                                                strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", (CityName & CityFieldSuffix).Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
+                                                                            End If
+                                                                            joGeoLoc = JObject.Parse(strJSON)
+                                                                            Tries = 5
+
+                                                                            tmpJSONObjectNames = joGeoLoc.Properties.Select(Function(x) x.Name).ToList
+                                                                            If tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) Then
+                                                                                WriteToLog("Try No.:" & Tries.ToString & ", error_message: " & CStr(joGeoLoc(ErrorMessageIdentifierInJSON)))
+                                                                                If ShowErrorDialogInError Then
+                                                                                    Dim UserResult = MsgBox("The API returned the Error: " & CStr(joGeoLoc(ErrorMessageIdentifierInJSON)) & vbCrLf & "Do you want to stop this procedure?" & vbCrLf & "'Yes' will stop the procedure, 'No' will let it continue ignoring future warning, 'Cancel' will ask for a new API key in case there is something wrong with the current one.", MsgBoxStyle.YesNoCancel)
+                                                                                    If UserResult = vbYes Then
+                                                                                        Exit For
+                                                                                    ElseIf UserResult = vbNo Then
+                                                                                        ShowErrorDialogInError = False
+                                                                                    Else
+                                                                                        TypeBox("Type in a valid Google Geolocation API", GeoLocAPIKey, False,,,,,,,, {GeoLocAPIKey})
+                                                                                    End If
+                                                                                End If
+                                                                            End If
+
+                                                                        Catch exc As Exception
+                                                                            If Tries >= 5 Then
+                                                                                Throw New Exception(exc.Message, exc.InnerException)
+                                                                            Else
+                                                                                Tries += 1
+                                                                                WriteToLog("Try No.:" & Tries.ToString & ", Exception: " & exc.Message)
+                                                                                Thread.Sleep(2000) 'APIs can reject it if it's tried to connect too many times per second. Waiting 2 seconds allows the API to 'calm itself down'
+                                                                            End If
+                                                                        End Try
+                                                                    Loop
+
+                                                                    Try
+                                                                        If joGeoLoc("results").HasValues Then
+                                                                            LongitudeX = CDbl(joGeoLoc("results")(0)("geometry")("location")("lng")).ToString 'To ensure that it is a number. If it is not then an error will be thrown,
+                                                                            LatitudeY = CDbl(joGeoLoc("results")(0)("geometry")("location")("lat")).ToString 'and the procedure will cease without saving the non-number to the DB
+                                                                        ElseIf Not tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) Or
+                                                                                (tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) AndAlso Not joGeoLoc(ErrorMessageIdentifierInJSON).ToString.ToLower = APIExceededQuotaError.ToLower) Then
+                                                                            LongitudeX = "-1"
+                                                                            LatitudeY = "-1"
+                                                                        End If
+                                                                    Catch ex As Exception
+                                                                    End Try
+
+                                                                End If
+
+                                                                'No matter how the Geolocation was loaded, now push it into the Database
+                                                                If LatitudeY <> String.Empty AndAlso LongitudeX <> String.Empty Then 'If they are numbers, then save them
+                                                                    'Dim SQLCmd As New SqlCommand(<SQL>  USE [<%= DatabaseName %>];
+                                                                    '                                    UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
+                                                                    '                                    SET [<%= ColGeoLocX %>] = <%= LongitudeX %>,
+                                                                    '                                        [<%= ColGeoLocY %>] = <%= LatitudeY %>
+                                                                    '                                    WHERE [<%= TableErga %>].[<%= ColID_Erga %>] = N'<%= row(columnName:=ColvID_Erga) %>';
+                                                                    '                             </SQL>.Value, SQLConn)
+                                                                    'SQLCmd.ExecuteNonQuery()
+                                                                    ExecuteSQLQuery(<SQL>  USE [<%= DatabaseName %>];
+                                                                                            UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
+                                                                                            SET [<%= ColGeoLocX %>] = <%= LongitudeX %>,
+                                                                                                [<%= ColGeoLocY %>] = <%= LatitudeY %>
+                                                                                            WHERE [<%= TableErga %>].[<%= ColID_Erga %>] = N'<%= row(columnName:=ColvID_Erga) %>';
+                                                                                     </SQL>.Value)
+                                                                End If
+
+                                                            Else
+                                                                Exit For
+                                                            End If
+                                                        Next
+                                                    End Sub)
+                                            End If
+
+                                            SQLAdaptrVErga.Dispose()
+
+                                            If blbtnGeoLocateContinue Then
+                                                Notify("Procedure Successful!", Color.Cyan, Color.Black, 25)
+                                            Else
+                                                Notify("Procedure Cancelled!", Color.Red, Color.Black, 25)
+                                            End If
+
+                                        Catch ex As WebException
+                                            ErrorsOnUpdateCount += 1
+                                            Notify("Something went wrong whilst trying to download the Geo-Location of [" & CityName & "]" & vbCrLf & "Either your internet is down, or the API is unresponsive" & vbCrLf & ex.ToString, Color.Red, Color.Black, 25)
+
+                                        Catch ex As Exception
+                                            ErrorsOnUpdateCount += 1
+                                            Notify("Something went wrong whilst trying to push the Geo-Location of [" & CityName & "]" & " to the SQL Server!", Color.Red, Color.Black, 25)
+
+                                        Finally
+                                            pbGeneralValue = 0
+                                            pbGeneralProgress.Style = ProgressBarStyle.Marquee
+                                            pbGeneralProgress.MarqueeAnimationSpeed = 10
+                                            pbGeneralProgress.Minimum = 0
+                                            pbGeneralProgress.Maximum = 1
+                                            pbGeneralProgress.Value = 1
+                                            pbGeneralProgress.Visible = False
+                                            tmrUpdatePB.Enabled = False
+                                        End Try
+
+                                    Else
+                                        MsgBox("The procedure is cancelled because it's failed too many times in a row", MsgBoxStyle.Critical)
+                                    End If
+
+                                Else
+                                    MsgBox(ss("The GeoLocation API Key is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
+                                    frmSettings.Show()
+                                End If
 
                             Else
-                                MsgBox("The procedure is cancelled because it's failed too many times in a row", MsgBoxStyle.Critical)
+                                MsgBox(ss("The GeoLocation API Link is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
+                                frmSettings.Show()
                             End If
-
                         Else
-                            MsgBox(ss("The GeoLocation API Key is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
-                            frmSettings.Show()
+                            MsgBox("There is no connection to the SQL Server!", MsgBoxStyle.Exclamation)
                         End If
 
-                    Else
-                        MsgBox(ss("The GeoLocation API Link is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
-                        frmSettings.Show()
+                        blbtnGeoLocateContinue = True
+                        mniGeoLocate.Text = "&Geo-Locate"
+                        'GeoLocateRect = New Rectangle(0, 0, 0, 0)
+                        'Me.Refresh()
+
+                    ElseIf mniGeoLocate.Text = "&Geo-Locate" AndAlso Not blbtnGeoLocateContinue Then
+                        ShowNonInterruptingMsgbox(Me, "Please Wait...", MsgBoxStyle.Information)
+
+                    ElseIf mniGeoLocate.Text = "&Stop GeoLocating" AndAlso blbtnGeoLocateContinue Then
+                        blbtnGeoLocateContinue = False
                     End If
+
+                    FuncInProgress.Remove("Geo-Locating")
                 Else
-                    MsgBox("There is no connection to the SQL Server!", MsgBoxStyle.Exclamation)
+                    MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
                 End If
-
-                blbtnGeoLocateContinue = True
-                mniGeoLocate.Text = "&Geo-Locate"
-                'GeoLocateRect = New Rectangle(0, 0, 0, 0)
-                'Me.Refresh()
-
-            ElseIf mniGeoLocate.Text = "&Geo-Locate" AndAlso Not blbtnGeoLocateContinue Then
-                ShowNonInterruptingMsgbox(Me, "Please Wait...", MsgBoxStyle.Information)
-
-            ElseIf mniGeoLocate.Text = "&Stop GeoLocating" AndAlso blbtnGeoLocateContinue Then
-                blbtnGeoLocateContinue = False
             End If
+        Catch ex As Exception
 
-            FuncInProgress.Remove("Geo-Locating")
-        Else
-            MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
-        End If
+        End Try
     End Sub
 
     Private Sub mniClustering_Click(sender As Object, e As EventArgs) Handles mniClustering.Click
@@ -1654,43 +1627,32 @@ Public Class frmMain
     End Sub
 
     Private Sub mniPreProcessTheData_Click(sender As Object, e As EventArgs) Handles mniPreProcessTheData.Click
-        If FuncInProgress.Count = 0 Then
-            FuncInProgress.Add("Pre-Processing Data")
-            Try
-                If RDotNet_Initialization() Then
-                    'Rdo.SetSymbol("TopSortedByComparisonPercOccurNum", New RDotNet.NumericVector(Rdo, TopSortedByComparisonPercOccurNum))
-                    'Rdo.SetSymbol("TopSortedByComparisonPercOccur", New RDotNet.NumericVector(Rdo, TopSortedByComparisonPercOccur))
-                    RSource(strFunctions & "Data-PreProcessing.R", , {"{0}", TablevErga}, True)
-                End If
-            Catch ex As Exception
-                Notify(ex.ToString, Color.Red, Color.Black, 10)
-                CreateCrashFile(ex)
-            End Try
-
-            FuncInProgress.Remove("Pre-Processing Data")
-        Else
-            MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
-        End If
+        Dim PreProcessingForm As New frmPreProcessing
+        PreProcessingForm.Show()
     End Sub
 
     <DebuggerStepThrough>
     Private Sub tmrFunctInProgress_Tick(sender As Object, e As EventArgs) Handles tmrFunctInProgress.Tick
         If FuncInProgress.Count > 0 Then
-            If lblFuncInProgress.Visible = False Then lblFuncInProgress.Visible = True
             lblFuncInProgress.Text = ArrayBox(False, ";", 0, True, FuncInProgress)
+            If lblFuncInProgress.Visible = False Then
+                GeoLocateRect = New Rectangle(pnlMain.Location.X + gbFunctions.Location.X + pnlFunctions.Location.X + lblFuncInProgress.Location.X - 8,
+                                              pnlMain.Location.Y + gbFunctions.Location.Y + pnlFunctions.Location.Y + lblFuncInProgress.Location.Y - 8,
+                                              lblFuncInProgress.Width + 16,
+                                              lblFuncInProgress.Height + 16)
+                Refresh()
+                lblFuncInProgress.Visible = True
+            End If
 
         ElseIf lblFuncInProgress.Visible = True Then
             lblFuncInProgress.Visible = False
+            GeoLocateRect = New Rectangle(0, 0, 0, 0)
+            Refresh()
         End If
     End Sub
 
     Private Sub CreateNeededSQLViews_Click(sender As Object, e As EventArgs) Handles CreateNeededSQLViews.Click
-        If FuncInProgress.Count = 0 Then
-            FuncInProgress.Add("Creating Needed SQL Views")
-
-            FuncInProgress.Remove("Creating Needed SQL Views")
-        Else
-            MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
-        End If
+        Dim CreateSQLViewForm As New frmCreateSQLView
+        CreateSQLViewForm.Show()
     End Sub
 End Class

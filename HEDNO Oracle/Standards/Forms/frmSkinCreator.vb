@@ -41,7 +41,7 @@ Public Class frmSkinCreator
         Next
     End Sub
 
-    Private Sub frmSkinCreator_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmSkinCreator_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
         Try
             Call SkinCreator_Language(Me)
 
@@ -125,7 +125,7 @@ Public Class frmSkinCreator
 
     End Sub
 
-    Private Sub lstSkins_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lstSkins.SelectedIndexChanged
+    Private Sub lstSkins_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles lstSkins.SelectedIndexChanged
         Try
             If lstSkins.SelectedIndex <> -1 Then
                 gbItems.Enabled = True
@@ -214,7 +214,7 @@ Public Class frmSkinCreator
         End If
     End Sub
 
-    Private Sub cbSelForms_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbSelForms.SelectedIndexChanged
+    Private Sub cbSelForms_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbSelForms.SelectedIndexChanged
         Try
             If cbSelForms.SelectedIndex <> -1 Then
                 btnApply.Enabled = False
@@ -319,7 +319,7 @@ Public Class frmSkinCreator
         End If
     End Sub
 
-    Private Sub cbSelControls_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbSelControls.SelectedIndexChanged
+    Private Sub cbSelControls_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbSelControls.SelectedIndexChanged
         Try
             If cbSelControls.SelectedIndex <> -1 Then
 
@@ -360,7 +360,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnApply_Click(sender As System.Object, e As System.EventArgs) Handles btnApply.Click
+    Private Sub btnApply_Click(sender As System.Object, e As EventArgs) Handles btnApply.Click
         Call Apply()
     End Sub
 
@@ -412,7 +412,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnImage_Click(sender As System.Object, e As System.EventArgs) Handles btnImage.Click
+    Private Sub btnImage_Click(sender As System.Object, e As EventArgs) Handles btnImage.Click
         Try
             Dim UserResult As MsgBoxResult = MsgBox(strLanguage_SkinCreator(19) & vbCrLf & strLanguage_SkinCreator(20), MsgBoxStyle.YesNoCancel)
             Dim NewImagePathName As String = strSkin & lstSkins.SelectedItem.ToString & "\" & cbSelForms.SelectedItem.ToString & "\" & cbSelForms.SelectedItem.ToString & ".jpg"
@@ -445,7 +445,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnBigImage_Click(sender As System.Object, e As System.EventArgs) Handles btnBigImage.Click
+    Private Sub btnBigImage_Click(sender As System.Object, e As EventArgs) Handles btnBigImage.Click
         Try
             Dim UserResult As MsgBoxResult = MsgBox(strLanguage_SkinCreator(19) & vbCrLf & strLanguage_SkinCreator(20), MsgBoxStyle.YesNoCancel)    'Do you want to search for an image, OrElse clear the image?
 
@@ -479,7 +479,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnCtrlImage_Click(sender As System.Object, e As System.EventArgs) Handles btnCtrlImage.Click
+    Private Sub btnCtrlImage_Click(sender As System.Object, e As EventArgs) Handles btnCtrlImage.Click
         Try
             Dim UserResult As MsgBoxResult = MsgBox(strLanguage_SkinCreator(19) & vbCrLf & strLanguage_SkinCreator(20), MsgBoxStyle.YesNoCancel)    'Do you want to search for an image, OrElse clear the image?
 
@@ -524,7 +524,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnSplashScreenImage_Click(sender As System.Object, e As System.EventArgs) Handles btnSplashScreenImage.Click
+    Private Sub btnSplashScreenImage_Click(sender As System.Object, e As EventArgs) Handles btnSplashScreenImage.Click
         Try
             Dim UserResult As MsgBoxResult = MsgBox(strLanguage_SkinCreator(19) & vbCrLf & strLanguage_SkinCreator(20), MsgBoxStyle.YesNoCancel)    'Do you want to search for an image, OrElse clear the image?
 
@@ -558,7 +558,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnNewSkin_Click(sender As System.Object, e As System.EventArgs) Handles btnNewSkin.Click
+    Private Sub btnNewSkin_Click(sender As System.Object, e As EventArgs) Handles btnNewSkin.Click
         Try
             gbCommands.Enabled = False
 
@@ -591,7 +591,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnRename_Click(sender As System.Object, e As System.EventArgs) Handles btnRename.Click
+    Private Sub btnRename_Click(sender As System.Object, e As EventArgs) Handles btnRename.Click
         Try
             gbCommands.Enabled = False
 
@@ -637,7 +637,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnDelSkin_Click(sender As System.Object, e As System.EventArgs) Handles btnDelSkin.Click
+    Private Sub btnDelSkin_Click(sender As System.Object, e As EventArgs) Handles btnDelSkin.Click
         Try
             gbCommands.Enabled = False
 
@@ -670,7 +670,7 @@ Public Class frmSkinCreator
         End Try
     End Sub
 
-    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
+    Private Sub btnCancel_Click(sender As System.Object, e As EventArgs) Handles btnClose.Click
         On Error Resume Next
 
         Close()
@@ -680,7 +680,7 @@ Public Class frmSkinCreator
         ReadSkinNames()
     End Sub
 
-    Private Sub cbForeColour_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbForeColour.SelectedIndexChanged
+    Private Sub cbForeColour_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbForeColour.SelectedIndexChanged
         If cbForeColour.SelectedIndex <> -1 Then
             CtrlForeColours(cbSelControls.SelectedIndex) = cbForeColour.SelectedItem.ToString
             lnsForeColour.BorderColor = Color.FromName(cbForeColour.SelectedItem.ToString)
@@ -690,7 +690,7 @@ Public Class frmSkinCreator
         btnApply.Enabled = True
     End Sub
 
-    Private Sub cbBackColour_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbBackColour.SelectedIndexChanged
+    Private Sub cbBackColour_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles cbBackColour.SelectedIndexChanged
         If cbBackColour.SelectedIndex <> -1 Then
             CtrlBackColours(cbSelControls.SelectedIndex) = cbBackColour.SelectedItem.ToString
             lnsBackColour.BorderColor = Color.FromName(cbBackColour.SelectedItem.ToString)
@@ -700,25 +700,25 @@ Public Class frmSkinCreator
         btnApply.Enabled = True
     End Sub
 
-    Private Sub btnDelForeColour_Click(sender As System.Object, e As System.EventArgs) Handles btnDelForeColour.MouseClick
+    Private Sub btnDelForeColour_Click(sender As System.Object, e As EventArgs) Handles btnDelForeColour.MouseClick
         CtrlForeColours(cbSelControls.SelectedIndex) = String.Empty
         cbForeColour.SelectedIndex = -1
         cbForeColour.Text = String.Empty
         btnApply.Enabled = True
     End Sub
 
-    Private Sub btnDelBackColour_Click(sender As System.Object, e As System.EventArgs) Handles btnDelBackColour.MouseClick
+    Private Sub btnDelBackColour_Click(sender As System.Object, e As EventArgs) Handles btnDelBackColour.MouseClick
         CtrlBackColours(cbSelControls.SelectedIndex) = String.Empty
         cbBackColour.SelectedIndex = -1
         cbBackColour.Text = String.Empty
         btnApply.Enabled = True
     End Sub
 
-    Private Sub btnDelForeColour_Click_1(sender As System.Object, e As System.EventArgs) Handles btnDelForeColour.Click
+    Private Sub btnDelForeColour_Click_1(sender As System.Object, e As EventArgs) Handles btnDelForeColour.Click
         Call Apply()
     End Sub
 
-    Private Sub btnDelBackColour_Click_1(sender As System.Object, e As System.EventArgs) Handles btnDelBackColour.Click
+    Private Sub btnDelBackColour_Click_1(sender As System.Object, e As EventArgs) Handles btnDelBackColour.Click
         Call Apply()
     End Sub
 

@@ -1,4 +1,9 @@
 ﻿Module modGlobal
+    Public strSQLDir As String = strRoot & "SQL\"
+    Public strSQLViewsDir As String = strSQLDir & "Views"
+    Public ConnectedToSQLServer As Boolean = False
+
+
     Public TablevErga As String = "v4Erga"
     Public ColvCityName As String = "Onoma_Polis"
     Public ColvGeoLocX As String = "GeoLocX"
@@ -22,5 +27,8 @@
     Public strXDF As String = ""
     Public RoundAt As Integer = 3
     Public RSQLConnStr As String = ""
+
+    'Informing the User
+    Public FuncInProgress As New List(Of String)
 
 End Module
