@@ -212,6 +212,37 @@ Module modR
         End Try
     End Function
 
+
+    Public Function GetRSQLConStr(Optional ByVal Server As String = "", Optional ByVal Database As String = "", Optional ByVal IntegratedSecurity As String = "",
+                                  Optional ByVal SQLUserID As String = "", Optional ByVal SQLPass As String = "",
+                                  Optional ByVal LeaveDatabaseBlankIfBlank As Boolean = False) As String
+        Dim Result As String = """"
+
+        If Server = "" Then Server = ServerName
+        If Server.Trim.StartsWith("""") OrElse Server.Trim.StartsWith("'") Then Server = Server.Trim().Substring(1)
+        If Server.Trim.EndsWith("""") OrElse Server.Trim.EndsWith("'") Then Server = AntiSubString(Server.Trim(), 1)
+
+        If Not LeaveDatabaseBlankIfBlank AndAlso Database = "" Then Database = DatabaseName
+
+        Result &= "driver={SQL Server};server=" & Server & ";"
+        If Database <> "" Then Result &= "database=" & Database & ";"
+
+        If IntegratedSecurity = "" AndAlso SQLUserID = "" AndAlso SQLPass = "" Then
+            Result &= "trusted_connection=True; "
+        ElseIf IntegratedSecurity.ToLower().Trim() = "true" OrElse IntegratedSecurity.ToLower().Trim() = "yes" OrElse IntegratedSecurity.ToLower().Trim() = "sspi" Then
+            Result &= "trusted_connection=" & IntegratedSecurity & ";"
+        Else
+            If SQLUserID <> "" Then Result &= "uid=" & SQLUserID & ";"
+            If SQLPass <> "" Then Result &= "pwd=" & SQLPass & ";"
+        End If
+
+        Result &= """"
+        Result = Result.Trim
+
+        Return Result
+    End Function
+
+
 #Region "RSource"
     Public Function RSource(ByVal FilePaths() As String, Optional ByVal CypherLevel As Integer = -1, Optional ByVal strArReplace() As String = Nothing, Optional ByVal KillGraphsFirst As Boolean = False, Optional ShowRCodeAfterFailure As Boolean = False) As Boolean
         Dim rnd As New Random()

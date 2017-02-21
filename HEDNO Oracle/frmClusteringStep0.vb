@@ -1,29 +1,27 @@
 ﻿Imports RDotNet
 
-Public Class frmPreProcessing
-    Public strLanguage_PreProcessing As String()
+Public Class frmClusteringStep0
+    Public strLanguage_ClusteringStep0 As String()
 
-    Private Sub frmPreProcessing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmClusteringStep0_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             'initialization
-            Call PreProcessing_Language(Me)
+            Call ClusteringStep0_Language(Me)
             frmSkin(Me, False)
             '/initialization
-
-
 
         Catch ex As Exception
             CreateCrashFile(ex, True)
         End Try
     End Sub
 
-    Private Sub btnPreProcess_Click(sender As Object, e As EventArgs) Handles btnPreProcess.Click
+    Private Sub btnClustering_Click(sender As Object, e As EventArgs) Handles btnClustering0.Click
         Try
             If FuncInProgress.Count = 0 Then
-                FuncInProgress.Add("Pre-Processing Data")
+                FuncInProgress.Add("Clustering Step 0")
                 pnlMain.Enabled = False
                 Try
-                    Dim vErgaColumnNames() As String = {}
+                    Dim ClusteringColumnNames() As String = {}
                     If RDotNet_Initialization() Then
                         If chkUseExistingXDFFile.Checked Then Rdo.Evaluate("UseExistingXDFFile <- TRUE") Else Rdo.Evaluate("UseExistingXDFFile <- FALSE")
                         If chkCleanXDFFile.Checked Then Rdo.Evaluate("CleanupXFDFile <- TRUE") Else Rdo.Evaluate("CleanupXFDFile <- FALSE")
@@ -31,22 +29,24 @@ Public Class frmPreProcessing
                         If chkShowDataSummary.Checked Then Rdo.Evaluate("ShowDataSummary <- TRUE") Else Rdo.Evaluate("ShowDataSummary <- FALSE")
                         If chkShowVariableInfo.Checked Then Rdo.Evaluate("ShowVariableInfo <- TRUE") Else Rdo.Evaluate("ShowVariableInfo <- FALSE")
 
+
                         If RSource({strFunctions & "[ColumnsInfo].R",
-                                    strFunctions & "1.0 Data-PreProcessing.R"}, , {"{0}", TablevErga,
+                                    strFunctions & "2.0 Clustering Step 0.R"}, , {"{0}", TablevErga,
                                                                                   "{1}", ColvGeoLocX,
                                                                                   "{2}", ColvGeoLocY}, True) Then
+
                             If chkShowDataSummary.Checked OrElse chkShowVariableInfo.Checked Then
-                                vErgaColumnNames = Rdo.GetSymbol("vErgaColumnNames").AsCharacter.ToArray
+                                ClusteringColumnNames = Rdo.GetSymbol("ClusteringColumnNames").AsCharacter.ToArray
 
                                 If chkShowDataSummary.Checked Then
-                                    Dim DataSummary As DataFrame = Rdo.GetSymbol("vErgaDataSummary").AsDataFrame
+                                    Dim DataSummary As DataFrame = Rdo.GetSymbol("ClusteringDataSummary").AsDataFrame
                                     Dim DataSummaryVisualiserForm As New frmDataSummaryVisualiser With {.dfDataSummary = DataSummary, .DatasetName = "Clustering"}
                                     DataSummaryVisualiserForm.Show()
                                 End If
 
                                 If chkShowVariableInfo.Checked Then
-                                    Dim VariableInfo = Rdo.GetSymbol("vErgaVarInfo").AsList
-                                    Dim VariableInfoVisualiserForm As New frmVariableInfoVisualiser With {.rlstVariableInfo = VariableInfo, .ColumnNames = vErgaColumnNames, .DatasetName = "Clustering"}
+                                    Dim VariableInfo = Rdo.GetSymbol("ClusteringVarInfo").AsList
+                                    Dim VariableInfoVisualiserForm As New frmVariableInfoVisualiser With {.rlstVariableInfo = VariableInfo, .ColumnNames = ClusteringColumnNames, .DatasetName = "Clustering"}
                                     VariableInfoVisualiserForm.Show()
                                 End If
                             End If
@@ -61,7 +61,7 @@ Public Class frmPreProcessing
                     pnlMain.Enabled = True
                 End Try
 
-                FuncInProgress.Remove("Pre-Processing Data")
+                FuncInProgress.Remove("Clustering Step 0")
                 pnlMain.Enabled = True
                 Close()
             Else

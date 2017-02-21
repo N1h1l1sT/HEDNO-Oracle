@@ -4,6 +4,8 @@
     Public ConnectedToSQLServer As Boolean = False
 
 
+    Public TablevTestSet As String = "v9TestSet"
+
     Public TablevErga As String = "v4Erga"
     Public ColvCityName As String = "Onoma_Polis"
     Public ColvGeoLocX As String = "GeoLocX"

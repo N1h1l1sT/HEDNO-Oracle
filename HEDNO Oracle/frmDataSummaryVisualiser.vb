@@ -5,6 +5,9 @@ Imports System.IO
 Imports System.Drawing.Printing
 
 Public Class frmDataSummaryVisualiser
+    Public dfDataSummary As DataFrame = Nothing
+    Public DatasetName As String = Nothing
+
     Public strLanguage_DataSummaryVisualiser() As String
     Public DefaultSaveFileName As String = String.Empty
     Public LastSaveFile As String = String.Empty
@@ -13,7 +16,6 @@ Public Class frmDataSummaryVisualiser
     Dim MyDataGridViewPrinter As clsDataGridViewPrinter
     Dim CurrentColumnIndex As Integer = -1
 
-    Public dfDataSummary As DataFrame = Nothing
     Dim dtDataSummary As New DataTable
 
     Private Sub frmDataSummaryVisualiser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -22,6 +24,10 @@ Public Class frmDataSummaryVisualiser
             Call DataSummaryVisualiser_Language(Me)
             frmSkin(Me, False)
             '/initialization
+
+            If DatasetName <> "" Then Text = DatasetName & " Data Summary"
+
+            Location = New Point(My.Computer.Screen.Bounds.Left, My.Computer.Screen.Bounds.Top)
 
             For i = 0 To dfDataSummary.ColumnCount - 1
                 dtDataSummary.Columns.Add(dfDataSummary.ColumnNames(i))

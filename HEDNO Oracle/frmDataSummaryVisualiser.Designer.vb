@@ -23,8 +23,8 @@ Partial Class frmDataSummaryVisualiser
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDataSummaryVisualiser))
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.dgvDataSummary = New System.Windows.Forms.DataGridView()
@@ -75,23 +75,23 @@ Partial Class frmDataSummaryVisualiser
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvDataSummary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvDataSummary.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDataSummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDataSummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvDataSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvDataSummary.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvDataSummary.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvDataSummary.Location = New System.Drawing.Point(0, 0)
         Me.dgvDataSummary.Name = "dgvDataSummary"
         Me.dgvDataSummary.ReadOnly = True
@@ -102,13 +102,13 @@ Partial Class frmDataSummaryVisualiser
         '
         'ssMain
         '
+        Me.ssMain.BackColor = System.Drawing.Color.LightGray
         Me.ssMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
         Me.ssMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblSelectedCells, Me.lblSelectedColumns, Me.lblSelectedRows, Me.lblColumnsCount, Me.lblRowsCount, Me.lblCurColumn, Me.lblCurRow})
         Me.ssMain.Location = New System.Drawing.Point(0, 657)
         Me.ssMain.Name = "ssMain"
         Me.ssMain.Size = New System.Drawing.Size(602, 22)
         Me.ssMain.TabIndex = 3
-        Me.ssMain.Text = "StatusStrip1"
         '
         'lblSelectedCells
         '
@@ -149,7 +149,7 @@ Partial Class frmDataSummaryVisualiser
         'lblCurRow
         '
         Me.lblCurRow.Name = "lblCurRow"
-        Me.lblCurRow.Size = New System.Drawing.Size(83, 17)
+        Me.lblCurRow.Size = New System.Drawing.Size(83, 14)
         Me.lblCurRow.Text = "Current Row: "
         '
         'mnuMain

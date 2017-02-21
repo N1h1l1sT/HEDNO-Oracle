@@ -4,13 +4,12 @@
 'Needs Settings.ini version 1.6; Language file Version 2.0
 
 'API Key: AIzaSyB1TNGKJ4jTOKWR9lsaJy8R9o1CBgYWCMc
-'API Key: AIzaSyB4qeHfUHoimexLFOfS05EdVcVCMJLK2h4
-'API Key: AIzaSyCGWuczNf_Z3wDMAVuB6P0roOjrlGtTxP0
-'API Key: AIzaSyBK0bY6POExfJTHlqaV1lZ9-j0ecaKVA4E
+
 'https://maps.googleapis.com/maps/api/geocode/json?&address=ΠΕΡΙΞ%20ΣΕΡΡΩΝ
 'https://maps.googleapis.com/maps/api/geocode/json?&address=ΑΝΩ%20ΜΗΛΙΑ&key=AIzaSyB4qeHfUHoimexLFOfS05EdVcVCMJLK2h4
 
 Option Strict On
+Imports RDotNet
 Imports System.Data.SqlClient
 Imports System.IO
 Imports System.Net
@@ -257,20 +256,21 @@ Public Class frmMain
                 WindowWidth = My.Computer.Screen.Bounds.Height
             End If
 
-            Try
-                MainFolderOnline = Registry.GetValue(strProgramRegistryKeyName, strMainFolderOverrideValueName, MainFolderOnline).ToString
 
-                Try
-                    strOnlineMainInfo = DlFile.DownloadString(MainFolderOnline & "MainInfo.txt").Split(New String() {Environment.NewLine}, StringSplitOptions.None)
-                    If Not CBool(strOnlineMainInfo(0).Substring("ProgramRun=".Length)) AndAlso BETA = False Then 'Check Run Parameter
-                        MsgBox(strModLanguage(20)) 'Run=False|The Program's framework is currently down. Please try again in 5 minutes.
-                        Application.Exit()
-                        Exit Sub
-                    End If
-                Catch exc As Exception
-                    'If there is a problem with that, then it's okay, lets just continue
-                End Try
+            Try 'If there's no such key (i.e. no Install-Shield installation but plain big instead), it's okay
+                MainFolderOnline = Registry.GetValue(strProgramRegistryKeyName, strMainFolderOverrideValueName, MainFolderOnline).ToString
             Catch ex As Exception
+            End Try
+
+            Try
+                strOnlineMainInfo = DlFile.DownloadString(MainFolderOnline & "MainInfo.txt").Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+                If Not CBool(strOnlineMainInfo(0).Substring("ProgramRun=".Length)) AndAlso BETA = False Then 'Check Run Parameter
+                    MsgBox(strModLanguage(20)) 'Run=False|The Program's framework is currently down. Please try again in 5 minutes.
+                    Application.Exit()
+                    Exit Sub
+                End If
+            Catch exc As Exception
+                'If there is a problem with that, then it's okay, lets just continue
             End Try
 
             CommandsDefaultText = strLanguage_Main(26)  'You may type commands here. For a list of available commands, please type "help()"
@@ -306,7 +306,7 @@ Public Class frmMain
                 RowsPerRead = CInt(strSettings(51).Substring("051RowsPerRead=".Length))
                 strXDF = strSettings(52).Substring("052PathtoSaveLoadXDFFiles=".Length)
                 RoundAt = CInt(strSettings(53).Substring("053RoundAt=".Length))
-                RSQLConnStr = strSettings(64).Substring("064RSQLConnStr=".Length)
+                RSQLConnStr = strSettings(64).Substring("064RSQLConnStr=".Length) 'If it's not filled in, then it's auto-configured in line 499
 
                 TablevErga = strSettings(54).Substring("054TablevErga=".Length)
                 ColvCityName = strSettings(55).Substring("055ColvCityName=".Length)
@@ -493,11 +493,29 @@ Public Class frmMain
             '=============================
 
             Try
-                If RDotNet_Initialization() Then
-                    RSource(strFunctions & "[Initialisation].R",, {"{0}", RowsPerRead.ToString,
-                                                                 "{1}", """" & strXDF & """",
-                                                                 "{2}", RSQLConnStr}, False)
+                If strXDF = "" OrElse strXDF.ToLower = "default" Then strXDF = strDesktop
+
+                SQLServerUserID = strSettings(65).Substring("065DBUsername=".Length)
+                SQLServerPass = strSettings(17).Substring("017DataBasePass=".Length)
+
+                If ConnectedToSQLServer Then
+                    If RSQLConnStr = "" OrElse RSQLConnStr.ToLower = "default".ToLower Then
+                        RSQLConnStr = GetRSQLConStr(ServerName, DatabaseName,, SQLServerUserID, SQLServerPass)
+                    End If
                 End If
+
+                If RDotNet_Initialization() Then
+                    Dim IsRServerOrEquivalent As Boolean = Rdo.Evaluate("('RevoScaleR' %in% loadedNamespaces())").AsLogical.First
+
+                    If IsRServerOrEquivalent Then
+                        RSource(strFunctions & "[Initialisation].R",, {"{0}", RowsPerRead.ToString,
+                                                                       "{1}", """" & strXDF & """",
+                                                                       "{2}", RSQLConnStr}, False)
+                    Else
+                        MsgBox(ss("Unfortunately, although some version of R has been found in your system, you need R_Server or equivalent for this programme to run{0}This requirement is imposed because the code hereinafter requires the RevoScaleR R Package to bypass R's limitations in computer Memory (RAM) and CPU.{0}{0}Please update your Registry and Environment ", vbCrLf))
+                    End If
+                End If
+
             Catch ex As Exception
                 Notify(ex.ToString, Color.Red, Color.Black, 10)
                 CreateCrashFile(ex)
@@ -1621,9 +1639,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mniClustering_Click(sender As Object, e As EventArgs) Handles mniClustering.Click
-        If RDotNet_Initialization() Then
-
-        End If
+        Dim ClusteringStep0Form As New frmClusteringStep0
+        ClusteringStep0Form.Show()
     End Sub
 
     Private Sub mniPreProcessTheData_Click(sender As Object, e As EventArgs) Handles mniPreProcessTheData.Click
@@ -1654,5 +1671,19 @@ Public Class frmMain
     Private Sub CreateNeededSQLViews_Click(sender As Object, e As EventArgs) Handles CreateNeededSQLViews.Click
         Dim CreateSQLViewForm As New frmCreateSQLView
         CreateSQLViewForm.Show()
+    End Sub
+
+    Private Sub Step1OptimalNumberOfClustersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Step1OptimalNumberOfClustersToolStripMenuItem.Click
+        Dim ClusteringStep1Form As New frmClusteringStep1
+        ClusteringStep1Form.Show()
+    End Sub
+
+    Private Sub FormTrainAndTestSetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormTrainAndTestSetsToolStripMenuItem.Click
+        Dim ClassificationForm As New frmClassification
+        ClassificationForm.Show()
+    End Sub
+
+    Private Sub LogisticRegressionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogisticRegressionToolStripMenuItem.Click
+
     End Sub
 End Class

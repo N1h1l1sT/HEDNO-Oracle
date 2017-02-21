@@ -22,7 +22,10 @@ Module modSkin
 
                 Dim strFormImage As String = strSkin & My.Settings.strSkinChoice & .Name & "\" & .Name & ".jpg" 'BackGroundImage File Path
                 If File.Exists(strFormImage) Then
-                    Dim img As Image = Image.FromFile(strFormImage) 'Loading BackGroundImage
+                    Dim img As Image '= Image.FromFile(strFormImage) 'Loading BackGroundImage
+                    Using bmpTemp = New Bitmap(strFormImage)
+                        img = New Bitmap(bmpTemp)
+                    End Using
 
                     If .Size.Width > img.Size.Width - 50 AndAlso .Size.Height > img.Size.Height - 50 _
                     AndAlso .Size.Width < img.Size.Width + 50 AndAlso .Size.Height < img.Size.Height + 50 Then 'Checking if the pic is within acceptable distortion limits
@@ -31,7 +34,14 @@ Module modSkin
                     Else 'If not, then let's see if a Pattern picture exists
                         Dim strFormBigImage As String = strSkin & My.Settings.strSkinChoice & .Name & "\" & .Name & "_Pattern.jpg"
                         If File.Exists(strFormBigImage) Then 'If one exists, then lets load the Pattern instead
-                            If frm.IsMdiContainer AndAlso MDIPanel IsNot Nothing Then MDIPanel.BackgroundImage = img Else .BackgroundImage = Image.FromFile(strFormBigImage)
+                            If frm.IsMdiContainer AndAlso MDIPanel IsNot Nothing Then
+                                MDIPanel.BackgroundImage = img
+                            Else
+                                '.BackgroundImage = Image.FromFile(strFormBigImage)
+                                Using bmpTemp = New Bitmap(strFormBigImage)
+                                    .BackgroundImage = New Bitmap(bmpTemp)
+                                End Using
+                            End If
 
                         Else 'If not, then we go back to the original picture even if it gets distorted
                             If frm.IsMdiContainer AndAlso MDIPanel IsNot Nothing Then MDIPanel.BackgroundImage = img Else .BackgroundImage = img
@@ -97,7 +107,10 @@ Module modSkin
 
             If File.Exists(strSkin & My.Settings.strSkinChoice & Name & "\" & ctrl.Name & ".jpg") Then
                 DirectCast(ctrl, Button).BackgroundImageLayout = ImageLayout.Stretch
-                DirectCast(ctrl, Button).BackgroundImage = Image.FromFile(strSkin & My.Settings.strSkinChoice & Name & "\" & ctrl.Name & ".jpg")
+                'DirectCast(ctrl, Button).BackgroundImage = Image.FromFile(strSkin & My.Settings.strSkinChoice & Name & "\" & ctrl.Name & ".jpg")
+                Using bmpTemp = New Bitmap(strSkin & My.Settings.strSkinChoice & Name & "\" & ctrl.Name & ".jpg")
+                    DirectCast(ctrl, Button).BackgroundImage = New Bitmap(bmpTemp)
+                End Using
             End If
 
         ElseIf TypeOf ctrl Is Label Then

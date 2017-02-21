@@ -87,7 +87,7 @@ Module modCommon
     '=========================
     '==Changes per Programme==
     '=========================
-    Public IniChars As String = "DDOC" 'In Case there is no modSecurity
+    Public IniChars As String = "HEDO" 'In Case there is no modSecurity
     Public Const MailSettingsCipherLevel As Integer = 7    'THIS ONE IS SET EVEN WHEN THE PROGRAMME DOES NOT USE modSecurity !
     Public BETA As Boolean = False
     Public TRIAL As Boolean = True
@@ -151,7 +151,7 @@ Module modCommon
     Public strDecimalSeparator As String = "."
     Public LangDelimiterForRangeOrSpan As String = "to"
     Public Const strMainFolderOverrideValueName As String = "Override Main Folder"
-    Public RemoteServer As String = "https://dl.dropboxusercontent.com/u/18135227/Programs/" & My.Application.Info.Title.Replace(" ", "%20")
+    Public RemoteServer As String = "https://www.nihilistslab.com/Programs/" & My.Application.Info.Title.Replace(" ", "")
     Public MainFolderOnline As String = RemoteServer & "/Main/"
     Public strProgramRegistrySubKey As String = "Software\Microsoft\" & IniChars
     Public strProgramRegistryKeyName As String = Registry.CurrentUser.Name & "\Software\Microsoft\" & IniChars

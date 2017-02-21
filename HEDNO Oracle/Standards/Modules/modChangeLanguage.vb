@@ -464,7 +464,37 @@ Module modChangeLanguage
 
     Public Sub VariableInfoVisualiser_Language(ByVal frm As frmVariableInfoVisualiser)
         With frm
-            Dim strLanguage_VariableInfoVisualiser() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_DataSummaryVisualiser)
+            Dim strLanguage_VariableInfoVisualiser() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_VariableInfoVisualiser)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub ClusteringStep0_Language(ByVal frm As frmClusteringStep0)
+        With frm
+            Dim strLanguage_ClusteringStep0() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_ClusteringStep0)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub ClusteringStep1_Language(ByVal frm As frmClusteringStep1)
+        With frm
+            Dim strLanguage_ClusteringStep1() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_ClusteringStep1)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub Classification_Language(ByVal frm As frmClassification)
+        With frm
+            Dim strLanguage_Classification() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_Classification)
             On Error Resume Next
 
             '.Text = strLanguage_strLanguage_CreateSQLView(1) '

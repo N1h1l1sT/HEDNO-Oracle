@@ -53,6 +53,8 @@ Partial Class frmSettings
         Me.lblSkin = New System.Windows.Forms.Label()
         Me.cbSkin = New System.Windows.Forms.ComboBox()
         Me.tpDatabase = New System.Windows.Forms.TabPage()
+        Me.txtDBUsername = New System.Windows.Forms.TextBox()
+        Me.lblUsername = New System.Windows.Forms.Label()
         Me.txtProtectedTables = New System.Windows.Forms.TextBox()
         Me.btnProtectedTables = New System.Windows.Forms.Button()
         Me.lblProtectedTables = New System.Windows.Forms.Label()
@@ -69,6 +71,8 @@ Partial Class frmSettings
         Me.lblDBtype = New System.Windows.Forms.Label()
         Me.btnBrowseDBPath = New System.Windows.Forms.Button()
         Me.tpRGeneral = New System.Windows.Forms.TabPage()
+        Me.lblRSQLConnStr = New System.Windows.Forms.Label()
+        Me.txtRSQLConnStr = New System.Windows.Forms.TextBox()
         Me.lblRoundAt = New System.Windows.Forms.Label()
         Me.txtRoundAt = New System.Windows.Forms.TextBox()
         Me.btnXDFPath = New System.Windows.Forms.Button()
@@ -111,14 +115,16 @@ Partial Class frmSettings
         Me.cmdCurrent = New System.Windows.Forms.Button()
         Me.cmdDefault = New System.Windows.Forms.Button()
         Me.ofdFileBrowser = New System.Windows.Forms.OpenFileDialog()
-        Me.lblRSQLConnStr = New System.Windows.Forms.Label()
-        Me.txtRSQLConnStr = New System.Windows.Forms.TextBox()
+        Me.txtTablevTestSet = New System.Windows.Forms.TextBox()
+        Me.lblTablevTestSet = New System.Windows.Forms.Label()
+        Me.tpSQLViews = New System.Windows.Forms.TabPage()
         Me.tcSettings.SuspendLayout()
         Me.tpGeneral.SuspendLayout()
         Me.tpDatabase.SuspendLayout()
         Me.tpRGeneral.SuspendLayout()
         Me.tpGeolocation.SuspendLayout()
         Me.gbCommands.SuspendLayout()
+        Me.tpSQLViews.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSecs
@@ -199,7 +205,7 @@ Partial Class frmSettings
         '
         Me.cmdExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdExit.Location = New System.Drawing.Point(27, 547)
+        Me.cmdExit.Location = New System.Drawing.Point(27, 455)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(133, 21)
         Me.cmdExit.TabIndex = 2
@@ -210,7 +216,7 @@ Partial Class frmSettings
         '
         Me.cmdApply.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdApply.Enabled = False
-        Me.cmdApply.Location = New System.Drawing.Point(488, 547)
+        Me.cmdApply.Location = New System.Drawing.Point(488, 455)
         Me.cmdApply.Name = "cmdApply"
         Me.cmdApply.Size = New System.Drawing.Size(133, 21)
         Me.cmdApply.TabIndex = 1
@@ -223,7 +229,7 @@ Partial Class frmSettings
         Me.lblInfo.BackColor = System.Drawing.Color.Black
         Me.lblInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.lblInfo.ForeColor = System.Drawing.Color.Gold
-        Me.lblInfo.Location = New System.Drawing.Point(27, 68)
+        Me.lblInfo.Location = New System.Drawing.Point(27, 51)
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(272, 15)
         Me.lblInfo.TabIndex = 5
@@ -259,10 +265,11 @@ Partial Class frmSettings
         Me.tcSettings.Controls.Add(Me.tpDatabase)
         Me.tcSettings.Controls.Add(Me.tpRGeneral)
         Me.tcSettings.Controls.Add(Me.tpGeolocation)
-        Me.tcSettings.Location = New System.Drawing.Point(27, 94)
+        Me.tcSettings.Controls.Add(Me.tpSQLViews)
+        Me.tcSettings.Location = New System.Drawing.Point(27, 71)
         Me.tcSettings.Name = "tcSettings"
         Me.tcSettings.SelectedIndex = 0
-        Me.tcSettings.Size = New System.Drawing.Size(594, 439)
+        Me.tcSettings.Size = New System.Drawing.Size(594, 354)
         Me.tcSettings.TabIndex = 0
         '
         'tpGeneral
@@ -294,7 +301,7 @@ Partial Class frmSettings
         Me.tpGeneral.Location = New System.Drawing.Point(4, 22)
         Me.tpGeneral.Name = "tpGeneral"
         Me.tpGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpGeneral.Size = New System.Drawing.Size(586, 413)
+        Me.tpGeneral.Size = New System.Drawing.Size(586, 314)
         Me.tpGeneral.TabIndex = 0
         Me.tpGeneral.Text = "General Settings"
         Me.tpGeneral.UseVisualStyleBackColor = True
@@ -457,6 +464,8 @@ Partial Class frmSettings
         '
         'tpDatabase
         '
+        Me.tpDatabase.Controls.Add(Me.txtDBUsername)
+        Me.tpDatabase.Controls.Add(Me.lblUsername)
         Me.tpDatabase.Controls.Add(Me.txtProtectedTables)
         Me.tpDatabase.Controls.Add(Me.btnProtectedTables)
         Me.tpDatabase.Controls.Add(Me.lblProtectedTables)
@@ -474,16 +483,36 @@ Partial Class frmSettings
         Me.tpDatabase.Controls.Add(Me.btnBrowseDBPath)
         Me.tpDatabase.Location = New System.Drawing.Point(4, 22)
         Me.tpDatabase.Name = "tpDatabase"
-        Me.tpDatabase.Size = New System.Drawing.Size(586, 413)
+        Me.tpDatabase.Size = New System.Drawing.Size(586, 314)
         Me.tpDatabase.TabIndex = 2
         Me.tpDatabase.Text = "Database"
         Me.tpDatabase.UseVisualStyleBackColor = True
+        '
+        'txtDBUsername
+        '
+        Me.txtDBUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDBUsername.Location = New System.Drawing.Point(252, 43)
+        Me.txtDBUsername.Name = "txtDBUsername"
+        Me.txtDBUsername.Size = New System.Drawing.Size(326, 20)
+        Me.txtDBUsername.TabIndex = 74
+        Me.txtDBUsername.Tag = "0"
+        Me.txtDBUsername.Text = "Unknown"
+        '
+        'lblUsername
+        '
+        Me.lblUsername.AutoSize = True
+        Me.lblUsername.Location = New System.Drawing.Point(6, 46)
+        Me.lblUsername.Name = "lblUsername"
+        Me.lblUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblUsername.TabIndex = 75
+        Me.lblUsername.Text = "Username:"
         '
         'txtProtectedTables
         '
         Me.txtProtectedTables.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtProtectedTables.Location = New System.Drawing.Point(251, 151)
+        Me.txtProtectedTables.Location = New System.Drawing.Point(251, 177)
         Me.txtProtectedTables.Name = "txtProtectedTables"
         Me.txtProtectedTables.ReadOnly = True
         Me.txtProtectedTables.Size = New System.Drawing.Size(296, 20)
@@ -494,7 +523,7 @@ Partial Class frmSettings
         'btnProtectedTables
         '
         Me.btnProtectedTables.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnProtectedTables.Location = New System.Drawing.Point(553, 149)
+        Me.btnProtectedTables.Location = New System.Drawing.Point(553, 175)
         Me.btnProtectedTables.Name = "btnProtectedTables"
         Me.btnProtectedTables.Size = New System.Drawing.Size(25, 23)
         Me.btnProtectedTables.TabIndex = 72
@@ -505,7 +534,7 @@ Partial Class frmSettings
         'lblProtectedTables
         '
         Me.lblProtectedTables.AutoSize = True
-        Me.lblProtectedTables.Location = New System.Drawing.Point(5, 154)
+        Me.lblProtectedTables.Location = New System.Drawing.Point(5, 180)
         Me.lblProtectedTables.Name = "lblProtectedTables"
         Me.lblProtectedTables.Size = New System.Drawing.Size(91, 13)
         Me.lblProtectedTables.TabIndex = 73
@@ -515,7 +544,7 @@ Partial Class frmSettings
         '
         Me.txtDatabaseTables.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDatabaseTables.Location = New System.Drawing.Point(251, 125)
+        Me.txtDatabaseTables.Location = New System.Drawing.Point(251, 151)
         Me.txtDatabaseTables.Name = "txtDatabaseTables"
         Me.txtDatabaseTables.ReadOnly = True
         Me.txtDatabaseTables.Size = New System.Drawing.Size(296, 20)
@@ -526,7 +555,7 @@ Partial Class frmSettings
         'lblDatabaseTables
         '
         Me.lblDatabaseTables.AutoSize = True
-        Me.lblDatabaseTables.Location = New System.Drawing.Point(5, 128)
+        Me.lblDatabaseTables.Location = New System.Drawing.Point(5, 154)
         Me.lblDatabaseTables.Name = "lblDatabaseTables"
         Me.lblDatabaseTables.Size = New System.Drawing.Size(92, 13)
         Me.lblDatabaseTables.TabIndex = 64
@@ -556,7 +585,7 @@ Partial Class frmSettings
         'btnDatabaseTables
         '
         Me.btnDatabaseTables.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDatabaseTables.Location = New System.Drawing.Point(553, 123)
+        Me.btnDatabaseTables.Location = New System.Drawing.Point(553, 149)
         Me.btnDatabaseTables.Name = "btnDatabaseTables"
         Me.btnDatabaseTables.Size = New System.Drawing.Size(25, 23)
         Me.btnDatabaseTables.TabIndex = 63
@@ -569,7 +598,7 @@ Partial Class frmSettings
         Me.cbAccessType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbAccessType.FormattingEnabled = True
-        Me.cbAccessType.Location = New System.Drawing.Point(252, 69)
+        Me.cbAccessType.Location = New System.Drawing.Point(252, 95)
         Me.cbAccessType.Name = "cbAccessType"
         Me.cbAccessType.Size = New System.Drawing.Size(326, 21)
         Me.cbAccessType.TabIndex = 60
@@ -580,7 +609,7 @@ Partial Class frmSettings
         '
         Me.txtDBpass.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDBpass.Location = New System.Drawing.Point(252, 43)
+        Me.txtDBpass.Location = New System.Drawing.Point(252, 69)
         Me.txtDBpass.Name = "txtDBpass"
         Me.txtDBpass.Size = New System.Drawing.Size(326, 20)
         Me.txtDBpass.TabIndex = 6
@@ -590,7 +619,7 @@ Partial Class frmSettings
         'lblDBpass
         '
         Me.lblDBpass.AutoSize = True
-        Me.lblDBpass.Location = New System.Drawing.Point(6, 46)
+        Me.lblDBpass.Location = New System.Drawing.Point(6, 72)
         Me.lblDBpass.Name = "lblDBpass"
         Me.lblDBpass.Size = New System.Drawing.Size(56, 13)
         Me.lblDBpass.TabIndex = 55
@@ -600,7 +629,7 @@ Partial Class frmSettings
         '
         Me.txtDBFile.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDBFile.Location = New System.Drawing.Point(251, 96)
+        Me.txtDBFile.Location = New System.Drawing.Point(251, 122)
         Me.txtDBFile.Name = "txtDBFile"
         Me.txtDBFile.Size = New System.Drawing.Size(296, 20)
         Me.txtDBFile.TabIndex = 0
@@ -610,7 +639,7 @@ Partial Class frmSettings
         'lblDBFile
         '
         Me.lblDBFile.AutoSize = True
-        Me.lblDBFile.Location = New System.Drawing.Point(5, 99)
+        Me.lblDBFile.Location = New System.Drawing.Point(5, 125)
         Me.lblDBFile.Name = "lblDBFile"
         Me.lblDBFile.Size = New System.Drawing.Size(76, 13)
         Me.lblDBFile.TabIndex = 48
@@ -619,7 +648,7 @@ Partial Class frmSettings
         'lblDBtype
         '
         Me.lblDBtype.AutoSize = True
-        Me.lblDBtype.Location = New System.Drawing.Point(5, 72)
+        Me.lblDBtype.Location = New System.Drawing.Point(5, 98)
         Me.lblDBtype.Name = "lblDBtype"
         Me.lblDBtype.Size = New System.Drawing.Size(83, 13)
         Me.lblDBtype.TabIndex = 51
@@ -628,7 +657,7 @@ Partial Class frmSettings
         'btnBrowseDBPath
         '
         Me.btnBrowseDBPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBrowseDBPath.Location = New System.Drawing.Point(553, 94)
+        Me.btnBrowseDBPath.Location = New System.Drawing.Point(553, 120)
         Me.btnBrowseDBPath.Name = "btnBrowseDBPath"
         Me.btnBrowseDBPath.Size = New System.Drawing.Size(25, 23)
         Me.btnBrowseDBPath.TabIndex = 1
@@ -650,10 +679,30 @@ Partial Class frmSettings
         Me.tpRGeneral.Location = New System.Drawing.Point(4, 22)
         Me.tpRGeneral.Name = "tpRGeneral"
         Me.tpRGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpRGeneral.Size = New System.Drawing.Size(586, 413)
+        Me.tpRGeneral.Size = New System.Drawing.Size(586, 314)
         Me.tpRGeneral.TabIndex = 3
         Me.tpRGeneral.Text = "R (General)"
         Me.tpRGeneral.UseVisualStyleBackColor = True
+        '
+        'lblRSQLConnStr
+        '
+        Me.lblRSQLConnStr.AutoSize = True
+        Me.lblRSQLConnStr.Location = New System.Drawing.Point(6, 97)
+        Me.lblRSQLConnStr.Name = "lblRSQLConnStr"
+        Me.lblRSQLConnStr.Size = New System.Drawing.Size(144, 13)
+        Me.lblRSQLConnStr.TabIndex = 9
+        Me.lblRSQLConnStr.Text = "SQL Connection String for R:"
+        '
+        'txtRSQLConnStr
+        '
+        Me.txtRSQLConnStr.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtRSQLConnStr.Location = New System.Drawing.Point(252, 94)
+        Me.txtRSQLConnStr.Name = "txtRSQLConnStr"
+        Me.txtRSQLConnStr.Size = New System.Drawing.Size(328, 20)
+        Me.txtRSQLConnStr.TabIndex = 8
+        Me.txtRSQLConnStr.Tag = "0"
+        Me.txtRSQLConnStr.Text = "Unknown"
         '
         'lblRoundAt
         '
@@ -730,26 +779,6 @@ Partial Class frmSettings
         '
         'tpGeolocation
         '
-        Me.tpGeolocation.Controls.Add(Me.txtColID_Erga)
-        Me.tpGeolocation.Controls.Add(Me.lblColID_Erga)
-        Me.tpGeolocation.Controls.Add(Me.txtTablevErga)
-        Me.tpGeolocation.Controls.Add(Me.lblTablevErga)
-        Me.tpGeolocation.Controls.Add(Me.txtColGeoLocY)
-        Me.tpGeolocation.Controls.Add(Me.lblColGeoLocY)
-        Me.tpGeolocation.Controls.Add(Me.txtColGeoLocX)
-        Me.tpGeolocation.Controls.Add(Me.lblColGeoLocX)
-        Me.tpGeolocation.Controls.Add(Me.txtColCityName)
-        Me.tpGeolocation.Controls.Add(Me.lblColCityName)
-        Me.tpGeolocation.Controls.Add(Me.txtTableErga)
-        Me.tpGeolocation.Controls.Add(Me.lblTableErga)
-        Me.tpGeolocation.Controls.Add(Me.txtColvID_Erga)
-        Me.tpGeolocation.Controls.Add(Me.lblColvID_Erga)
-        Me.tpGeolocation.Controls.Add(Me.txtColvGeoLocY)
-        Me.tpGeolocation.Controls.Add(Me.lblColvGeoLocY)
-        Me.tpGeolocation.Controls.Add(Me.txtColvGeoLocX)
-        Me.tpGeolocation.Controls.Add(Me.lblColvGeoLocX)
-        Me.tpGeolocation.Controls.Add(Me.txtColvCityName)
-        Me.tpGeolocation.Controls.Add(Me.lblColvCityName)
         Me.tpGeolocation.Controls.Add(Me.txtAPIKey)
         Me.tpGeolocation.Controls.Add(Me.lblAPIKey)
         Me.tpGeolocation.Controls.Add(Me.txtCityFieldSuffix)
@@ -762,7 +791,7 @@ Partial Class frmSettings
         Me.tpGeolocation.Controls.Add(Me.lblGeoLocationAPILink)
         Me.tpGeolocation.Location = New System.Drawing.Point(4, 22)
         Me.tpGeolocation.Name = "tpGeolocation"
-        Me.tpGeolocation.Size = New System.Drawing.Size(586, 413)
+        Me.tpGeolocation.Size = New System.Drawing.Size(586, 314)
         Me.tpGeolocation.TabIndex = 4
         Me.tpGeolocation.Text = "Geolocation"
         Me.tpGeolocation.UseVisualStyleBackColor = True
@@ -771,7 +800,7 @@ Partial Class frmSettings
         '
         Me.txtColID_Erga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColID_Erga.Location = New System.Drawing.Point(252, 380)
+        Me.txtColID_Erga.Location = New System.Drawing.Point(252, 277)
         Me.txtColID_Erga.Name = "txtColID_Erga"
         Me.txtColID_Erga.Size = New System.Drawing.Size(326, 20)
         Me.txtColID_Erga.TabIndex = 32
@@ -781,7 +810,7 @@ Partial Class frmSettings
         'lblColID_Erga
         '
         Me.lblColID_Erga.AutoSize = True
-        Me.lblColID_Erga.Location = New System.Drawing.Point(6, 383)
+        Me.lblColID_Erga.Location = New System.Drawing.Point(6, 280)
         Me.lblColID_Erga.Name = "lblColID_Erga"
         Me.lblColID_Erga.Size = New System.Drawing.Size(146, 13)
         Me.lblColID_Erga.TabIndex = 33
@@ -791,7 +820,7 @@ Partial Class frmSettings
         '
         Me.txtTablevErga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTablevErga.Location = New System.Drawing.Point(252, 172)
+        Me.txtTablevErga.Location = New System.Drawing.Point(252, 42)
         Me.txtTablevErga.Name = "txtTablevErga"
         Me.txtTablevErga.Size = New System.Drawing.Size(326, 20)
         Me.txtTablevErga.TabIndex = 30
@@ -801,7 +830,7 @@ Partial Class frmSettings
         'lblTablevErga
         '
         Me.lblTablevErga.AutoSize = True
-        Me.lblTablevErga.Location = New System.Drawing.Point(6, 175)
+        Me.lblTablevErga.Location = New System.Drawing.Point(6, 45)
         Me.lblTablevErga.Name = "lblTablevErga"
         Me.lblTablevErga.Size = New System.Drawing.Size(121, 13)
         Me.lblTablevErga.TabIndex = 31
@@ -811,7 +840,7 @@ Partial Class frmSettings
         '
         Me.txtColGeoLocY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColGeoLocY.Location = New System.Drawing.Point(252, 354)
+        Me.txtColGeoLocY.Location = New System.Drawing.Point(252, 251)
         Me.txtColGeoLocY.Name = "txtColGeoLocY"
         Me.txtColGeoLocY.Size = New System.Drawing.Size(326, 20)
         Me.txtColGeoLocY.TabIndex = 28
@@ -821,7 +850,7 @@ Partial Class frmSettings
         'lblColGeoLocY
         '
         Me.lblColGeoLocY.AutoSize = True
-        Me.lblColGeoLocY.Location = New System.Drawing.Point(6, 357)
+        Me.lblColGeoLocY.Location = New System.Drawing.Point(6, 254)
         Me.lblColGeoLocY.Name = "lblColGeoLocY"
         Me.lblColGeoLocY.Size = New System.Drawing.Size(163, 13)
         Me.lblColGeoLocY.TabIndex = 29
@@ -831,7 +860,7 @@ Partial Class frmSettings
         '
         Me.txtColGeoLocX.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColGeoLocX.Location = New System.Drawing.Point(252, 328)
+        Me.txtColGeoLocX.Location = New System.Drawing.Point(252, 225)
         Me.txtColGeoLocX.Name = "txtColGeoLocX"
         Me.txtColGeoLocX.Size = New System.Drawing.Size(326, 20)
         Me.txtColGeoLocX.TabIndex = 26
@@ -841,7 +870,7 @@ Partial Class frmSettings
         'lblColGeoLocX
         '
         Me.lblColGeoLocX.AutoSize = True
-        Me.lblColGeoLocX.Location = New System.Drawing.Point(6, 331)
+        Me.lblColGeoLocX.Location = New System.Drawing.Point(6, 228)
         Me.lblColGeoLocX.Name = "lblColGeoLocX"
         Me.lblColGeoLocX.Size = New System.Drawing.Size(163, 13)
         Me.lblColGeoLocX.TabIndex = 27
@@ -851,7 +880,7 @@ Partial Class frmSettings
         '
         Me.txtColCityName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColCityName.Location = New System.Drawing.Point(252, 302)
+        Me.txtColCityName.Location = New System.Drawing.Point(252, 199)
         Me.txtColCityName.Name = "txtColCityName"
         Me.txtColCityName.Size = New System.Drawing.Size(326, 20)
         Me.txtColCityName.TabIndex = 24
@@ -861,7 +890,7 @@ Partial Class frmSettings
         'lblColCityName
         '
         Me.lblColCityName.AutoSize = True
-        Me.lblColCityName.Location = New System.Drawing.Point(6, 305)
+        Me.lblColCityName.Location = New System.Drawing.Point(6, 202)
         Me.lblColCityName.Name = "lblColCityName"
         Me.lblColCityName.Size = New System.Drawing.Size(150, 13)
         Me.lblColCityName.TabIndex = 25
@@ -871,7 +900,7 @@ Partial Class frmSettings
         '
         Me.txtTableErga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTableErga.Location = New System.Drawing.Point(252, 276)
+        Me.txtTableErga.Location = New System.Drawing.Point(252, 173)
         Me.txtTableErga.Name = "txtTableErga"
         Me.txtTableErga.Size = New System.Drawing.Size(326, 20)
         Me.txtTableErga.TabIndex = 22
@@ -881,7 +910,7 @@ Partial Class frmSettings
         'lblTableErga
         '
         Me.lblTableErga.AutoSize = True
-        Me.lblTableErga.Location = New System.Drawing.Point(6, 279)
+        Me.lblTableErga.Location = New System.Drawing.Point(6, 176)
         Me.lblTableErga.Name = "lblTableErga"
         Me.lblTableErga.Size = New System.Drawing.Size(121, 13)
         Me.lblTableErga.TabIndex = 23
@@ -891,7 +920,7 @@ Partial Class frmSettings
         '
         Me.txtColvID_Erga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvID_Erga.Location = New System.Drawing.Point(252, 250)
+        Me.txtColvID_Erga.Location = New System.Drawing.Point(252, 120)
         Me.txtColvID_Erga.Name = "txtColvID_Erga"
         Me.txtColvID_Erga.Size = New System.Drawing.Size(326, 20)
         Me.txtColvID_Erga.TabIndex = 20
@@ -901,7 +930,7 @@ Partial Class frmSettings
         'lblColvID_Erga
         '
         Me.lblColvID_Erga.AutoSize = True
-        Me.lblColvID_Erga.Location = New System.Drawing.Point(6, 253)
+        Me.lblColvID_Erga.Location = New System.Drawing.Point(6, 123)
         Me.lblColvID_Erga.Name = "lblColvID_Erga"
         Me.lblColvID_Erga.Size = New System.Drawing.Size(140, 13)
         Me.lblColvID_Erga.TabIndex = 21
@@ -911,7 +940,7 @@ Partial Class frmSettings
         '
         Me.txtColvGeoLocY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvGeoLocY.Location = New System.Drawing.Point(252, 224)
+        Me.txtColvGeoLocY.Location = New System.Drawing.Point(252, 94)
         Me.txtColvGeoLocY.Name = "txtColvGeoLocY"
         Me.txtColvGeoLocY.Size = New System.Drawing.Size(326, 20)
         Me.txtColvGeoLocY.TabIndex = 18
@@ -921,7 +950,7 @@ Partial Class frmSettings
         'lblColvGeoLocY
         '
         Me.lblColvGeoLocY.AutoSize = True
-        Me.lblColvGeoLocY.Location = New System.Drawing.Point(6, 227)
+        Me.lblColvGeoLocY.Location = New System.Drawing.Point(6, 97)
         Me.lblColvGeoLocY.Name = "lblColvGeoLocY"
         Me.lblColvGeoLocY.Size = New System.Drawing.Size(197, 13)
         Me.lblColvGeoLocY.TabIndex = 19
@@ -931,7 +960,7 @@ Partial Class frmSettings
         '
         Me.txtColvGeoLocX.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvGeoLocX.Location = New System.Drawing.Point(252, 198)
+        Me.txtColvGeoLocX.Location = New System.Drawing.Point(252, 68)
         Me.txtColvGeoLocX.Name = "txtColvGeoLocX"
         Me.txtColvGeoLocX.Size = New System.Drawing.Size(326, 20)
         Me.txtColvGeoLocX.TabIndex = 16
@@ -941,7 +970,7 @@ Partial Class frmSettings
         'lblColvGeoLocX
         '
         Me.lblColvGeoLocX.AutoSize = True
-        Me.lblColvGeoLocX.Location = New System.Drawing.Point(6, 201)
+        Me.lblColvGeoLocX.Location = New System.Drawing.Point(6, 71)
         Me.lblColvGeoLocX.Name = "lblColvGeoLocX"
         Me.lblColvGeoLocX.Size = New System.Drawing.Size(197, 13)
         Me.lblColvGeoLocX.TabIndex = 17
@@ -951,7 +980,7 @@ Partial Class frmSettings
         '
         Me.txtColvCityName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvCityName.Location = New System.Drawing.Point(252, 146)
+        Me.txtColvCityName.Location = New System.Drawing.Point(252, 16)
         Me.txtColvCityName.Name = "txtColvCityName"
         Me.txtColvCityName.Size = New System.Drawing.Size(326, 20)
         Me.txtColvCityName.TabIndex = 14
@@ -961,7 +990,7 @@ Partial Class frmSettings
         'lblColvCityName
         '
         Me.lblColvCityName.AutoSize = True
-        Me.lblColvCityName.Location = New System.Drawing.Point(6, 149)
+        Me.lblColvCityName.Location = New System.Drawing.Point(6, 19)
         Me.lblColvCityName.Name = "lblColvCityName"
         Me.lblColvCityName.Size = New System.Drawing.Size(146, 13)
         Me.lblColvCityName.TabIndex = 15
@@ -1075,16 +1104,17 @@ Partial Class frmSettings
         Me.gbCommands.Controls.Add(Me.cmdCurrent)
         Me.gbCommands.Controls.Add(Me.cmdDefault)
         Me.gbCommands.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.gbCommands.Location = New System.Drawing.Point(22, 12)
+        Me.gbCommands.Location = New System.Drawing.Point(27, -1)
         Me.gbCommands.Name = "gbCommands"
-        Me.gbCommands.Size = New System.Drawing.Size(605, 48)
+        Me.gbCommands.Size = New System.Drawing.Size(594, 37)
         Me.gbCommands.TabIndex = 31
         Me.gbCommands.TabStop = False
         Me.gbCommands.Text = "Commands:"
         '
         'cmdCurrent
         '
-        Me.cmdCurrent.Location = New System.Drawing.Point(6, 19)
+        Me.cmdCurrent.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdCurrent.Location = New System.Drawing.Point(6, 12)
         Me.cmdCurrent.Name = "cmdCurrent"
         Me.cmdCurrent.Size = New System.Drawing.Size(133, 23)
         Me.cmdCurrent.TabIndex = 0
@@ -1093,33 +1123,65 @@ Partial Class frmSettings
         '
         'cmdDefault
         '
-        Me.cmdDefault.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdDefault.Location = New System.Drawing.Point(466, 19)
+        Me.cmdDefault.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdDefault.Location = New System.Drawing.Point(455, 12)
         Me.cmdDefault.Name = "cmdDefault"
         Me.cmdDefault.Size = New System.Drawing.Size(133, 23)
         Me.cmdDefault.TabIndex = 1
         Me.cmdDefault.Text = "Reset Default Settings"
         Me.cmdDefault.UseVisualStyleBackColor = True
         '
-        'lblRSQLConnStr
+        'txtTablevTestSet
         '
-        Me.lblRSQLConnStr.AutoSize = True
-        Me.lblRSQLConnStr.Location = New System.Drawing.Point(6, 97)
-        Me.lblRSQLConnStr.Name = "lblRSQLConnStr"
-        Me.lblRSQLConnStr.Size = New System.Drawing.Size(144, 13)
-        Me.lblRSQLConnStr.TabIndex = 9
-        Me.lblRSQLConnStr.Text = "SQL Connection String for R:"
-        '
-        'txtRSQLConnStr
-        '
-        Me.txtRSQLConnStr.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtTablevTestSet.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtRSQLConnStr.Location = New System.Drawing.Point(252, 94)
-        Me.txtRSQLConnStr.Name = "txtRSQLConnStr"
-        Me.txtRSQLConnStr.Size = New System.Drawing.Size(328, 20)
-        Me.txtRSQLConnStr.TabIndex = 8
-        Me.txtRSQLConnStr.Tag = "0"
-        Me.txtRSQLConnStr.Text = "Unknown"
+        Me.txtTablevTestSet.Location = New System.Drawing.Point(252, 146)
+        Me.txtTablevTestSet.Name = "txtTablevTestSet"
+        Me.txtTablevTestSet.Size = New System.Drawing.Size(326, 20)
+        Me.txtTablevTestSet.TabIndex = 34
+        Me.txtTablevTestSet.Tag = "0"
+        Me.txtTablevTestSet.Text = "Unknown"
+        '
+        'lblTablevTestSet
+        '
+        Me.lblTablevTestSet.AutoSize = True
+        Me.lblTablevTestSet.Location = New System.Drawing.Point(6, 149)
+        Me.lblTablevTestSet.Name = "lblTablevTestSet"
+        Me.lblTablevTestSet.Size = New System.Drawing.Size(128, 13)
+        Me.lblTablevTestSet.TabIndex = 35
+        Me.lblTablevTestSet.Text = "SQL View TestSet Name:"
+        '
+        'tpSQLViews
+        '
+        Me.tpSQLViews.Controls.Add(Me.txtTablevTestSet)
+        Me.tpSQLViews.Controls.Add(Me.lblColvCityName)
+        Me.tpSQLViews.Controls.Add(Me.lblTableErga)
+        Me.tpSQLViews.Controls.Add(Me.lblTablevTestSet)
+        Me.tpSQLViews.Controls.Add(Me.txtColvID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.txtTableErga)
+        Me.tpSQLViews.Controls.Add(Me.txtColID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.lblColvID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.lblColCityName)
+        Me.tpSQLViews.Controls.Add(Me.lblColID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.txtColvGeoLocY)
+        Me.tpSQLViews.Controls.Add(Me.txtColCityName)
+        Me.tpSQLViews.Controls.Add(Me.txtTablevErga)
+        Me.tpSQLViews.Controls.Add(Me.lblColvGeoLocY)
+        Me.tpSQLViews.Controls.Add(Me.lblColGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.lblTablevErga)
+        Me.tpSQLViews.Controls.Add(Me.txtColvGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.txtColGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.txtColGeoLocY)
+        Me.tpSQLViews.Controls.Add(Me.lblColvGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.txtColvCityName)
+        Me.tpSQLViews.Controls.Add(Me.lblColGeoLocY)
+        Me.tpSQLViews.Location = New System.Drawing.Point(4, 22)
+        Me.tpSQLViews.Name = "tpSQLViews"
+        Me.tpSQLViews.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpSQLViews.Size = New System.Drawing.Size(586, 328)
+        Me.tpSQLViews.TabIndex = 5
+        Me.tpSQLViews.Text = "SQL Views"
+        Me.tpSQLViews.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
@@ -1128,7 +1190,7 @@ Partial Class frmSettings
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.CancelButton = Me.cmdExit
-        Me.ClientSize = New System.Drawing.Size(644, 570)
+        Me.ClientSize = New System.Drawing.Size(644, 485)
         Me.Controls.Add(Me.gbCommands)
         Me.Controls.Add(Me.tcSettings)
         Me.Controls.Add(Me.lblInfo)
@@ -1148,6 +1210,8 @@ Partial Class frmSettings
         Me.tpGeolocation.ResumeLayout(False)
         Me.tpGeolocation.PerformLayout()
         Me.gbCommands.ResumeLayout(False)
+        Me.tpSQLViews.ResumeLayout(False)
+        Me.tpSQLViews.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1243,4 +1307,9 @@ Partial Class frmSettings
     Friend WithEvents lblColvCityName As Label
     Friend WithEvents lblRSQLConnStr As Label
     Friend WithEvents txtRSQLConnStr As TextBox
+    Friend WithEvents txtDBUsername As TextBox
+    Friend WithEvents lblUsername As Label
+    Friend WithEvents txtTablevTestSet As TextBox
+    Friend WithEvents lblTablevTestSet As Label
+    Friend WithEvents tpSQLViews As TabPage
 End Class

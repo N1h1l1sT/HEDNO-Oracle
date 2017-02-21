@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmPreProcessing
+Partial Class frmClusteringStep0
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,40 +22,29 @@ Partial Class frmPreProcessing
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnPreProcess = New System.Windows.Forms.Button()
-        Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
+        Me.pnlMain = New System.Windows.Forms.Panel()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.chkUseExistingXDFFile = New System.Windows.Forms.CheckBox()
         Me.chkShowDataSummary = New System.Windows.Forms.CheckBox()
-        Me.chkShowGeoLocGraph = New System.Windows.Forms.CheckBox()
         Me.chkShowVariableInfo = New System.Windows.Forms.CheckBox()
-        Me.pnlMain = New System.Windows.Forms.Panel()
-        Me.gbOptions.SuspendLayout()
+        Me.chkShowGeoLocGraph = New System.Windows.Forms.CheckBox()
+        Me.btnClustering0 = New System.Windows.Forms.Button()
+        Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
         Me.pnlMain.SuspendLayout()
+        Me.gbOptions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnPreProcess
+        'pnlMain
         '
-        Me.btnPreProcess.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnPreProcess.Location = New System.Drawing.Point(12, 211)
-        Me.btnPreProcess.Name = "btnPreProcess"
-        Me.btnPreProcess.Size = New System.Drawing.Size(259, 23)
-        Me.btnPreProcess.TabIndex = 0
-        Me.btnPreProcess.Text = "Commence Pre-Processing"
-        Me.btnPreProcess.UseVisualStyleBackColor = True
-        '
-        'chkCleanXDFFile
-        '
-        Me.chkCleanXDFFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.chkCleanXDFFile.AutoSize = True
-        Me.chkCleanXDFFile.Location = New System.Drawing.Point(12, 188)
-        Me.chkCleanXDFFile.Name = "chkCleanXDFFile"
-        Me.chkCleanXDFFile.Size = New System.Drawing.Size(189, 17)
-        Me.chkCleanXDFFile.TabIndex = 1
-        Me.chkCleanXDFFile.Text = "Clean the XDF file after completion"
-        Me.chkCleanXDFFile.UseVisualStyleBackColor = True
+        Me.pnlMain.Controls.Add(Me.gbOptions)
+        Me.pnlMain.Controls.Add(Me.btnClustering0)
+        Me.pnlMain.Controls.Add(Me.chkCleanXDFFile)
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(283, 246)
+        Me.pnlMain.TabIndex = 5
         '
         'gbOptions
         '
@@ -65,8 +54,8 @@ Partial Class frmPreProcessing
         Me.gbOptions.Controls.Add(Me.btnSelectAll)
         Me.gbOptions.Controls.Add(Me.chkUseExistingXDFFile)
         Me.gbOptions.Controls.Add(Me.chkShowDataSummary)
-        Me.gbOptions.Controls.Add(Me.chkShowGeoLocGraph)
         Me.gbOptions.Controls.Add(Me.chkShowVariableInfo)
+        Me.gbOptions.Controls.Add(Me.chkShowGeoLocGraph)
         Me.gbOptions.Location = New System.Drawing.Point(12, 12)
         Me.gbOptions.Name = "gbOptions"
         Me.gbOptions.Size = New System.Drawing.Size(259, 142)
@@ -105,16 +94,6 @@ Partial Class frmPreProcessing
         Me.chkShowDataSummary.Text = "Show Data Summary"
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
-        'chkShowGeoLocGraph
-        '
-        Me.chkShowGeoLocGraph.AutoSize = True
-        Me.chkShowGeoLocGraph.Location = New System.Drawing.Point(6, 88)
-        Me.chkShowGeoLocGraph.Name = "chkShowGeoLocGraph"
-        Me.chkShowGeoLocGraph.Size = New System.Drawing.Size(170, 17)
-        Me.chkShowGeoLocGraph.TabIndex = 2
-        Me.chkShowGeoLocGraph.Text = "Show the Geo-Location Graph"
-        Me.chkShowGeoLocGraph.UseVisualStyleBackColor = True
-        '
         'chkShowVariableInfo
         '
         Me.chkShowVariableInfo.AutoSize = True
@@ -125,44 +104,65 @@ Partial Class frmPreProcessing
         Me.chkShowVariableInfo.Text = "Show Variable Information"
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
-        'pnlMain
+        'chkShowGeoLocGraph
         '
-        Me.pnlMain.Controls.Add(Me.gbOptions)
-        Me.pnlMain.Controls.Add(Me.btnPreProcess)
-        Me.pnlMain.Controls.Add(Me.chkCleanXDFFile)
-        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMain.Location = New System.Drawing.Point(0, 0)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(283, 246)
-        Me.pnlMain.TabIndex = 4
+        Me.chkShowGeoLocGraph.AutoSize = True
+        Me.chkShowGeoLocGraph.Location = New System.Drawing.Point(6, 88)
+        Me.chkShowGeoLocGraph.Name = "chkShowGeoLocGraph"
+        Me.chkShowGeoLocGraph.Size = New System.Drawing.Size(170, 17)
+        Me.chkShowGeoLocGraph.TabIndex = 2
+        Me.chkShowGeoLocGraph.Text = "Show the Geo-Location Graph"
+        Me.chkShowGeoLocGraph.UseVisualStyleBackColor = True
         '
-        'frmPreProcessing
+        'btnClustering0
         '
-        Me.AcceptButton = Me.btnPreProcess
+        Me.btnClustering0.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClustering0.Location = New System.Drawing.Point(12, 211)
+        Me.btnClustering0.Name = "btnClustering0"
+        Me.btnClustering0.Size = New System.Drawing.Size(259, 23)
+        Me.btnClustering0.TabIndex = 0
+        Me.btnClustering0.Text = "Commence Clustering Step 0"
+        Me.btnClustering0.UseVisualStyleBackColor = True
+        '
+        'chkCleanXDFFile
+        '
+        Me.chkCleanXDFFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.chkCleanXDFFile.AutoSize = True
+        Me.chkCleanXDFFile.Location = New System.Drawing.Point(12, 188)
+        Me.chkCleanXDFFile.Name = "chkCleanXDFFile"
+        Me.chkCleanXDFFile.Size = New System.Drawing.Size(189, 17)
+        Me.chkCleanXDFFile.TabIndex = 1
+        Me.chkCleanXDFFile.Text = "Clean the XDF file after completion"
+        Me.chkCleanXDFFile.UseVisualStyleBackColor = True
+        '
+        'frmClusteringStep0
+        '
+        Me.AcceptButton = Me.btnClustering0
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSelectAll
         Me.ClientSize = New System.Drawing.Size(283, 246)
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Name = "frmPreProcessing"
+        Me.Name = "frmClusteringStep0"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pre-Processing Options"
-        Me.gbOptions.ResumeLayout(False)
-        Me.gbOptions.PerformLayout()
+        Me.Text = "Clustering Step 0 Options"
         Me.pnlMain.ResumeLayout(False)
         Me.pnlMain.PerformLayout()
+        Me.gbOptions.ResumeLayout(False)
+        Me.gbOptions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents btnPreProcess As Button
-    Friend WithEvents chkCleanXDFFile As CheckBox
+    Friend WithEvents pnlMain As Panel
     Friend WithEvents gbOptions As GroupBox
+    Friend WithEvents btnSelectAll As Button
+    Friend WithEvents chkUseExistingXDFFile As CheckBox
     Friend WithEvents chkShowDataSummary As CheckBox
     Friend WithEvents chkShowVariableInfo As CheckBox
     Friend WithEvents chkShowGeoLocGraph As CheckBox
-    Friend WithEvents btnSelectAll As Button
-    Friend WithEvents pnlMain As Panel
-    Friend WithEvents chkUseExistingXDFFile As CheckBox
+    Friend WithEvents chkCleanXDFFile As CheckBox
+    Friend WithEvents btnClustering0 As Button
 End Class

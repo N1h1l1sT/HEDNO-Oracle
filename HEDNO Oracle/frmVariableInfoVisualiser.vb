@@ -3,9 +3,10 @@ Imports System.Text
 Imports RDotNet
 
 Public Class frmVariableInfoVisualiser
-    Public strLanguage_DataSummaryVisualiser() As String
+    Public strLanguage_VariableInfoVisualiser() As String
 
     Public rlstVariableInfo As GenericVector = Nothing
+    Public DatasetName As String = Nothing
     Public ColumnNames() As String = Nothing
 
     Private Sub frmVariableInfoVisualiser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -14,6 +15,11 @@ Public Class frmVariableInfoVisualiser
             Call VariableInfoVisualiser_Language(Me)
             frmSkin(Me, False)
             '/initialization
+
+            If DatasetName <> "" Then Text = DatasetName & " Variables Information"
+
+            Location = New Point(My.Computer.Screen.Bounds.Left + My.Computer.Screen.Bounds.Width - Width,
+                                 My.Computer.Screen.Bounds.Top + My.Computer.Screen.Bounds.Height - Height)
 
             If rlstVariableInfo IsNot Nothing Then
                 Dim sbVariableInfoText As New StringBuilder
@@ -34,9 +40,9 @@ Public Class frmVariableInfoVisualiser
 
                         sbVariableInfoText.AppendLine()
                         sbVariableInfoText.AppendLine()
-                        sbVariableInfoText.Append(SpaceAString(ss("Var {0}: ", i), VarStringLength)) '           Var 1:
-                        sbVariableInfoText.Append(ss("{0}", ColumnNames(i))) '                                                 Label
-                        If VarDescription <> String.Empty Then sbVariableInfoText.Append(ss(", {0}", VarDescription)) '             , The Label for the supervised......
+                        sbVariableInfoText.Append(SpaceAString(ss("Var {0}: ", (i + 1).ToString), VarStringLength)) '           Var 1:
+                        sbVariableInfoText.Append(ss("{0}", ColumnNames(i))) '                                                      Label
+                        If VarDescription <> String.Empty Then sbVariableInfoText.Append(ss(", {0}", VarDescription)) '                 , The Label for the supervised......
                         sbVariableInfoText.AppendLine()
 
                         If VarType.ToLower = "integer".ToLower OrElse VarType.ToLower = "numeric".ToLower Then
@@ -70,9 +76,9 @@ Public Class frmVariableInfoVisualiser
 
                         sbVariableInfoText.AppendLine()
                         sbVariableInfoText.AppendLine()
-                        sbVariableInfoText.Append(SpaceAString(ss("Var {0}: ", i), VarStringLength)) '           Var 1:
-                        sbVariableInfoText.Append(ss("{0}", rlstVariableInfo.Names(i))) '                                                 Label
-                        If VarDescription <> String.Empty Then sbVariableInfoText.Append(ss(", {0}", VarDescription)) '             , The Label for the supervised......
+                        sbVariableInfoText.Append(SpaceAString(ss("Var {0}: ", (i + 1).ToString), VarStringLength)) '           Var 1:
+                        sbVariableInfoText.Append(ss("{0}", rlstVariableInfo.Names(i))) '                                           Label
+                        If VarDescription <> String.Empty Then sbVariableInfoText.Append(ss(", {0}", VarDescription)) '                 , The Label for the supervised......
                         sbVariableInfoText.AppendLine()
 
                         If VarType.ToLower = "integer".ToLower OrElse VarType.ToLower = "numeric".ToLower Then

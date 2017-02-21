@@ -40,6 +40,9 @@ Partial Class frmToastNotification
         Me.lblMessage.Text = "Message will appear here"
         Me.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'tmrLifeTimer
+        '
+        '
         'tltMain
         '
         Me.tltMain.AutoPopDelay = 25000
@@ -68,6 +71,8 @@ Partial Class frmToastNotification
         Me.Controls.Add(Me.pbIcon)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmToastNotification"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.Text = "Toast Form"
         Me.TopMost = True
         CType(Me.pbIcon, System.ComponentModel.ISupportInitialize).EndInit()

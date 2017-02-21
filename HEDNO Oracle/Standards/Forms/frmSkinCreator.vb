@@ -506,8 +506,12 @@ Public Class frmSkinCreator
                 End If
 
             ElseIf UserResult = MsgBoxResult.No Then
-                DelFileFolder(NewImagePathName)
-                txtCtrlImage.Text = ""
+                Try
+                    DelFileFolder(NewImagePathName)
+                    txtCtrlImage.Text = ""
+                Catch ex As Exception
+                    ''''''''''''''''''''''''''''''''''''''''''''''''
+                End Try
 
                 For i As Integer = 0 To My.Application.OpenForms.Count - 1
                     If My.Application.OpenForms(i).Name = cbSelForms.Items(cbSelForms.SelectedIndex).ToString Then

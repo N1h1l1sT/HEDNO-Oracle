@@ -39,6 +39,10 @@ Partial Class frmMain
         Me.mniPreProcessTheData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClusteringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClustering = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Step1OptimalNumberOfClustersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClassificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FormTrainAndTestSetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogisticRegressionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniDirectoriesMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniProgramDocuments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
@@ -115,7 +119,7 @@ Partial Class frmMain
         '
         'mnuMain
         '
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFileMenu, Me.PreProcessingToolStripMenuItem, Me.ClusteringToolStripMenuItem, Me.mniDirectoriesMenu, Me.mniLinksMenu, Me.mniHelpMenu})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFileMenu, Me.PreProcessingToolStripMenuItem, Me.ClusteringToolStripMenuItem, Me.ClassificationToolStripMenuItem, Me.mniDirectoriesMenu, Me.mniLinksMenu, Me.mniHelpMenu})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Size = New System.Drawing.Size(778, 24)
@@ -207,7 +211,7 @@ Partial Class frmMain
         '
         'ClusteringToolStripMenuItem
         '
-        Me.ClusteringToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniClustering})
+        Me.ClusteringToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniClustering, Me.Step1OptimalNumberOfClustersToolStripMenuItem})
         Me.ClusteringToolStripMenuItem.Name = "ClusteringToolStripMenuItem"
         Me.ClusteringToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
         Me.ClusteringToolStripMenuItem.Text = "Clustering"
@@ -215,8 +219,33 @@ Partial Class frmMain
         'mniClustering
         '
         Me.mniClustering.Name = "mniClustering"
-        Me.mniClustering.Size = New System.Drawing.Size(196, 22)
-        Me.mniClustering.Text = "Commence Clustering"
+        Me.mniClustering.Size = New System.Drawing.Size(274, 22)
+        Me.mniClustering.Text = "Step 0: Process Data"
+        '
+        'Step1OptimalNumberOfClustersToolStripMenuItem
+        '
+        Me.Step1OptimalNumberOfClustersToolStripMenuItem.Name = "Step1OptimalNumberOfClustersToolStripMenuItem"
+        Me.Step1OptimalNumberOfClustersToolStripMenuItem.Size = New System.Drawing.Size(274, 22)
+        Me.Step1OptimalNumberOfClustersToolStripMenuItem.Text = "Step 1: Apply Unsupervised Learning"
+        '
+        'ClassificationToolStripMenuItem
+        '
+        Me.ClassificationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FormTrainAndTestSetsToolStripMenuItem, Me.LogisticRegressionToolStripMenuItem})
+        Me.ClassificationToolStripMenuItem.Name = "ClassificationToolStripMenuItem"
+        Me.ClassificationToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
+        Me.ClassificationToolStripMenuItem.Text = "Classification"
+        '
+        'FormTrainAndTestSetsToolStripMenuItem
+        '
+        Me.FormTrainAndTestSetsToolStripMenuItem.Name = "FormTrainAndTestSetsToolStripMenuItem"
+        Me.FormTrainAndTestSetsToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
+        Me.FormTrainAndTestSetsToolStripMenuItem.Text = "&Form Train and Test sets"
+        '
+        'LogisticRegressionToolStripMenuItem
+        '
+        Me.LogisticRegressionToolStripMenuItem.Name = "LogisticRegressionToolStripMenuItem"
+        Me.LogisticRegressionToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
+        Me.LogisticRegressionToolStripMenuItem.Text = "Logistic Regression"
         '
         'mniDirectoriesMenu
         '
@@ -393,7 +422,7 @@ Partial Class frmMain
         '
         Me.lblState.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblState.AutoSize = True
-        Me.lblState.Location = New System.Drawing.Point(20, 469)
+        Me.lblState.Location = New System.Drawing.Point(20, 411)
         Me.lblState.Name = "lblState"
         Me.lblState.Size = New System.Drawing.Size(23, 13)
         Me.lblState.TabIndex = 2
@@ -407,7 +436,7 @@ Partial Class frmMain
         Me.lblCompany.BackColor = System.Drawing.Color.Transparent
         Me.lblCompany.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.lblCompany.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.lblCompany.Location = New System.Drawing.Point(17, 482)
+        Me.lblCompany.Location = New System.Drawing.Point(17, 424)
         Me.lblCompany.Name = "lblCompany"
         Me.lblCompany.Size = New System.Drawing.Size(78, 13)
         Me.lblCompany.TabIndex = 3
@@ -419,7 +448,7 @@ Partial Class frmMain
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.btnExit.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnExit.Location = New System.Drawing.Point(606, 474)
+        Me.btnExit.Location = New System.Drawing.Point(606, 416)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(150, 23)
         Me.btnExit.TabIndex = 1
@@ -455,7 +484,7 @@ Partial Class frmMain
         Me.gbCommands.BackColor = System.Drawing.Color.Transparent
         Me.gbCommands.Controls.Add(Me.pnlCommands)
         Me.gbCommands.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
-        Me.gbCommands.Location = New System.Drawing.Point(20, 373)
+        Me.gbCommands.Location = New System.Drawing.Point(20, 315)
         Me.gbCommands.Name = "gbCommands"
         Me.gbCommands.Size = New System.Drawing.Size(736, 85)
         Me.gbCommands.TabIndex = 0
@@ -570,7 +599,7 @@ Partial Class frmMain
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 24)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(778, 502)
+        Me.pnlMain.Size = New System.Drawing.Size(778, 444)
         Me.pnlMain.TabIndex = 21
         '
         'gbFunctions
@@ -583,7 +612,7 @@ Partial Class frmMain
         Me.gbFunctions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.gbFunctions.Location = New System.Drawing.Point(20, 15)
         Me.gbFunctions.Name = "gbFunctions"
-        Me.gbFunctions.Size = New System.Drawing.Size(736, 352)
+        Me.gbFunctions.Size = New System.Drawing.Size(736, 294)
         Me.gbFunctions.TabIndex = 1
         Me.gbFunctions.TabStop = False
         Me.gbFunctions.Text = "Functions:"
@@ -598,7 +627,7 @@ Partial Class frmMain
         Me.pnlFunctions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlFunctions.Location = New System.Drawing.Point(3, 16)
         Me.pnlFunctions.Name = "pnlFunctions"
-        Me.pnlFunctions.Size = New System.Drawing.Size(730, 333)
+        Me.pnlFunctions.Size = New System.Drawing.Size(730, 275)
         Me.pnlFunctions.TabIndex = 20
         '
         'lblFuncInProgress
@@ -617,7 +646,7 @@ Partial Class frmMain
         '
         Me.pbGeneralProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pbGeneralProgress.Location = New System.Drawing.Point(17, 297)
+        Me.pbGeneralProgress.Location = New System.Drawing.Point(17, 239)
         Me.pbGeneralProgress.MarqueeAnimationSpeed = 400
         Me.pbGeneralProgress.Name = "pbGeneralProgress"
         Me.pbGeneralProgress.Size = New System.Drawing.Size(697, 23)
@@ -732,7 +761,7 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(778, 526)
+        Me.ClientSize = New System.Drawing.Size(778, 468)
         Me.Controls.Add(Me.lblHelp)
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.mnuMain)
@@ -840,4 +869,8 @@ Partial Class frmMain
     Friend WithEvents CreateNeededSQLViews As ToolStripMenuItem
     Friend WithEvents lblFuncInProgress As Label
     Friend WithEvents tmrFunctInProgress As Timer
+    Friend WithEvents Step1OptimalNumberOfClustersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClassificationToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LogisticRegressionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FormTrainAndTestSetsToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -76,6 +76,9 @@ Public Class frmSettings
         '==CUSTOM==
         '==========
 
+        'Tab: Database
+        txtDBUsername.Text = ""
+
         'Tab: R General
         txtRowsPerRead.Text = ""
         txtXDFPath.Text = ""
@@ -98,6 +101,7 @@ Public Class frmSettings
         txtColGeoLocX.Text = ""
         txtColGeoLocY.Text = ""
         txtColID_Erga.Text = ""
+        txtTablevTestSet.Text = ""
 
         '/===============\
         '/=END OF CUSTOM=\
@@ -131,6 +135,9 @@ Public Class frmSettings
         '==CUSTOM==
         '==========
 
+        'Tab: Database
+        txtDBUsername.Tag = 0
+
         'Tab: R General
         txtRowsPerRead.Tag = 0
         txtXDFPath.Tag = 0
@@ -153,6 +160,7 @@ Public Class frmSettings
         txtColGeoLocX.Tag = 0
         txtColGeoLocY.Tag = 0
         txtColID_Erga.Tag = 0
+        txtTablevTestSet.Tag = 0
 
         '/===============\
         '/=END OF CUSTOM=\
@@ -494,6 +502,15 @@ Public Class frmSettings
             '==END OF STANDARD PROCEDURE==
             '=============================
 
+            'Tab: Database
+            'DB Username
+            If strSettings(65).Length > "065DBUsername=".Length Then
+                txtDBUsername.Text = strSettings(65).Substring("065DBUsername=".Length)
+            Else
+                txtDBUsername.Text = String.Empty
+            End If
+            '/DB Username
+
             'Tab: R General
             'Rows Per Read
             If strSettings(51).Length > "051RowsPerRead=".Length Then
@@ -648,6 +665,14 @@ Public Class frmSettings
                 txtColID_Erga.Text = String.Empty
             End If
             '/ColID_Erga
+
+            'TablevTestSet
+            If strSettings(66).Length > "066TablevTestSet=".Length Then
+                txtTablevTestSet.Text = strSettings(66).Substring("066TablevTestSet=".Length)
+            Else
+                txtTablevTestSet.Text = String.Empty
+            End If
+            '/TablevTestSet
 
             '======================
             '==STANDARD PROCEDURE==
@@ -917,6 +942,7 @@ Public Class frmSettings
             If txtDBpass.Tag.ToString = "1" Then    'Password CAN be "" so not "AndAlso <> String.Empty"
                 strSettings(17) = "017DataBasePass=" & txtDBpass.Text
                 AccessDatabasePass = txtDBpass.Text
+                SQLServerPass = txtDBpass.Text
             End If
             '/Database Pass
 
@@ -1088,6 +1114,20 @@ Public Class frmSettings
                 ColID_Erga = strSettings(63).Substring("063ColID_Erga=".Length)
             End If
             '/ColID_Erga
+
+            'Database Username
+            If txtDBUsername.Tag.ToString = "1" Then
+                strSettings(65) = "065DBUsername=" & txtDBUsername.Text
+                SQLServerUserID = txtDBUsername.Text
+            End If
+            '/Database Username
+
+            'TablevTestSet
+            If txtTablevTestSet.Tag.ToString = "1" Then
+                strSettings(66) = "066TablevTestSet=" & txtTablevTestSet.Text
+                TablevTestSet = txtTablevTestSet.Text
+            End If
+            '/TablevTestSet
 
 
             '======================
@@ -1527,6 +1567,20 @@ Public Class frmSettings
         If Not isLoading Then
             cmdApply.Enabled = True
             txtRSQLConnStr.Tag = "1"
+        End If
+    End Sub
+
+    Private Sub txtUsername_TextChanged(sender As Object, e As EventArgs) Handles txtDBUsername.TextChanged
+        If Not isLoading Then
+            cmdApply.Enabled = True
+            txtDBUsername.Tag = "1"
+        End If
+    End Sub
+
+    Private Sub txtTablevTestSet_TextChanged(sender As Object, e As EventArgs) Handles txtTablevTestSet.TextChanged
+        If Not isLoading Then
+            cmdApply.Enabled = True
+            txtTablevTestSet.Tag = "1"
         End If
     End Sub
 

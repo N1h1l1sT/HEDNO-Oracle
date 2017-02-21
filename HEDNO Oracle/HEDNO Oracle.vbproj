@@ -120,6 +120,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="frmClassification.Designer.vb">
+      <DependentUpon>frmClassification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmClassification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClusteringStep0.Designer.vb">
+      <DependentUpon>frmClusteringStep0.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmClusteringStep0.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClusteringStep1.Designer.vb">
+      <DependentUpon>frmClusteringStep1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmClusteringStep1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDataSummaryVisualiser.Designer.vb">
       <DependentUpon>frmDataSummaryVisualiser.vb</DependentUpon>
     </Compile>
@@ -130,6 +148,12 @@
       <DependentUpon>frmCreateSQLView.vb</DependentUpon>
     </Compile>
     <Compile Include="frmCreateSQLView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogisticRegression.Designer.vb">
+      <DependentUpon>frmLogisticRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogisticRegression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.designer.vb">
@@ -278,6 +302,15 @@
     <Compile Include="Standards\Modules\modUpdate.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmClassification.resx">
+      <DependentUpon>frmClassification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClusteringStep0.resx">
+      <DependentUpon>frmClusteringStep0.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClusteringStep1.resx">
+      <DependentUpon>frmClusteringStep1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDataSummaryVisualiser.resx">
       <DependentUpon>frmDataSummaryVisualiser.vb</DependentUpon>
     </EmbeddedResource>
@@ -349,6 +382,82 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\Database\ProperFormat.json" />
+    <None Include="bin\Debug\Database\Tables.JSON" />
+    <None Include="bin\Debug\EULA.rtf" />
+    <None Include="bin\Debug\Extras\32bit\UnlockerDriver5.sys" />
+    <None Include="bin\Debug\Extras\64bit\UnlockerDriver5.sys" />
+    <None Include="bin\Debug\Extras\Cities.csv" />
+    <None Include="bin\Debug\Extras\Cities.rar" />
+    <None Include="bin\Debug\Extras\DEDDHE Oracle.log" />
+    <None Include="bin\Debug\Extras\DEDDHE_Oracle.log" />
+    <None Include="bin\Debug\Functions\1.0 Data-PreProcessing.R" />
+    <None Include="bin\Debug\Functions\2.0 Clustering Step 0.R" />
+    <None Include="bin\Debug\Functions\2.1 Clustering Step 1.R" />
+    <None Include="bin\Debug\Functions\2.2 Clustering Step 1.R" />
+    <None Include="bin\Debug\Functions\Classification_FormTrainTestSets.R" />
+    <None Include="bin\Debug\Functions\Classification_VisualiseClassImbalance.R" />
+    <None Include="bin\Debug\Functions\[ColumnsInfo].R" />
+    <None Include="bin\Debug\Functions\[Initialisation].R" />
+    <None Include="bin\Debug\Language\el-GR\dlgTypeBox.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmAbout.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmAbout_Textbox.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmClusteringStep0.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmClusteringStep1.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmCrashLog.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmCreateSQLView.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmDatabaseMaintenance.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmDatabaseMaintenance_Tips.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmDataGridView.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmDataSummaryVisualiser.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmFindR.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmFindR_Tips.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmFirstTime.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmLicenseViewer.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmMain.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmMain_Tips.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmPleaseWait.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmPreProcessing.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmPresentation.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmSettings.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmSkinCreator.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmSuggestionAndComplaint.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmVariableInfoVisualiser.lng" />
+    <None Include="bin\Debug\Language\el-GR\ModuleStrings.lng" />
+    <None Include="bin\Debug\Language\en-GB\dlgTypeBox.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmAbout.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmAbout_Textbox.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmClusteringStep0.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmClusteringStep1.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmCrashLog.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmCreateSQLView.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmDatabaseMaintenance.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmDatabaseMaintenance_Tips.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmDataGridView.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmDataSummaryVisualiser.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmFindR.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmFindR_Tips.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmFirstTime.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmHelp.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmLicenseViewer.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmMain.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmMain_Tips.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmPleaseWait.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmPreProcessing.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmPresentation.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmSettings.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmSkinCreator.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmSuggestionAndComplaint.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmVariableInfoVisualiser.lng" />
+    <None Include="bin\Debug\Language\en-GB\ModuleStrings.lng" />
+    <None Include="bin\Debug\Licenses\Math Parser .Net License.rtf" />
+    <None Include="bin\Debug\Licenses\Newtonsoft.JSON.rtf" />
+    <None Include="bin\Debug\Licenses\OSVersionInfoDLL License.rtf" />
+    <None Include="bin\Debug\Licenses\R.Net License.rtf" />
+    <None Include="bin\Debug\Settings\FileNames.ini" />
+    <None Include="bin\Debug\Settings\Settings.bak" />
+    <None Include="bin\Debug\Settings\Settings.ini" />
+    <None Include="bin\Debug\Settings\Settings.orig" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -363,6 +472,161 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\AxInterop.WMPLib.dll" />
+    <Content Include="bin\Debug\Changelog.html" />
+    <Content Include="bin\Debug\Database\Database.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bin\Debug\Extras\32bit\Unlocker.exe" />
+    <Content Include="bin\Debug\Extras\32bit\UnlockerAssistant.exe" />
+    <Content Include="bin\Debug\Extras\32bit\UnlockerHook.dll" />
+    <Content Include="bin\Debug\Extras\64bit\Unlocker.exe" />
+    <Content Include="bin\Debug\Extras\64bit\UnlockerInject32.exe" />
+    <Content Include="bin\Debug\Extras\Crash ex201610031242.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702111951.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702111955.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112014.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112302.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112304.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112305.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112306.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112312.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112316.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112327.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702112345.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702161901.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702172128.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702172202.txt" />
+    <Content Include="bin\Debug\Extras\Crash ex201702172209.txt" />
+    <Content Include="bin\Debug\Extras\UnRARx64.exe" />
+    <Content Include="bin\Debug\Extras\UnRARx86.exe" />
+    <Content Include="bin\Debug\icon.ico" />
+    <Content Include="bin\Debug\Icon.png" />
+    <Content Include="bin\Debug\Interop.WMPLib.dll" />
+    <Content Include="bin\Debug\Language\el-GR\frmFirstTime_txtInfo.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\About.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Changelog.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Credits.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Database Maintenance.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Database Path.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\EULA.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Extras Path.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Help.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Language Path.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Presentation.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Programme Path.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Programme Website.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Programmer Website.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Quit.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Settings File.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Settings Path.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Settings.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Skin Path.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Skin.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Suggestions and Complaints.html" />
+    <Content Include="bin\Debug\Language\el-GR\Help\Welcome.html" />
+    <Content Include="bin\Debug\Language\el-GR\HTML\GenericProgrammeCredits.html" />
+    <Content Include="bin\Debug\Language\el-GR\HTML\html5.js" />
+    <Content Include="bin\Debug\Language\el-GR\HTML\Pictures\Credits_Logo.jpg" />
+    <Content Include="bin\Debug\Language\en-GB\frmFirstTime_txtInfo.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\About.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Changelog.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Credits.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Database Maintenance.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Database Path.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\EULA.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Extras Path.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Help.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Language Path.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Presentation.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Programme Path.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Programme Website.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Programmer Website.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Quit.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Settings File.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Settings Path.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Settings.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Skin Path.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Skin.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Suggestions and Complaints.html" />
+    <Content Include="bin\Debug\Language\en-GB\Help\Welcome.html" />
+    <Content Include="bin\Debug\Language\en-GB\HTML\GenericProgrammeCredits.html" />
+    <Content Include="bin\Debug\Language\en-GB\HTML\html5.js" />
+    <Content Include="bin\Debug\Language\en-GB\HTML\Pictures\Credits_Logo.jpg" />
+    <Content Include="bin\Debug\MathParserNet.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll" />
+    <Content Include="bin\Debug\Microsoft.WindowsAPICodePack.dll" />
+    <Content Include="bin\Debug\Microsoft.WindowsAPICodePack.pdb" />
+    <Content Include="bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <Content Include="bin\Debug\Microsoft.WindowsAPICodePack.Shell.pdb" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\OSVersionInfoDLL.dll" />
+    <Content Include="bin\Debug\RDotNet.dll" />
+    <Content Include="bin\Debug\RDotNet.NativeLibrary.dll" />
+    <Content Include="bin\Debug\RDotNet.NativeLibrary.xml" />
+    <Content Include="bin\Debug\RDotNet.xml" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmAbout\cmdExit.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmAbout\frmAbout.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmAbout\frmAbout_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmAbout\frmAbout_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDatabaseMaintenance\btnClearAll.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDatabaseMaintenance\btnClearSingleTable.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDatabaseMaintenance\btnCompactDB.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDatabaseMaintenance\btnExit.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDatabaseMaintenance\frmDatabaseMaintenance.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDatabaseMaintenance\frmDatabaseMaintenance_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDatabaseMaintenance\frmDatabaseMaintenance_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDataSummaryVisualiser\frmDataSummaryVisualiser_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmDataSummaryVisualiser\frmDataSummaryVisualiser_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\btnClassification.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\btnClustering.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\btnCreateGeoLocColumns.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\btnDatabaseMaintenance.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\btnExit.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\btnGeoLocate.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\cmdExpirationDate.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\cmdGo.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\cmdHelp.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\cmdSettings.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\frmMain.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\frmMain_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmMain\frmMain_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmRegister\btnCancel.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmRegister\btnRegister.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmRegister\frmRegister.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmRegister\frmRegister_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmRegister\frmRegister_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSettings\cmdApply.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSettings\cmdCurrent.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSettings\cmdDefault.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSettings\cmdExit.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSettings\frmSettings.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSettings\frmSettings_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSettings\frmSettings_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSuggestionAndComplaint\btnCancel.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSuggestionAndComplaint\btnNext.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSuggestionAndComplaint\frmSuggestionAndComplaint.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSuggestionAndComplaint\frmSuggestionAndComplaint_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\frmSuggestionAndComplaint\frmSuggestionAndComplaint_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\SplashScreen\SplashScreen 1.jpg" />
+    <Content Include="bin\Debug\Skins\Legend - Light\SplashScreen\SplashScreen 1_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\Legend - Light\SplashScreen\SplashScreen 1_ForeColours.txt" />
+    <Content Include="bin\Debug\Skins\None\SplashScreen\SplashScreen 1.jpg" />
+    <Content Include="bin\Debug\Skins\None\SplashScreen\SplashScreen 1_BackColours.txt" />
+    <Content Include="bin\Debug\Skins\None\SplashScreen\SplashScreen 1_ForeColours.txt" />
+    <Content Include="bin\Debug\SQL\1. View Mel Ylika.sql" />
+    <Content Include="bin\Debug\SQL\Views\1. View Mel Ylika.sql" />
+    <Content Include="bin\Debug\SQL\Views\2. View Analysi Ylika.sql" />
+    <Content Include="bin\Debug\SQL\Views\3. View Kostologisi Variantes.sql" />
+    <Content Include="bin\Debug\SQL\Views\4. View Erga.sql" />
+    <Content Include="bin\Debug\SQL\Views\5. View All In One.sql" />
+    <Content Include="bin\Debug\SQL\Views\6. View Aggregated Variantes.sql" />
+    <Content Include="bin\Debug\SQL\Views\7. View Agrregated Erga.sql" />
+    <Content Include="bin\Debug\SQL\Views\8. View Trimestre Price.sql" />
+    <Content Include="bin\Debug\StartUp.exe" />
+    <Content Include="bin\Debug\System.Numerics.dll" />
+    <Content Include="bin\Debug\System.Web.Services.dll" />
     <Content Include="Other\icon.ico" />
     <None Include="Resources\warning.png" />
   </ItemGroup>
@@ -384,6 +648,13 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\Language\el-GR\HTML\Images\" />
+    <Folder Include="bin\Debug\Language\el-GR\Presentation\Images\" />
+    <Folder Include="bin\Debug\Language\el-GR\Presentation\Videos\" />
+    <Folder Include="bin\Debug\Language\en-GB\Presentation\Images\" />
+    <Folder Include="bin\Debug\Language\en-GB\Presentation\Videos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
