@@ -1,4 +1,6 @@
-﻿Imports RDotNet
+﻿Imports System.Drawing.Color
+Imports System.IO
+Imports RDotNet
 
 Public Class frmClusteringStep1
     Public strLanguage_ClusteringStep1 As String()
@@ -6,6 +8,85 @@ Public Class frmClusteringStep1
     Private Const DefaultMaxKNum As Integer = 30
     Private MaxKNum As Integer = DefaultMaxKNum
     Private Shared KMeansModelSavePath As String = strXDF
+    Private XDFFileExists As Boolean = False
+    Private isStatisticsXDF As Boolean = True
+
+    '!Put on frm_Load
+    'pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
+    'pbLoading.Width = pbLoading.Parent.Width
+    'fswModelExists.Path = strXDF
+    'fswModelExists.Filter = "vErga_DS.xdf"
+    'Call CheckXDFFileExists()
+    '
+    '!Put on chkOptions_CheckedChanged
+    'Call ColourChkStatisticsMode()
+#Region "XDFFileExists"
+
+    Private Sub CheckXDFFileExists()
+        If File.Exists(doProperFileName(strXDF & "Clustering_DS.xdf")) Then
+            XDFFileExists = True
+            chkUseExistingXDFFile.BackColor = LightGreen
+
+            pbLoading.MarqueeAnimationSpeed = 10
+            pbLoading.Visible = True
+            lblLoading.Visible = True
+            lblLoading.Dock = DockStyle.Fill
+            tmrModelExists.Enabled = True
+
+        Else
+            XDFFileExists = False
+            chkUseExistingXDFFile.BackColor = IndianRed
+            chkStatisticsMode.BackColor = SystemColors.Control
+        End If
+    End Sub
+
+    Private Sub ColourChkStatisticsMode()
+        If XDFFileExists AndAlso chkUseExistingXDFFile.Checked Then
+            If chkStatisticsMode.Checked Then
+                If isStatisticsXDF Then chkStatisticsMode.BackColor = LightGreen Else chkStatisticsMode.BackColor = IndianRed
+            Else
+                If isStatisticsXDF Then chkStatisticsMode.BackColor = IndianRed Else chkStatisticsMode.BackColor = LightGreen
+            End If
+
+        Else
+            chkStatisticsMode.BackColor = SystemColors.Control
+        End If
+    End Sub
+
+    Private Sub tmrModelExists_Tick(sender As Object, e As EventArgs) Handles tmrModelExists.Tick
+        tmrModelExists.Enabled = False
+
+        Try 'Non-Essential Functions
+            If XDFFileExists Then
+                If RDotNet_Initialization() Then
+                    RSource(strFunctions & "[ColumnNames_For_FormLoad].R",, {"{0}", "Clustering_DS"})
+                    isStatisticsXDF = Rdo.GetSymbol("isStatisticsXDF").AsLogical.First
+
+                    Call ColourChkStatisticsMode()
+
+                End If
+            End If
+        Catch ex As Exception
+            Notify(ex.ToString, Red, Black, 10,,, True)
+        End Try
+
+        pbLoading.MarqueeAnimationSpeed = 0
+        pbLoading.Visible = False
+        lblLoading.Dock = DockStyle.None
+        lblLoading.Visible = False
+
+    End Sub
+
+    Private Sub chkStatisticsMode_CheckedChanged(sender As Object, e As EventArgs) Handles chkStatisticsMode.CheckedChanged
+        Call ColourChkStatisticsMode()
+    End Sub
+
+    Private Sub fswModelExists_Created_Created_Renamed(sender As Object, e As FileSystemEventArgs) Handles fswModelExists.Created, fswModelExists.Deleted, fswModelExists.Renamed
+        Call CheckXDFFileExists()
+    End Sub
+
+
+#End Region
 
     Private Sub frmClusteringStep1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
@@ -17,9 +98,22 @@ Public Class frmClusteringStep1
             txtMaxClusterNum.Text = DefaultMaxKNum.ToString
             txtSavePath.Text = KMeansModelSavePath
 
+            pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
+            pbLoading.Width = pbLoading.Parent.Width
+            fswModelExists.Path = strXDF
+            fswModelExists.Filter = "Clustering_DS.xdf"
+            Call CheckXDFFileExists()
+
         Catch ex As Exception
             CreateCrashFile(ex, True)
         End Try
+    End Sub
+
+    Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
+        If FuncInProgress.Count <> 0 Then
+            e.Cancel = True
+            MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+        End If
     End Sub
 
     Private Sub btnClustering_Click(sender As Object, e As EventArgs) Handles btnClustering1.Click
@@ -36,17 +130,18 @@ Public Class frmClusteringStep1
                         If chkShowDataSummary.Checked Then Rdo.Evaluate("ShowDataSummary <- TRUE") Else Rdo.Evaluate("ShowDataSummary <- FALSE")
                         If chkShowVariableInfo.Checked Then Rdo.Evaluate("ShowVariableInfo <- TRUE") Else Rdo.Evaluate("ShowVariableInfo <- FALSE")
                         If chkSaveKMeansModel.Checked Then Rdo.Evaluate("SaveKMeansModel <- TRUE") Else Rdo.Evaluate("SaveKMeansModel <- FALSE")
+                        If chkStatisticsMode.Checked Then Rdo.Evaluate("StatisticsMode <- TRUE") Else Rdo.Evaluate("StatisticsMode <- FALSE")
 
 
                         If RSource({strFunctions & "[ColumnsInfo].R",
-                                    strFunctions & "2.1 Clustering Step 1.R"}, , {"{0}", TablevErga,
+                                    strFunctions & "2.1 Clustering Step 1.R"}, , {"{0}", If(chkStatisticsMode.Checked, TablevErga, TablevFinalDataset),
                                                                                   "{1}", ColvGeoLocX,
                                                                                   "{2}", ColvGeoLocY,
                                                                                   "{3}", MaxKNum.ToString,
                                                                                   "{4}", KMeansModelSavePath}, True) Then
 
                             Dim k As Integer = Rdo.GetSymbol("k").AsInteger.First
-                            If TypeBox(ss("How many clusters should the database be separated into?{0}After analysis, the Recommended Value for this dataset is: [{1}].", vbCrLf, k),
+                            If TypeBox(sa("How many clusters should the database be separated into?{0}After analysis, the Recommended Value for this dataset is: [{1}].", vbCrLf, k),
                                        k,
                                        False,
                                        "Choosing k for K-Means",
@@ -54,11 +149,11 @@ Public Class frmClusteringStep1
                                 Rdo.SetSymbol("k", Rdo.CreateIntegerVector({k}))
 
                                 If RSource({strFunctions & "[ColumnsInfo].R",
-                                        strFunctions & "2.2 Clustering Step 1.R"}, , {"{0}", TablevErga,
-                                                          "{1}", ColvGeoLocX,
-                                                          "{2}", ColvGeoLocY,
-                                                          "{3}", MaxKNum.ToString,
-                                                          "{4}", KMeansModelSavePath}, True) Then
+                                        strFunctions & "2.1 Clustering Step 1_2nd Falf.R"}, , {"{0}", If(chkStatisticsMode.Checked, TablevErga, TablevFinalDataset),
+                                                                                               "{1}", ColvGeoLocX,
+                                                                                               "{2}", ColvGeoLocY,
+                                                                                               "{3}", MaxKNum.ToString,
+                                                                                               "{4}", KMeansModelSavePath}, True) Then
 
 
 
@@ -79,14 +174,14 @@ Public Class frmClusteringStep1
                                     End If
 
                                     Dim XDFCreatedOutOfNecessity As Boolean = Rdo.GetSymbol("XDFCreatedOutOfNecessity").AsLogical.First
-                                    If XDFCreatedOutOfNecessity Then MsgBox(ss("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
+                                    If XDFCreatedOutOfNecessity Then MsgBox(sa("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
                                 End If
 
                             Else
-                                MsgBox(ss("Operation Cancelled."), MsgBoxStyle.Exclamation)
+                                MsgBox(sa("Operation Cancelled."), MsgBoxStyle.Exclamation)
                             End If
                         End If
-                        End If
+                    End If
                 Catch ex As Exception
                     Notify(ex.ToString, Color.Red, Color.Black, 10)
                     CreateCrashFile(ex)
@@ -97,7 +192,7 @@ Public Class frmClusteringStep1
                 pnlMain.Enabled = True
                 Close()
             Else
-                MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
             End If
 
         Catch ex As Exception
@@ -126,17 +221,12 @@ Public Class frmClusteringStep1
         Else
             btnSelectAll.Text = "Select &All"
         End If
-    End Sub
 
-    Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
-        If FuncInProgress.Count <> 0 Then
-            e.Cancel = True
-            MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
-        End If
+        Call ColourChkStatisticsMode()
     End Sub
 
     Private Sub txtMaxClusterNum_Click(sender As Object, e As EventArgs) Handles txtMaxClusterNum.Click
-        If TypeBox(ss("Which is the maximum number of clusters you wish to test for?{0}The Default Value is: {1}", vbCrLf, DefaultMaxKNum), MaxKNum, False,, 3, MaxInteger,,,, DefaultMaxKNum.ToString) Then
+        If TypeBox(sa("Which is the maximum number of clusters you wish to test for?{0}The Default Value is: {1}", vbCrLf, DefaultMaxKNum), MaxKNum, False,, 3, MaxInteger,,,, DefaultMaxKNum.ToString) Then
             txtMaxClusterNum.Text = MaxKNum.ToString
         End If
     End Sub
@@ -155,6 +245,15 @@ Public Class frmClusteringStep1
             KMeansModelSavePath = doProperPathNameLinux(fbdKMeansModel.SelectedPath)
             txtSavePath.Text = KMeansModelSavePath
         End If
+    End Sub
 
+    Private Sub chkSaveKMeansModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveKMeansModel.CheckedChanged
+        If chkSaveKMeansModel.Checked Then
+            lblSavePath.Enabled = True
+            txtSavePath.Enabled = True
+        Else
+            lblSavePath.Enabled = False
+            txtSavePath.Enabled = False
+        End If
     End Sub
 End Class

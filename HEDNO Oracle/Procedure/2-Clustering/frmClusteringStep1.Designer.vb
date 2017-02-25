@@ -22,7 +22,9 @@ Partial Class frmClusteringStep1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblLoading = New System.Windows.Forms.Label()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
         Me.scMain = New System.Windows.Forms.SplitContainer()
         Me.chkUseExistingXDFFile = New System.Windows.Forms.CheckBox()
@@ -30,6 +32,7 @@ Partial Class frmClusteringStep1
         Me.chkShowVariableInfo = New System.Windows.Forms.CheckBox()
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.chkShowDataSummary = New System.Windows.Forms.CheckBox()
+        Me.chkStatisticsMode = New System.Windows.Forms.CheckBox()
         Me.lblSavePath = New System.Windows.Forms.Label()
         Me.lblMaxClusterNum = New System.Windows.Forms.Label()
         Me.txtSavePath = New System.Windows.Forms.TextBox()
@@ -38,23 +41,39 @@ Partial Class frmClusteringStep1
         Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
         Me.btnClustering1 = New System.Windows.Forms.Button()
         Me.fbdKMeansModel = New System.Windows.Forms.FolderBrowserDialog()
+        Me.tmrModelExists = New System.Windows.Forms.Timer(Me.components)
+        Me.fswModelExists = New System.IO.FileSystemWatcher()
+        Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.pnlMain.SuspendLayout()
         Me.gbOptions.SuspendLayout()
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scMain.Panel1.SuspendLayout()
         Me.scMain.Panel2.SuspendLayout()
         Me.scMain.SuspendLayout()
+        CType(Me.fswModelExists, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlMain
         '
+        Me.pnlMain.Controls.Add(Me.pbLoading)
+        Me.pnlMain.Controls.Add(Me.lblLoading)
         Me.pnlMain.Controls.Add(Me.gbOptions)
         Me.pnlMain.Controls.Add(Me.btnClustering1)
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(496, 197)
+        Me.pnlMain.Size = New System.Drawing.Size(496, 213)
         Me.pnlMain.TabIndex = 6
+        '
+        'lblLoading
+        '
+        Me.lblLoading.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
+        Me.lblLoading.Location = New System.Drawing.Point(393, 0)
+        Me.lblLoading.Name = "lblLoading"
+        Me.lblLoading.Size = New System.Drawing.Size(100, 23)
+        Me.lblLoading.TabIndex = 14
+        Me.lblLoading.Text = "Loading..."
+        Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'gbOptions
         '
@@ -64,7 +83,7 @@ Partial Class frmClusteringStep1
         Me.gbOptions.Controls.Add(Me.scMain)
         Me.gbOptions.Location = New System.Drawing.Point(12, 12)
         Me.gbOptions.Name = "gbOptions"
-        Me.gbOptions.Size = New System.Drawing.Size(472, 144)
+        Me.gbOptions.Size = New System.Drawing.Size(472, 160)
         Me.gbOptions.TabIndex = 2
         Me.gbOptions.TabStop = False
         Me.gbOptions.Text = "Main Options:"
@@ -85,13 +104,14 @@ Partial Class frmClusteringStep1
         '
         'scMain.Panel2
         '
+        Me.scMain.Panel2.Controls.Add(Me.chkStatisticsMode)
         Me.scMain.Panel2.Controls.Add(Me.lblSavePath)
         Me.scMain.Panel2.Controls.Add(Me.lblMaxClusterNum)
         Me.scMain.Panel2.Controls.Add(Me.txtSavePath)
         Me.scMain.Panel2.Controls.Add(Me.txtMaxClusterNum)
         Me.scMain.Panel2.Controls.Add(Me.chkSaveKMeansModel)
         Me.scMain.Panel2.Controls.Add(Me.chkCleanXDFFile)
-        Me.scMain.Size = New System.Drawing.Size(466, 125)
+        Me.scMain.Size = New System.Drawing.Size(466, 141)
         Me.scMain.SplitterDistance = 224
         Me.scMain.TabIndex = 10
         '
@@ -145,10 +165,23 @@ Partial Class frmClusteringStep1
         Me.chkShowDataSummary.Text = "Show Data Summary"
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
+        'chkStatisticsMode
+        '
+        Me.chkStatisticsMode.AutoSize = True
+        Me.chkStatisticsMode.Checked = True
+        Me.chkStatisticsMode.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStatisticsMode.Location = New System.Drawing.Point(3, 3)
+        Me.chkStatisticsMode.Name = "chkStatisticsMode"
+        Me.chkStatisticsMode.Size = New System.Drawing.Size(98, 17)
+        Me.chkStatisticsMode.TabIndex = 14
+        Me.chkStatisticsMode.Text = "Statistics Mode"
+        Me.chkStatisticsMode.UseVisualStyleBackColor = True
+        '
         'lblSavePath
         '
         Me.lblSavePath.AutoSize = True
-        Me.lblSavePath.Location = New System.Drawing.Point(3, 27)
+        Me.lblSavePath.Enabled = False
+        Me.lblSavePath.Location = New System.Drawing.Point(0, 50)
         Me.lblSavePath.Name = "lblSavePath"
         Me.lblSavePath.Size = New System.Drawing.Size(92, 13)
         Me.lblSavePath.TabIndex = 10
@@ -157,7 +190,7 @@ Partial Class frmClusteringStep1
         'lblMaxClusterNum
         '
         Me.lblMaxClusterNum.AutoSize = True
-        Me.lblMaxClusterNum.Location = New System.Drawing.Point(3, 98)
+        Me.lblMaxClusterNum.Location = New System.Drawing.Point(0, 118)
         Me.lblMaxClusterNum.Name = "lblMaxClusterNum"
         Me.lblMaxClusterNum.Size = New System.Drawing.Size(116, 13)
         Me.lblMaxClusterNum.TabIndex = 7
@@ -167,7 +200,8 @@ Partial Class frmClusteringStep1
         '
         Me.txtSavePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSavePath.Location = New System.Drawing.Point(6, 43)
+        Me.txtSavePath.Enabled = False
+        Me.txtSavePath.Location = New System.Drawing.Point(3, 66)
         Me.txtSavePath.Name = "txtSavePath"
         Me.txtSavePath.ReadOnly = True
         Me.txtSavePath.Size = New System.Drawing.Size(229, 20)
@@ -175,7 +209,7 @@ Partial Class frmClusteringStep1
         '
         'txtMaxClusterNum
         '
-        Me.txtMaxClusterNum.Location = New System.Drawing.Point(125, 95)
+        Me.txtMaxClusterNum.Location = New System.Drawing.Point(122, 115)
         Me.txtMaxClusterNum.Name = "txtMaxClusterNum"
         Me.txtMaxClusterNum.ReadOnly = True
         Me.txtMaxClusterNum.Size = New System.Drawing.Size(51, 20)
@@ -184,7 +218,7 @@ Partial Class frmClusteringStep1
         'chkSaveKMeansModel
         '
         Me.chkSaveKMeansModel.AutoSize = True
-        Me.chkSaveKMeansModel.Location = New System.Drawing.Point(6, 3)
+        Me.chkSaveKMeansModel.Location = New System.Drawing.Point(3, 26)
         Me.chkSaveKMeansModel.Name = "chkSaveKMeansModel"
         Me.chkSaveKMeansModel.Size = New System.Drawing.Size(128, 17)
         Me.chkSaveKMeansModel.TabIndex = 9
@@ -194,7 +228,7 @@ Partial Class frmClusteringStep1
         'chkCleanXDFFile
         '
         Me.chkCleanXDFFile.AutoSize = True
-        Me.chkCleanXDFFile.Location = New System.Drawing.Point(6, 72)
+        Me.chkCleanXDFFile.Location = New System.Drawing.Point(3, 92)
         Me.chkCleanXDFFile.Name = "chkCleanXDFFile"
         Me.chkCleanXDFFile.Size = New System.Drawing.Size(189, 17)
         Me.chkCleanXDFFile.TabIndex = 1
@@ -205,12 +239,31 @@ Partial Class frmClusteringStep1
         '
         Me.btnClustering1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClustering1.Location = New System.Drawing.Point(12, 162)
+        Me.btnClustering1.Location = New System.Drawing.Point(12, 178)
         Me.btnClustering1.Name = "btnClustering1"
         Me.btnClustering1.Size = New System.Drawing.Size(472, 23)
         Me.btnClustering1.TabIndex = 0
         Me.btnClustering1.Text = "Commence Clustering Step 1"
         Me.btnClustering1.UseVisualStyleBackColor = True
+        '
+        'tmrModelExists
+        '
+        Me.tmrModelExists.Interval = 10
+        '
+        'fswModelExists
+        '
+        Me.fswModelExists.EnableRaisingEvents = True
+        Me.fswModelExists.SynchronizingObject = Me
+        '
+        'pbLoading
+        '
+        Me.pbLoading.Location = New System.Drawing.Point(316, 0)
+        Me.pbLoading.MarqueeAnimationSpeed = 10
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
+        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pbLoading.TabIndex = 15
+        Me.pbLoading.Visible = False
         '
         'frmClusteringStep1
         '
@@ -218,7 +271,7 @@ Partial Class frmClusteringStep1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSelectAll
-        Me.ClientSize = New System.Drawing.Size(496, 197)
+        Me.ClientSize = New System.Drawing.Size(496, 213)
         Me.Controls.Add(Me.pnlMain)
         Me.Name = "frmClusteringStep1"
         Me.Text = "Clustering Step 1 Options"
@@ -230,6 +283,7 @@ Partial Class frmClusteringStep1
         Me.scMain.Panel2.PerformLayout()
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.scMain.ResumeLayout(False)
+        CType(Me.fswModelExists, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -250,4 +304,9 @@ Partial Class frmClusteringStep1
     Friend WithEvents lblSavePath As Label
     Friend WithEvents txtSavePath As TextBox
     Friend WithEvents fbdKMeansModel As FolderBrowserDialog
+    Friend WithEvents chkStatisticsMode As CheckBox
+    Friend WithEvents lblLoading As Label
+    Friend WithEvents tmrModelExists As Timer
+    Friend WithEvents fswModelExists As IO.FileSystemWatcher
+    Friend WithEvents pbLoading As ProgressBar
 End Class

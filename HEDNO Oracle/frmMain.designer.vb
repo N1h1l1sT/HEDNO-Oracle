@@ -32,17 +32,17 @@ Partial Class frmMain
         Me.mniOpenSettingsFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mniExit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PreProcessingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniPreProcessing = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniCreateGeoColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreateNeededSQLViews = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniCreateNeededSQLViews = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniGeoLocate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniPreProcessTheData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClusteringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClustering = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Step1OptimalNumberOfClustersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClassificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FormTrainAndTestSetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LogisticRegressionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniClusteringStep0 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniClusteringStep1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniClassification = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniFormTrainAndTestSets = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniLogit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniDirectoriesMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniProgramDocuments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
@@ -119,7 +119,7 @@ Partial Class frmMain
         '
         'mnuMain
         '
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFileMenu, Me.PreProcessingToolStripMenuItem, Me.ClusteringToolStripMenuItem, Me.ClassificationToolStripMenuItem, Me.mniDirectoriesMenu, Me.mniLinksMenu, Me.mniHelpMenu})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFileMenu, Me.mniPreProcessing, Me.mniClustering, Me.mniClassification, Me.mniDirectoriesMenu, Me.mniLinksMenu, Me.mniHelpMenu})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Size = New System.Drawing.Size(778, 24)
@@ -178,12 +178,12 @@ Partial Class frmMain
         Me.mniExit.Size = New System.Drawing.Size(244, 22)
         Me.mniExit.Text = "E&xit"
         '
-        'PreProcessingToolStripMenuItem
+        'mniPreProcessing
         '
-        Me.PreProcessingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniCreateGeoColumns, Me.CreateNeededSQLViews, Me.mniGeoLocate, Me.mniPreProcessTheData})
-        Me.PreProcessingToolStripMenuItem.Name = "PreProcessingToolStripMenuItem"
-        Me.PreProcessingToolStripMenuItem.Size = New System.Drawing.Size(103, 20)
-        Me.PreProcessingToolStripMenuItem.Text = "Pre-Processing"
+        Me.mniPreProcessing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniCreateGeoColumns, Me.mniCreateNeededSQLViews, Me.mniGeoLocate, Me.mniPreProcessTheData})
+        Me.mniPreProcessing.Name = "mniPreProcessing"
+        Me.mniPreProcessing.Size = New System.Drawing.Size(103, 20)
+        Me.mniPreProcessing.Text = "Pre-Processing"
         '
         'mniCreateGeoColumns
         '
@@ -191,11 +191,11 @@ Partial Class frmMain
         Me.mniCreateGeoColumns.Size = New System.Drawing.Size(255, 22)
         Me.mniCreateGeoColumns.Text = "Create Geolocation SQL Columns"
         '
-        'CreateNeededSQLViews
+        'mniCreateNeededSQLViews
         '
-        Me.CreateNeededSQLViews.Name = "CreateNeededSQLViews"
-        Me.CreateNeededSQLViews.Size = New System.Drawing.Size(255, 22)
-        Me.CreateNeededSQLViews.Text = "Create Needed SQL Views"
+        Me.mniCreateNeededSQLViews.Name = "mniCreateNeededSQLViews"
+        Me.mniCreateNeededSQLViews.Size = New System.Drawing.Size(255, 22)
+        Me.mniCreateNeededSQLViews.Text = "Create Needed SQL Views"
         '
         'mniGeoLocate
         '
@@ -209,43 +209,43 @@ Partial Class frmMain
         Me.mniPreProcessTheData.Size = New System.Drawing.Size(255, 22)
         Me.mniPreProcessTheData.Text = "&Pre-Process The Data"
         '
-        'ClusteringToolStripMenuItem
-        '
-        Me.ClusteringToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniClustering, Me.Step1OptimalNumberOfClustersToolStripMenuItem})
-        Me.ClusteringToolStripMenuItem.Name = "ClusteringToolStripMenuItem"
-        Me.ClusteringToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
-        Me.ClusteringToolStripMenuItem.Text = "Clustering"
-        '
         'mniClustering
         '
+        Me.mniClustering.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniClusteringStep0, Me.mniClusteringStep1})
         Me.mniClustering.Name = "mniClustering"
-        Me.mniClustering.Size = New System.Drawing.Size(274, 22)
-        Me.mniClustering.Text = "Step 0: Process Data"
+        Me.mniClustering.Size = New System.Drawing.Size(74, 20)
+        Me.mniClustering.Text = "Clustering"
         '
-        'Step1OptimalNumberOfClustersToolStripMenuItem
+        'mniClusteringStep0
         '
-        Me.Step1OptimalNumberOfClustersToolStripMenuItem.Name = "Step1OptimalNumberOfClustersToolStripMenuItem"
-        Me.Step1OptimalNumberOfClustersToolStripMenuItem.Size = New System.Drawing.Size(274, 22)
-        Me.Step1OptimalNumberOfClustersToolStripMenuItem.Text = "Step 1: Apply Unsupervised Learning"
+        Me.mniClusteringStep0.Name = "mniClusteringStep0"
+        Me.mniClusteringStep0.Size = New System.Drawing.Size(274, 22)
+        Me.mniClusteringStep0.Text = "Step 0: Process Data"
         '
-        'ClassificationToolStripMenuItem
+        'mniClusteringStep1
         '
-        Me.ClassificationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FormTrainAndTestSetsToolStripMenuItem, Me.LogisticRegressionToolStripMenuItem})
-        Me.ClassificationToolStripMenuItem.Name = "ClassificationToolStripMenuItem"
-        Me.ClassificationToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
-        Me.ClassificationToolStripMenuItem.Text = "Classification"
+        Me.mniClusteringStep1.Name = "mniClusteringStep1"
+        Me.mniClusteringStep1.Size = New System.Drawing.Size(274, 22)
+        Me.mniClusteringStep1.Text = "Step 1: Apply Unsupervised Learning"
         '
-        'FormTrainAndTestSetsToolStripMenuItem
+        'mniClassification
         '
-        Me.FormTrainAndTestSetsToolStripMenuItem.Name = "FormTrainAndTestSetsToolStripMenuItem"
-        Me.FormTrainAndTestSetsToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
-        Me.FormTrainAndTestSetsToolStripMenuItem.Text = "&Form Train and Test sets"
+        Me.mniClassification.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFormTrainAndTestSets, Me.mniLogit})
+        Me.mniClassification.Name = "mniClassification"
+        Me.mniClassification.Size = New System.Drawing.Size(88, 20)
+        Me.mniClassification.Text = "Classification"
         '
-        'LogisticRegressionToolStripMenuItem
+        'mniFormTrainAndTestSets
         '
-        Me.LogisticRegressionToolStripMenuItem.Name = "LogisticRegressionToolStripMenuItem"
-        Me.LogisticRegressionToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
-        Me.LogisticRegressionToolStripMenuItem.Text = "Logistic Regression"
+        Me.mniFormTrainAndTestSets.Name = "mniFormTrainAndTestSets"
+        Me.mniFormTrainAndTestSets.Size = New System.Drawing.Size(211, 22)
+        Me.mniFormTrainAndTestSets.Text = "&Form Train and Test sets"
+        '
+        'mniLogit
+        '
+        Me.mniLogit.Name = "mniLogit"
+        Me.mniLogit.Size = New System.Drawing.Size(211, 22)
+        Me.mniLogit.Text = "&1) Logistic Regression"
         '
         'mniDirectoriesMenu
         '
@@ -860,17 +860,17 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mniSuggestOrComplain As ToolStripMenuItem
     Friend WithEvents mniOpenSettingsFile As ToolStripMenuItem
-    Friend WithEvents PreProcessingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mniPreProcessing As ToolStripMenuItem
     Friend WithEvents mniCreateGeoColumns As ToolStripMenuItem
     Friend WithEvents mniGeoLocate As ToolStripMenuItem
-    Friend WithEvents ClusteringToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mniClustering As ToolStripMenuItem
+    Friend WithEvents mniClusteringStep0 As ToolStripMenuItem
     Friend WithEvents mniPreProcessTheData As ToolStripMenuItem
-    Friend WithEvents CreateNeededSQLViews As ToolStripMenuItem
+    Friend WithEvents mniCreateNeededSQLViews As ToolStripMenuItem
     Friend WithEvents lblFuncInProgress As Label
     Friend WithEvents tmrFunctInProgress As Timer
-    Friend WithEvents Step1OptimalNumberOfClustersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ClassificationToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LogisticRegressionToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FormTrainAndTestSetsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mniClusteringStep1 As ToolStripMenuItem
+    Friend WithEvents mniClassification As ToolStripMenuItem
+    Friend WithEvents mniLogit As ToolStripMenuItem
+    Friend WithEvents mniFormTrainAndTestSets As ToolStripMenuItem
 End Class

@@ -22,7 +22,10 @@ Partial Class frmClusteringStep0
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblLoading = New System.Windows.Forms.Label()
+        Me.chkStatisticsMode = New System.Windows.Forms.CheckBox()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.chkUseExistingXDFFile = New System.Windows.Forms.CheckBox()
@@ -31,12 +34,19 @@ Partial Class frmClusteringStep0
         Me.chkShowGeoLocGraph = New System.Windows.Forms.CheckBox()
         Me.btnClustering0 = New System.Windows.Forms.Button()
         Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
+        Me.fswModelExists = New System.IO.FileSystemWatcher()
+        Me.tmrModelExists = New System.Windows.Forms.Timer(Me.components)
+        Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.pnlMain.SuspendLayout()
         Me.gbOptions.SuspendLayout()
+        CType(Me.fswModelExists, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlMain
         '
+        Me.pnlMain.Controls.Add(Me.pbLoading)
+        Me.pnlMain.Controls.Add(Me.lblLoading)
+        Me.pnlMain.Controls.Add(Me.chkStatisticsMode)
         Me.pnlMain.Controls.Add(Me.gbOptions)
         Me.pnlMain.Controls.Add(Me.btnClustering0)
         Me.pnlMain.Controls.Add(Me.chkCleanXDFFile)
@@ -45,6 +55,28 @@ Partial Class frmClusteringStep0
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.Size = New System.Drawing.Size(283, 246)
         Me.pnlMain.TabIndex = 5
+        '
+        'lblLoading
+        '
+        Me.lblLoading.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
+        Me.lblLoading.Location = New System.Drawing.Point(183, 0)
+        Me.lblLoading.Name = "lblLoading"
+        Me.lblLoading.Size = New System.Drawing.Size(100, 23)
+        Me.lblLoading.TabIndex = 14
+        Me.lblLoading.Text = "Loading..."
+        Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'chkStatisticsMode
+        '
+        Me.chkStatisticsMode.AutoSize = True
+        Me.chkStatisticsMode.Checked = True
+        Me.chkStatisticsMode.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStatisticsMode.Location = New System.Drawing.Point(12, 165)
+        Me.chkStatisticsMode.Name = "chkStatisticsMode"
+        Me.chkStatisticsMode.Size = New System.Drawing.Size(98, 17)
+        Me.chkStatisticsMode.TabIndex = 13
+        Me.chkStatisticsMode.Text = "Statistics Mode"
+        Me.chkStatisticsMode.UseVisualStyleBackColor = True
         '
         'gbOptions
         '
@@ -136,6 +168,25 @@ Partial Class frmClusteringStep0
         Me.chkCleanXDFFile.Text = "Clean the XDF file after completion"
         Me.chkCleanXDFFile.UseVisualStyleBackColor = True
         '
+        'fswModelExists
+        '
+        Me.fswModelExists.EnableRaisingEvents = True
+        Me.fswModelExists.SynchronizingObject = Me
+        '
+        'tmrModelExists
+        '
+        Me.tmrModelExists.Interval = 10
+        '
+        'pbLoading
+        '
+        Me.pbLoading.Location = New System.Drawing.Point(118, 0)
+        Me.pbLoading.MarqueeAnimationSpeed = 10
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
+        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pbLoading.TabIndex = 15
+        Me.pbLoading.Visible = False
+        '
         'frmClusteringStep0
         '
         Me.AcceptButton = Me.btnClustering0
@@ -152,6 +203,7 @@ Partial Class frmClusteringStep0
         Me.pnlMain.PerformLayout()
         Me.gbOptions.ResumeLayout(False)
         Me.gbOptions.PerformLayout()
+        CType(Me.fswModelExists, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -165,4 +217,9 @@ Partial Class frmClusteringStep0
     Friend WithEvents chkShowGeoLocGraph As CheckBox
     Friend WithEvents chkCleanXDFFile As CheckBox
     Friend WithEvents btnClustering0 As Button
+    Friend WithEvents chkStatisticsMode As CheckBox
+    Friend WithEvents lblLoading As Label
+    Friend WithEvents fswModelExists As IO.FileSystemWatcher
+    Friend WithEvents tmrModelExists As Timer
+    Friend WithEvents pbLoading As ProgressBar
 End Class

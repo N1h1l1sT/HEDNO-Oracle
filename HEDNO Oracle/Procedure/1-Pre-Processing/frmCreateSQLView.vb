@@ -35,7 +35,6 @@ Public Class frmCreateSQLView
     End Sub
 
     Private Sub btnCreateSQLViews_Click(sender As Object, e As EventArgs) Handles btnCreateSQLViews.Click
-
         Try
             If clbSQLViews.CheckedIndices.Count > 0 Then
                 If ConnectedToSQLServer = True Then

@@ -502,6 +502,26 @@ Module modChangeLanguage
         End With
     End Sub
 
+    Public Sub LogisticRegression_Language(ByVal frm As frmLogisticRegression)
+        With frm
+            Dim strLanguage_LogisticRegression() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_LogisticRegression)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub Statistics_Language(ByVal frm As frmStatistics)
+        With frm
+            Dim strLanguage_Statistics() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_Statistics)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
 
 
 End Module

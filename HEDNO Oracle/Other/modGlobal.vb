@@ -1,10 +1,12 @@
 ﻿Module modGlobal
+    Public strGraphs As String = strRoot & "Graphs\"
     Public strSQLDir As String = strRoot & "SQL\"
     Public strSQLViewsDir As String = strSQLDir & "Views"
     Public ConnectedToSQLServer As Boolean = False
 
+    Public strModelsPath As String = doProperPathNameLinux(strRoot & "Models/")
 
-    Public TablevTestSet As String = "v9TestSet"
+    Public TablevFinalDataset As String = "v9FinalDataset" 'This is v4Erga without the Label Restriction Clause, hence all rows are fetched, not only whose projects actually got or didn't get the Approval
 
     Public TablevErga As String = "v4Erga"
     Public ColvCityName As String = "Onoma_Polis"

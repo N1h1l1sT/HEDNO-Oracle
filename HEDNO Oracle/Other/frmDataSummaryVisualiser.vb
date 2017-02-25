@@ -40,10 +40,10 @@ Public Class frmDataSummaryVisualiser
                 For i = 0 To dfDataSummary.ColumnCount - 1
                     Dim PotentialValue As String = CType(dfDataSummary(j, i), String)
 
-                    If isNumericExtended(PotentialValue) Then
+                    If IsNumeric(PotentialValue) OrElse isNumericExtended(PotentialValue) Then
                         Dim BecameZeroByRounding As Boolean = False
                         DataSummaryRow(i) = StatRound(PotentialValue, CUInt(RoundAt), , BecameZeroByRounding)
-                        If BecameZeroByRounding Then DataSummaryRow(i) = DataSummaryRow(i).ToString & "*"
+                        If BecameZeroByRounding Then DataSummaryRow(i) = Zero_A_String("", RoundAt) & "*"
 
                     Else
                         DataSummaryRow(i) = PotentialValue

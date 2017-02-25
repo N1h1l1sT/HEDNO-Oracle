@@ -1,5 +1,5 @@
 ﻿'Version 7.14 2017-02-10
-'Added "ss" as a quick way of writing string; previously added doMT
+'Added "sa" as a quick way of writing string; previously added doMT
 'CAUTION ArrayBox(...,List(of List(of T))): it showed columns as rows and vice verse... fixed it but it MIGHT cause a problem to anything that already used it
 'Added the "ExtraTextOnTheBeginning on CrashCreate; Moved "TRIAL, BETA, VERBOSE" in here.
 'Requires Settings v1.6; ModuleStrings.lng version 1.5.6;
@@ -24,9 +24,9 @@
 'Clock / Date / Time
 'My.Computer.Clock.LocalTime        -       Has Date and Time (Hours Minutes seconds)
 'My.Computer.Clock.GmtTime          -       Same as above, but always in GMT+00 hours, not the computer's hour
-'Today.ToLongDateString             -       Does NOT contain any Time (HH mm ss) only Date
+'Today.ToLongDateString             -       Does NOT contain any Time (HH mm sa) only Date
 'Date and Time variable manipulation
-'DateTime.ParseExact(SomeDateString, "dd.MM.yy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+'DateTime.ParseExact(SomeDateString, "dd.MM.yy HH:mm:sa", System.Globalization.CultureInfo.InvariantCulture)
 
 'File Type Association
 'Public Shared Sub AssociateFileType(ByVal Extension As String, ByVal Description As String, ByVal Executable As String, Optional ByVal Icon As String = "")
@@ -50,7 +50,7 @@
 'It doesn't matter what is in front of % or after it. You can also use only a one of the %, using two isn't mandatory.
 'SELECT * FROM <table> WHERE <title> LIKE %Something%
 
-'In Access DB: Query Date: "WHERE [buy-date] = #1/1/2001 00:00:00#" - 'MM.dd.yyyy HH:mm:ss
+'In Access DB: Query Date: "WHERE [buy-date] = #1/1/2001 00:00:00#" - 'MM.dd.yyyy HH:mm:sa
 'In SQL      : Query Date: "WHERE "buy-date" = '1/1/2001'"
 
 'Variable Type Symbols
@@ -258,6 +258,7 @@ Module modCommon
         WriteToLog(Lines, strLogFilePath, PrependTime)
     End Sub
     Public Sub WriteToLog(ByVal Lines() As String, ByVal LogFilePath As String, Optional ByVal PrependTime As Boolean = True)
+        If PrependTime AndAlso Lines.Length > 0 Then Lines(0) = Now.ToString("dd/MM/yyyy hh:mm:ss.fff") & vbTab & Lines(0)
         File.AppendAllLines(LogFilePath, Lines, Encoding.UTF8)
     End Sub
 
@@ -406,10 +407,9 @@ Module modCommon
 #End Region
 
 #Region "isNumeric - All Variations"
-    Public Function isNumericExtended(Of T)(ByVal Var As T) As Boolean
-        Dim tmpString As String = String.Empty
+    Public Function isNumericExtended(Of T)(ByVal Var As T, Optional ByRef Num As String = "") As Boolean
         Try
-            tmpString = MathEvaluator.SimplifyObject(Var.ToString).ToString
+            Num = MathEvaluator.SimplifyObject(Var.ToString).ToString
         Catch ex As Exception
             Return False
         End Try
@@ -4161,7 +4161,7 @@ begin:
                         End If
 
                     Else
-                            FinalSettings(i) = NewSettings(i)
+                        FinalSettings(i) = NewSettings(i)
                     End If
                 Next
 
@@ -4327,7 +4327,7 @@ begin:
 #End Region
 
     <DebuggerStepThrough()>
-    Public Function ss(ByVal str As String, ParamArray Vars() As Object) As String
+    Public Function sa(ByVal str As String, ParamArray Vars() As Object) As String
         Try
             Return String.Format(str, Vars)
         Catch ex As Exception

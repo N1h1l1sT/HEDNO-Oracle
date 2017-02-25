@@ -93,7 +93,7 @@ Partial Class dlgTypeBox
         '
         'dtFrom
         '
-        Me.dtFrom.CustomFormat = "MM/dd/yyyy HH:mm:ss"
+        Me.dtFrom.CustomFormat = "MM/dd/yyyy HH:mm:sa"
         Me.dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtFrom.Location = New System.Drawing.Point(12, 41)
         Me.dtFrom.Name = "dtFrom"
@@ -103,7 +103,7 @@ Partial Class dlgTypeBox
         '
         'dtTo
         '
-        Me.dtTo.CustomFormat = "MM/dd/yyyy HH:mm:ss"
+        Me.dtTo.CustomFormat = "MM/dd/yyyy HH:mm:sa"
         Me.dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtTo.Location = New System.Drawing.Point(179, 41)
         Me.dtTo.Name = "dtTo"

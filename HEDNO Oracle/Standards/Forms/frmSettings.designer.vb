@@ -81,26 +81,6 @@ Partial Class frmSettings
         Me.txtXDFPath = New System.Windows.Forms.TextBox()
         Me.lblRowsPerRead = New System.Windows.Forms.Label()
         Me.tpGeolocation = New System.Windows.Forms.TabPage()
-        Me.txtColID_Erga = New System.Windows.Forms.TextBox()
-        Me.lblColID_Erga = New System.Windows.Forms.Label()
-        Me.txtTablevErga = New System.Windows.Forms.TextBox()
-        Me.lblTablevErga = New System.Windows.Forms.Label()
-        Me.txtColGeoLocY = New System.Windows.Forms.TextBox()
-        Me.lblColGeoLocY = New System.Windows.Forms.Label()
-        Me.txtColGeoLocX = New System.Windows.Forms.TextBox()
-        Me.lblColGeoLocX = New System.Windows.Forms.Label()
-        Me.txtColCityName = New System.Windows.Forms.TextBox()
-        Me.lblColCityName = New System.Windows.Forms.Label()
-        Me.txtTableErga = New System.Windows.Forms.TextBox()
-        Me.lblTableErga = New System.Windows.Forms.Label()
-        Me.txtColvID_Erga = New System.Windows.Forms.TextBox()
-        Me.lblColvID_Erga = New System.Windows.Forms.Label()
-        Me.txtColvGeoLocY = New System.Windows.Forms.TextBox()
-        Me.lblColvGeoLocY = New System.Windows.Forms.Label()
-        Me.txtColvGeoLocX = New System.Windows.Forms.TextBox()
-        Me.lblColvGeoLocX = New System.Windows.Forms.Label()
-        Me.txtColvCityName = New System.Windows.Forms.TextBox()
-        Me.lblColvCityName = New System.Windows.Forms.Label()
         Me.txtAPIKey = New System.Windows.Forms.TextBox()
         Me.lblAPIKey = New System.Windows.Forms.Label()
         Me.txtCityFieldSuffix = New System.Windows.Forms.TextBox()
@@ -111,20 +91,40 @@ Partial Class frmSettings
         Me.lblAPIExceededQuotaError = New System.Windows.Forms.Label()
         Me.lblErrorMessageIdentifierInJSON = New System.Windows.Forms.Label()
         Me.lblGeoLocationAPILink = New System.Windows.Forms.Label()
+        Me.tpSQLViews = New System.Windows.Forms.TabPage()
+        Me.txtTablevFinalDataset = New System.Windows.Forms.TextBox()
+        Me.lblColvCityName = New System.Windows.Forms.Label()
+        Me.lblTableErga = New System.Windows.Forms.Label()
+        Me.lblTablevFinalDataset = New System.Windows.Forms.Label()
+        Me.txtColvID_Erga = New System.Windows.Forms.TextBox()
+        Me.txtTableErga = New System.Windows.Forms.TextBox()
+        Me.txtColID_Erga = New System.Windows.Forms.TextBox()
+        Me.lblColvID_Erga = New System.Windows.Forms.Label()
+        Me.lblColCityName = New System.Windows.Forms.Label()
+        Me.lblColID_Erga = New System.Windows.Forms.Label()
+        Me.txtColvGeoLocY = New System.Windows.Forms.TextBox()
+        Me.txtColCityName = New System.Windows.Forms.TextBox()
+        Me.txtTablevErga = New System.Windows.Forms.TextBox()
+        Me.lblColvGeoLocY = New System.Windows.Forms.Label()
+        Me.lblColGeoLocX = New System.Windows.Forms.Label()
+        Me.lblTablevErga = New System.Windows.Forms.Label()
+        Me.txtColvGeoLocX = New System.Windows.Forms.TextBox()
+        Me.txtColGeoLocX = New System.Windows.Forms.TextBox()
+        Me.txtColGeoLocY = New System.Windows.Forms.TextBox()
+        Me.lblColvGeoLocX = New System.Windows.Forms.Label()
+        Me.txtColvCityName = New System.Windows.Forms.TextBox()
+        Me.lblColGeoLocY = New System.Windows.Forms.Label()
         Me.gbCommands = New System.Windows.Forms.GroupBox()
         Me.cmdCurrent = New System.Windows.Forms.Button()
         Me.cmdDefault = New System.Windows.Forms.Button()
         Me.ofdFileBrowser = New System.Windows.Forms.OpenFileDialog()
-        Me.txtTablevTestSet = New System.Windows.Forms.TextBox()
-        Me.lblTablevTestSet = New System.Windows.Forms.Label()
-        Me.tpSQLViews = New System.Windows.Forms.TabPage()
         Me.tcSettings.SuspendLayout()
         Me.tpGeneral.SuspendLayout()
         Me.tpDatabase.SuspendLayout()
         Me.tpRGeneral.SuspendLayout()
         Me.tpGeolocation.SuspendLayout()
-        Me.gbCommands.SuspendLayout()
         Me.tpSQLViews.SuspendLayout()
+        Me.gbCommands.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSecs
@@ -301,7 +301,7 @@ Partial Class frmSettings
         Me.tpGeneral.Location = New System.Drawing.Point(4, 22)
         Me.tpGeneral.Name = "tpGeneral"
         Me.tpGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpGeneral.Size = New System.Drawing.Size(586, 314)
+        Me.tpGeneral.Size = New System.Drawing.Size(586, 328)
         Me.tpGeneral.TabIndex = 0
         Me.tpGeneral.Text = "General Settings"
         Me.tpGeneral.UseVisualStyleBackColor = True
@@ -483,7 +483,7 @@ Partial Class frmSettings
         Me.tpDatabase.Controls.Add(Me.btnBrowseDBPath)
         Me.tpDatabase.Location = New System.Drawing.Point(4, 22)
         Me.tpDatabase.Name = "tpDatabase"
-        Me.tpDatabase.Size = New System.Drawing.Size(586, 314)
+        Me.tpDatabase.Size = New System.Drawing.Size(586, 328)
         Me.tpDatabase.TabIndex = 2
         Me.tpDatabase.Text = "Database"
         Me.tpDatabase.UseVisualStyleBackColor = True
@@ -679,7 +679,7 @@ Partial Class frmSettings
         Me.tpRGeneral.Location = New System.Drawing.Point(4, 22)
         Me.tpRGeneral.Name = "tpRGeneral"
         Me.tpRGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpRGeneral.Size = New System.Drawing.Size(586, 314)
+        Me.tpRGeneral.Size = New System.Drawing.Size(586, 328)
         Me.tpRGeneral.TabIndex = 3
         Me.tpRGeneral.Text = "R (General)"
         Me.tpRGeneral.UseVisualStyleBackColor = True
@@ -791,210 +791,10 @@ Partial Class frmSettings
         Me.tpGeolocation.Controls.Add(Me.lblGeoLocationAPILink)
         Me.tpGeolocation.Location = New System.Drawing.Point(4, 22)
         Me.tpGeolocation.Name = "tpGeolocation"
-        Me.tpGeolocation.Size = New System.Drawing.Size(586, 314)
+        Me.tpGeolocation.Size = New System.Drawing.Size(586, 328)
         Me.tpGeolocation.TabIndex = 4
         Me.tpGeolocation.Text = "Geolocation"
         Me.tpGeolocation.UseVisualStyleBackColor = True
-        '
-        'txtColID_Erga
-        '
-        Me.txtColID_Erga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColID_Erga.Location = New System.Drawing.Point(252, 277)
-        Me.txtColID_Erga.Name = "txtColID_Erga"
-        Me.txtColID_Erga.Size = New System.Drawing.Size(326, 20)
-        Me.txtColID_Erga.TabIndex = 32
-        Me.txtColID_Erga.Tag = "0"
-        Me.txtColID_Erga.Text = "Unknown"
-        '
-        'lblColID_Erga
-        '
-        Me.lblColID_Erga.AutoSize = True
-        Me.lblColID_Erga.Location = New System.Drawing.Point(6, 280)
-        Me.lblColID_Erga.Name = "lblColID_Erga"
-        Me.lblColID_Erga.Size = New System.Drawing.Size(146, 13)
-        Me.lblColID_Erga.TabIndex = 33
-        Me.lblColID_Erga.Text = "Suffix for each Address Entry:"
-        '
-        'txtTablevErga
-        '
-        Me.txtTablevErga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTablevErga.Location = New System.Drawing.Point(252, 42)
-        Me.txtTablevErga.Name = "txtTablevErga"
-        Me.txtTablevErga.Size = New System.Drawing.Size(326, 20)
-        Me.txtTablevErga.TabIndex = 30
-        Me.txtTablevErga.Tag = "0"
-        Me.txtTablevErga.Text = "Unknown"
-        '
-        'lblTablevErga
-        '
-        Me.lblTablevErga.AutoSize = True
-        Me.lblTablevErga.Location = New System.Drawing.Point(6, 45)
-        Me.lblTablevErga.Name = "lblTablevErga"
-        Me.lblTablevErga.Size = New System.Drawing.Size(121, 13)
-        Me.lblTablevErga.TabIndex = 31
-        Me.lblTablevErga.Text = "SQL View ERGA Name:"
-        '
-        'txtColGeoLocY
-        '
-        Me.txtColGeoLocY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColGeoLocY.Location = New System.Drawing.Point(252, 251)
-        Me.txtColGeoLocY.Name = "txtColGeoLocY"
-        Me.txtColGeoLocY.Size = New System.Drawing.Size(326, 20)
-        Me.txtColGeoLocY.TabIndex = 28
-        Me.txtColGeoLocY.Tag = "0"
-        Me.txtColGeoLocY.Text = "Unknown"
-        '
-        'lblColGeoLocY
-        '
-        Me.lblColGeoLocY.AutoSize = True
-        Me.lblColGeoLocY.Location = New System.Drawing.Point(6, 254)
-        Me.lblColGeoLocY.Name = "lblColGeoLocY"
-        Me.lblColGeoLocY.Size = New System.Drawing.Size(163, 13)
-        Me.lblColGeoLocY.TabIndex = 29
-        Me.lblColGeoLocY.Text = "SQL Table GeoLocationY Name:"
-        '
-        'txtColGeoLocX
-        '
-        Me.txtColGeoLocX.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColGeoLocX.Location = New System.Drawing.Point(252, 225)
-        Me.txtColGeoLocX.Name = "txtColGeoLocX"
-        Me.txtColGeoLocX.Size = New System.Drawing.Size(326, 20)
-        Me.txtColGeoLocX.TabIndex = 26
-        Me.txtColGeoLocX.Tag = "0"
-        Me.txtColGeoLocX.Text = "Unknown"
-        '
-        'lblColGeoLocX
-        '
-        Me.lblColGeoLocX.AutoSize = True
-        Me.lblColGeoLocX.Location = New System.Drawing.Point(6, 228)
-        Me.lblColGeoLocX.Name = "lblColGeoLocX"
-        Me.lblColGeoLocX.Size = New System.Drawing.Size(163, 13)
-        Me.lblColGeoLocX.TabIndex = 27
-        Me.lblColGeoLocX.Text = "SQL Table GeoLocationX Name:"
-        '
-        'txtColCityName
-        '
-        Me.txtColCityName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColCityName.Location = New System.Drawing.Point(252, 199)
-        Me.txtColCityName.Name = "txtColCityName"
-        Me.txtColCityName.Size = New System.Drawing.Size(326, 20)
-        Me.txtColCityName.TabIndex = 24
-        Me.txtColCityName.Tag = "0"
-        Me.txtColCityName.Text = "Unknown"
-        '
-        'lblColCityName
-        '
-        Me.lblColCityName.AutoSize = True
-        Me.lblColCityName.Location = New System.Drawing.Point(6, 202)
-        Me.lblColCityName.Name = "lblColCityName"
-        Me.lblColCityName.Size = New System.Drawing.Size(150, 13)
-        Me.lblColCityName.TabIndex = 25
-        Me.lblColCityName.Text = "SQL Table City Column Name:"
-        '
-        'txtTableErga
-        '
-        Me.txtTableErga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTableErga.Location = New System.Drawing.Point(252, 173)
-        Me.txtTableErga.Name = "txtTableErga"
-        Me.txtTableErga.Size = New System.Drawing.Size(326, 20)
-        Me.txtTableErga.TabIndex = 22
-        Me.txtTableErga.Tag = "0"
-        Me.txtTableErga.Text = "Unknown"
-        '
-        'lblTableErga
-        '
-        Me.lblTableErga.AutoSize = True
-        Me.lblTableErga.Location = New System.Drawing.Point(6, 176)
-        Me.lblTableErga.Name = "lblTableErga"
-        Me.lblTableErga.Size = New System.Drawing.Size(121, 13)
-        Me.lblTableErga.TabIndex = 23
-        Me.lblTableErga.Text = "SQL Table ΕΡΓΑ Name:"
-        '
-        'txtColvID_Erga
-        '
-        Me.txtColvID_Erga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvID_Erga.Location = New System.Drawing.Point(252, 120)
-        Me.txtColvID_Erga.Name = "txtColvID_Erga"
-        Me.txtColvID_Erga.Size = New System.Drawing.Size(326, 20)
-        Me.txtColvID_Erga.TabIndex = 20
-        Me.txtColvID_Erga.Tag = "0"
-        Me.txtColvID_Erga.Text = "Unknown"
-        '
-        'lblColvID_Erga
-        '
-        Me.lblColvID_Erga.AutoSize = True
-        Me.lblColvID_Erga.Location = New System.Drawing.Point(6, 123)
-        Me.lblColvID_Erga.Name = "lblColvID_Erga"
-        Me.lblColvID_Erga.Size = New System.Drawing.Size(140, 13)
-        Me.lblColvID_Erga.TabIndex = 21
-        Me.lblColvID_Erga.Text = "SQL View Column ID Name:"
-        '
-        'txtColvGeoLocY
-        '
-        Me.txtColvGeoLocY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvGeoLocY.Location = New System.Drawing.Point(252, 94)
-        Me.txtColvGeoLocY.Name = "txtColvGeoLocY"
-        Me.txtColvGeoLocY.Size = New System.Drawing.Size(326, 20)
-        Me.txtColvGeoLocY.TabIndex = 18
-        Me.txtColvGeoLocY.Tag = "0"
-        Me.txtColvGeoLocY.Text = "Unknown"
-        '
-        'lblColvGeoLocY
-        '
-        Me.lblColvGeoLocY.AutoSize = True
-        Me.lblColvGeoLocY.Location = New System.Drawing.Point(6, 97)
-        Me.lblColvGeoLocY.Name = "lblColvGeoLocY"
-        Me.lblColvGeoLocY.Size = New System.Drawing.Size(197, 13)
-        Me.lblColvGeoLocY.TabIndex = 19
-        Me.lblColvGeoLocY.Text = "SQL View Column GeoLocationY Name:"
-        '
-        'txtColvGeoLocX
-        '
-        Me.txtColvGeoLocX.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvGeoLocX.Location = New System.Drawing.Point(252, 68)
-        Me.txtColvGeoLocX.Name = "txtColvGeoLocX"
-        Me.txtColvGeoLocX.Size = New System.Drawing.Size(326, 20)
-        Me.txtColvGeoLocX.TabIndex = 16
-        Me.txtColvGeoLocX.Tag = "0"
-        Me.txtColvGeoLocX.Text = "Unknown"
-        '
-        'lblColvGeoLocX
-        '
-        Me.lblColvGeoLocX.AutoSize = True
-        Me.lblColvGeoLocX.Location = New System.Drawing.Point(6, 71)
-        Me.lblColvGeoLocX.Name = "lblColvGeoLocX"
-        Me.lblColvGeoLocX.Size = New System.Drawing.Size(197, 13)
-        Me.lblColvGeoLocX.TabIndex = 17
-        Me.lblColvGeoLocX.Text = "SQL View Column GeoLocationX Name:"
-        '
-        'txtColvCityName
-        '
-        Me.txtColvCityName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtColvCityName.Location = New System.Drawing.Point(252, 16)
-        Me.txtColvCityName.Name = "txtColvCityName"
-        Me.txtColvCityName.Size = New System.Drawing.Size(326, 20)
-        Me.txtColvCityName.TabIndex = 14
-        Me.txtColvCityName.Tag = "0"
-        Me.txtColvCityName.Text = "Unknown"
-        '
-        'lblColvCityName
-        '
-        Me.lblColvCityName.AutoSize = True
-        Me.lblColvCityName.Location = New System.Drawing.Point(6, 19)
-        Me.lblColvCityName.Name = "lblColvCityName"
-        Me.lblColvCityName.Size = New System.Drawing.Size(146, 13)
-        Me.lblColvCityName.TabIndex = 15
-        Me.lblColvCityName.Text = "SQL View City Column Name:"
         '
         'txtAPIKey
         '
@@ -1096,6 +896,258 @@ Partial Class frmSettings
         Me.lblGeoLocationAPILink.TabIndex = 5
         Me.lblGeoLocationAPILink.Text = "Geolocation API Link:"
         '
+        'tpSQLViews
+        '
+        Me.tpSQLViews.Controls.Add(Me.txtTablevFinalDataset)
+        Me.tpSQLViews.Controls.Add(Me.lblColvCityName)
+        Me.tpSQLViews.Controls.Add(Me.lblTableErga)
+        Me.tpSQLViews.Controls.Add(Me.lblTablevFinalDataset)
+        Me.tpSQLViews.Controls.Add(Me.txtColvID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.txtTableErga)
+        Me.tpSQLViews.Controls.Add(Me.txtColID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.lblColvID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.lblColCityName)
+        Me.tpSQLViews.Controls.Add(Me.lblColID_Erga)
+        Me.tpSQLViews.Controls.Add(Me.txtColvGeoLocY)
+        Me.tpSQLViews.Controls.Add(Me.txtColCityName)
+        Me.tpSQLViews.Controls.Add(Me.txtTablevErga)
+        Me.tpSQLViews.Controls.Add(Me.lblColvGeoLocY)
+        Me.tpSQLViews.Controls.Add(Me.lblColGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.lblTablevErga)
+        Me.tpSQLViews.Controls.Add(Me.txtColvGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.txtColGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.txtColGeoLocY)
+        Me.tpSQLViews.Controls.Add(Me.lblColvGeoLocX)
+        Me.tpSQLViews.Controls.Add(Me.txtColvCityName)
+        Me.tpSQLViews.Controls.Add(Me.lblColGeoLocY)
+        Me.tpSQLViews.Location = New System.Drawing.Point(4, 22)
+        Me.tpSQLViews.Name = "tpSQLViews"
+        Me.tpSQLViews.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpSQLViews.Size = New System.Drawing.Size(586, 328)
+        Me.tpSQLViews.TabIndex = 5
+        Me.tpSQLViews.Text = "SQL Views"
+        Me.tpSQLViews.UseVisualStyleBackColor = True
+        '
+        'txtTablevFinalDataset
+        '
+        Me.txtTablevFinalDataset.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTablevFinalDataset.Location = New System.Drawing.Point(252, 146)
+        Me.txtTablevFinalDataset.Name = "txtTablevFinalDataset"
+        Me.txtTablevFinalDataset.Size = New System.Drawing.Size(326, 20)
+        Me.txtTablevFinalDataset.TabIndex = 34
+        Me.txtTablevFinalDataset.Tag = "0"
+        Me.txtTablevFinalDataset.Text = "Unknown"
+        '
+        'lblColvCityName
+        '
+        Me.lblColvCityName.AutoSize = True
+        Me.lblColvCityName.Location = New System.Drawing.Point(6, 19)
+        Me.lblColvCityName.Name = "lblColvCityName"
+        Me.lblColvCityName.Size = New System.Drawing.Size(146, 13)
+        Me.lblColvCityName.TabIndex = 15
+        Me.lblColvCityName.Text = "SQL View City Column Name:"
+        '
+        'lblTableErga
+        '
+        Me.lblTableErga.AutoSize = True
+        Me.lblTableErga.Location = New System.Drawing.Point(6, 176)
+        Me.lblTableErga.Name = "lblTableErga"
+        Me.lblTableErga.Size = New System.Drawing.Size(121, 13)
+        Me.lblTableErga.TabIndex = 23
+        Me.lblTableErga.Text = "SQL Table ΕΡΓΑ Name:"
+        '
+        'lblTablevFinalDataset
+        '
+        Me.lblTablevFinalDataset.AutoSize = True
+        Me.lblTablevFinalDataset.Location = New System.Drawing.Point(6, 149)
+        Me.lblTablevFinalDataset.Name = "lblTablevFinalDataset"
+        Me.lblTablevFinalDataset.Size = New System.Drawing.Size(150, 13)
+        Me.lblTablevFinalDataset.TabIndex = 35
+        Me.lblTablevFinalDataset.Text = "SQL View FinalDataset Name:"
+        '
+        'txtColvID_Erga
+        '
+        Me.txtColvID_Erga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColvID_Erga.Location = New System.Drawing.Point(252, 120)
+        Me.txtColvID_Erga.Name = "txtColvID_Erga"
+        Me.txtColvID_Erga.Size = New System.Drawing.Size(326, 20)
+        Me.txtColvID_Erga.TabIndex = 20
+        Me.txtColvID_Erga.Tag = "0"
+        Me.txtColvID_Erga.Text = "Unknown"
+        '
+        'txtTableErga
+        '
+        Me.txtTableErga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTableErga.Location = New System.Drawing.Point(252, 173)
+        Me.txtTableErga.Name = "txtTableErga"
+        Me.txtTableErga.Size = New System.Drawing.Size(326, 20)
+        Me.txtTableErga.TabIndex = 22
+        Me.txtTableErga.Tag = "0"
+        Me.txtTableErga.Text = "Unknown"
+        '
+        'txtColID_Erga
+        '
+        Me.txtColID_Erga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColID_Erga.Location = New System.Drawing.Point(252, 277)
+        Me.txtColID_Erga.Name = "txtColID_Erga"
+        Me.txtColID_Erga.Size = New System.Drawing.Size(326, 20)
+        Me.txtColID_Erga.TabIndex = 32
+        Me.txtColID_Erga.Tag = "0"
+        Me.txtColID_Erga.Text = "Unknown"
+        '
+        'lblColvID_Erga
+        '
+        Me.lblColvID_Erga.AutoSize = True
+        Me.lblColvID_Erga.Location = New System.Drawing.Point(6, 123)
+        Me.lblColvID_Erga.Name = "lblColvID_Erga"
+        Me.lblColvID_Erga.Size = New System.Drawing.Size(140, 13)
+        Me.lblColvID_Erga.TabIndex = 21
+        Me.lblColvID_Erga.Text = "SQL View Column ID Name:"
+        '
+        'lblColCityName
+        '
+        Me.lblColCityName.AutoSize = True
+        Me.lblColCityName.Location = New System.Drawing.Point(6, 202)
+        Me.lblColCityName.Name = "lblColCityName"
+        Me.lblColCityName.Size = New System.Drawing.Size(150, 13)
+        Me.lblColCityName.TabIndex = 25
+        Me.lblColCityName.Text = "SQL Table City Column Name:"
+        '
+        'lblColID_Erga
+        '
+        Me.lblColID_Erga.AutoSize = True
+        Me.lblColID_Erga.Location = New System.Drawing.Point(6, 280)
+        Me.lblColID_Erga.Name = "lblColID_Erga"
+        Me.lblColID_Erga.Size = New System.Drawing.Size(146, 13)
+        Me.lblColID_Erga.TabIndex = 33
+        Me.lblColID_Erga.Text = "Suffix for each Address Entry:"
+        '
+        'txtColvGeoLocY
+        '
+        Me.txtColvGeoLocY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColvGeoLocY.Location = New System.Drawing.Point(252, 94)
+        Me.txtColvGeoLocY.Name = "txtColvGeoLocY"
+        Me.txtColvGeoLocY.Size = New System.Drawing.Size(326, 20)
+        Me.txtColvGeoLocY.TabIndex = 18
+        Me.txtColvGeoLocY.Tag = "0"
+        Me.txtColvGeoLocY.Text = "Unknown"
+        '
+        'txtColCityName
+        '
+        Me.txtColCityName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColCityName.Location = New System.Drawing.Point(252, 199)
+        Me.txtColCityName.Name = "txtColCityName"
+        Me.txtColCityName.Size = New System.Drawing.Size(326, 20)
+        Me.txtColCityName.TabIndex = 24
+        Me.txtColCityName.Tag = "0"
+        Me.txtColCityName.Text = "Unknown"
+        '
+        'txtTablevErga
+        '
+        Me.txtTablevErga.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTablevErga.Location = New System.Drawing.Point(252, 42)
+        Me.txtTablevErga.Name = "txtTablevErga"
+        Me.txtTablevErga.Size = New System.Drawing.Size(326, 20)
+        Me.txtTablevErga.TabIndex = 30
+        Me.txtTablevErga.Tag = "0"
+        Me.txtTablevErga.Text = "Unknown"
+        '
+        'lblColvGeoLocY
+        '
+        Me.lblColvGeoLocY.AutoSize = True
+        Me.lblColvGeoLocY.Location = New System.Drawing.Point(6, 97)
+        Me.lblColvGeoLocY.Name = "lblColvGeoLocY"
+        Me.lblColvGeoLocY.Size = New System.Drawing.Size(197, 13)
+        Me.lblColvGeoLocY.TabIndex = 19
+        Me.lblColvGeoLocY.Text = "SQL View Column GeoLocationY Name:"
+        '
+        'lblColGeoLocX
+        '
+        Me.lblColGeoLocX.AutoSize = True
+        Me.lblColGeoLocX.Location = New System.Drawing.Point(6, 228)
+        Me.lblColGeoLocX.Name = "lblColGeoLocX"
+        Me.lblColGeoLocX.Size = New System.Drawing.Size(163, 13)
+        Me.lblColGeoLocX.TabIndex = 27
+        Me.lblColGeoLocX.Text = "SQL Table GeoLocationX Name:"
+        '
+        'lblTablevErga
+        '
+        Me.lblTablevErga.AutoSize = True
+        Me.lblTablevErga.Location = New System.Drawing.Point(6, 45)
+        Me.lblTablevErga.Name = "lblTablevErga"
+        Me.lblTablevErga.Size = New System.Drawing.Size(121, 13)
+        Me.lblTablevErga.TabIndex = 31
+        Me.lblTablevErga.Text = "SQL View ERGA Name:"
+        '
+        'txtColvGeoLocX
+        '
+        Me.txtColvGeoLocX.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColvGeoLocX.Location = New System.Drawing.Point(252, 68)
+        Me.txtColvGeoLocX.Name = "txtColvGeoLocX"
+        Me.txtColvGeoLocX.Size = New System.Drawing.Size(326, 20)
+        Me.txtColvGeoLocX.TabIndex = 16
+        Me.txtColvGeoLocX.Tag = "0"
+        Me.txtColvGeoLocX.Text = "Unknown"
+        '
+        'txtColGeoLocX
+        '
+        Me.txtColGeoLocX.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColGeoLocX.Location = New System.Drawing.Point(252, 225)
+        Me.txtColGeoLocX.Name = "txtColGeoLocX"
+        Me.txtColGeoLocX.Size = New System.Drawing.Size(326, 20)
+        Me.txtColGeoLocX.TabIndex = 26
+        Me.txtColGeoLocX.Tag = "0"
+        Me.txtColGeoLocX.Text = "Unknown"
+        '
+        'txtColGeoLocY
+        '
+        Me.txtColGeoLocY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColGeoLocY.Location = New System.Drawing.Point(252, 251)
+        Me.txtColGeoLocY.Name = "txtColGeoLocY"
+        Me.txtColGeoLocY.Size = New System.Drawing.Size(326, 20)
+        Me.txtColGeoLocY.TabIndex = 28
+        Me.txtColGeoLocY.Tag = "0"
+        Me.txtColGeoLocY.Text = "Unknown"
+        '
+        'lblColvGeoLocX
+        '
+        Me.lblColvGeoLocX.AutoSize = True
+        Me.lblColvGeoLocX.Location = New System.Drawing.Point(6, 71)
+        Me.lblColvGeoLocX.Name = "lblColvGeoLocX"
+        Me.lblColvGeoLocX.Size = New System.Drawing.Size(197, 13)
+        Me.lblColvGeoLocX.TabIndex = 17
+        Me.lblColvGeoLocX.Text = "SQL View Column GeoLocationX Name:"
+        '
+        'txtColvCityName
+        '
+        Me.txtColvCityName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtColvCityName.Location = New System.Drawing.Point(252, 16)
+        Me.txtColvCityName.Name = "txtColvCityName"
+        Me.txtColvCityName.Size = New System.Drawing.Size(326, 20)
+        Me.txtColvCityName.TabIndex = 14
+        Me.txtColvCityName.Tag = "0"
+        Me.txtColvCityName.Text = "Unknown"
+        '
+        'lblColGeoLocY
+        '
+        Me.lblColGeoLocY.AutoSize = True
+        Me.lblColGeoLocY.Location = New System.Drawing.Point(6, 254)
+        Me.lblColGeoLocY.Name = "lblColGeoLocY"
+        Me.lblColGeoLocY.Size = New System.Drawing.Size(163, 13)
+        Me.lblColGeoLocY.TabIndex = 29
+        Me.lblColGeoLocY.Text = "SQL Table GeoLocationY Name:"
+        '
         'gbCommands
         '
         Me.gbCommands.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -1131,58 +1183,6 @@ Partial Class frmSettings
         Me.cmdDefault.Text = "Reset Default Settings"
         Me.cmdDefault.UseVisualStyleBackColor = True
         '
-        'txtTablevTestSet
-        '
-        Me.txtTablevTestSet.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTablevTestSet.Location = New System.Drawing.Point(252, 146)
-        Me.txtTablevTestSet.Name = "txtTablevTestSet"
-        Me.txtTablevTestSet.Size = New System.Drawing.Size(326, 20)
-        Me.txtTablevTestSet.TabIndex = 34
-        Me.txtTablevTestSet.Tag = "0"
-        Me.txtTablevTestSet.Text = "Unknown"
-        '
-        'lblTablevTestSet
-        '
-        Me.lblTablevTestSet.AutoSize = True
-        Me.lblTablevTestSet.Location = New System.Drawing.Point(6, 149)
-        Me.lblTablevTestSet.Name = "lblTablevTestSet"
-        Me.lblTablevTestSet.Size = New System.Drawing.Size(128, 13)
-        Me.lblTablevTestSet.TabIndex = 35
-        Me.lblTablevTestSet.Text = "SQL View TestSet Name:"
-        '
-        'tpSQLViews
-        '
-        Me.tpSQLViews.Controls.Add(Me.txtTablevTestSet)
-        Me.tpSQLViews.Controls.Add(Me.lblColvCityName)
-        Me.tpSQLViews.Controls.Add(Me.lblTableErga)
-        Me.tpSQLViews.Controls.Add(Me.lblTablevTestSet)
-        Me.tpSQLViews.Controls.Add(Me.txtColvID_Erga)
-        Me.tpSQLViews.Controls.Add(Me.txtTableErga)
-        Me.tpSQLViews.Controls.Add(Me.txtColID_Erga)
-        Me.tpSQLViews.Controls.Add(Me.lblColvID_Erga)
-        Me.tpSQLViews.Controls.Add(Me.lblColCityName)
-        Me.tpSQLViews.Controls.Add(Me.lblColID_Erga)
-        Me.tpSQLViews.Controls.Add(Me.txtColvGeoLocY)
-        Me.tpSQLViews.Controls.Add(Me.txtColCityName)
-        Me.tpSQLViews.Controls.Add(Me.txtTablevErga)
-        Me.tpSQLViews.Controls.Add(Me.lblColvGeoLocY)
-        Me.tpSQLViews.Controls.Add(Me.lblColGeoLocX)
-        Me.tpSQLViews.Controls.Add(Me.lblTablevErga)
-        Me.tpSQLViews.Controls.Add(Me.txtColvGeoLocX)
-        Me.tpSQLViews.Controls.Add(Me.txtColGeoLocX)
-        Me.tpSQLViews.Controls.Add(Me.txtColGeoLocY)
-        Me.tpSQLViews.Controls.Add(Me.lblColvGeoLocX)
-        Me.tpSQLViews.Controls.Add(Me.txtColvCityName)
-        Me.tpSQLViews.Controls.Add(Me.lblColGeoLocY)
-        Me.tpSQLViews.Location = New System.Drawing.Point(4, 22)
-        Me.tpSQLViews.Name = "tpSQLViews"
-        Me.tpSQLViews.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpSQLViews.Size = New System.Drawing.Size(586, 328)
-        Me.tpSQLViews.TabIndex = 5
-        Me.tpSQLViews.Text = "SQL Views"
-        Me.tpSQLViews.UseVisualStyleBackColor = True
-        '
         'frmSettings
         '
         Me.AcceptButton = Me.cmdApply
@@ -1209,9 +1209,9 @@ Partial Class frmSettings
         Me.tpRGeneral.PerformLayout()
         Me.tpGeolocation.ResumeLayout(False)
         Me.tpGeolocation.PerformLayout()
-        Me.gbCommands.ResumeLayout(False)
         Me.tpSQLViews.ResumeLayout(False)
         Me.tpSQLViews.PerformLayout()
+        Me.gbCommands.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1309,7 +1309,7 @@ Partial Class frmSettings
     Friend WithEvents txtRSQLConnStr As TextBox
     Friend WithEvents txtDBUsername As TextBox
     Friend WithEvents lblUsername As Label
-    Friend WithEvents txtTablevTestSet As TextBox
-    Friend WithEvents lblTablevTestSet As Label
+    Friend WithEvents txtTablevFinalDataset As TextBox
+    Friend WithEvents lblTablevFinalDataset As Label
     Friend WithEvents tpSQLViews As TabPage
 End Class

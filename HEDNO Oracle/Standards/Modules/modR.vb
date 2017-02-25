@@ -8,6 +8,7 @@ Imports Microsoft.Win32
 Module modR
     Public Rdo As REngine
     Public strFunctions As String = strRoot & "Functions\"
+    Public strSinkFile As String = strFunctions & "Sink.R"
 
     Public Function RDotNet_Initialization() As Boolean
         Try
@@ -242,7 +243,6 @@ Module modR
         Return Result
     End Function
 
-
 #Region "RSource"
     Public Function RSource(ByVal FilePaths() As String, Optional ByVal CypherLevel As Integer = -1, Optional ByVal strArReplace() As String = Nothing, Optional ByVal KillGraphsFirst As Boolean = False, Optional ShowRCodeAfterFailure As Boolean = False) As Boolean
         Dim rnd As New Random()
@@ -272,11 +272,11 @@ Module modR
 
         Catch ex As Exception
             If ShowRCodeAfterFailure Then
-                MsgBox(ss("R Code failed to be executed; the R file is going to open for you to examine the code or send it to the developer.{0}{0}The error message is:{0}{1}", vbCrLf, ex.ToString))
+                MsgBox(sa("R Code failed to be executed; the R file is going to open for you to examine the code or send it to the developer.{0}{0}The error message is:{0}{1}", vbCrLf, ex.ToString))
                 RunOpenDir(strAuxiliaryFile)
             Else
                 Dim FileNamesAlone As String = ArrayBox(False, "; ", 0, False, (From FilePath In FilePaths Select GetFileNameAlone(FilePath)),,,,,,,)
-                MsgBox(ss("R Code failed to execute;{0}You can inform the developer that the file which failed is: '{1}'.{0}{0}The error message is:{2}", vbCrLf, FileNamesAlone, ex.ToString))
+                MsgBox(sa("R Code failed to execute;{0}You can inform the developer that the file which failed is: '{1}'.{0}{0}The error message is:{2}", vbCrLf, FileNamesAlone, ex.ToString))
                 'DelFileFolder(strAuxiliaryFile, False)
                 File.Delete(strAuxiliaryFile)
             End If
@@ -306,10 +306,10 @@ Module modR
 
         Catch ex As Exception
             If ShowRCodeAfterFailure Then
-                MsgBox(ss("R Code failed to be executed; the R file is going to open for you to examine the code or send it to the developer.{0}{0}The error message is:{0}{1}", vbCrLf, ex.ToString))
+                MsgBox(sa("R Code failed to be executed; the R file is going to open for you to examine the code or send it to the developer.{0}{0}The error message is:{0}{1}", vbCrLf, ex.ToString))
                 RunOpenDir(strAuxiliaryFile)
             Else
-                MsgBox(ss("R Code failed to execute;{0}You can inform the developer that the file which failed is: '{1}'.{0}{0}The error message is:{2}", vbCrLf, GetFileNameAlone(FilePath), ex.ToString))
+                MsgBox(sa("R Code failed to execute;{0}You can inform the developer that the file which failed is: '{1}'.{0}{0}The error message is:{2}", vbCrLf, GetFileNameAlone(FilePath), ex.ToString))
                 'DelFileFolder(strAuxiliaryFile, False)
                 File.Delete(strAuxiliaryFile)
             End If

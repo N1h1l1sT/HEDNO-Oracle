@@ -120,40 +120,46 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="frmClassification.Designer.vb">
+    <Compile Include="Other\frmStatistics.Designer.vb">
+      <DependentUpon>frmStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmClassification.Designer.vb">
       <DependentUpon>frmClassification.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmClassification.vb">
+    <Compile Include="Procedure\3-Classification\frmClassification.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmClusteringStep0.Designer.vb">
+    <Compile Include="Procedure\2-Clustering\frmClusteringStep0.Designer.vb">
       <DependentUpon>frmClusteringStep0.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmClusteringStep0.vb">
+    <Compile Include="Procedure\2-Clustering\frmClusteringStep0.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmClusteringStep1.Designer.vb">
+    <Compile Include="Procedure\2-Clustering\frmClusteringStep1.Designer.vb">
       <DependentUpon>frmClusteringStep1.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmClusteringStep1.vb">
+    <Compile Include="Procedure\2-Clustering\frmClusteringStep1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDataSummaryVisualiser.Designer.vb">
+    <Compile Include="Other\frmDataSummaryVisualiser.Designer.vb">
       <DependentUpon>frmDataSummaryVisualiser.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmDataSummaryVisualiser.vb">
+    <Compile Include="Other\frmDataSummaryVisualiser.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCreateSQLView.Designer.vb">
+    <Compile Include="Procedure\1-Pre-Processing\frmCreateSQLView.Designer.vb">
       <DependentUpon>frmCreateSQLView.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmCreateSQLView.vb">
+    <Compile Include="Procedure\1-Pre-Processing\frmCreateSQLView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogisticRegression.Designer.vb">
+    <Compile Include="Procedure\3-Classification\frmLogisticRegression.Designer.vb">
       <DependentUpon>frmLogisticRegression.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmLogisticRegression.vb">
+    <Compile Include="Procedure\3-Classification\frmLogisticRegression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.designer.vb">
@@ -162,16 +168,16 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPreProcessing.Designer.vb">
+    <Compile Include="Procedure\1-Pre-Processing\frmPreProcessing.Designer.vb">
       <DependentUpon>frmPreProcessing.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPreProcessing.vb">
+    <Compile Include="Procedure\1-Pre-Processing\frmPreProcessing.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmVariableInfoVisualiser.Designer.vb">
+    <Compile Include="Other\frmVariableInfoVisualiser.Designer.vb">
       <DependentUpon>frmVariableInfoVisualiser.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmVariableInfoVisualiser.vb">
+    <Compile Include="Other\frmVariableInfoVisualiser.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -302,28 +308,31 @@
     <Compile Include="Standards\Modules\modUpdate.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmClassification.resx">
+    <EmbeddedResource Include="Other\frmStatistics.resx">
+      <DependentUpon>frmStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmClassification.resx">
       <DependentUpon>frmClassification.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmClusteringStep0.resx">
+    <EmbeddedResource Include="Procedure\2-Clustering\frmClusteringStep0.resx">
       <DependentUpon>frmClusteringStep0.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmClusteringStep1.resx">
+    <EmbeddedResource Include="Procedure\2-Clustering\frmClusteringStep1.resx">
       <DependentUpon>frmClusteringStep1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDataSummaryVisualiser.resx">
+    <EmbeddedResource Include="Other\frmDataSummaryVisualiser.resx">
       <DependentUpon>frmDataSummaryVisualiser.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCreateSQLView.resx">
+    <EmbeddedResource Include="Procedure\1-Pre-Processing\frmCreateSQLView.resx">
       <DependentUpon>frmCreateSQLView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPreProcessing.resx">
+    <EmbeddedResource Include="Procedure\1-Pre-Processing\frmPreProcessing.resx">
       <DependentUpon>frmPreProcessing.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmVariableInfoVisualiser.resx">
+    <EmbeddedResource Include="Other\frmVariableInfoVisualiser.resx">
       <DependentUpon>frmVariableInfoVisualiser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -331,6 +340,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmLogisticRegression.resx">
+      <DependentUpon>frmLogisticRegression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Standards\Forms\dlgTypeBox.resx">
       <DependentUpon>dlgTypeBox.vb</DependentUpon>
@@ -387,21 +399,22 @@
     <None Include="bin\Debug\EULA.rtf" />
     <None Include="bin\Debug\Extras\32bit\UnlockerDriver5.sys" />
     <None Include="bin\Debug\Extras\64bit\UnlockerDriver5.sys" />
-    <None Include="bin\Debug\Extras\Cities.csv" />
-    <None Include="bin\Debug\Extras\Cities.rar" />
-    <None Include="bin\Debug\Extras\DEDDHE Oracle.log" />
-    <None Include="bin\Debug\Extras\DEDDHE_Oracle.log" />
     <None Include="bin\Debug\Functions\1.0 Data-PreProcessing.R" />
     <None Include="bin\Debug\Functions\2.0 Clustering Step 0.R" />
     <None Include="bin\Debug\Functions\2.1 Clustering Step 1.R" />
-    <None Include="bin\Debug\Functions\2.2 Clustering Step 1.R" />
-    <None Include="bin\Debug\Functions\Classification_FormTrainTestSets.R" />
-    <None Include="bin\Debug\Functions\Classification_VisualiseClassImbalance.R" />
+    <None Include="bin\Debug\Functions\2.1 Clustering Step 1_2nd Falf.R" />
+    <None Include="bin\Debug\Functions\3.0 Classification - Form Train and Test Sets.R" />
+    <None Include="bin\Debug\Functions\3.1 Logistic Regression.R" />
+    <None Include="bin\Debug\Functions\[ColumnNames_For_Classification].R" />
+    <None Include="bin\Debug\Functions\[ColumnNames_For_FormLoad].R" />
     <None Include="bin\Debug\Functions\[ColumnsInfo].R" />
     <None Include="bin\Debug\Functions\[Initialisation].R" />
+    <None Include="bin\Debug\Functions\[Multiple_ROC_Comparisons].R" />
+    <None Include="bin\Debug\Graphs\Models.log" />
     <None Include="bin\Debug\Language\el-GR\dlgTypeBox.lng" />
     <None Include="bin\Debug\Language\el-GR\frmAbout.lng" />
     <None Include="bin\Debug\Language\el-GR\frmAbout_Textbox.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmClassification.lng" />
     <None Include="bin\Debug\Language\el-GR\frmClusteringStep0.lng" />
     <None Include="bin\Debug\Language\el-GR\frmClusteringStep1.lng" />
     <None Include="bin\Debug\Language\el-GR\frmCrashLog.lng" />
@@ -414,6 +427,7 @@
     <None Include="bin\Debug\Language\el-GR\frmFindR_Tips.lng" />
     <None Include="bin\Debug\Language\el-GR\frmFirstTime.lng" />
     <None Include="bin\Debug\Language\el-GR\frmLicenseViewer.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmLogisticRegression.lng" />
     <None Include="bin\Debug\Language\el-GR\frmMain.lng" />
     <None Include="bin\Debug\Language\el-GR\frmMain_Tips.lng" />
     <None Include="bin\Debug\Language\el-GR\frmPleaseWait.lng" />
@@ -421,12 +435,14 @@
     <None Include="bin\Debug\Language\el-GR\frmPresentation.lng" />
     <None Include="bin\Debug\Language\el-GR\frmSettings.lng" />
     <None Include="bin\Debug\Language\el-GR\frmSkinCreator.lng" />
+    <None Include="bin\Debug\Language\el-GR\frmStatistics.lng" />
     <None Include="bin\Debug\Language\el-GR\frmSuggestionAndComplaint.lng" />
     <None Include="bin\Debug\Language\el-GR\frmVariableInfoVisualiser.lng" />
     <None Include="bin\Debug\Language\el-GR\ModuleStrings.lng" />
     <None Include="bin\Debug\Language\en-GB\dlgTypeBox.lng" />
     <None Include="bin\Debug\Language\en-GB\frmAbout.lng" />
     <None Include="bin\Debug\Language\en-GB\frmAbout_Textbox.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmClassification.lng" />
     <None Include="bin\Debug\Language\en-GB\frmClusteringStep0.lng" />
     <None Include="bin\Debug\Language\en-GB\frmClusteringStep1.lng" />
     <None Include="bin\Debug\Language\en-GB\frmCrashLog.lng" />
@@ -440,6 +456,7 @@
     <None Include="bin\Debug\Language\en-GB\frmFirstTime.lng" />
     <None Include="bin\Debug\Language\en-GB\frmHelp.lng" />
     <None Include="bin\Debug\Language\en-GB\frmLicenseViewer.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmLogisticRegression.lng" />
     <None Include="bin\Debug\Language\en-GB\frmMain.lng" />
     <None Include="bin\Debug\Language\en-GB\frmMain_Tips.lng" />
     <None Include="bin\Debug\Language\en-GB\frmPleaseWait.lng" />
@@ -447,6 +464,7 @@
     <None Include="bin\Debug\Language\en-GB\frmPresentation.lng" />
     <None Include="bin\Debug\Language\en-GB\frmSettings.lng" />
     <None Include="bin\Debug\Language\en-GB\frmSkinCreator.lng" />
+    <None Include="bin\Debug\Language\en-GB\frmStatistics.lng" />
     <None Include="bin\Debug\Language\en-GB\frmSuggestionAndComplaint.lng" />
     <None Include="bin\Debug\Language\en-GB\frmVariableInfoVisualiser.lng" />
     <None Include="bin\Debug\Language\en-GB\ModuleStrings.lng" />
@@ -482,22 +500,6 @@
     <Content Include="bin\Debug\Extras\32bit\UnlockerHook.dll" />
     <Content Include="bin\Debug\Extras\64bit\Unlocker.exe" />
     <Content Include="bin\Debug\Extras\64bit\UnlockerInject32.exe" />
-    <Content Include="bin\Debug\Extras\Crash ex201610031242.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702111951.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702111955.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112014.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112302.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112304.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112305.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112306.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112312.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112316.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112327.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702112345.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702161901.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702172128.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702172202.txt" />
-    <Content Include="bin\Debug\Extras\Crash ex201702172209.txt" />
     <Content Include="bin\Debug\Extras\UnRARx64.exe" />
     <Content Include="bin\Debug\Extras\UnRARx86.exe" />
     <Content Include="bin\Debug\icon.ico" />
@@ -615,7 +617,6 @@
     <Content Include="bin\Debug\Skins\None\SplashScreen\SplashScreen 1.jpg" />
     <Content Include="bin\Debug\Skins\None\SplashScreen\SplashScreen 1_BackColours.txt" />
     <Content Include="bin\Debug\Skins\None\SplashScreen\SplashScreen 1_ForeColours.txt" />
-    <Content Include="bin\Debug\SQL\1. View Mel Ylika.sql" />
     <Content Include="bin\Debug\SQL\Views\1. View Mel Ylika.sql" />
     <Content Include="bin\Debug\SQL\Views\2. View Analysi Ylika.sql" />
     <Content Include="bin\Debug\SQL\Views\3. View Kostologisi Variantes.sql" />
@@ -624,6 +625,7 @@
     <Content Include="bin\Debug\SQL\Views\6. View Aggregated Variantes.sql" />
     <Content Include="bin\Debug\SQL\Views\7. View Agrregated Erga.sql" />
     <Content Include="bin\Debug\SQL\Views\8. View Trimestre Price.sql" />
+    <Content Include="bin\Debug\SQL\Views\9. FinalDataset.sql" />
     <Content Include="bin\Debug\StartUp.exe" />
     <Content Include="bin\Debug\System.Numerics.dll" />
     <Content Include="bin\Debug\System.Web.Services.dll" />
@@ -655,6 +657,7 @@
     <Folder Include="bin\Debug\Language\el-GR\Presentation\Videos\" />
     <Folder Include="bin\Debug\Language\en-GB\Presentation\Images\" />
     <Folder Include="bin\Debug\Language\en-GB\Presentation\Videos\" />
+    <Folder Include="bin\Debug\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

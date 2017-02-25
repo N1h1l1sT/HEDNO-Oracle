@@ -101,7 +101,7 @@ Public Class frmSettings
         txtColGeoLocX.Text = ""
         txtColGeoLocY.Text = ""
         txtColID_Erga.Text = ""
-        txtTablevTestSet.Text = ""
+        txtTablevFinalDataset.Text = ""
 
         '/===============\
         '/=END OF CUSTOM=\
@@ -160,7 +160,7 @@ Public Class frmSettings
         txtColGeoLocX.Tag = 0
         txtColGeoLocY.Tag = 0
         txtColID_Erga.Tag = 0
-        txtTablevTestSet.Tag = 0
+        txtTablevFinalDataset.Tag = 0
 
         '/===============\
         '/=END OF CUSTOM=\
@@ -666,13 +666,13 @@ Public Class frmSettings
             End If
             '/ColID_Erga
 
-            'TablevTestSet
-            If strSettings(66).Length > "066TablevTestSet=".Length Then
-                txtTablevTestSet.Text = strSettings(66).Substring("066TablevTestSet=".Length)
+            'TablevFinalDataset
+            If strSettings(66).Length > "066TablevFinalDataset=".Length Then
+                txtTablevFinalDataset.Text = strSettings(66).Substring("066TablevFinalDataset=".Length)
             Else
-                txtTablevTestSet.Text = String.Empty
+                txtTablevFinalDataset.Text = String.Empty
             End If
-            '/TablevTestSet
+            '/TablevFinalDataset
 
             '======================
             '==STANDARD PROCEDURE==
@@ -984,7 +984,7 @@ Public Class frmSettings
                     strSettings(52) = "052PathtoSaveLoadXDFFiles=" & doProperPathNameLinux(txtXDFPath.Text)
                     strXDF = strSettings(52).Substring("052PathtoSaveLoadXDFFiles=".Length)
                 Else
-                    MsgBox(ss("There specified directory: ""{0}"" does not exist and is therefore not saved", doProperPathName(txtXDFPath.Text)), MsgBoxStyle.Exclamation)
+                    MsgBox(sa("There specified directory: ""{0}"" does not exist and is therefore not saved", doProperPathName(txtXDFPath.Text)), MsgBoxStyle.Exclamation)
                 End If
             End If
             '/Path to Save and Load XDF Files
@@ -1122,12 +1122,12 @@ Public Class frmSettings
             End If
             '/Database Username
 
-            'TablevTestSet
-            If txtTablevTestSet.Tag.ToString = "1" Then
-                strSettings(66) = "066TablevTestSet=" & txtTablevTestSet.Text
-                TablevTestSet = txtTablevTestSet.Text
+            'TablevFinalDataset
+            If txtTablevFinalDataset.Tag.ToString = "1" Then
+                strSettings(66) = "066TablevFinalDataset=" & txtTablevFinalDataset.Text
+                TablevFinalDataset = txtTablevFinalDataset.Text
             End If
-            '/TablevTestSet
+            '/TablevFinalDataset
 
 
             '======================
@@ -1577,10 +1577,10 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub txtTablevTestSet_TextChanged(sender As Object, e As EventArgs) Handles txtTablevTestSet.TextChanged
+    Private Sub txtTablevTestSet_TextChanged(sender As Object, e As EventArgs) Handles txtTablevFinalDataset.TextChanged
         If Not isLoading Then
             cmdApply.Enabled = True
-            txtTablevTestSet.Tag = "1"
+            txtTablevFinalDataset.Tag = "1"
         End If
     End Sub
 

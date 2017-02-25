@@ -687,6 +687,7 @@ Public Class dlgTypeBox
                 '                                                   If the number is outside the bounds, lets warn the user
             ElseIf (MinimumValidDouble <> Double.MinValue AndAlso CDbl(tmpNum) < MinimumValidDouble) OrElse (MaximumValidDouble <> Double.MinValue AndAlso CDbl(tmpNum) > MaximumValidDouble) Then
                 MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                txtInput.SelectAll()
                 DialogResult = DialogResult.None
 
                 '                                                   Else, everything's ok
@@ -916,6 +917,7 @@ Public Class dlgTypeBox
                 '                                                   If the number is outside the bounds, lets warn the user
             ElseIf (MinimumValidDouble <> Double.MinValue AndAlso CDbl(strNumber) < MinimumValidDouble) OrElse (MaximumValidDouble <> Double.MinValue AndAlso CDbl(strNumber) > MaximumValidDouble) Then
                 MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                txtInput.SelectAll()
                 DialogResult = DialogResult.None
 
                 '                                                   Else, everything's ok
@@ -1134,6 +1136,7 @@ Public Class dlgTypeBox
                 '                                                   If the number is outside the bounds, lets warn the user
             ElseIf (MinimumValidDecimal <> Decimal.MinValue AndAlso CDec(strNumber.Replace(".", CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)) < MinimumValidDecimal) OrElse (MaximumValidDecimal <> Decimal.MinValue AndAlso CDec(strNumber.Replace(".", CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)) > MaximumValidDecimal) Then
                 MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                txtInput.SelectAll()
                 DialogResult = DialogResult.None
 
                 '                                                   Else, everything's ok
@@ -1351,6 +1354,7 @@ Public Class dlgTypeBox
 
                 '                                                   If the number is outside the bounds, lets warn the user
             ElseIf (MinimumValidSingle <> Single.MinValue AndAlso CSng(strNumber) < MinimumValidSingle) OrElse (MaximumValidSingle <> Single.MinValue AndAlso CSng(strNumber) > MaximumValidSingle) Then
+                txtInput.SelectAll()
                 MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
                 DialogResult = DialogResult.None
 
@@ -1571,6 +1575,7 @@ Public Class dlgTypeBox
             Else
                 If (MinimumValidInteger <> Integer.MinValue AndAlso CInt(strNumber) < MinimumValidInteger) OrElse (MaximumValidInteger <> Integer.MinValue AndAlso CInt(strNumber) > MaximumValidInteger) Then
                     MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                    txtInput.SelectAll()
                     DialogResult = DialogResult.None
                 Else
                     ReturnedIntegerOne = CInt(strNumber)
@@ -1780,6 +1785,7 @@ Public Class dlgTypeBox
                     DialogResult = DialogResult.None
                 Else
                     If (MinimumValidUInteger <> UInteger.MaxValue AndAlso CUInt(strNumber) < MinimumValidUInteger) OrElse (MaximumValidUInteger <> UInteger.MaxValue AndAlso CUInt(strNumber) > MaximumValidUInteger) Then
+                        txtInput.SelectAll()
                         MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
                         DialogResult = DialogResult.None
                     Else
@@ -2009,6 +2015,7 @@ Public Class dlgTypeBox
             Else
                 If (MinimumValidShort <> Short.MinValue AndAlso CShort(strNumber) < MinimumValidShort) OrElse (MaximumValidShort <> Short.MinValue AndAlso CShort(strNumber) > MaximumValidShort) Then
                     MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                    txtInput.SelectAll()
                     DialogResult = DialogResult.None
                 Else
                     ReturnedShortOne = CShort(strNumber)
@@ -2219,6 +2226,7 @@ Public Class dlgTypeBox
                 Else
                     If (MinimumValidUShort <> UShort.MaxValue AndAlso CUShort(strNumber) < MinimumValidUShort) OrElse (MaximumValidUShort <> UShort.MaxValue AndAlso CUShort(strNumber) > MaximumValidUShort) Then
                         MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                        txtInput.SelectAll()
                         DialogResult = DialogResult.None
                     Else
                         ReturnedUShortOne = CUShort(strNumber)
@@ -2448,6 +2456,7 @@ Public Class dlgTypeBox
             Else
                 If (MinimumValidLong <> Long.MinValue AndAlso CLng(strNumber) < MinimumValidLong) OrElse (MaximumValidLong <> Long.MinValue AndAlso CLng(strNumber) > MaximumValidLong) Then
                     MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                    txtInput.SelectAll()
                     DialogResult = DialogResult.None
                 Else
                     ReturnedLongOne = CLng(strNumber)
@@ -2658,6 +2667,7 @@ Public Class dlgTypeBox
                 Else
                     If (MinimumValidULong <> ULong.MaxValue AndAlso CULng(strNumber) < MinimumValidULong) OrElse (MaximumValidULong <> ULong.MaxValue AndAlso CULng(strNumber) > MaximumValidULong) Then
                         MsgBox(strLanguage_Typebox(26) & vbCrLf & "[ " & strLowerLimit & " , " & strUpperLimit & " ]") 'The number you typed is outside the bounds of the valid range:
+                        txtInput.SelectAll()
                         DialogResult = DialogResult.None
                     Else
                         ReturnedULongOne = CULng(strNumber)
@@ -3350,7 +3360,7 @@ Public Class dlgTypeBox
             'If DateFormat.Contains("mm") AndAlso dtFrom.Value.Minute = 0 Then
             '    dtTo.Value = dtTo.Value.AddMinutes(59)
             'End If
-            'If DateFormat.Contains("ss") AndAlso dtFrom.Value.Second = 0 Then
+            'If DateFormat.Contains("sa") AndAlso dtFrom.Value.Second = 0 Then
             '    dtTo.Value = dtTo.Value.AddSeconds(59)
             'End If
         End If
@@ -3368,7 +3378,7 @@ Public Class dlgTypeBox
             '    TimeDifference = TimeSpan.FromMinutes(dtTo.Value.Minute)
             '    dtFrom.Value = dtFrom.Value.Subtract(TimeDifference)
             'End If
-            'If DateFormat.Contains("ss") Then 'AndAlso dtTo.Value.Second = 59 Then
+            'If DateFormat.Contains("sa") Then 'AndAlso dtTo.Value.Second = 59 Then
             '    TimeDifference = TimeSpan.FromSeconds(dtTo.Value.Second)
             '    dtFrom.Value = dtFrom.Value.Subtract(TimeDifference)
             'End If

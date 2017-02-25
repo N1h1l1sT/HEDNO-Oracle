@@ -33,6 +33,7 @@ Partial Class frmCreateSQLView
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkDeleteAll = New System.Windows.Forms.CheckBox()
         Me.btnSelectAll = New System.Windows.Forms.Button()
+        Me.lblWarning = New System.Windows.Forms.Label()
         Me.gbSQLViews.SuspendLayout()
         CType(Me.fswSQLViewFiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSQLViewOptions.SuspendLayout()
@@ -155,11 +156,24 @@ Partial Class frmCreateSQLView
         Me.btnSelectAll.Text = "Select &All"
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
+        'lblWarning
+        '
+        Me.lblWarning.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblWarning.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
+        Me.lblWarning.Location = New System.Drawing.Point(199, 148)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(197, 112)
+        Me.lblWarning.TabIndex = 4
+        Me.lblWarning.Text = "Remember:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SQL Files must be encoded as UTF8, otherise the operations will fail."
+        Me.lblWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmCreateSQLView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(399, 343)
+        Me.Controls.Add(Me.lblWarning)
         Me.Controls.Add(Me.btnSelectAll)
         Me.Controls.Add(Me.chkDeleteAll)
         Me.Controls.Add(Me.gbSQLViewOptions)
@@ -187,4 +201,5 @@ Partial Class frmCreateSQLView
     Friend WithEvents rdbDoNothing As RadioButton
     Friend WithEvents Label1 As Label
     Friend WithEvents btnSelectAll As Button
+    Friend WithEvents lblWarning As Label
 End Class

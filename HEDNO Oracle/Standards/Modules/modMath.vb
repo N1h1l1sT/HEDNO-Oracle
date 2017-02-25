@@ -144,9 +144,14 @@ Module modMath
 #Region "StatRound"
     Public Function StatRound(Of T)(ByVal Num As T, Optional intRound As UInteger = 3, Optional MinTotalLength As Integer = -1, Optional ByRef BecameZeroByRounding As Boolean = False) As String
         Dim Result As String = String.Empty
+        Dim NumStr As String = Num.ToString
 
-        If IsNumeric(Num) Then
-            Dim ProperNum As String = Num.ToString.Replace(".", CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)
+        If Not IsNumeric(Num) AndAlso isNumericExtended(Num, NumStr) Then
+            'Do Nothing - the second boolean Clause changed the value to a real numeric one already
+        End If
+
+        If IsNumeric(NumStr) Then
+            Dim ProperNum As String = NumStr.Replace(".", CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)
             Dim ResultStr As String = Zero_A_Num(Round(CDbl(ProperNum), CInt(intRound)), CInt(intRound)) 'String.Format("{0:n" & intRound & "}", CDbl(ProperNum))
 
             If CDbl(ResultStr) <> 0 OrElse CDbl(ProperNum) = 0 Then
@@ -171,7 +176,7 @@ Module modMath
             End If
 
         Else
-            Result = Num.ToString
+            Result = NumStr
         End If
 
         Return Result

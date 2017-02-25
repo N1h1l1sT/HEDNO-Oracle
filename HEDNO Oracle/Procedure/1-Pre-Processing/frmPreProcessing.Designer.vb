@@ -22,6 +22,7 @@ Partial Class frmPreProcessing
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnPreProcess = New System.Windows.Forms.Button()
         Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
@@ -30,9 +31,15 @@ Partial Class frmPreProcessing
         Me.chkShowDataSummary = New System.Windows.Forms.CheckBox()
         Me.chkShowGeoLocGraph = New System.Windows.Forms.CheckBox()
         Me.chkShowVariableInfo = New System.Windows.Forms.CheckBox()
+        Me.lblLoading = New System.Windows.Forms.Label()
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.chkStatisticsMode = New System.Windows.Forms.CheckBox()
+        Me.fswXDFFileExists = New System.IO.FileSystemWatcher()
+        Me.tmrXDFExists = New System.Windows.Forms.Timer(Me.components)
+        Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.gbOptions.SuspendLayout()
         Me.pnlMain.SuspendLayout()
+        CType(Me.fswXDFFileExists, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnPreProcess
@@ -125,8 +132,21 @@ Partial Class frmPreProcessing
         Me.chkShowVariableInfo.Text = "Show Variable Information"
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
+        'lblLoading
+        '
+        Me.lblLoading.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
+        Me.lblLoading.Location = New System.Drawing.Point(183, 0)
+        Me.lblLoading.Name = "lblLoading"
+        Me.lblLoading.Size = New System.Drawing.Size(100, 23)
+        Me.lblLoading.TabIndex = 13
+        Me.lblLoading.Text = "Loading..."
+        Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'pnlMain
         '
+        Me.pnlMain.Controls.Add(Me.pbLoading)
+        Me.pnlMain.Controls.Add(Me.lblLoading)
+        Me.pnlMain.Controls.Add(Me.chkStatisticsMode)
         Me.pnlMain.Controls.Add(Me.gbOptions)
         Me.pnlMain.Controls.Add(Me.btnPreProcess)
         Me.pnlMain.Controls.Add(Me.chkCleanXDFFile)
@@ -135,6 +155,37 @@ Partial Class frmPreProcessing
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.Size = New System.Drawing.Size(283, 246)
         Me.pnlMain.TabIndex = 4
+        '
+        'chkStatisticsMode
+        '
+        Me.chkStatisticsMode.AutoSize = True
+        Me.chkStatisticsMode.Checked = True
+        Me.chkStatisticsMode.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStatisticsMode.Location = New System.Drawing.Point(12, 165)
+        Me.chkStatisticsMode.Name = "chkStatisticsMode"
+        Me.chkStatisticsMode.Size = New System.Drawing.Size(98, 17)
+        Me.chkStatisticsMode.TabIndex = 12
+        Me.chkStatisticsMode.Text = "Statistics Mode"
+        Me.chkStatisticsMode.UseVisualStyleBackColor = True
+        '
+        'fswXDFFileExists
+        '
+        Me.fswXDFFileExists.EnableRaisingEvents = True
+        Me.fswXDFFileExists.SynchronizingObject = Me
+        '
+        'tmrXDFExists
+        '
+        Me.tmrXDFExists.Interval = 10
+        '
+        'pbLoading
+        '
+        Me.pbLoading.Location = New System.Drawing.Point(139, 0)
+        Me.pbLoading.MarqueeAnimationSpeed = 10
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
+        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pbLoading.TabIndex = 14
+        Me.pbLoading.Visible = False
         '
         'frmPreProcessing
         '
@@ -152,6 +203,7 @@ Partial Class frmPreProcessing
         Me.gbOptions.PerformLayout()
         Me.pnlMain.ResumeLayout(False)
         Me.pnlMain.PerformLayout()
+        CType(Me.fswXDFFileExists, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -165,4 +217,9 @@ Partial Class frmPreProcessing
     Friend WithEvents btnSelectAll As Button
     Friend WithEvents pnlMain As Panel
     Friend WithEvents chkUseExistingXDFFile As CheckBox
+    Friend WithEvents chkStatisticsMode As CheckBox
+    Friend WithEvents fswXDFFileExists As IO.FileSystemWatcher
+    Friend WithEvents lblLoading As Label
+    Friend WithEvents tmrXDFExists As Timer
+    Friend WithEvents pbLoading As ProgressBar
 End Class

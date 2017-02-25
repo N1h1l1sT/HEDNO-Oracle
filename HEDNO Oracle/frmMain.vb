@@ -318,6 +318,7 @@ Public Class frmMain
                 ColGeoLocX = strSettings(61).Substring("061ColGeoLocX=".Length)
                 ColGeoLocY = strSettings(62).Substring("062ColGeoLocY=".Length)
                 ColID_Erga = strSettings(63).Substring("063ColID_Erga=".Length)
+                TablevFinalDataset = strSettings(66).Substring("066TablevFinalDataset=".Length)
 
                 '============================
                 '==BEGIN STANDARD PROCEDURE==
@@ -510,9 +511,10 @@ Public Class frmMain
                     If IsRServerOrEquivalent Then
                         RSource(strFunctions & "[Initialisation].R",, {"{0}", RowsPerRead.ToString,
                                                                        "{1}", """" & strXDF & """",
-                                                                       "{2}", RSQLConnStr}, False)
+                                                                       "{2}", RSQLConnStr,
+                                                                       "{3}", """" & doProperPathNameLinux(strGraphs) & """"}, False)
                     Else
-                        MsgBox(ss("Unfortunately, although some version of R has been found in your system, you need R_Server or equivalent for this programme to run{0}This requirement is imposed because the code hereinafter requires the RevoScaleR R Package to bypass R's limitations in computer Memory (RAM) and CPU.{0}{0}Please update your Registry and Environment ", vbCrLf))
+                        MsgBox(sa("Unfortunately, although some version of R has been found in your system, you need R_Server or equivalent for this programme to run{0}This requirement is imposed because the code hereinafter requires the RevoScaleR R Package to bypass R's limitations in computer Memory (RAM) and CPU.{0}{0}Please update your Registry and Environment ", vbCrLf))
                     End If
                 End If
 
@@ -547,6 +549,9 @@ Public Class frmMain
             Visible = False
             Call FormStatefrmMain.Restore(Me)
             Call RestoreResolution()
+
+        ElseIf Rdo IsNot Nothing Then
+            Rdo.Evaluate("graphics.off()")
         End If
 
         '=============================
@@ -1374,26 +1379,26 @@ Public Class frmMain
                     End If
 
                     If GeoLocXExists AndAlso GeoLocYExists Then
-                        MsgBox(ss("The Variables {0} and {1} already existed in {2}.{3}.{4}No action was taken.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga, vbNewLine), MsgBoxStyle.Information)
+                        MsgBox(sa("The Variables {0} and {1} already existed in {2}.{3}.{4}No action was taken.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga, vbNewLine), MsgBoxStyle.Information)
                     ElseIf GeoLocXExists AndAlso Not GeoLocYExists Then
-                        MsgBox(ss("{0} was successfully created; {1} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
+                        MsgBox(sa("{0} was successfully created; {1} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
                     ElseIf GeoLocXExists AndAlso Not GeoLocYExists Then
-                        MsgBox(ss("{1} was successfully created; {0} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
+                        MsgBox(sa("{1} was successfully created; {0} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
                     Else
-                        MsgBox(ss("{0} and {1} have been successfully created in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
+                        MsgBox(sa("{0} and {1} have been successfully created in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
                     End If
 
                 Else
-                    MsgBox(ss("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
+                    MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
                 End If
 
             Else
-                MsgBox(ss("You need to be connected to the SQL Server first"), MsgBoxStyle.Exclamation)
+                MsgBox(sa("You need to be connected to the SQL Server first"), MsgBoxStyle.Exclamation)
             End If
 
             FuncInProgress.Remove("Creating Geo-Location Columns")
         Else
-            MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
         End If
     End Sub
 
@@ -1429,20 +1434,20 @@ Public Class frmMain
                                         Dim RowsToGeoLCount As Integer = 0
                                         Dim DlClinet As New WebClient
 
-                                        Dim dtVErga As New DataTable
-                                        Dim SQLAdaptrVErga As SqlDataAdapter = Nothing
+                                        Dim dtVFinalDataset As New DataTable
+                                        Dim SQLAdaptrVFinalDataset As SqlDataAdapter = Nothing
 
                                         Dim CityName As String = String.Empty
                                         Try
                                             'Getting the IDs and city name from SQL View
-                                            SQLAdaptrVErga = New SqlDataAdapter(<SQL>
+                                            SQLAdaptrVFinalDataset = New SqlDataAdapter(<SQL>
                                                                        USE [<%= DatabaseName %>]
                                                                        SELECT [<%= ColvID_Erga %>], [<%= ColvCityName %>], [<%= ColvGeoLocX %>]
-                                                                       FROM [dbo].[<%= TablevErga %>]
+                                                                       FROM [dbo].[<%= TablevFinalDataset %>]
                                                                        WHERE [<%= ColvGeoLocX %>] IS NULL AND [<%= ColvCityName %>] IS NOT NULL
                                                                     </SQL>.Value, SQLConn)
-                                            SQLAdaptrVErga.Fill(dtVErga)
-                                            RowsToGeoLCount = dtVErga.Rows.Count
+                                            SQLAdaptrVFinalDataset.Fill(dtVFinalDataset)
+                                            RowsToGeoLCount = dtVFinalDataset.Rows.Count
                                             'Starting the Progress Bar
                                             pbGeneralProgress.Style = ProgressBarStyle.Blocks
                                             pbGeneralProgress.Minimum = 0
@@ -1456,7 +1461,7 @@ Public Class frmMain
                                                 Await Task.Run(
                                                     Sub()
                                                         Dim ShowErrorDialogInError As Boolean = True
-                                                        For Each row As DataRow In dtVErga.Rows
+                                                        For Each row As DataRow In dtVFinalDataset.Rows
                                                             If blbtnGeoLocateContinue Then
                                                                 pbGeneralValue += 1
 
@@ -1468,8 +1473,8 @@ Public Class frmMain
                                                                 Dim SQLAdptAlreadyFoundCity As New SqlDataAdapter(<SQL>
                                                                                                         USE [<%= DatabaseName %>]
                                                                                                         SELECT TOP 1 [<%= ColvGeoLocX %>], [<%= ColvGeoLocY %>]
-                                                                                                        FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
-                                                                                                        WHERE [<%= TablevErga %>].[<%= ColvCityName %>] = N'<%= CityName.Replace("'", "''") %>' --Because some entries contain the character "'", which messes with the SQL Query.
+                                                                                                        FROM [<%= DatabaseName %>].[dbo].[<%= TablevFinalDataset %>]
+                                                                                                        WHERE [<%= TablevFinalDataset %>].[<%= ColvCityName %>] = N'<%= CityName.Replace("'", "''") %>' --Because some entries contain the character "'", which messes with the SQL Query.
                                                                                                       </SQL>.Value, SQLConn)
                                                                 SQLAdptAlreadyFoundCity.Fill(dtAlreadyFoundCityGeoLoc)
 
@@ -1572,7 +1577,7 @@ Public Class frmMain
                                                     End Sub)
                                             End If
 
-                                            SQLAdaptrVErga.Dispose()
+                                            SQLAdaptrVFinalDataset.Dispose()
 
                                             If blbtnGeoLocateContinue Then
                                                 Notify("Procedure Successful!", Color.Cyan, Color.Black, 25)
@@ -1604,12 +1609,12 @@ Public Class frmMain
                                     End If
 
                                 Else
-                                    MsgBox(ss("The GeoLocation API Key is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
+                                    MsgBox(sa("The GeoLocation API Key is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
                                     frmSettings.Show()
                                 End If
 
                             Else
-                                MsgBox(ss("The GeoLocation API Link is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
+                                MsgBox(sa("The GeoLocation API Link is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
                                 frmSettings.Show()
                             End If
                         Else
@@ -1630,7 +1635,7 @@ Public Class frmMain
 
                     FuncInProgress.Remove("Geo-Locating")
                 Else
-                    MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                    MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
                 End If
             End If
         Catch ex As Exception
@@ -1638,7 +1643,7 @@ Public Class frmMain
         End Try
     End Sub
 
-    Private Sub mniClustering_Click(sender As Object, e As EventArgs) Handles mniClustering.Click
+    Private Sub mniClustering_Click(sender As Object, e As EventArgs) Handles mniClusteringStep0.Click
         Dim ClusteringStep0Form As New frmClusteringStep0
         ClusteringStep0Form.Show()
     End Sub
@@ -1668,22 +1673,23 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub CreateNeededSQLViews_Click(sender As Object, e As EventArgs) Handles CreateNeededSQLViews.Click
+    Private Sub CreateNeededSQLViews_Click(sender As Object, e As EventArgs) Handles mniCreateNeededSQLViews.Click
         Dim CreateSQLViewForm As New frmCreateSQLView
         CreateSQLViewForm.Show()
     End Sub
 
-    Private Sub Step1OptimalNumberOfClustersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Step1OptimalNumberOfClustersToolStripMenuItem.Click
+    Private Sub Step1OptimalNumberOfClustersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniClusteringStep1.Click
         Dim ClusteringStep1Form As New frmClusteringStep1
         ClusteringStep1Form.Show()
     End Sub
 
-    Private Sub FormTrainAndTestSetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormTrainAndTestSetsToolStripMenuItem.Click
+    Private Sub FormTrainAndTestSetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniFormTrainAndTestSets.Click
         Dim ClassificationForm As New frmClassification
         ClassificationForm.Show()
     End Sub
 
-    Private Sub LogisticRegressionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogisticRegressionToolStripMenuItem.Click
-
+    Private Sub LogisticRegressionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniLogit.Click
+        Dim LogisticRegressionForm As New frmLogisticRegression
+        LogisticRegressionForm.Show()
     End Sub
 End Class

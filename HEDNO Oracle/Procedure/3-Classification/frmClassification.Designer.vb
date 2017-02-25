@@ -22,7 +22,9 @@ Partial Class frmClassification
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblLoading = New System.Windows.Forms.Label()
         Me.scMain = New System.Windows.Forms.SplitContainer()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
         Me.chkFormTestSet = New System.Windows.Forms.CheckBox()
@@ -33,15 +35,18 @@ Partial Class frmClassification
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.chkShowVariableInfo = New System.Windows.Forms.CheckBox()
         Me.gbStatistics = New System.Windows.Forms.GroupBox()
+        Me.chkShowTestDataSummary = New System.Windows.Forms.CheckBox()
+        Me.chkShowTestVarInfo = New System.Windows.Forms.CheckBox()
+        Me.chkShowTrainDataSummary = New System.Windows.Forms.CheckBox()
+        Me.chkShowTrainVarInfo = New System.Windows.Forms.CheckBox()
         Me.lblTrainPercent = New System.Windows.Forms.Label()
         Me.cbTrainPercent = New System.Windows.Forms.ComboBox()
         Me.chkStatisticsMode = New System.Windows.Forms.CheckBox()
         Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
         Me.btnClassification = New System.Windows.Forms.Button()
-        Me.chkShowTrainDataSummary = New System.Windows.Forms.CheckBox()
-        Me.chkShowTrainVarInfo = New System.Windows.Forms.CheckBox()
-        Me.chkShowTestDataSummary = New System.Windows.Forms.CheckBox()
-        Me.chkShowTestVarInfo = New System.Windows.Forms.CheckBox()
+        Me.fswModelExists = New System.IO.FileSystemWatcher()
+        Me.tmrModelExists = New System.Windows.Forms.Timer(Me.components)
+        Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.pnlMain.SuspendLayout()
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scMain.Panel1.SuspendLayout()
@@ -49,10 +54,14 @@ Partial Class frmClassification
         Me.scMain.SuspendLayout()
         Me.gbOptions.SuspendLayout()
         Me.gbStatistics.SuspendLayout()
+        CType(Me.fswModelExists, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlMain
         '
+        Me.pnlMain.Controls.Add(Me.pbLoading)
+        Me.pnlMain.Controls.Add(Me.lblLoading)
+        Me.pnlMain.Controls.Add(Me.chkStatisticsMode)
         Me.pnlMain.Controls.Add(Me.scMain)
         Me.pnlMain.Controls.Add(Me.btnClassification)
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
@@ -60,6 +69,16 @@ Partial Class frmClassification
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.Size = New System.Drawing.Size(496, 248)
         Me.pnlMain.TabIndex = 7
+        '
+        'lblLoading
+        '
+        Me.lblLoading.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
+        Me.lblLoading.Location = New System.Drawing.Point(393, 0)
+        Me.lblLoading.Name = "lblLoading"
+        Me.lblLoading.Size = New System.Drawing.Size(100, 23)
+        Me.lblLoading.TabIndex = 14
+        Me.lblLoading.Text = "Loading..."
+        Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'scMain
         '
@@ -175,7 +194,6 @@ Partial Class frmClassification
         Me.gbStatistics.Controls.Add(Me.chkShowTrainVarInfo)
         Me.gbStatistics.Controls.Add(Me.lblTrainPercent)
         Me.gbStatistics.Controls.Add(Me.cbTrainPercent)
-        Me.gbStatistics.Controls.Add(Me.chkStatisticsMode)
         Me.gbStatistics.Controls.Add(Me.chkCleanXDFFile)
         Me.gbStatistics.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbStatistics.Location = New System.Drawing.Point(0, 0)
@@ -183,6 +201,46 @@ Partial Class frmClassification
         Me.gbStatistics.Size = New System.Drawing.Size(244, 195)
         Me.gbStatistics.TabIndex = 11
         Me.gbStatistics.TabStop = False
+        '
+        'chkShowTestDataSummary
+        '
+        Me.chkShowTestDataSummary.AutoSize = True
+        Me.chkShowTestDataSummary.Location = New System.Drawing.Point(9, 93)
+        Me.chkShowTestDataSummary.Name = "chkShowTestDataSummary"
+        Me.chkShowTestDataSummary.Size = New System.Drawing.Size(163, 17)
+        Me.chkShowTestDataSummary.TabIndex = 16
+        Me.chkShowTestDataSummary.Text = "Show Testing Data Summary"
+        Me.chkShowTestDataSummary.UseVisualStyleBackColor = True
+        '
+        'chkShowTestVarInfo
+        '
+        Me.chkShowTestVarInfo.AutoSize = True
+        Me.chkShowTestVarInfo.Location = New System.Drawing.Point(9, 118)
+        Me.chkShowTestVarInfo.Name = "chkShowTestVarInfo"
+        Me.chkShowTestVarInfo.Size = New System.Drawing.Size(187, 17)
+        Me.chkShowTestVarInfo.TabIndex = 15
+        Me.chkShowTestVarInfo.Text = "Show Testing Variable Information"
+        Me.chkShowTestVarInfo.UseVisualStyleBackColor = True
+        '
+        'chkShowTrainDataSummary
+        '
+        Me.chkShowTrainDataSummary.AutoSize = True
+        Me.chkShowTrainDataSummary.Location = New System.Drawing.Point(9, 45)
+        Me.chkShowTrainDataSummary.Name = "chkShowTrainDataSummary"
+        Me.chkShowTrainDataSummary.Size = New System.Drawing.Size(166, 17)
+        Me.chkShowTrainDataSummary.TabIndex = 14
+        Me.chkShowTrainDataSummary.Text = "Show Training Data Summary"
+        Me.chkShowTrainDataSummary.UseVisualStyleBackColor = True
+        '
+        'chkShowTrainVarInfo
+        '
+        Me.chkShowTrainVarInfo.AutoSize = True
+        Me.chkShowTrainVarInfo.Location = New System.Drawing.Point(9, 70)
+        Me.chkShowTrainVarInfo.Name = "chkShowTrainVarInfo"
+        Me.chkShowTrainVarInfo.Size = New System.Drawing.Size(190, 17)
+        Me.chkShowTrainVarInfo.TabIndex = 13
+        Me.chkShowTrainVarInfo.Text = "Show Training Variable Information"
+        Me.chkShowTrainVarInfo.UseVisualStyleBackColor = True
         '
         'lblTrainPercent
         '
@@ -208,7 +266,7 @@ Partial Class frmClassification
         Me.chkStatisticsMode.AutoSize = True
         Me.chkStatisticsMode.Checked = True
         Me.chkStatisticsMode.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkStatisticsMode.Location = New System.Drawing.Point(1, -1)
+        Me.chkStatisticsMode.Location = New System.Drawing.Point(248, 12)
         Me.chkStatisticsMode.Name = "chkStatisticsMode"
         Me.chkStatisticsMode.Size = New System.Drawing.Size(101, 17)
         Me.chkStatisticsMode.TabIndex = 11
@@ -237,45 +295,24 @@ Partial Class frmClassification
         Me.btnClassification.Text = "Form Training and Test Sets"
         Me.btnClassification.UseVisualStyleBackColor = True
         '
-        'chkShowTrainDataSummary
+        'fswModelExists
         '
-        Me.chkShowTrainDataSummary.AutoSize = True
-        Me.chkShowTrainDataSummary.Location = New System.Drawing.Point(9, 45)
-        Me.chkShowTrainDataSummary.Name = "chkShowTrainDataSummary"
-        Me.chkShowTrainDataSummary.Size = New System.Drawing.Size(166, 17)
-        Me.chkShowTrainDataSummary.TabIndex = 14
-        Me.chkShowTrainDataSummary.Text = "Show Training Data Summary"
-        Me.chkShowTrainDataSummary.UseVisualStyleBackColor = True
+        Me.fswModelExists.EnableRaisingEvents = True
+        Me.fswModelExists.SynchronizingObject = Me
         '
-        'chkShowTrainVarInfo
+        'tmrModelExists
         '
-        Me.chkShowTrainVarInfo.AutoSize = True
-        Me.chkShowTrainVarInfo.Location = New System.Drawing.Point(9, 70)
-        Me.chkShowTrainVarInfo.Name = "chkShowTrainVarInfo"
-        Me.chkShowTrainVarInfo.Size = New System.Drawing.Size(190, 17)
-        Me.chkShowTrainVarInfo.TabIndex = 13
-        Me.chkShowTrainVarInfo.Text = "Show Training Variable Information"
-        Me.chkShowTrainVarInfo.UseVisualStyleBackColor = True
+        Me.tmrModelExists.Interval = 10
         '
-        'chkShowTestDataSummary
+        'pbLoading
         '
-        Me.chkShowTestDataSummary.AutoSize = True
-        Me.chkShowTestDataSummary.Location = New System.Drawing.Point(9, 93)
-        Me.chkShowTestDataSummary.Name = "chkShowTestDataSummary"
-        Me.chkShowTestDataSummary.Size = New System.Drawing.Size(163, 17)
-        Me.chkShowTestDataSummary.TabIndex = 16
-        Me.chkShowTestDataSummary.Text = "Show Testing Data Summary"
-        Me.chkShowTestDataSummary.UseVisualStyleBackColor = True
-        '
-        'chkShowTestVarInfo
-        '
-        Me.chkShowTestVarInfo.AutoSize = True
-        Me.chkShowTestVarInfo.Location = New System.Drawing.Point(9, 118)
-        Me.chkShowTestVarInfo.Name = "chkShowTestVarInfo"
-        Me.chkShowTestVarInfo.Size = New System.Drawing.Size(187, 17)
-        Me.chkShowTestVarInfo.TabIndex = 15
-        Me.chkShowTestVarInfo.Text = "Show Testing Variable Information"
-        Me.chkShowTestVarInfo.UseVisualStyleBackColor = True
+        Me.pbLoading.Location = New System.Drawing.Point(326, 0)
+        Me.pbLoading.MarqueeAnimationSpeed = 10
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
+        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pbLoading.TabIndex = 15
+        Me.pbLoading.Visible = False
         '
         'frmClassification
         '
@@ -290,6 +327,7 @@ Partial Class frmClassification
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Classification Options"
         Me.pnlMain.ResumeLayout(False)
+        Me.pnlMain.PerformLayout()
         Me.scMain.Panel1.ResumeLayout(False)
         Me.scMain.Panel2.ResumeLayout(False)
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).EndInit()
@@ -298,6 +336,7 @@ Partial Class frmClassification
         Me.gbOptions.PerformLayout()
         Me.gbStatistics.ResumeLayout(False)
         Me.gbStatistics.PerformLayout()
+        CType(Me.fswModelExists, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -322,4 +361,8 @@ Partial Class frmClassification
     Friend WithEvents chkShowTestVarInfo As CheckBox
     Friend WithEvents chkShowTrainDataSummary As CheckBox
     Friend WithEvents chkShowTrainVarInfo As CheckBox
+    Friend WithEvents fswModelExists As IO.FileSystemWatcher
+    Friend WithEvents tmrModelExists As Timer
+    Friend WithEvents lblLoading As Label
+    Friend WithEvents pbLoading As ProgressBar
 End Class

@@ -1,18 +1,96 @@
-﻿Imports System.IO
+﻿Imports System.Drawing.Color
+Imports System.IO
 Imports RDotNet
-Imports System.Drawing.Color
 
 Public Class frmClassification
     Public strLanguage_Classification As String()
+    Private XDFFileExists As Boolean = False
+    Private isStatisticsXDF As Boolean = True
 
     Dim TrainPercentages As New List(Of String)
+
+    '!Put on frm_Load
+    'pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
+    'pbLoading.Width = pbLoading.Parent.Width
+    'fswModelExists.Path = strXDF
+    'fswModelExists.Filter = "Classification_DS.xdf"
+    'Call CheckXDFFileExists()
+    '
+    '!Put on chkOptions_CheckedChanged
+    'Call ColourChkStatisticsMode()
+#Region "XDFFileExists"
+
+    Private Sub CheckXDFFileExists()
+        If File.Exists(doProperFileName(strXDF & "Classification_DS.xdf")) Then
+            XDFFileExists = True
+            chkUseExistingXDFFile.BackColor = LightGreen
+
+            pbLoading.MarqueeAnimationSpeed = 10
+            pbLoading.Visible = True
+            lblLoading.Visible = True
+            lblLoading.Dock = DockStyle.Fill
+            tmrModelExists.Enabled = True
+
+        Else
+            XDFFileExists = False
+            chkUseExistingXDFFile.BackColor = IndianRed
+            chkStatisticsMode.BackColor = SystemColors.Control
+        End If
+    End Sub
+
+    Private Sub ColourChkStatisticsMode()
+        If XDFFileExists AndAlso chkUseExistingXDFFile.Checked Then
+            If chkStatisticsMode.Checked Then
+                If isStatisticsXDF Then chkStatisticsMode.BackColor = LightGreen Else chkStatisticsMode.BackColor = IndianRed
+            Else
+                If isStatisticsXDF Then chkStatisticsMode.BackColor = IndianRed Else chkStatisticsMode.BackColor = LightGreen
+            End If
+
+        Else
+            chkStatisticsMode.BackColor = SystemColors.Control
+        End If
+    End Sub
+
+    Private Sub tmrModelExists_Tick(sender As Object, e As EventArgs) Handles tmrModelExists.Tick
+        tmrModelExists.Enabled = False
+
+        Try 'Non-Essential Functions
+            If XDFFileExists Then
+                If RDotNet_Initialization() Then
+                    RSource(strFunctions & "[ColumnNames_For_FormLoad].R",, {"{0}", "Classification_DS"})
+                    isStatisticsXDF = Rdo.GetSymbol("isStatisticsXDF").AsLogical.First
+
+                    Call ColourChkStatisticsMode()
+
+                End If
+            End If
+        Catch ex As Exception
+            Notify(ex.ToString, Red, Black, 10,,, True)
+        End Try
+
+        pbLoading.MarqueeAnimationSpeed = 0
+        pbLoading.Visible = False
+        lblLoading.Dock = DockStyle.None
+        lblLoading.Visible = False
+
+    End Sub
+
+    'Private Sub chkStatisticsMode_CheckedChanged(sender As Object, e As EventArgs) Handles chkStatisticsMode.CheckedChanged
+    '    Call ColourChkStatisticsMode()
+    'End Sub
+
+    Private Sub fswModelExists_Created_Created_Renamed(sender As Object, e As FileSystemEventArgs) Handles fswModelExists.Created, fswModelExists.Deleted, fswModelExists.Renamed
+        Call CheckXDFFileExists()
+    End Sub
+
+
+#End Region
 
     Private Sub frmClassification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             'initialization
             Call Classification_Language(Me)
             frmSkin(Me, False)
-            '/initialization
 
             cbTrainPercent.DataSource = Nothing
             For i As Integer = 1 To 10
@@ -20,24 +98,32 @@ Public Class frmClassification
             Next
             cbTrainPercent.DataSource = TrainPercentages
             cbTrainPercent.SelectedIndex = 7 '80%
+            '/initialization
+
+            pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
+            pbLoading.Width = pbLoading.Parent.Width
+            fswModelExists.Path = strXDF
+            fswModelExists.Filter = "Classification_DS.xdf"
+            Call CheckXDFFileExists()
 
             If File.Exists(strXDF & "Clustering_DS.xdf") Then
                 btnClassification.Enabled = True
             Else
                 If File.Exists(strXDF & "Classification_DS.xdf") Then
-                    Notify(ss("The Clustering Dataset file '{1}' does not exist or is not reachable, however the Classification one '{2}' is found, hence the button '{3}' will remain locked on checked.{0}{0}If you wish to uncheck it so that the Classification file is created anew, please do the Clustering first.", vbCrLf, strXDF & "Clustering_DS.xdf", strXDF & "Classification_DS.xdf", RemCtrHotLetter(chkUseExistingXDFFile)),
+                    Notify(sa("The Clustering Dataset file '{1}' does not exist or is not reachable, however the Classification one '{2}' is found, hence the button '{3}' will remain locked on checked.{0}{0}If you wish to uncheck it so that the Classification file is created anew, please do the Clustering first.", vbCrLf, strXDF & "Clustering_DS.xdf", strXDF & "Classification_DS.xdf", RemCtrHotLetter(chkUseExistingXDFFile)),
                            Red, Black, 30)
                     chkUseExistingXDFFile.Checked = True
                     chkUseExistingXDFFile.Enabled = False
                     btnClassification.Enabled = True
 
                 Else
-                    MsgBox(ss("For the classification process to commence, clustering must have already occurred.{0}Unfortunately the file '{1}' cannot be reached.{0}The Clustering form will now open for you to perform clustering with the CleanXDF option disabled so that the file needed remains.", vbCrLf, strXDF & "Clustering_DS.xdf"))
+                    MsgBox(sa("For the classification process to commence, clustering must have already occurred.{0}Unfortunately the file '{1}' cannot be reached.{0}The Clustering form will now open for you to perform clustering with the CleanXDF option disabled so that the file needed remains.", vbCrLf, strXDF & "Clustering_DS.xdf"))
                     Dim ClusteringForm As New frmClusteringStep1
                     ClusteringForm.chkCleanXDFFile.Checked = False
                     ClusteringForm.chkCleanXDFFile.Enabled = False
                     ClusteringForm.Show()
                     Close()
+                    Exit Sub
                 End If
             End If
 
@@ -46,16 +132,10 @@ Public Class frmClassification
         End Try
     End Sub
 
-    Private Sub lblTrainPercent_TextChanged(sender As Object, e As EventArgs) Handles lblTrainPercent.TextChanged
-        cbTrainPercent.Location = New Point(lblTrainPercent.Location.X + lblTrainPercent.Width + 5, cbTrainPercent.Location.Y)
-        cbTrainPercent.Width = cbTrainPercent.Parent.Width - cbTrainPercent.Location.X
-    End Sub
-
-    Private Sub chkStatisticsMode_CheckedChanged(sender As Object, e As EventArgs) Handles chkStatisticsMode.CheckedChanged
-        If chkStatisticsMode.Checked Then
-            gbStatistics.Enabled = True
-        Else
-            gbStatistics.Enabled = False
+    Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
+        If FuncInProgress.Count <> 0 Then
+            e.Cancel = True
+            MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
         End If
     End Sub
 
@@ -87,7 +167,7 @@ Public Class frmClassification
 
 
                         If RSource({strFunctions & "[ColumnsInfo].R",
-                                    strFunctions & "3.0 Classification - Form Train and Test Sets.R"}, , {"{0}", TablevTestSet,
+                                    strFunctions & "3.0 Classification - Form Train and Test Sets.R"}, , {"{0}", If(chkStatisticsMode.Checked, TablevErga, TablevFinalDataset),
                                                                                                           "{1}", ColvGeoLocX,
                                                                                                           "{2}", ColvGeoLocY,
                                                                                                           "{3}", If(chkStatisticsMode.Checked, "SelectionRatio = as.integer(runif(.rxNumRows,1,11)),", ""),
@@ -146,7 +226,7 @@ Public Class frmClassification
                             End If
 
                             Dim XDFCreatedOutOfNecessity As Boolean = Rdo.GetSymbol("XDFCreatedOutOfNecessity").AsLogical.First
-                            If XDFCreatedOutOfNecessity Then MsgBox(ss("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
+                            If XDFCreatedOutOfNecessity Then MsgBox(sa("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
 
                         End If
                     End If
@@ -160,12 +240,40 @@ Public Class frmClassification
                 pnlMain.Enabled = True
                 Close()
             Else
-                MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
             End If
 
         Catch ex As Exception
             CreateCrashFile(ex, True)
         End Try
+    End Sub
+
+    Private Sub chkOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowDataSummary.CheckedChanged, chkVisualiseClassImbal.CheckedChanged,
+                                                                                    chkShowVariableInfo.CheckedChanged, chkUseExistingXDFFile.CheckedChanged,
+                                                                                    chkFormTrainSet.CheckedChanged, chkFormTestSet.CheckedChanged
+        If chkShowDataSummary.Checked And chkVisualiseClassImbal.Checked And chkShowVariableInfo.Checked And chkUseExistingXDFFile.Checked And
+            chkFormTrainSet.Checked And chkFormTestSet.Checked Then
+            btnSelectAll.Text = "Unselect &All"
+        Else
+            btnSelectAll.Text = "Select &All"
+        End If
+
+        Call ColourChkStatisticsMode()
+    End Sub
+
+    Private Sub lblTrainPercent_TextChanged(sender As Object, e As EventArgs) Handles lblTrainPercent.TextChanged
+        cbTrainPercent.Location = New Point(lblTrainPercent.Location.X + lblTrainPercent.Width + 5, cbTrainPercent.Location.Y)
+        cbTrainPercent.Width = cbTrainPercent.Parent.Width - cbTrainPercent.Location.X
+    End Sub
+
+    Private Sub chkStatisticsMode_CheckedChanged(sender As Object, e As EventArgs) Handles chkStatisticsMode.CheckedChanged
+        If chkStatisticsMode.Checked Then
+            gbStatistics.Enabled = True
+        Else
+            gbStatistics.Enabled = False
+        End If
+
+        Call ColourChkStatisticsMode()
     End Sub
 
     Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
@@ -183,24 +291,6 @@ Public Class frmClassification
             If chkShowVariableInfo.Enabled Then chkShowVariableInfo.Checked = True
             If chkFormTrainSet.Enabled Then chkFormTrainSet.Checked = True
             If chkFormTestSet.Enabled Then chkFormTestSet.Checked = True
-        End If
-    End Sub
-
-    Private Sub chkOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowDataSummary.CheckedChanged, chkVisualiseClassImbal.CheckedChanged,
-                                                                                    chkShowVariableInfo.CheckedChanged, chkUseExistingXDFFile.CheckedChanged,
-                                                                                    chkFormTrainSet.CheckedChanged, chkFormTestSet.CheckedChanged
-        If chkShowDataSummary.Checked And chkVisualiseClassImbal.Checked And chkShowVariableInfo.Checked And chkUseExistingXDFFile.Checked And
-            chkFormTrainSet.Checked And chkFormTestSet.Checked Then
-            btnSelectAll.Text = "Unselect &All"
-        Else
-            btnSelectAll.Text = "Select &All"
-        End If
-    End Sub
-
-    Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
-        If FuncInProgress.Count <> 0 Then
-            e.Cancel = True
-            MsgBox(ss("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
         End If
     End Sub
 
