@@ -45,9 +45,10 @@ Partial Class frmCreateSQLView
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gbSQLViews.Controls.Add(Me.clbSQLViews)
+        Me.gbSQLViews.Controls.Add(Me.btnSelectAll)
         Me.gbSQLViews.Location = New System.Drawing.Point(12, 12)
         Me.gbSQLViews.Name = "gbSQLViews"
-        Me.gbSQLViews.Size = New System.Drawing.Size(185, 261)
+        Me.gbSQLViews.Size = New System.Drawing.Size(185, 237)
         Me.gbSQLViews.TabIndex = 0
         Me.gbSQLViews.TabStop = False
         Me.gbSQLViews.Text = "Create SQL View for:"
@@ -60,14 +61,14 @@ Partial Class frmCreateSQLView
         Me.clbSQLViews.FormattingEnabled = True
         Me.clbSQLViews.Location = New System.Drawing.Point(6, 19)
         Me.clbSQLViews.Name = "clbSQLViews"
-        Me.clbSQLViews.Size = New System.Drawing.Size(173, 229)
+        Me.clbSQLViews.Size = New System.Drawing.Size(173, 184)
         Me.clbSQLViews.TabIndex = 0
         '
         'btnCreateSQLViews
         '
         Me.btnCreateSQLViews.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCreateSQLViews.Location = New System.Drawing.Point(12, 308)
+        Me.btnCreateSQLViews.Location = New System.Drawing.Point(12, 263)
         Me.btnCreateSQLViews.Name = "btnCreateSQLViews"
         Me.btnCreateSQLViews.Size = New System.Drawing.Size(375, 23)
         Me.btnCreateSQLViews.TabIndex = 1
@@ -149,9 +150,11 @@ Partial Class frmCreateSQLView
         '
         'btnSelectAll
         '
-        Me.btnSelectAll.Location = New System.Drawing.Point(12, 279)
+        Me.btnSelectAll.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSelectAll.Location = New System.Drawing.Point(6, 208)
         Me.btnSelectAll.Name = "btnSelectAll"
-        Me.btnSelectAll.Size = New System.Drawing.Size(185, 23)
+        Me.btnSelectAll.Size = New System.Drawing.Size(173, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
         Me.btnSelectAll.UseVisualStyleBackColor = True
@@ -172,9 +175,8 @@ Partial Class frmCreateSQLView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(399, 343)
+        Me.ClientSize = New System.Drawing.Size(399, 298)
         Me.Controls.Add(Me.lblWarning)
-        Me.Controls.Add(Me.btnSelectAll)
         Me.Controls.Add(Me.chkDeleteAll)
         Me.Controls.Add(Me.gbSQLViewOptions)
         Me.Controls.Add(Me.btnCreateSQLViews)

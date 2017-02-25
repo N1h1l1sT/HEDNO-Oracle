@@ -1402,7 +1402,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Async Sub GeoLocateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniGeoLocate.Click
+    Private Async Sub mniGeoLocate_Click(sender As Object, e As EventArgs) Handles mniGeoLocate.Click
         Try
             Dim Proceed As MsgBoxResult = MsgBox("The Geo-Location procedure is about to begin, proceed?", MsgBoxStyle.YesNo)
             If Proceed = vbYes Then
@@ -1419,46 +1419,48 @@ Public Class frmMain
                         'Me.Refresh()
 
                         If ConnectedToSQLServer = True Then
-                            If GeoLocationAPILink <> "" Then
-                                If GeoLocAPIKey <> "" Then
-                                    pbGeneralProgress.Style = ProgressBarStyle.Marquee
-                                    pbGeneralProgress.MarqueeAnimationSpeed = 10
-                                    pbGeneralProgress.Minimum = 0
-                                    pbGeneralProgress.Maximum = 1
-                                    pbGeneralProgress.Value = 1
-                                    pbGeneralProgress.Visible = True
-                                    pbGeneralProgress.BringToFront()
-                                    tmrUpdatePB.Enabled = True
+                            If SQLTableExists(TablevFinalDataset) Then
+                                If SQLColumnExists(TablevFinalDataset, ColvGeoLocX) AndAlso SQLColumnExists(TablevFinalDataset, ColvGeoLocY) Then
+                                    If GeoLocationAPILink <> "" Then
+                                        If GeoLocAPIKey <> "" Then
+                                            pbGeneralProgress.Style = ProgressBarStyle.Marquee
+                                            pbGeneralProgress.MarqueeAnimationSpeed = 10
+                                            pbGeneralProgress.Minimum = 0
+                                            pbGeneralProgress.Maximum = 1
+                                            pbGeneralProgress.Value = 1
+                                            pbGeneralProgress.Visible = True
+                                            pbGeneralProgress.BringToFront()
+                                            tmrUpdatePB.Enabled = True
 
-                                    If ErrorsOnUpdateCount < 5 Then
-                                        Dim RowsToGeoLCount As Integer = 0
-                                        Dim DlClinet As New WebClient
+                                            If ErrorsOnUpdateCount < 5 Then
+                                                Dim RowsToGeoLCount As Integer = 0
+                                                Dim DlClinet As New WebClient
 
-                                        Dim dtVFinalDataset As New DataTable
-                                        Dim SQLAdaptrVFinalDataset As SqlDataAdapter = Nothing
+                                                Dim dtVFinalDataset As New DataTable
+                                                Dim SQLAdaptrVFinalDataset As SqlDataAdapter = Nothing
 
-                                        Dim CityName As String = String.Empty
-                                        Try
-                                            'Getting the IDs and city name from SQL View
-                                            SQLAdaptrVFinalDataset = New SqlDataAdapter(<SQL>
+                                                Dim CityName As String = String.Empty
+                                                Try
+                                                    'Getting the IDs and city name from SQL View
+                                                    SQLAdaptrVFinalDataset = New SqlDataAdapter(<SQL>
                                                                        USE [<%= DatabaseName %>]
                                                                        SELECT [<%= ColvID_Erga %>], [<%= ColvCityName %>], [<%= ColvGeoLocX %>]
                                                                        FROM [dbo].[<%= TablevFinalDataset %>]
                                                                        WHERE [<%= ColvGeoLocX %>] IS NULL AND [<%= ColvCityName %>] IS NOT NULL
                                                                     </SQL>.Value, SQLConn)
-                                            SQLAdaptrVFinalDataset.Fill(dtVFinalDataset)
-                                            RowsToGeoLCount = dtVFinalDataset.Rows.Count
-                                            'Starting the Progress Bar
-                                            pbGeneralProgress.Style = ProgressBarStyle.Blocks
-                                            pbGeneralProgress.Minimum = 0
-                                            pbGeneralProgress.Maximum = RowsToGeoLCount
-                                            pbGeneralProgress.Value = 0
-                                            pbGeneralValue = 0
+                                                    SQLAdaptrVFinalDataset.Fill(dtVFinalDataset)
+                                                    RowsToGeoLCount = dtVFinalDataset.Rows.Count
+                                                    'Starting the Progress Bar
+                                                    pbGeneralProgress.Style = ProgressBarStyle.Blocks
+                                                    pbGeneralProgress.Minimum = 0
+                                                    pbGeneralProgress.Maximum = RowsToGeoLCount
+                                                    pbGeneralProgress.Value = 0
+                                                    pbGeneralValue = 0
 
-                                            If RowsToGeoLCount > 0 Then
-                                                Dim strJSON As String
-                                                Dim joGeoLoc As JObject
-                                                Await Task.Run(
+                                                    If RowsToGeoLCount > 0 Then
+                                                        Dim strJSON As String
+                                                        Dim joGeoLoc As JObject
+                                                        Await Task.Run(
                                                     Sub()
                                                         Dim ShowErrorDialogInError As Boolean = True
                                                         For Each row As DataRow In dtVFinalDataset.Rows
@@ -1575,48 +1577,66 @@ Public Class frmMain
                                                             End If
                                                         Next
                                                     End Sub)
-                                            End If
+                                                    End If
 
-                                            SQLAdaptrVFinalDataset.Dispose()
+                                                    SQLAdaptrVFinalDataset.Dispose()
 
-                                            If blbtnGeoLocateContinue Then
-                                                Notify("Procedure Successful!", Color.Cyan, Color.Black, 25)
+                                                    If blbtnGeoLocateContinue Then
+                                                        Notify("Procedure Successful!", Color.Cyan, Color.Black, 25)
+                                                    Else
+                                                        Notify("Procedure Cancelled!", Color.Red, Color.Black, 25)
+                                                    End If
+
+                                                Catch ex As WebException
+                                                    ErrorsOnUpdateCount += 1
+                                                    Notify("Something went wrong whilst trying to download the Geo-Location of [" & CityName & "]" & vbCrLf & "Either your internet is down, or the API is unresponsive" & vbCrLf & ex.ToString, Color.Red, Color.Black, 25)
+
+                                                Catch ex As Exception
+                                                    ErrorsOnUpdateCount += 1
+                                                    Notify("Something went wrong whilst trying to push the Geo-Location of [" & CityName & "]" & " to the SQL Server!", Color.Red, Color.Black, 25)
+
+                                                Finally
+                                                    pbGeneralValue = 0
+                                                    pbGeneralProgress.Style = ProgressBarStyle.Marquee
+                                                    pbGeneralProgress.MarqueeAnimationSpeed = 10
+                                                    pbGeneralProgress.Minimum = 0
+                                                    pbGeneralProgress.Maximum = 1
+                                                    pbGeneralProgress.Value = 1
+                                                    pbGeneralProgress.Visible = False
+                                                    tmrUpdatePB.Enabled = False
+                                                End Try
+
                                             Else
-                                                Notify("Procedure Cancelled!", Color.Red, Color.Black, 25)
+                                                MsgBox("The procedure is cancelled because it's failed too many times in a row", MsgBoxStyle.Critical)
                                             End If
 
-                                        Catch ex As WebException
-                                            ErrorsOnUpdateCount += 1
-                                            Notify("Something went wrong whilst trying to download the Geo-Location of [" & CityName & "]" & vbCrLf & "Either your internet is down, or the API is unresponsive" & vbCrLf & ex.ToString, Color.Red, Color.Black, 25)
-
-                                        Catch ex As Exception
-                                            ErrorsOnUpdateCount += 1
-                                            Notify("Something went wrong whilst trying to push the Geo-Location of [" & CityName & "]" & " to the SQL Server!", Color.Red, Color.Black, 25)
-
-                                        Finally
-                                            pbGeneralValue = 0
-                                            pbGeneralProgress.Style = ProgressBarStyle.Marquee
-                                            pbGeneralProgress.MarqueeAnimationSpeed = 10
-                                            pbGeneralProgress.Minimum = 0
-                                            pbGeneralProgress.Maximum = 1
-                                            pbGeneralProgress.Value = 1
-                                            pbGeneralProgress.Visible = False
-                                            tmrUpdatePB.Enabled = False
-                                        End Try
+                                        Else
+                                            MsgBox(sa("The GeoLocation API Key is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
+                                            frmSettings.Show()
+                                        End If
 
                                     Else
-                                        MsgBox("The procedure is cancelled because it's failed too many times in a row", MsgBoxStyle.Critical)
+                                        MsgBox(sa("The GeoLocation API Link is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
+                                        frmSettings.Show()
                                     End If
 
                                 Else
-                                    MsgBox(sa("The GeoLocation API Key is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
-                                    frmSettings.Show()
-                                End If
 
+                                End If
+                                MsgBox(sa("The GeoLocation procedure is trying to upload the longitude and latitude on the SQL Columns {3} on the {1} Table/View on the SQL Server, however one or more columns are unreachable.{0}'{2}' will open for you to create the GeoLocation Columns",
+                                          vbCrLf,
+                                          "[" & DatabaseName & "].[dbo].[" & TablevFinalDataset & "]",
+                                          RemMniHotLetter(mniCreateNeededSQLViews),
+                                          sa("'{0}' and '{1}'", ColvGeoLocX, ColvGeoLocY)))
+                                Call mniCreateGeoColumns_Click(Nothing, New EventArgs)
                             Else
-                                MsgBox(sa("The GeoLocation API Link is empty!{0}Please change it from the Settings form and try again", vbCrLf), MsgBoxStyle.Information)
-                                frmSettings.Show()
+                                MsgBox(sa("The GeoLocation procedure is trying to upload the longitude and latitude on {1} on the SQL Server, however the Table/View is unreachable.{0}'{2}' will open for you to create the Table/View",
+                                      vbCrLf,
+                                      sa("[{0}].dbo.[{1}]", DatabaseName, TablevFinalDataset),
+                                      RemMniHotLetter(mniCreateNeededSQLViews)))
+                                Call CreateNeededSQLViews_Click(Nothing, New EventArgs)
                             End If
+
                         Else
                             MsgBox("There is no connection to the SQL Server!", MsgBoxStyle.Exclamation)
                         End If
@@ -1691,5 +1711,13 @@ Public Class frmMain
     Private Sub LogisticRegressionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniLogit.Click
         Dim LogisticRegressionForm As New frmLogisticRegression
         LogisticRegressionForm.Show()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+        Call mniCreateGeoColumns_Click(Nothing, New EventArgs)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
+        Call CreateNeededSQLViews_Click(Nothing, New EventArgs)
     End Sub
 End Class
