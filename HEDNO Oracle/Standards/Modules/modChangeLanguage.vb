@@ -502,16 +502,6 @@ Module modChangeLanguage
         End With
     End Sub
 
-    Public Sub LogisticRegression_Language(ByVal frm As frmLogisticRegression)
-        With frm
-            Dim strLanguage_LogisticRegression() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_LogisticRegression)
-            On Error Resume Next
-
-            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
-
-        End With
-    End Sub
-
     Public Sub Statistics_Language(ByVal frm As frmStatistics)
         With frm
             Dim strLanguage_Statistics() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_Statistics)
@@ -522,6 +512,95 @@ Module modChangeLanguage
         End With
     End Sub
 
+    Public Sub LogisticRegression_Language(ByVal frm As frmLogisticRegression)
+        With frm
+            Dim strLanguage_LogisticRegression() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_LogisticRegression)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub DecisionTrees_Language(ByVal frm As frmDecisionTrees)
+        With frm
+            Dim strLanguage_DecisionTrees() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_DecisionTrees)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub NaiveBayes_Language(ByVal frm As frmNaiveBayes)
+        With frm
+            Dim strLanguage_NaiveBayes() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_NaiveBayes)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub RandomForest_Language(ByVal frm As frmRandomForest)
+        With frm
+            Dim strLanguage_RandomForest() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_RandomForest)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub StochasticGradientBoosting_Language(ByVal frm As frmStochasticGradientBoosting)
+        With frm
+            Dim strLanguage_StochasticGradientBoosting() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_StochasticGradientBoosting)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub StochasticDualCoordinateAscent_Language(ByVal frm As frmStochasticDualCoordinateAscent)
+        With frm
+            Dim strLanguage_StochasticDualCoordinateAscent() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_StochasticDualCoordinateAscent)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub BoostedDecisionTrees_Language(ByVal frm As frmBoostedDecisionTrees)
+        With frm
+            Dim strLanguage_BoostedDecisionTrees() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_BoostedDecisionTrees)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub EnsembleofDecisionTrees_Language(ByVal frm As frmEnsembleofDecisionTrees)
+        With frm
+            Dim strLanguage_EnsembleofDecisionTrees() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_EnsembleofDecisionTrees)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
+    Public Sub NeuralNetworks_Language(ByVal frm As frmNeuralNetworks)
+        With frm
+            Dim strLanguage_NeuralNetworks() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_NeuralNetworks)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
 
 
 End Module

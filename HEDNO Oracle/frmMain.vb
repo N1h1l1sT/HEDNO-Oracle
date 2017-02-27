@@ -52,11 +52,6 @@ Public Class frmMain
     Private CityOrigName As New List(Of String)
     Private CityCorrespName As New List(Of String)
 
-    Public Structure GeoLocation
-        Public LatitudeY As Double
-        Public longitude As Double
-    End Structure
-
     '===============================
     '==BEGIN OF STANDARD PROCEDURE==
     '===============================
@@ -66,32 +61,6 @@ Public Class frmMain
     '=============================
     '==END OF STANDARD PROCEDURE==
     '=============================
-
-    Public Function GetLatLon(ByVal APIKey As String, ByVal strAddress As String) As GeoLocation
-        Dim url = Convert.ToString("http://maps.google.com/maps/geo?output=csv&key=" & APIKey & "&q=") & strAddress
-        Dim request = WebRequest.Create(url)
-        Dim response = DirectCast(request.GetResponse(), HttpWebResponse)
-
-        If response.StatusCode = HttpStatusCode.OK Then
-            Dim ms = New MemoryStream()
-            Dim responseStream = response.GetResponseStream()
-            Dim buffer = New Byte(2047) {}
-            Dim count As Integer = responseStream.Read(buffer, 0, buffer.Length)
-            While count > 0
-                ms.Write(buffer, 0, count)
-                count = responseStream.Read(buffer, 0, buffer.Length)
-            End While
-            responseStream.Close()
-            ms.Close()
-            Dim responseBytes = ms.ToArray()
-            Dim encoding = New Text.ASCIIEncoding()
-            Dim coords = encoding.GetString(responseBytes)
-            Dim parts = coords.Split(","c)
-
-            Return New GeoLocation With {.LatitudeY = Convert.ToDouble(parts(2)), .longitude = Convert.ToDouble(parts(3))}
-        End If
-        Return Nothing
-    End Function
 
 #Region "Security Settings"
     'Security Settings of {Programme}:
@@ -1708,16 +1677,154 @@ Public Class frmMain
         ClassificationForm.Show()
     End Sub
 
-    Private Sub LogisticRegressionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniLogit.Click
+    Private Sub LogisticRegressionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniLogisticRegression.Click
         Dim LogisticRegressionForm As New frmLogisticRegression
         LogisticRegressionForm.Show()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-        Call mniCreateGeoColumns_Click(Nothing, New EventArgs)
+    Private Sub DecisionTreesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mniDecisionTrees.Click
+        Dim DecisionTreesForm As New frmDecisionTrees
+        DecisionTreesForm.Show()
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
-        Call CreateNeededSQLViews_Click(Nothing, New EventArgs)
+    Private Sub mniRandomForest_Click(sender As Object, e As EventArgs) Handles mniRandomForest.Click
+        Dim RandomForestForm As New frmRandomForest
+        RandomForestForm.Show()
+    End Sub
+
+    Private Sub mniStochasticGradientBoosting_Click(sender As Object, e As EventArgs) Handles mniStochasticGradientBoosting.Click
+        Dim StochasticGradientBoostingForm As New frmStochasticGradientBoosting
+        StochasticGradientBoostingForm.Show()
+    End Sub
+
+    Private Sub mniStochasticDualCoordinateAscent_Click(sender As Object, e As EventArgs) Handles mniStochasticDualCoordinateAscent.Click
+        Dim StochasticDualCoordinateAscentForm As New frmStochasticDualCoordinateAscent
+        StochasticDualCoordinateAscentForm.Show()
+    End Sub
+
+    Private Sub mniBoostedDecisionTrees_Click(sender As Object, e As EventArgs) Handles mniBoostedDecisionTrees.Click
+        Dim BoostedDecisionTreesForm As New frmBoostedDecisionTrees
+        BoostedDecisionTreesForm.Show()
+    End Sub
+
+    Private Sub mniEnsambleOfDecisionTrees_Click(sender As Object, e As EventArgs) Handles mniEnsambleOfDecisionTrees.Click
+        Dim EnsambleOfDecisionTreesForm As New frmEnsembleofDecisionTrees
+        EnsambleOfDecisionTreesForm.Show()
+    End Sub
+
+    Private Sub mniNeuralNetworks_Click(sender As Object, e As EventArgs) Handles mniNeuralNetworks.Click
+        Dim NeuralNetworksForm As New frmNeuralNetworks
+        NeuralNetworksForm.Show()
+    End Sub
+
+    Private Sub mniGeoLocationStatus_Click(sender As Object, e As EventArgs) Handles mniGeoLocationStatus.Click
+        Try
+            If FuncInProgress.Count = 0 Then
+                FuncInProgress.Add("Acquiring Geo-Location Status")
+                If ConnectedToSQLServer = True Then
+                    If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+                    Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevErga)
+                    If TableExists Then
+                        If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocX) Then
+                            If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocY) Then
+                                Dim Total_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [Total_Rows]
+                                                                  FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]</SQL>.Value))
+
+                                Dim GeoLoc_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [GeoLoc_Rows]
+                                                                    FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                    WHERE <%= ColvGeoLocX %> IS NOT NULL and <%= ColvGeoLocX %> &lt;> '-1'</SQL>.Value))
+
+                                Dim NonGeoLoc_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [NonGeoLoc_Rows]
+                                                                            FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                            WHERE <%= ColvGeoLocX %> IS NULL</SQL>.Value))
+
+                                Dim Problematic_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [Problematic_Rows]
+                                                                            FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                            WHERE <%= ColvGeoLocX %> = '-1'</SQL>.Value))
+
+                                Dim ProblematicOnomaPolisCount As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(DISTINCT [<%= ColvCityName %>]) AS [ProblematicOnomaPolisCount]
+                                                                                    FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                                    WHERE <%= ColvGeoLocX %> = '-1'</SQL>.Value))
+
+                                MsgBox(sa("There is a total of {1} projects.{0}For {2}, the Geo-Location process has been successful, whilst for {4} it has not.{0}{3} projects have yet to be subject to Geo-Location.{0}There is a total of {5} cities/addresses throughout the {4} project for which the Geo-Location failed.",
+                                      vbCrLf, Total_Rows, GeoLoc_Rows, NonGeoLoc_Rows, Problematic_Rows, ProblematicOnomaPolisCount))
+
+                            Else
+                                MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                            End If
+                        Else
+                            MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                        End If
+
+                    Else
+                            MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
+                    End If
+
+                Else
+                    MsgBox(sa("You need to be connected to the SQL Server first"), MsgBoxStyle.Exclamation)
+                End If
+
+                FuncInProgress.Remove("Acquiring Geo-Location Status")
+            Else
+                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            End If
+
+
+        Catch ex As Exception
+            CreateCrashFile(ex, True)
+        End Try
+    End Sub
+
+    Private Sub mniExportListofProblematicAddresses_Click(sender As Object, e As EventArgs) Handles mniExportListofProblematicAddresses.Click
+
+        Try
+            If FuncInProgress.Count = 0 Then
+                FuncInProgress.Add("Acquiring Geo-Location Status")
+                If ConnectedToSQLServer = True Then
+                    If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+                    Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevErga)
+                    If TableExists Then
+                        If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocX) Then
+                            If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocY) Then
+                                Dim dtProblematicAddresses As New DataTable
+                                Dim SQLAdaptrVFinalDataset As SqlDataAdapter = Nothing
+
+                                Dim CityName As String = String.Empty
+                                SQLAdaptrVFinalDataset = New SqlDataAdapter(<SQL>
+                                                                                SELECT DISTINCT [<%= ColvCityName %>]
+                                                                                FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                                WHERE <%= ColvGeoLocX %> = '-1'
+                                                                                ORDER BY [<%= ColvCityName %>]
+                                                                            </SQL>.Value, SQLConn)
+                                SQLAdaptrVFinalDataset.Fill(dtProblematicAddresses)
+
+                                Dim csvFileName As String = doProperFileName(strXDF & "Problematic_Cities.csv")
+                                Save_Datatable_To_csv(csvFileName, dtProblematicAddresses, True)
+                                RunOpenDir(csvFileName)
+
+                            Else
+                                    MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                            End If
+                        Else
+                            MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                        End If
+
+                    Else
+                        MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
+                    End If
+
+                Else
+                    MsgBox(sa("You need to be connected to the SQL Server first"), MsgBoxStyle.Exclamation)
+                End If
+
+                FuncInProgress.Remove("Acquiring Geo-Location Status")
+            Else
+                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            End If
+
+
+        Catch ex As Exception
+            CreateCrashFile(ex, True)
+        End Try
     End Sub
 End Class

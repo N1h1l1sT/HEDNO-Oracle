@@ -1,10 +1,11 @@
 ﻿Imports System.IO
 Imports RDotNet
 Imports System.Drawing.Color
+Imports System.Math
 Imports System.Text
 
-Public Class frmLogisticRegression
-    Public strLanguage_LogisticRegression As String()
+Public Class frmRandomForest
+    Public strLanguage_RandomForest As String()
     Private XDFFileExists As Boolean = False
     Private isStatisticsXDF As Boolean = True
 
@@ -148,7 +149,7 @@ Public Class frmLogisticRegression
     End Function
 
     Private Sub CheckModelExists()
-        If File.Exists(doProperFileName(strModelsPath & "LogisticRegressionModel.RDS")) Then
+        If File.Exists(doProperFileName(strModelsPath & "RandomForestModel.RDS")) Then
             ModelExists = True
             chkUseExistingModel.BackColor = LightGreen
         Else
@@ -168,16 +169,26 @@ Public Class frmLogisticRegression
         End If
     End Sub
 
-    Private Sub frmLogisticRegression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmRandomForest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             'initialization
-            Call LogisticRegression_Language(Me)
+            Call RandomForest_Language(Me)
             frmSkin(Me, False)
 
-            cbCovCoef.Items.Clear()
-            cbCovCoef.Items.Add("False")
-            cbCovCoef.Items.Add("True")
-            cbCovCoef.SelectedItem = cbCovCoef.Items(1)
+            cbPlotVarImportance.Items.Clear()
+            cbPlotVarImportance.Items.Add("False")
+            cbPlotVarImportance.Items.Add("True")
+            cbPlotVarImportance.SelectedItem = cbPlotVarImportance.Items(1)
+
+            cbClassMethod.Items.Clear()
+            cbClassMethod.Items.Add("class")
+            cbClassMethod.Items.Add("anova")
+            cbClassMethod.SelectedItem = cbClassMethod.Items(1)
+
+            cbShowOOBEPlot.Items.Clear()
+            cbShowOOBEPlot.Items.Add("False")
+            cbShowOOBEPlot.Items.Add("True")
+            cbShowOOBEPlot.SelectedItem = cbShowOOBEPlot.Items(1)
             '/initialization
 
             lblColumnsLoading.Visible = True
@@ -228,7 +239,7 @@ Public Class frmLogisticRegression
             Call CheckXDFFileExists()
 
             fswModelFileExists.Path = doProperPathName(strModelsPath)
-            fswModelFileExists.Filter = "LogisticRegressionModel.RDS"
+            fswModelFileExists.Filter = "RandomForestModel.RDS"
             Call CheckModelExists()
 
             fswTrainAndTest.Path = doProperPathName(strXDF)
@@ -241,7 +252,7 @@ Public Class frmLogisticRegression
         End Try
     End Sub
 
-    Private Sub btnLogit_Click(sender As Object, e As EventArgs) Handles btnRunModel.Click
+    Private Sub btnRunModel_Click(sender As Object, e As EventArgs) Handles btnRunModel.Click
         Try
             If Not isWorking Then
 
@@ -264,13 +275,13 @@ Public Class frmLogisticRegression
                         fswModelFileExists.EnableRaisingEvents = False
                         fswTrainAndTest.EnableRaisingEvents = False
                         fswXDFFileExists.EnableRaisingEvents = False
-                        FuncInProgress.Add("Applying Logistic Regression")
+                        FuncInProgress.Add("Applying Random Forest")
                         Try
                             Dim TestColumnNames() As String = {}
 
                             If RDotNet_Initialization() Then
                                 If StopWorking Then
-                                    FuncInProgress.Remove("Applying Logistic Regression")
+                                    FuncInProgress.Remove("Applying Random Forest")
                                     Close()
                                     Exit Sub
                                 End If
@@ -283,16 +294,22 @@ Public Class frmLogisticRegression
                                 If chkShowStatistics.Checked Then Rdo.Evaluate("ShowStatistics <- TRUE") Else Rdo.Evaluate("ShowStatistics <- FALSE")
                                 If chkShowROCCurve.Checked Then Rdo.Evaluate("ShowROCCurve <- TRUE") Else Rdo.Evaluate("ShowROCCurve <- FALSE")
                                 If chkColumnsCombinations.Checked Then Rdo.Evaluate("ColumnsCombinations <- TRUE") Else Rdo.Evaluate("ColumnsCombinations <- FALSE")
-                                'WriteToLog({sa("chkShowDataSummary.Checked = {0}", chkShowDataSummary.Checked),
-                                '            sa("chkShowVariableInfo.Checked = {0}", chkShowVariableInfo.Checked),
-                                '            sa("chkStatisticsMode.Checked = {0}", chkStatisticsMode.Checked),
-                                '            sa("chkUseExistingModel.Checked = {0}", chkUseExistingModel.Checked),
-                                '            sa("chkMakePredictions.Checked = {0}", chkMakePredictions.Checked),
-                                '            sa("chkSavePredictionModel.Checked = {0}", chkSavePredictionModel.Checked),
-                                '            sa("chkShowStatistics.Checked = {0}", chkShowStatistics.Checked),
-                                '            sa("chkShowROCCurve.Checked = {0}", chkShowROCCurve.Checked),
-                                '            sa("chkColumnsCombinations.Checked = {0}", chkColumnsCombinations.Checked)
-                                '           })
+
+                                If chkPlotVarImportance.Checked Then Rdo.Evaluate(sa("PlotVarImportance <- {0}", cbPlotVarImportance.SelectedItem.ToString)) Else Rdo.Evaluate("PlotVarImportance <- FALSE")
+                                If chkClassMethod.Checked Then Rdo.Evaluate(sa("ClassMethod <- '{0}'", cbClassMethod.SelectedItem.ToString)) Else Rdo.Evaluate("ClassMethod <- 'anova'")
+                                If chkShowOOBEPlot.Checked Then Rdo.Evaluate(sa("ShowOOBEPlot <- {0}", cbShowOOBEPlot.SelectedItem.ToString)) Else Rdo.Evaluate("ShowOOBEPlot <- FALSE")
+
+                                WriteToLog({vbCrLf &
+                                            sa("chkShowDataSummary.Checked = {0}", chkShowDataSummary.Checked),
+                                            sa("chkShowVariableInfo.Checked = {0}", chkShowVariableInfo.Checked),
+                                            sa("chkStatisticsMode.Checked = {0}", chkStatisticsMode.Checked),
+                                            sa("chkUseExistingModel.Checked = {0}", chkUseExistingModel.Checked),
+                                            sa("chkMakePredictions.Checked = {0}", chkMakePredictions.Checked),
+                                            sa("chkSavePredictionModel.Checked = {0}", chkSavePredictionModel.Checked),
+                                            sa("chkShowStatistics.Checked = {0}", chkShowStatistics.Checked),
+                                            sa("chkShowROCCurve.Checked = {0}", chkShowROCCurve.Checked),
+                                            sa("chkColumnsCombinations.Checked = {0}", chkColumnsCombinations.Checked)
+                                           }, doProperPathName(strGraphs) & "Models.log", False)
 
                                 Dim CurCheckedColumnNames As New List(Of String)
                                 For i = 0 To clbColumns.CheckedIndices.Count - 1
@@ -334,41 +351,46 @@ Public Class frmLogisticRegression
 
                                     Dim predVarName_ForMultiROC As New List(Of String)
 
-                                    WriteToLog("", doProperPathName(strGraphs) & "Models.log", False)
                                     For i As Integer = 0 To ColumnNamesFormula.Count - 1
                                         If StopWorking Then
-                                            FuncInProgress.Remove("Applying Logistic Regression")
+                                            FuncInProgress.Remove("Applying Random Forest")
                                             Close()
                                             Exit Sub
                                         End If
-                                        WriteToLog({sa("LogRe_PredictionReal{0}:  {1}",
+                                        WriteToLog({sa("RF_PredictionReal{0}:  {1}",
                                                         If(chkColumnsCombinations.Checked, (i + 1).ToString, ""),
                                                         ColumnNamesFormula(i))},
                                                    doProperPathName(strGraphs) & "Models.log")
 
                                         Dim ResultsFileName As String
                                         If chkColumnsCombinations.Checked OrElse chkUpToNGramsN.Checked Then
-                                            ResultsFileName = sa("LogisticRegression_Results_{0}.csv", (i + 1))
-                                            predVarName_ForMultiROC.Add(sa("LogRe_PredictionReal{0}", (i + 1)))
+                                            ResultsFileName = sa("RandomForest_Results_{0}.csv", (i + 1))
+                                            predVarName_ForMultiROC.Add(sa("RF_PredictionReal{0}", (i + 1)))
                                         Else
-                                            ResultsFileName = "LogisticRegression_Results.csv"
+                                            ResultsFileName = "RandomForest_Results.csv"
                                         End If
 
                                         Dim SinkFilePathLinux As String = doProperFileNameLinux(strSinkFile)
-                                        If RSource({strFunctions & "3.1 Logistic Regression.R"}, , {"{reportProgress}", If(chkreportProgress.Checked, txtReportProgress.Text, "rxGetOption('reportProgress')"),
-                                                                                                    "{blocksPerRead}", If(chkBlocksPerRead.Checked, txtBlocksPerRead.Text, "rxGetOption('blocksPerRead')"),
-                                                                                                    "{rowSelection}", If(chkrowSelection.Checked, txtrowSelection.Text, "NULL"),
-                                                                                                    "{0}", ColumnNamesFormula(i),
-                                                                                                    "{1}", ModelSavePath,
-                                                                                                    "{2}", txtRoundAt.Text,
-                                                                                                    "{3}", ResultsFileName,
-                                                                                                    "{4}", SinkFilePathLinux,
-                                                                                                    "{5}", If(chkColumnsCombinations.Checked, (i + 1).ToString, ""),
-                                                                                                    "{6}", "LogisticRegressionModel"
-                                                                                                    }, True) Then
+                                        If RSource({strFunctions & "3.4 Random Forest.R"}, , {"{reportProgress}", If(chkreportProgress.Checked, txtReportProgress.Text, "rxGetOption('reportProgress')"),
+                                                                                                "{blocksPerRead}", If(chkBlocksPerRead.Checked, txtBlocksPerRead.Text, "rxGetOption('blocksPerRead')"),
+                                                                                                "{rowSelection}", If(chkrowSelection.Checked, txtrowSelection.Text, "NULL"),
+                                                                                                "{0}", ColumnNamesFormula(i),
+                                                                                                "{1}", ModelSavePath,
+                                                                                                "{2}", txtRoundAt.Text,
+                                                                                                "{3}", ResultsFileName,
+                                                                                                "{4}", SinkFilePathLinux,
+                                                                                                "{5}", If(chkColumnsCombinations.Checked, (i + 1).ToString, ""),
+                                                                                                "{6}", "RandomForestModel",
+                                                                                                "{7}", If(chkClassMethod.Checked AndAlso cbClassMethod.SelectedIndex = 0, sa("'0_prob', 'RF_PredictionReal{0}'", If(chkColumnsCombinations.Checked, (i + 1).ToString, "")),
+                                                                                                                                                                          sa("'RF_PredictionReal{0}'", If(chkColumnsCombinations.Checked, (i + 1).ToString, ""))),
+                                                                                                "{8}", If(chkCP.Checked, txtCP.Text, "0.001"),
+                                                                                                "{9}", If(chknTree.Checked, txtnTree.Text, "500"),
+                                                                                                "{10}", If(chkmTry.Checked, txtmTry.Text, "NULL"),
+                                                                                                "{11}", If(chkmaxDepth.Checked, txtmaxDepth.Text, "15")
+                                                                                                }, True) Then
 
                                             If StopWorking Then
-                                                FuncInProgress.Remove("Applying Logistic Regression")
+                                                FuncInProgress.Remove("Applying Random Forest")
                                                 Close()
                                                 Exit Sub
                                             End If
@@ -429,6 +451,20 @@ Public Class frmLogisticRegression
                                                 End If
                                             End If
 
+                                            If chkPlotVarImportance.Checked Then
+                                                Dim PlotFilePath As String = doProperFileName(strGraphs & "RandomForestModel_VariablesImportance" & If(chkColumnsCombinations.Checked, (i + 1).ToString, "") & ".png")
+                                                If File.Exists(PlotFilePath) Then
+                                                    RunOpenDir(PlotFilePath)
+                                                End If
+                                            End If
+
+                                            If chkShowOOBEPlot.Checked Then
+                                                Dim PlotFilePath As String = doProperFileName(strGraphs & "RandomForestModel_OutOfBagError" & If(chkColumnsCombinations.Checked, (i + 1).ToString, "") & ".png")
+                                                If File.Exists(PlotFilePath) Then
+                                                    RunOpenDir(PlotFilePath)
+                                                End If
+                                            End If
+
                                         End If
                                     Next
                                     WriteToLog("", doProperPathName(strGraphs) & "Models.log", False)
@@ -463,7 +499,7 @@ Public Class frmLogisticRegression
 
                         pbLoading.MarqueeAnimationSpeed = 0
                         pbLoading.Visible = False
-                        FuncInProgress.Remove("Applying Logistic Regression")
+                        FuncInProgress.Remove("Applying Random Forest")
                         fswModelFileExists.EnableRaisingEvents = False
                         fswTrainAndTest.EnableRaisingEvents = False
                         fswXDFFileExists.EnableRaisingEvents = False
@@ -523,14 +559,17 @@ Public Class frmLogisticRegression
             '    Dim a As Integer = clbColumns.CheckedIndices(i)
             '    clbColumns.SetItemChecked(a, False)
             'Next
+            gbSettings.Enabled = False
+
             btnSelectAllColumns.Enabled = False
             clbColumns.Enabled = False
             For i As Integer = 0 To clbColumns.Items.Count - 1
                 clbColumns.SetItemChecked(i, False)
             Next
 
-
         Else
+            gbSettings.Enabled = True
+
             btnSelectAllColumns.Enabled = True
             clbColumns.Enabled = True
 
@@ -615,6 +654,8 @@ Public Class frmLogisticRegression
             chkShowVariableInfo.Enabled = False
             chkUseExistingModel.Checked = False
             chkUseExistingModel.Enabled = False
+            chkmTry.Checked = False
+            chkmTry.Enabled = False
 
             If chkShowROCCurve.Checked Then
                 chkOpenGraphDirectory.Enabled = True
@@ -622,6 +663,7 @@ Public Class frmLogisticRegression
                 chkOpenGraphDirectory.Enabled = False
                 chkOpenGraphDirectory.Checked = False
             End If
+
 
         Else
             chkUpToNGramsN.Enabled = False
@@ -631,6 +673,7 @@ Public Class frmLogisticRegression
             chkShowDataSummary.Enabled = True
             chkShowVariableInfo.Enabled = True
             chkUseExistingModel.Enabled = True
+            chkmTry.Enabled = True
 
             chkOpenGraphDirectory.Enabled = False
             chkOpenGraphDirectory.Checked = False
@@ -758,6 +801,36 @@ Public Class frmLogisticRegression
         Else
             chkOpenGraphDirectory.Enabled = False
             chkOpenGraphDirectory.Checked = False
+        End If
+    End Sub
+
+    Private Sub txtCP_Click(sender As Object, e As EventArgs) Handles txtCP.Click
+        Dim Complexity As Decimal = 0.001D
+        If TypeBox("Give a value for the minimum complexity:", Complexity, False,, 0D, 1D,,,,,,, Complexity.ToString) Then
+            txtCP.Text = Complexity.ToString
+        End If
+    End Sub
+
+    Private Sub txtnTree_Click(sender As Object, e As EventArgs) Handles txtnTree.Click
+        Dim nTree As Integer = 500
+        If TypeBox("Grow this number of trees:", nTree, False,, 10, Integer.MaxValue,,,, nTree.ToString) Then
+            txtnTree.Text = nTree.ToString
+        End If
+    End Sub
+
+    Private Sub txtmTry_Click(sender As Object, e As EventArgs) Handles txtmTry.Click
+        Dim mTry As Integer = If(cbClassMethod.SelectedIndex = 0, CInt(Sqrt(clbColumns.CheckedIndices.Count)), CInt(clbColumns.CheckedIndices.Count / 3))
+        If TypeBox("Variables to sample as split candidates at each node:", mTry, False,, 1, clbColumns.CheckedIndices.Count,,,, mTry.ToString) Then
+            txtmTry.Text = mTry.ToString
+        Else
+            txtmTry.Text = "NULL"
+        End If
+    End Sub
+
+    Private Sub txtmaxDepth_Click(sender As Object, e As EventArgs) Handles txtmaxDepth.Click
+        Dim maxDepth As Integer = 15
+        If TypeBox("Maximum depth of any tree node:", maxDepth, False,, 1, Integer.MaxValue,,,, maxDepth.ToString) Then
+            txtmaxDepth.Text = maxDepth.ToString
         End If
     End Sub
 

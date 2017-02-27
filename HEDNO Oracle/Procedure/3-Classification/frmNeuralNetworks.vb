@@ -3,8 +3,8 @@ Imports RDotNet
 Imports System.Drawing.Color
 Imports System.Text
 
-Public Class frmLogisticRegression
-    Public strLanguage_LogisticRegression As String()
+Public Class frmNeuralNetworks
+    Public strLanguage_NeuralNetworks As String()
     Private XDFFileExists As Boolean = False
     Private isStatisticsXDF As Boolean = True
 
@@ -148,7 +148,7 @@ Public Class frmLogisticRegression
     End Function
 
     Private Sub CheckModelExists()
-        If File.Exists(doProperFileName(strModelsPath & "LogisticRegressionModel.RDS")) Then
+        If File.Exists(doProperFileName(strModelsPath & "NeuralNetworksModel.RDS")) Then
             ModelExists = True
             chkUseExistingModel.BackColor = LightGreen
         Else
@@ -168,16 +168,23 @@ Public Class frmLogisticRegression
         End If
     End Sub
 
-    Private Sub frmLogisticRegression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmNeuralNetworks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             'initialization
-            Call LogisticRegression_Language(Me)
+            Call NeuralNetworks_Language(Me)
             frmSkin(Me, False)
 
-            cbCovCoef.Items.Clear()
-            cbCovCoef.Items.Add("False")
-            cbCovCoef.Items.Add("True")
-            cbCovCoef.SelectedItem = cbCovCoef.Items(1)
+            cbacceleration.Items.Clear()
+            cbacceleration.Items.Add("sse")
+            cbacceleration.Items.Add("gpu")
+            cbacceleration.SelectedItem = cbacceleration.Items(0)
+
+            cbnormalize.Items.Clear()
+            cbnormalize.Items.Add("auto")
+            cbnormalize.Items.Add("no")
+            cbnormalize.Items.Add("yes")
+            cbnormalize.Items.Add("warn")
+            cbnormalize.SelectedItem = cbnormalize.Items(0)
             '/initialization
 
             lblColumnsLoading.Visible = True
@@ -228,7 +235,7 @@ Public Class frmLogisticRegression
             Call CheckXDFFileExists()
 
             fswModelFileExists.Path = doProperPathName(strModelsPath)
-            fswModelFileExists.Filter = "LogisticRegressionModel.RDS"
+            fswModelFileExists.Filter = "NeuralNetworksModel.RDS"
             Call CheckModelExists()
 
             fswTrainAndTest.Path = doProperPathName(strXDF)
@@ -241,7 +248,7 @@ Public Class frmLogisticRegression
         End Try
     End Sub
 
-    Private Sub btnLogit_Click(sender As Object, e As EventArgs) Handles btnRunModel.Click
+    Private Sub btnRunModel_Click(sender As Object, e As EventArgs) Handles btnRunModel.Click
         Try
             If Not isWorking Then
 
@@ -264,13 +271,13 @@ Public Class frmLogisticRegression
                         fswModelFileExists.EnableRaisingEvents = False
                         fswTrainAndTest.EnableRaisingEvents = False
                         fswXDFFileExists.EnableRaisingEvents = False
-                        FuncInProgress.Add("Applying Logistic Regression")
+                        FuncInProgress.Add("Applying Neural Networks")
                         Try
                             Dim TestColumnNames() As String = {}
 
                             If RDotNet_Initialization() Then
                                 If StopWorking Then
-                                    FuncInProgress.Remove("Applying Logistic Regression")
+                                    FuncInProgress.Remove("Applying Neural Networks")
                                     Close()
                                     Exit Sub
                                 End If
@@ -283,16 +290,20 @@ Public Class frmLogisticRegression
                                 If chkShowStatistics.Checked Then Rdo.Evaluate("ShowStatistics <- TRUE") Else Rdo.Evaluate("ShowStatistics <- FALSE")
                                 If chkShowROCCurve.Checked Then Rdo.Evaluate("ShowROCCurve <- TRUE") Else Rdo.Evaluate("ShowROCCurve <- FALSE")
                                 If chkColumnsCombinations.Checked Then Rdo.Evaluate("ColumnsCombinations <- TRUE") Else Rdo.Evaluate("ColumnsCombinations <- FALSE")
-                                'WriteToLog({sa("chkShowDataSummary.Checked = {0}", chkShowDataSummary.Checked),
-                                '            sa("chkShowVariableInfo.Checked = {0}", chkShowVariableInfo.Checked),
-                                '            sa("chkStatisticsMode.Checked = {0}", chkStatisticsMode.Checked),
-                                '            sa("chkUseExistingModel.Checked = {0}", chkUseExistingModel.Checked),
-                                '            sa("chkMakePredictions.Checked = {0}", chkMakePredictions.Checked),
-                                '            sa("chkSavePredictionModel.Checked = {0}", chkSavePredictionModel.Checked),
-                                '            sa("chkShowStatistics.Checked = {0}", chkShowStatistics.Checked),
-                                '            sa("chkShowROCCurve.Checked = {0}", chkShowROCCurve.Checked),
-                                '            sa("chkColumnsCombinations.Checked = {0}", chkColumnsCombinations.Checked)
-                                '           })
+
+                                If chkacceleration.Checked Then Rdo.Evaluate(sa("acceleration <- '{0}'", cbacceleration.SelectedItem.ToString)) Else Rdo.Evaluate("acceleration <- 'sse'")
+
+                                WriteToLog({vbCrLf &
+                                            sa("chkShowDataSummary.Checked = {0}", chkShowDataSummary.Checked),
+                                            sa("chkShowVariableInfo.Checked = {0}", chkShowVariableInfo.Checked),
+                                            sa("chkStatisticsMode.Checked = {0}", chkStatisticsMode.Checked),
+                                            sa("chkUseExistingModel.Checked = {0}", chkUseExistingModel.Checked),
+                                            sa("chkMakePredictions.Checked = {0}", chkMakePredictions.Checked),
+                                            sa("chkSavePredictionModel.Checked = {0}", chkSavePredictionModel.Checked),
+                                            sa("chkShowStatistics.Checked = {0}", chkShowStatistics.Checked),
+                                            sa("chkShowROCCurve.Checked = {0}", chkShowROCCurve.Checked),
+                                            sa("chkColumnsCombinations.Checked = {0}", chkColumnsCombinations.Checked)
+                                           }, doProperPathName(strGraphs) & "Models.log", False)
 
                                 Dim CurCheckedColumnNames As New List(Of String)
                                 For i = 0 To clbColumns.CheckedIndices.Count - 1
@@ -334,41 +345,43 @@ Public Class frmLogisticRegression
 
                                     Dim predVarName_ForMultiROC As New List(Of String)
 
-                                    WriteToLog("", doProperPathName(strGraphs) & "Models.log", False)
                                     For i As Integer = 0 To ColumnNamesFormula.Count - 1
                                         If StopWorking Then
-                                            FuncInProgress.Remove("Applying Logistic Regression")
+                                            FuncInProgress.Remove("Applying Neural Networks")
                                             Close()
                                             Exit Sub
                                         End If
-                                        WriteToLog({sa("LogRe_PredictionReal{0}:  {1}",
+                                        WriteToLog({sa("NN_PredictionReal{0}:  {1}",
                                                         If(chkColumnsCombinations.Checked, (i + 1).ToString, ""),
                                                         ColumnNamesFormula(i))},
                                                    doProperPathName(strGraphs) & "Models.log")
 
                                         Dim ResultsFileName As String
                                         If chkColumnsCombinations.Checked OrElse chkUpToNGramsN.Checked Then
-                                            ResultsFileName = sa("LogisticRegression_Results_{0}.csv", (i + 1))
-                                            predVarName_ForMultiROC.Add(sa("LogRe_PredictionReal{0}", (i + 1)))
+                                            ResultsFileName = sa("NeuralNetworks_Results_{0}.csv", (i + 1))
+                                            predVarName_ForMultiROC.Add(sa("NN_PredictionReal{0}", (i + 1)))
                                         Else
-                                            ResultsFileName = "LogisticRegression_Results.csv"
+                                            ResultsFileName = "NeuralNetworks_Results.csv"
                                         End If
 
                                         Dim SinkFilePathLinux As String = doProperFileNameLinux(strSinkFile)
-                                        If RSource({strFunctions & "3.1 Logistic Regression.R"}, , {"{reportProgress}", If(chkreportProgress.Checked, txtReportProgress.Text, "rxGetOption('reportProgress')"),
-                                                                                                    "{blocksPerRead}", If(chkBlocksPerRead.Checked, txtBlocksPerRead.Text, "rxGetOption('blocksPerRead')"),
-                                                                                                    "{rowSelection}", If(chkrowSelection.Checked, txtrowSelection.Text, "NULL"),
-                                                                                                    "{0}", ColumnNamesFormula(i),
-                                                                                                    "{1}", ModelSavePath,
-                                                                                                    "{2}", txtRoundAt.Text,
-                                                                                                    "{3}", ResultsFileName,
-                                                                                                    "{4}", SinkFilePathLinux,
-                                                                                                    "{5}", If(chkColumnsCombinations.Checked, (i + 1).ToString, ""),
-                                                                                                    "{6}", "LogisticRegressionModel"
-                                                                                                    }, True) Then
+                                        If RSource({strFunctions & "3.9 Neural Networks.R"}, , {"{reportProgress}", If(chkreportProgress.Checked, txtReportProgress.Text, "rxGetOption('reportProgress')"),
+                                                                                                "{blocksPerRead}", If(chkBlocksPerRead.Checked, txtBlocksPerRead.Text, "rxGetOption('blocksPerRead')"),
+                                                                                                "{rowSelection}", If(chkrowSelection.Checked, txtrowSelection.Text, "NULL"),
+                                                                                                "{0}", ColumnNamesFormula(i),
+                                                                                                "{1}", ModelSavePath,
+                                                                                                "{2}", txtRoundAt.Text,
+                                                                                                "{3}", ResultsFileName,
+                                                                                                "{4}", SinkFilePathLinux,
+                                                                                                "{5}", If(chkColumnsCombinations.Checked, (i + 1).ToString, ""),
+                                                                                                "{6}", "NeuralNetworksModel",
+                                                                                                "{7}", If(chknumHiddenNodes.Checked, txtnumHiddenNodes.Text, "500"),
+                                                                                                "{8}", If(chknumIterations.Checked, txtnumIterations.Text, "25"),
+                                                                                                "{9}", If(chknormalize.Checked, cbnormalize.SelectedItem.ToString, "auto")
+                                                                                                }, True) Then
 
                                             If StopWorking Then
-                                                FuncInProgress.Remove("Applying Logistic Regression")
+                                                FuncInProgress.Remove("Applying Neural Networks")
                                                 Close()
                                                 Exit Sub
                                             End If
@@ -463,7 +476,7 @@ Public Class frmLogisticRegression
 
                         pbLoading.MarqueeAnimationSpeed = 0
                         pbLoading.Visible = False
-                        FuncInProgress.Remove("Applying Logistic Regression")
+                        FuncInProgress.Remove("Applying Neural Networks")
                         fswModelFileExists.EnableRaisingEvents = False
                         fswTrainAndTest.EnableRaisingEvents = False
                         fswXDFFileExists.EnableRaisingEvents = False
@@ -523,14 +536,17 @@ Public Class frmLogisticRegression
             '    Dim a As Integer = clbColumns.CheckedIndices(i)
             '    clbColumns.SetItemChecked(a, False)
             'Next
+            gbSettings.Enabled = False
+
             btnSelectAllColumns.Enabled = False
             clbColumns.Enabled = False
             For i As Integer = 0 To clbColumns.Items.Count - 1
                 clbColumns.SetItemChecked(i, False)
             Next
 
-
         Else
+            gbSettings.Enabled = True
+
             btnSelectAllColumns.Enabled = True
             clbColumns.Enabled = True
 
@@ -760,5 +776,20 @@ Public Class frmLogisticRegression
             chkOpenGraphDirectory.Checked = False
         End If
     End Sub
+
+    Private Sub txtnumLeaves_Click(sender As Object, e As EventArgs) Handles txtnumIterations.Click
+        Dim numIterations As Integer = 100
+        If TypeBox("The maximum number of leaves (terminal nodes) in any tree:", numIterations, False,, 1, Integer.MaxValue,,,, numIterations.ToString) Then
+            txtnumIterations.Text = numIterations.ToString
+        End If
+    End Sub
+
+    Private Sub txtnTree_Click(sender As Object, e As EventArgs) Handles txtnumHiddenNodes.Click
+        Dim numHiddenNodes As Integer = 100
+        If TypeBox("Grow this number of trees:", numHiddenNodes, False,, 1, Integer.MaxValue,,,, numHiddenNodes.ToString) Then
+            txtnumHiddenNodes.Text = numHiddenNodes.ToString
+        End If
+    End Sub
+
 
 End Class

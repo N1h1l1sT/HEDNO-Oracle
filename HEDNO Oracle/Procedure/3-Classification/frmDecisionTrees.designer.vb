@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmLogisticRegression
+Partial Class frmDecisionTrees
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frmLogisticRegression
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogisticRegression))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDecisionTrees))
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.lblLoading = New System.Windows.Forms.Label()
@@ -59,12 +59,18 @@ Partial Class frmLogisticRegression
         Me.tpAlgorithmOptions = New System.Windows.Forms.TabPage()
         Me.gbSettings = New System.Windows.Forms.GroupBox()
         Me.scSettings = New System.Windows.Forms.SplitContainer()
+        Me.chkCP = New System.Windows.Forms.CheckBox()
+        Me.chkShowComplexityPlot = New System.Windows.Forms.CheckBox()
+        Me.chkClassMethod = New System.Windows.Forms.CheckBox()
+        Me.chkPlotTreeModel = New System.Windows.Forms.CheckBox()
         Me.chkrowSelection = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkBlocksPerRead = New System.Windows.Forms.CheckBox()
         Me.chkreportProgress = New System.Windows.Forms.CheckBox()
+        Me.txtCP = New System.Windows.Forms.TextBox()
+        Me.cbShowComplexityPlot = New System.Windows.Forms.ComboBox()
+        Me.cbClassMethod = New System.Windows.Forms.ComboBox()
+        Me.cbPlotTreeModel = New System.Windows.Forms.ComboBox()
         Me.txtrowSelection = New System.Windows.Forms.TextBox()
-        Me.cbCovCoef = New System.Windows.Forms.ComboBox()
         Me.txtBlocksPerRead = New System.Windows.Forms.TextBox()
         Me.txtReportProgress = New System.Windows.Forms.TextBox()
         Me.btnRunModel = New System.Windows.Forms.Button()
@@ -224,11 +230,12 @@ Partial Class frmLogisticRegression
         '
         'txtRoundAt
         '
-        Me.txtRoundAt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtRoundAt.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtRoundAt.Location = New System.Drawing.Point(67, 88)
         Me.txtRoundAt.Name = "txtRoundAt"
         Me.txtRoundAt.ReadOnly = True
-        Me.txtRoundAt.Size = New System.Drawing.Size(50, 20)
+        Me.txtRoundAt.Size = New System.Drawing.Size(90, 20)
         Me.txtRoundAt.TabIndex = 19
         Me.txtRoundAt.Text = "1"
         '
@@ -427,7 +434,7 @@ Partial Class frmLogisticRegression
         Me.txtNGrams.ReadOnly = True
         Me.txtNGrams.Size = New System.Drawing.Size(44, 20)
         Me.txtNGrams.TabIndex = 17
-        Me.txtNGrams.Text = "111"
+        Me.txtNGrams.Text = "1"
         '
         'chkUpToNGramsN
         '
@@ -507,40 +514,76 @@ Partial Class frmLogisticRegression
         '
         'scSettings.Panel1
         '
+        Me.scSettings.Panel1.Controls.Add(Me.chkCP)
+        Me.scSettings.Panel1.Controls.Add(Me.chkShowComplexityPlot)
+        Me.scSettings.Panel1.Controls.Add(Me.chkClassMethod)
+        Me.scSettings.Panel1.Controls.Add(Me.chkPlotTreeModel)
         Me.scSettings.Panel1.Controls.Add(Me.chkrowSelection)
-        Me.scSettings.Panel1.Controls.Add(Me.CheckBox2)
         Me.scSettings.Panel1.Controls.Add(Me.chkBlocksPerRead)
         Me.scSettings.Panel1.Controls.Add(Me.chkreportProgress)
         '
         'scSettings.Panel2
         '
+        Me.scSettings.Panel2.Controls.Add(Me.txtCP)
+        Me.scSettings.Panel2.Controls.Add(Me.cbShowComplexityPlot)
+        Me.scSettings.Panel2.Controls.Add(Me.cbClassMethod)
+        Me.scSettings.Panel2.Controls.Add(Me.cbPlotTreeModel)
         Me.scSettings.Panel2.Controls.Add(Me.txtrowSelection)
-        Me.scSettings.Panel2.Controls.Add(Me.cbCovCoef)
         Me.scSettings.Panel2.Controls.Add(Me.txtBlocksPerRead)
         Me.scSettings.Panel2.Controls.Add(Me.txtReportProgress)
         Me.scSettings.Size = New System.Drawing.Size(517, 332)
         Me.scSettings.SplitterDistance = 191
         Me.scSettings.TabIndex = 8
         '
+        'chkCP
+        '
+        Me.chkCP.AutoSize = True
+        Me.chkCP.Location = New System.Drawing.Point(3, 164)
+        Me.chkCP.Name = "chkCP"
+        Me.chkCP.Size = New System.Drawing.Size(38, 17)
+        Me.chkCP.TabIndex = 13
+        Me.chkCP.Text = "cp"
+        Me.chkCP.UseVisualStyleBackColor = True
+        '
+        'chkShowComplexityPlot
+        '
+        Me.chkShowComplexityPlot.AutoSize = True
+        Me.chkShowComplexityPlot.Location = New System.Drawing.Point(3, 137)
+        Me.chkShowComplexityPlot.Name = "chkShowComplexityPlot"
+        Me.chkShowComplexityPlot.Size = New System.Drawing.Size(127, 17)
+        Me.chkShowComplexityPlot.TabIndex = 12
+        Me.chkShowComplexityPlot.Text = "Show Complexity Plot"
+        Me.chkShowComplexityPlot.UseVisualStyleBackColor = True
+        '
+        'chkClassMethod
+        '
+        Me.chkClassMethod.AutoSize = True
+        Me.chkClassMethod.Location = New System.Drawing.Point(3, 110)
+        Me.chkClassMethod.Name = "chkClassMethod"
+        Me.chkClassMethod.Size = New System.Drawing.Size(126, 17)
+        Me.chkClassMethod.TabIndex = 11
+        Me.chkClassMethod.Text = "Classification Method"
+        Me.chkClassMethod.UseVisualStyleBackColor = True
+        '
+        'chkPlotTreeModel
+        '
+        Me.chkPlotTreeModel.AutoSize = True
+        Me.chkPlotTreeModel.Location = New System.Drawing.Point(3, 83)
+        Me.chkPlotTreeModel.Name = "chkPlotTreeModel"
+        Me.chkPlotTreeModel.Size = New System.Drawing.Size(101, 17)
+        Me.chkPlotTreeModel.TabIndex = 10
+        Me.chkPlotTreeModel.Text = "Plot Tree Model"
+        Me.chkPlotTreeModel.UseVisualStyleBackColor = True
+        '
         'chkrowSelection
         '
         Me.chkrowSelection.AutoSize = True
-        Me.chkrowSelection.Location = New System.Drawing.Point(3, 54)
+        Me.chkrowSelection.Location = New System.Drawing.Point(3, 57)
         Me.chkrowSelection.Name = "chkrowSelection"
         Me.chkrowSelection.Size = New System.Drawing.Size(87, 17)
         Me.chkrowSelection.TabIndex = 9
         Me.chkrowSelection.Text = "rowSelection"
         Me.chkrowSelection.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(3, 77)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(66, 17)
-        Me.CheckBox2.TabIndex = 8
-        Me.CheckBox2.Text = "covCoef"
-        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'chkBlocksPerRead
         '
@@ -562,6 +605,47 @@ Partial Class frmLogisticRegression
         Me.chkreportProgress.Text = "reportProgress"
         Me.chkreportProgress.UseVisualStyleBackColor = True
         '
+        'txtCP
+        '
+        Me.txtCP.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCP.Location = New System.Drawing.Point(3, 162)
+        Me.txtCP.Name = "txtCP"
+        Me.txtCP.ReadOnly = True
+        Me.txtCP.Size = New System.Drawing.Size(315, 20)
+        Me.txtCP.TabIndex = 20
+        Me.txtCP.Text = "0.001"
+        '
+        'cbShowComplexityPlot
+        '
+        Me.cbShowComplexityPlot.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbShowComplexityPlot.FormattingEnabled = True
+        Me.cbShowComplexityPlot.Location = New System.Drawing.Point(3, 135)
+        Me.cbShowComplexityPlot.Name = "cbShowComplexityPlot"
+        Me.cbShowComplexityPlot.Size = New System.Drawing.Size(315, 21)
+        Me.cbShowComplexityPlot.TabIndex = 13
+        '
+        'cbClassMethod
+        '
+        Me.cbClassMethod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbClassMethod.FormattingEnabled = True
+        Me.cbClassMethod.Location = New System.Drawing.Point(3, 108)
+        Me.cbClassMethod.Name = "cbClassMethod"
+        Me.cbClassMethod.Size = New System.Drawing.Size(315, 21)
+        Me.cbClassMethod.TabIndex = 12
+        '
+        'cbPlotTreeModel
+        '
+        Me.cbPlotTreeModel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbPlotTreeModel.FormattingEnabled = True
+        Me.cbPlotTreeModel.Location = New System.Drawing.Point(3, 81)
+        Me.cbPlotTreeModel.Name = "cbPlotTreeModel"
+        Me.cbPlotTreeModel.Size = New System.Drawing.Size(316, 21)
+        Me.cbPlotTreeModel.TabIndex = 11
+        '
         'txtrowSelection
         '
         Me.txtrowSelection.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -571,16 +655,6 @@ Partial Class frmLogisticRegression
         Me.txtrowSelection.Size = New System.Drawing.Size(316, 20)
         Me.txtrowSelection.TabIndex = 10
         Me.txtrowSelection.Text = "NULL"
-        '
-        'cbCovCoef
-        '
-        Me.cbCovCoef.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbCovCoef.FormattingEnabled = True
-        Me.cbCovCoef.Location = New System.Drawing.Point(2, 81)
-        Me.cbCovCoef.Name = "cbCovCoef"
-        Me.cbCovCoef.Size = New System.Drawing.Size(317, 21)
-        Me.cbCovCoef.TabIndex = 9
         '
         'txtBlocksPerRead
         '
@@ -611,7 +685,7 @@ Partial Class frmLogisticRegression
         Me.btnRunModel.Name = "btnRunModel"
         Me.btnRunModel.Size = New System.Drawing.Size(516, 23)
         Me.btnRunModel.TabIndex = 0
-        Me.btnRunModel.Text = "Apply Logistic Regression"
+        Me.btnRunModel.Text = "Apply Decision Trees"
         Me.btnRunModel.UseVisualStyleBackColor = True
         '
         'tmrLoadColumns
@@ -636,7 +710,7 @@ Partial Class frmLogisticRegression
         Me.fswTrainAndTest.EnableRaisingEvents = True
         Me.fswTrainAndTest.SynchronizingObject = Me
         '
-        'frmLogisticRegression
+        'frmDecisionTrees
         '
         Me.AcceptButton = Me.btnRunModel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -644,9 +718,9 @@ Partial Class frmLogisticRegression
         Me.CancelButton = Me.btnSelectAll
         Me.ClientSize = New System.Drawing.Size(540, 429)
         Me.Controls.Add(Me.pnlMain)
-        Me.Name = "frmLogisticRegression"
+        Me.Name = "frmDecisionTrees"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "1. Logistic Regression"
+        Me.Text = "2. Decision Trees"
         Me.pnlMain.ResumeLayout(False)
         Me.tcOptions.ResumeLayout(False)
         Me.tpGeneralOptions.ResumeLayout(False)
@@ -725,9 +799,15 @@ Partial Class frmLogisticRegression
     Friend WithEvents chkreportProgress As CheckBox
     Friend WithEvents txtReportProgress As TextBox
     Friend WithEvents txtBlocksPerRead As TextBox
-    Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents chkBlocksPerRead As CheckBox
-    Friend WithEvents cbCovCoef As ComboBox
     Friend WithEvents chkrowSelection As CheckBox
     Friend WithEvents txtrowSelection As TextBox
+    Friend WithEvents cbPlotTreeModel As ComboBox
+    Friend WithEvents chkPlotTreeModel As CheckBox
+    Friend WithEvents chkClassMethod As CheckBox
+    Friend WithEvents cbClassMethod As ComboBox
+    Friend WithEvents chkShowComplexityPlot As CheckBox
+    Friend WithEvents cbShowComplexityPlot As ComboBox
+    Friend WithEvents chkCP As CheckBox
+    Friend WithEvents txtCP As TextBox
 End Class

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmLogisticRegression
+Partial Class frmBoostedDecisionTrees
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frmLogisticRegression
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogisticRegression))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBoostedDecisionTrees))
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.lblLoading = New System.Windows.Forms.Label()
@@ -59,12 +59,18 @@ Partial Class frmLogisticRegression
         Me.tpAlgorithmOptions = New System.Windows.Forms.TabPage()
         Me.gbSettings = New System.Windows.Forms.GroupBox()
         Me.scSettings = New System.Windows.Forms.SplitContainer()
+        Me.chkgainConfLevel = New System.Windows.Forms.CheckBox()
+        Me.chknumTrees = New System.Windows.Forms.CheckBox()
+        Me.chknumLeaves = New System.Windows.Forms.CheckBox()
+        Me.chkunbalancedSets = New System.Windows.Forms.CheckBox()
         Me.chkrowSelection = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkBlocksPerRead = New System.Windows.Forms.CheckBox()
         Me.chkreportProgress = New System.Windows.Forms.CheckBox()
+        Me.txtgainConfLevel = New System.Windows.Forms.TextBox()
+        Me.txtnumTrees = New System.Windows.Forms.TextBox()
+        Me.txtnumLeaves = New System.Windows.Forms.TextBox()
+        Me.cbunbalancedSets = New System.Windows.Forms.ComboBox()
         Me.txtrowSelection = New System.Windows.Forms.TextBox()
-        Me.cbCovCoef = New System.Windows.Forms.ComboBox()
         Me.txtBlocksPerRead = New System.Windows.Forms.TextBox()
         Me.txtReportProgress = New System.Windows.Forms.TextBox()
         Me.btnRunModel = New System.Windows.Forms.Button()
@@ -224,11 +230,12 @@ Partial Class frmLogisticRegression
         '
         'txtRoundAt
         '
-        Me.txtRoundAt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtRoundAt.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtRoundAt.Location = New System.Drawing.Point(67, 88)
         Me.txtRoundAt.Name = "txtRoundAt"
         Me.txtRoundAt.ReadOnly = True
-        Me.txtRoundAt.Size = New System.Drawing.Size(50, 20)
+        Me.txtRoundAt.Size = New System.Drawing.Size(90, 20)
         Me.txtRoundAt.TabIndex = 19
         Me.txtRoundAt.Text = "1"
         '
@@ -427,7 +434,7 @@ Partial Class frmLogisticRegression
         Me.txtNGrams.ReadOnly = True
         Me.txtNGrams.Size = New System.Drawing.Size(44, 20)
         Me.txtNGrams.TabIndex = 17
-        Me.txtNGrams.Text = "111"
+        Me.txtNGrams.Text = "1"
         '
         'chkUpToNGramsN
         '
@@ -507,40 +514,76 @@ Partial Class frmLogisticRegression
         '
         'scSettings.Panel1
         '
+        Me.scSettings.Panel1.Controls.Add(Me.chkgainConfLevel)
+        Me.scSettings.Panel1.Controls.Add(Me.chknumTrees)
+        Me.scSettings.Panel1.Controls.Add(Me.chknumLeaves)
+        Me.scSettings.Panel1.Controls.Add(Me.chkunbalancedSets)
         Me.scSettings.Panel1.Controls.Add(Me.chkrowSelection)
-        Me.scSettings.Panel1.Controls.Add(Me.CheckBox2)
         Me.scSettings.Panel1.Controls.Add(Me.chkBlocksPerRead)
         Me.scSettings.Panel1.Controls.Add(Me.chkreportProgress)
         '
         'scSettings.Panel2
         '
+        Me.scSettings.Panel2.Controls.Add(Me.txtgainConfLevel)
+        Me.scSettings.Panel2.Controls.Add(Me.txtnumTrees)
+        Me.scSettings.Panel2.Controls.Add(Me.txtnumLeaves)
+        Me.scSettings.Panel2.Controls.Add(Me.cbunbalancedSets)
         Me.scSettings.Panel2.Controls.Add(Me.txtrowSelection)
-        Me.scSettings.Panel2.Controls.Add(Me.cbCovCoef)
         Me.scSettings.Panel2.Controls.Add(Me.txtBlocksPerRead)
         Me.scSettings.Panel2.Controls.Add(Me.txtReportProgress)
         Me.scSettings.Size = New System.Drawing.Size(517, 332)
         Me.scSettings.SplitterDistance = 191
         Me.scSettings.TabIndex = 8
         '
+        'chkgainConfLevel
+        '
+        Me.chkgainConfLevel.AutoSize = True
+        Me.chkgainConfLevel.Location = New System.Drawing.Point(3, 162)
+        Me.chkgainConfLevel.Name = "chkgainConfLevel"
+        Me.chkgainConfLevel.Size = New System.Drawing.Size(94, 17)
+        Me.chkgainConfLevel.TabIndex = 23
+        Me.chkgainConfLevel.Text = "gainConfLevel"
+        Me.chkgainConfLevel.UseVisualStyleBackColor = True
+        '
+        'chknumTrees
+        '
+        Me.chknumTrees.AutoSize = True
+        Me.chknumTrees.Location = New System.Drawing.Point(3, 110)
+        Me.chknumTrees.Name = "chknumTrees"
+        Me.chknumTrees.Size = New System.Drawing.Size(73, 17)
+        Me.chknumTrees.TabIndex = 22
+        Me.chknumTrees.Text = "numTrees"
+        Me.chknumTrees.UseVisualStyleBackColor = True
+        '
+        'chknumLeaves
+        '
+        Me.chknumLeaves.AutoSize = True
+        Me.chknumLeaves.Location = New System.Drawing.Point(4, 136)
+        Me.chknumLeaves.Name = "chknumLeaves"
+        Me.chknumLeaves.Size = New System.Drawing.Size(81, 17)
+        Me.chknumLeaves.TabIndex = 13
+        Me.chknumLeaves.Text = "numLeaves"
+        Me.chknumLeaves.UseVisualStyleBackColor = True
+        '
+        'chkunbalancedSets
+        '
+        Me.chkunbalancedSets.AutoSize = True
+        Me.chkunbalancedSets.Location = New System.Drawing.Point(3, 83)
+        Me.chkunbalancedSets.Name = "chkunbalancedSets"
+        Me.chkunbalancedSets.Size = New System.Drawing.Size(103, 17)
+        Me.chkunbalancedSets.TabIndex = 10
+        Me.chkunbalancedSets.Text = "unbalancedSets"
+        Me.chkunbalancedSets.UseVisualStyleBackColor = True
+        '
         'chkrowSelection
         '
         Me.chkrowSelection.AutoSize = True
-        Me.chkrowSelection.Location = New System.Drawing.Point(3, 54)
+        Me.chkrowSelection.Location = New System.Drawing.Point(3, 57)
         Me.chkrowSelection.Name = "chkrowSelection"
         Me.chkrowSelection.Size = New System.Drawing.Size(87, 17)
         Me.chkrowSelection.TabIndex = 9
         Me.chkrowSelection.Text = "rowSelection"
         Me.chkrowSelection.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(3, 77)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(66, 17)
-        Me.CheckBox2.TabIndex = 8
-        Me.CheckBox2.Text = "covCoef"
-        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'chkBlocksPerRead
         '
@@ -562,6 +605,49 @@ Partial Class frmLogisticRegression
         Me.chkreportProgress.Text = "reportProgress"
         Me.chkreportProgress.UseVisualStyleBackColor = True
         '
+        'txtgainConfLevel
+        '
+        Me.txtgainConfLevel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtgainConfLevel.Location = New System.Drawing.Point(3, 160)
+        Me.txtgainConfLevel.Name = "txtgainConfLevel"
+        Me.txtgainConfLevel.ReadOnly = True
+        Me.txtgainConfLevel.Size = New System.Drawing.Size(315, 20)
+        Me.txtgainConfLevel.TabIndex = 24
+        Me.txtgainConfLevel.Text = "0"
+        '
+        'txtnumTrees
+        '
+        Me.txtnumTrees.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtnumTrees.Location = New System.Drawing.Point(2, 108)
+        Me.txtnumTrees.Name = "txtnumTrees"
+        Me.txtnumTrees.ReadOnly = True
+        Me.txtnumTrees.Size = New System.Drawing.Size(316, 20)
+        Me.txtnumTrees.TabIndex = 23
+        Me.txtnumTrees.Text = "500"
+        '
+        'txtnumLeaves
+        '
+        Me.txtnumLeaves.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtnumLeaves.Location = New System.Drawing.Point(3, 134)
+        Me.txtnumLeaves.Name = "txtnumLeaves"
+        Me.txtnumLeaves.ReadOnly = True
+        Me.txtnumLeaves.Size = New System.Drawing.Size(315, 20)
+        Me.txtnumLeaves.TabIndex = 20
+        Me.txtnumLeaves.Text = "25"
+        '
+        'cbunbalancedSets
+        '
+        Me.cbunbalancedSets.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbunbalancedSets.FormattingEnabled = True
+        Me.cbunbalancedSets.Location = New System.Drawing.Point(3, 81)
+        Me.cbunbalancedSets.Name = "cbunbalancedSets"
+        Me.cbunbalancedSets.Size = New System.Drawing.Size(316, 21)
+        Me.cbunbalancedSets.TabIndex = 11
+        '
         'txtrowSelection
         '
         Me.txtrowSelection.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -571,16 +657,6 @@ Partial Class frmLogisticRegression
         Me.txtrowSelection.Size = New System.Drawing.Size(316, 20)
         Me.txtrowSelection.TabIndex = 10
         Me.txtrowSelection.Text = "NULL"
-        '
-        'cbCovCoef
-        '
-        Me.cbCovCoef.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbCovCoef.FormattingEnabled = True
-        Me.cbCovCoef.Location = New System.Drawing.Point(2, 81)
-        Me.cbCovCoef.Name = "cbCovCoef"
-        Me.cbCovCoef.Size = New System.Drawing.Size(317, 21)
-        Me.cbCovCoef.TabIndex = 9
         '
         'txtBlocksPerRead
         '
@@ -611,7 +687,7 @@ Partial Class frmLogisticRegression
         Me.btnRunModel.Name = "btnRunModel"
         Me.btnRunModel.Size = New System.Drawing.Size(516, 23)
         Me.btnRunModel.TabIndex = 0
-        Me.btnRunModel.Text = "Apply Logistic Regression"
+        Me.btnRunModel.Text = "Apply Decision Trees"
         Me.btnRunModel.UseVisualStyleBackColor = True
         '
         'tmrLoadColumns
@@ -636,7 +712,7 @@ Partial Class frmLogisticRegression
         Me.fswTrainAndTest.EnableRaisingEvents = True
         Me.fswTrainAndTest.SynchronizingObject = Me
         '
-        'frmLogisticRegression
+        'frmBoostedDecisionTrees
         '
         Me.AcceptButton = Me.btnRunModel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -644,9 +720,9 @@ Partial Class frmLogisticRegression
         Me.CancelButton = Me.btnSelectAll
         Me.ClientSize = New System.Drawing.Size(540, 429)
         Me.Controls.Add(Me.pnlMain)
-        Me.Name = "frmLogisticRegression"
+        Me.Name = "frmBoostedDecisionTrees"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "1. Logistic Regression"
+        Me.Text = "7. Boosted Decision Trees"
         Me.pnlMain.ResumeLayout(False)
         Me.tcOptions.ResumeLayout(False)
         Me.tpGeneralOptions.ResumeLayout(False)
@@ -725,9 +801,15 @@ Partial Class frmLogisticRegression
     Friend WithEvents chkreportProgress As CheckBox
     Friend WithEvents txtReportProgress As TextBox
     Friend WithEvents txtBlocksPerRead As TextBox
-    Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents chkBlocksPerRead As CheckBox
-    Friend WithEvents cbCovCoef As ComboBox
     Friend WithEvents chkrowSelection As CheckBox
     Friend WithEvents txtrowSelection As TextBox
+    Friend WithEvents chknumTrees As CheckBox
+    Friend WithEvents txtnumTrees As TextBox
+    Friend WithEvents chknumLeaves As CheckBox
+    Friend WithEvents chkunbalancedSets As CheckBox
+    Friend WithEvents txtnumLeaves As TextBox
+    Friend WithEvents cbunbalancedSets As ComboBox
+    Friend WithEvents chkgainConfLevel As CheckBox
+    Friend WithEvents txtgainConfLevel As TextBox
 End Class

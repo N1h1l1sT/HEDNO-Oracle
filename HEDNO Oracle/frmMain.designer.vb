@@ -36,13 +36,22 @@ Partial Class frmMain
         Me.mniCreateGeoColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniCreateNeededSQLViews = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniGeoLocate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniGeoLocationStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniPreProcessTheData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClustering = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClusteringStep0 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClusteringStep1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClassification = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniFormTrainAndTestSets = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mniLogit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniLogisticRegression = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniDecisionTrees = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniNaiveBayes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniRandomForest = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniStochasticGradientBoosting = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniStochasticDualCoordinateAscent = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniBoostedDecisionTrees = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniEnsambleOfDecisionTrees = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniNeuralNetworks = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniDirectoriesMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniProgramDocuments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
@@ -107,6 +116,7 @@ Partial Class frmMain
         Me.tmrHideReEnable = New System.Windows.Forms.Timer(Me.components)
         Me.tmrUpdatePB = New System.Windows.Forms.Timer(Me.components)
         Me.tmrFunctInProgress = New System.Windows.Forms.Timer(Me.components)
+        Me.mniExportListofProblematicAddresses = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMain.SuspendLayout()
         Me.gbCommands.SuspendLayout()
         Me.pnlCommands.SuspendLayout()
@@ -180,7 +190,7 @@ Partial Class frmMain
         '
         'mniPreProcessing
         '
-        Me.mniPreProcessing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniCreateGeoColumns, Me.mniCreateNeededSQLViews, Me.mniGeoLocate, Me.mniPreProcessTheData})
+        Me.mniPreProcessing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniCreateGeoColumns, Me.mniCreateNeededSQLViews, Me.mniGeoLocate, Me.mniGeoLocationStatus, Me.mniPreProcessTheData, Me.mniExportListofProblematicAddresses})
         Me.mniPreProcessing.Name = "mniPreProcessing"
         Me.mniPreProcessing.Size = New System.Drawing.Size(103, 20)
         Me.mniPreProcessing.Text = "Pre-Processing"
@@ -188,25 +198,31 @@ Partial Class frmMain
         'mniCreateGeoColumns
         '
         Me.mniCreateGeoColumns.Name = "mniCreateGeoColumns"
-        Me.mniCreateGeoColumns.Size = New System.Drawing.Size(255, 22)
+        Me.mniCreateGeoColumns.Size = New System.Drawing.Size(273, 22)
         Me.mniCreateGeoColumns.Text = "Create Geolocation SQL Columns"
         '
         'mniCreateNeededSQLViews
         '
         Me.mniCreateNeededSQLViews.Name = "mniCreateNeededSQLViews"
-        Me.mniCreateNeededSQLViews.Size = New System.Drawing.Size(255, 22)
+        Me.mniCreateNeededSQLViews.Size = New System.Drawing.Size(273, 22)
         Me.mniCreateNeededSQLViews.Text = "Create Needed SQL Views"
         '
         'mniGeoLocate
         '
         Me.mniGeoLocate.Name = "mniGeoLocate"
-        Me.mniGeoLocate.Size = New System.Drawing.Size(255, 22)
+        Me.mniGeoLocate.Size = New System.Drawing.Size(273, 22)
         Me.mniGeoLocate.Text = "&Geo-Locate"
+        '
+        'mniGeoLocationStatus
+        '
+        Me.mniGeoLocationStatus.Name = "mniGeoLocationStatus"
+        Me.mniGeoLocationStatus.Size = New System.Drawing.Size(273, 22)
+        Me.mniGeoLocationStatus.Text = "Geo-Location Status"
         '
         'mniPreProcessTheData
         '
         Me.mniPreProcessTheData.Name = "mniPreProcessTheData"
-        Me.mniPreProcessTheData.Size = New System.Drawing.Size(255, 22)
+        Me.mniPreProcessTheData.Size = New System.Drawing.Size(273, 22)
         Me.mniPreProcessTheData.Text = "&Pre-Process The Data"
         '
         'mniClustering
@@ -230,7 +246,7 @@ Partial Class frmMain
         '
         'mniClassification
         '
-        Me.mniClassification.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFormTrainAndTestSets, Me.mniLogit})
+        Me.mniClassification.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFormTrainAndTestSets, Me.mniLogisticRegression, Me.mniDecisionTrees, Me.mniNaiveBayes, Me.mniRandomForest, Me.mniStochasticGradientBoosting, Me.mniStochasticDualCoordinateAscent, Me.mniBoostedDecisionTrees, Me.mniEnsambleOfDecisionTrees, Me.mniNeuralNetworks})
         Me.mniClassification.Name = "mniClassification"
         Me.mniClassification.Size = New System.Drawing.Size(88, 20)
         Me.mniClassification.Text = "Classification"
@@ -238,14 +254,62 @@ Partial Class frmMain
         'mniFormTrainAndTestSets
         '
         Me.mniFormTrainAndTestSets.Name = "mniFormTrainAndTestSets"
-        Me.mniFormTrainAndTestSets.Size = New System.Drawing.Size(211, 22)
+        Me.mniFormTrainAndTestSets.Size = New System.Drawing.Size(277, 22)
         Me.mniFormTrainAndTestSets.Text = "&Form Train and Test sets"
         '
-        'mniLogit
+        'mniLogisticRegression
         '
-        Me.mniLogit.Name = "mniLogit"
-        Me.mniLogit.Size = New System.Drawing.Size(211, 22)
-        Me.mniLogit.Text = "&1) Logistic Regression"
+        Me.mniLogisticRegression.Name = "mniLogisticRegression"
+        Me.mniLogisticRegression.Size = New System.Drawing.Size(277, 22)
+        Me.mniLogisticRegression.Text = "&1) Logistic Regression"
+        '
+        'mniDecisionTrees
+        '
+        Me.mniDecisionTrees.Name = "mniDecisionTrees"
+        Me.mniDecisionTrees.Size = New System.Drawing.Size(277, 22)
+        Me.mniDecisionTrees.Text = "2) Decision Trees"
+        '
+        'mniNaiveBayes
+        '
+        Me.mniNaiveBayes.Name = "mniNaiveBayes"
+        Me.mniNaiveBayes.Size = New System.Drawing.Size(277, 22)
+        Me.mniNaiveBayes.Text = "3) Naive Bayes"
+        '
+        'mniRandomForest
+        '
+        Me.mniRandomForest.Name = "mniRandomForest"
+        Me.mniRandomForest.Size = New System.Drawing.Size(277, 22)
+        Me.mniRandomForest.Text = "4) Random Forest"
+        '
+        'mniStochasticGradientBoosting
+        '
+        Me.mniStochasticGradientBoosting.Name = "mniStochasticGradientBoosting"
+        Me.mniStochasticGradientBoosting.Size = New System.Drawing.Size(277, 22)
+        Me.mniStochasticGradientBoosting.Text = "5) Stochastic Gradient Boosting"
+        '
+        'mniStochasticDualCoordinateAscent
+        '
+        Me.mniStochasticDualCoordinateAscent.Name = "mniStochasticDualCoordinateAscent"
+        Me.mniStochasticDualCoordinateAscent.Size = New System.Drawing.Size(277, 22)
+        Me.mniStochasticDualCoordinateAscent.Text = "6) Stochastic Dual Coordinate Ascent"
+        '
+        'mniBoostedDecisionTrees
+        '
+        Me.mniBoostedDecisionTrees.Name = "mniBoostedDecisionTrees"
+        Me.mniBoostedDecisionTrees.Size = New System.Drawing.Size(277, 22)
+        Me.mniBoostedDecisionTrees.Text = "7) Boosted Decision Trees"
+        '
+        'mniEnsambleOfDecisionTrees
+        '
+        Me.mniEnsambleOfDecisionTrees.Name = "mniEnsambleOfDecisionTrees"
+        Me.mniEnsambleOfDecisionTrees.Size = New System.Drawing.Size(277, 22)
+        Me.mniEnsambleOfDecisionTrees.Text = "8) Ensamble of Decision Trees"
+        '
+        'mniNeuralNetworks
+        '
+        Me.mniNeuralNetworks.Name = "mniNeuralNetworks"
+        Me.mniNeuralNetworks.Size = New System.Drawing.Size(277, 22)
+        Me.mniNeuralNetworks.Text = "9) Neural Networks"
         '
         'mniDirectoriesMenu
         '
@@ -754,6 +818,12 @@ Partial Class frmMain
         '
         Me.tmrFunctInProgress.Interval = 1000
         '
+        'mniExportListofProblematicAddresses
+        '
+        Me.mniExportListofProblematicAddresses.Name = "mniExportListofProblematicAddresses"
+        Me.mniExportListofProblematicAddresses.Size = New System.Drawing.Size(273, 22)
+        Me.mniExportListofProblematicAddresses.Text = "&Export List of Problematic Addresses"
+        '
         'frmMain
         '
         Me.AcceptButton = Me.cmdGo
@@ -871,6 +941,16 @@ Partial Class frmMain
     Friend WithEvents tmrFunctInProgress As Timer
     Friend WithEvents mniClusteringStep1 As ToolStripMenuItem
     Friend WithEvents mniClassification As ToolStripMenuItem
-    Friend WithEvents mniLogit As ToolStripMenuItem
+    Friend WithEvents mniLogisticRegression As ToolStripMenuItem
     Friend WithEvents mniFormTrainAndTestSets As ToolStripMenuItem
+    Friend WithEvents mniDecisionTrees As ToolStripMenuItem
+    Friend WithEvents mniNaiveBayes As ToolStripMenuItem
+    Friend WithEvents mniRandomForest As ToolStripMenuItem
+    Friend WithEvents mniStochasticGradientBoosting As ToolStripMenuItem
+    Friend WithEvents mniStochasticDualCoordinateAscent As ToolStripMenuItem
+    Friend WithEvents mniBoostedDecisionTrees As ToolStripMenuItem
+    Friend WithEvents mniEnsambleOfDecisionTrees As ToolStripMenuItem
+    Friend WithEvents mniNeuralNetworks As ToolStripMenuItem
+    Friend WithEvents mniGeoLocationStatus As ToolStripMenuItem
+    Friend WithEvents mniExportListofProblematicAddresses As ToolStripMenuItem
 End Class

@@ -120,6 +120,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Procedure\3-Classification\frmRandomForest.designer.vb">
+      <DependentUpon>frmRandomForest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmRandomForest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmDecisionTrees.designer.vb">
+      <DependentUpon>frmDecisionTrees.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmDecisionTrees.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Other\frmStatistics.Designer.vb">
       <DependentUpon>frmStatistics.vb</DependentUpon>
     </Compile>
@@ -196,6 +208,42 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Other\modGlobal.vb" />
+    <Compile Include="Procedure\3-Classification\frmNaiveBayes.designer.vb">
+      <DependentUpon>frmNaiveBayes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmNaiveBayes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmStochasticGradientBoosting.designer.vb">
+      <DependentUpon>frmStochasticGradientBoosting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmStochasticGradientBoosting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmStochasticDualCoordinateAscent.designer.vb">
+      <DependentUpon>frmStochasticDualCoordinateAscent.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmStochasticDualCoordinateAscent.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmBoostedDecisionTrees.designer.vb">
+      <DependentUpon>frmBoostedDecisionTrees.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmBoostedDecisionTrees.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmEnsembleofDecisionTrees.designer.vb">
+      <DependentUpon>frmEnsembleofDecisionTrees.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmEnsembleofDecisionTrees.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmNeuralNetworks.designer.vb">
+      <DependentUpon>frmNeuralNetworks.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmNeuralNetworks.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Standards\Classes\clsDataGridViewPrinter.vb" />
     <Compile Include="Standards\Classes\clsDisplayResolutions.vb" />
     <Compile Include="Standards\Classes\clsFullScreen.vb" />
@@ -308,6 +356,12 @@
     <Compile Include="Standards\Modules\modUpdate.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Procedure\3-Classification\frmRandomForest.resx">
+      <DependentUpon>frmRandomForest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmDecisionTrees.resx">
+      <DependentUpon>frmDecisionTrees.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Other\frmStatistics.resx">
       <DependentUpon>frmStatistics.vb</DependentUpon>
     </EmbeddedResource>
@@ -343,6 +397,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Procedure\3-Classification\frmLogisticRegression.resx">
       <DependentUpon>frmLogisticRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmNaiveBayes.resx">
+      <DependentUpon>frmNaiveBayes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmStochasticGradientBoosting.resx">
+      <DependentUpon>frmStochasticGradientBoosting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmStochasticDualCoordinateAscent.resx">
+      <DependentUpon>frmStochasticDualCoordinateAscent.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmBoostedDecisionTrees.resx">
+      <DependentUpon>frmBoostedDecisionTrees.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmEnsembleofDecisionTrees.resx">
+      <DependentUpon>frmEnsembleofDecisionTrees.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmNeuralNetworks.resx">
+      <DependentUpon>frmNeuralNetworks.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Standards\Forms\dlgTypeBox.resx">
       <DependentUpon>dlgTypeBox.vb</DependentUpon>
