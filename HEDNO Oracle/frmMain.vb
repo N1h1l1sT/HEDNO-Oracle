@@ -1717,6 +1717,11 @@ Public Class frmMain
         NeuralNetworksForm.Show()
     End Sub
 
+    Private Sub mniFastLogisticRegression_Click(sender As Object, e As EventArgs) Handles mniFastLogisticRegression.Click
+        Dim FastLogisticRegressionForm As New frmFastLogisticRegression
+        FastLogisticRegressionForm.Show()
+    End Sub
+
     Private Sub mniGeoLocationStatus_Click(sender As Object, e As EventArgs) Handles mniGeoLocationStatus.Click
         Try
             If FuncInProgress.Count = 0 Then
@@ -1757,7 +1762,7 @@ Public Class frmMain
                         End If
 
                     Else
-                            MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
+                        MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
                     End If
 
                 Else
@@ -1799,11 +1804,11 @@ Public Class frmMain
                                 SQLAdaptrVFinalDataset.Fill(dtProblematicAddresses)
 
                                 Dim csvFileName As String = doProperFileName(strXDF & "Problematic_Cities.csv")
-                                Save_Datatable_To_csv(csvFileName, dtProblematicAddresses, True)
+                                Save_Datatable_To_csv(csvFileName, dtProblematicAddresses, True,,, CChar(vbTab))
                                 RunOpenDir(csvFileName)
 
                             Else
-                                    MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                                MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
                             End If
                         Else
                             MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))

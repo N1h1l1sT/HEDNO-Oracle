@@ -602,5 +602,15 @@ Module modChangeLanguage
         End With
     End Sub
 
+    Public Sub FastLogisticRegression_Language(ByVal frm As frmFastLogisticRegression)
+        With frm
+            Dim strLanguage_FastLogisticRegression() As String = ReadFile(strLanguageFolders & CurrentLanguage & "\" & .Name & ".lng", .strLanguage_FastLogisticRegression)
+            On Error Resume Next
+
+            '.Text = strLanguage_strLanguage_CreateSQLView(1) '
+
+        End With
+    End Sub
+
 
 End Module

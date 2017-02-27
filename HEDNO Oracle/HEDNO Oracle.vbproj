@@ -244,6 +244,12 @@
     <Compile Include="Procedure\3-Classification\frmNeuralNetworks.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Procedure\3-Classification\frmFastLogisticRegression.designer.vb">
+      <DependentUpon>frmFastLogisticRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Procedure\3-Classification\frmFastLogisticRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Standards\Classes\clsDataGridViewPrinter.vb" />
     <Compile Include="Standards\Classes\clsDisplayResolutions.vb" />
     <Compile Include="Standards\Classes\clsFullScreen.vb" />
@@ -415,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Procedure\3-Classification\frmNeuralNetworks.resx">
       <DependentUpon>frmNeuralNetworks.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Procedure\3-Classification\frmFastLogisticRegression.resx">
+      <DependentUpon>frmFastLogisticRegression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Standards\Forms\dlgTypeBox.resx">
       <DependentUpon>dlgTypeBox.vb</DependentUpon>

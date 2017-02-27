@@ -38,6 +38,7 @@ Partial Class frmMain
         Me.mniGeoLocate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniGeoLocationStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniPreProcessTheData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniExportListofProblematicAddresses = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClustering = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClusteringStep0 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClusteringStep1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -52,6 +53,7 @@ Partial Class frmMain
         Me.mniBoostedDecisionTrees = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniEnsambleOfDecisionTrees = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniNeuralNetworks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniFastLogisticRegression = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniDirectoriesMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniProgramDocuments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
@@ -116,7 +118,6 @@ Partial Class frmMain
         Me.tmrHideReEnable = New System.Windows.Forms.Timer(Me.components)
         Me.tmrUpdatePB = New System.Windows.Forms.Timer(Me.components)
         Me.tmrFunctInProgress = New System.Windows.Forms.Timer(Me.components)
-        Me.mniExportListofProblematicAddresses = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMain.SuspendLayout()
         Me.gbCommands.SuspendLayout()
         Me.pnlCommands.SuspendLayout()
@@ -225,6 +226,12 @@ Partial Class frmMain
         Me.mniPreProcessTheData.Size = New System.Drawing.Size(273, 22)
         Me.mniPreProcessTheData.Text = "&Pre-Process The Data"
         '
+        'mniExportListofProblematicAddresses
+        '
+        Me.mniExportListofProblematicAddresses.Name = "mniExportListofProblematicAddresses"
+        Me.mniExportListofProblematicAddresses.Size = New System.Drawing.Size(273, 22)
+        Me.mniExportListofProblematicAddresses.Text = "&Export List of Problematic Addresses"
+        '
         'mniClustering
         '
         Me.mniClustering.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniClusteringStep0, Me.mniClusteringStep1})
@@ -246,7 +253,7 @@ Partial Class frmMain
         '
         'mniClassification
         '
-        Me.mniClassification.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFormTrainAndTestSets, Me.mniLogisticRegression, Me.mniDecisionTrees, Me.mniNaiveBayes, Me.mniRandomForest, Me.mniStochasticGradientBoosting, Me.mniStochasticDualCoordinateAscent, Me.mniBoostedDecisionTrees, Me.mniEnsambleOfDecisionTrees, Me.mniNeuralNetworks})
+        Me.mniClassification.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniFormTrainAndTestSets, Me.mniLogisticRegression, Me.mniDecisionTrees, Me.mniNaiveBayes, Me.mniRandomForest, Me.mniStochasticGradientBoosting, Me.mniStochasticDualCoordinateAscent, Me.mniBoostedDecisionTrees, Me.mniEnsambleOfDecisionTrees, Me.mniNeuralNetworks, Me.mniFastLogisticRegression})
         Me.mniClassification.Name = "mniClassification"
         Me.mniClassification.Size = New System.Drawing.Size(88, 20)
         Me.mniClassification.Text = "Classification"
@@ -310,6 +317,12 @@ Partial Class frmMain
         Me.mniNeuralNetworks.Name = "mniNeuralNetworks"
         Me.mniNeuralNetworks.Size = New System.Drawing.Size(277, 22)
         Me.mniNeuralNetworks.Text = "9) Neural Networks"
+        '
+        'mniFastLogisticRegression
+        '
+        Me.mniFastLogisticRegression.Name = "mniFastLogisticRegression"
+        Me.mniFastLogisticRegression.Size = New System.Drawing.Size(277, 22)
+        Me.mniFastLogisticRegression.Text = "10) Fast Logistic Regression"
         '
         'mniDirectoriesMenu
         '
@@ -818,12 +831,6 @@ Partial Class frmMain
         '
         Me.tmrFunctInProgress.Interval = 1000
         '
-        'mniExportListofProblematicAddresses
-        '
-        Me.mniExportListofProblematicAddresses.Name = "mniExportListofProblematicAddresses"
-        Me.mniExportListofProblematicAddresses.Size = New System.Drawing.Size(273, 22)
-        Me.mniExportListofProblematicAddresses.Text = "&Export List of Problematic Addresses"
-        '
         'frmMain
         '
         Me.AcceptButton = Me.cmdGo
@@ -953,4 +960,5 @@ Partial Class frmMain
     Friend WithEvents mniNeuralNetworks As ToolStripMenuItem
     Friend WithEvents mniGeoLocationStatus As ToolStripMenuItem
     Friend WithEvents mniExportListofProblematicAddresses As ToolStripMenuItem
+    Friend WithEvents mniFastLogisticRegression As ToolStripMenuItem
 End Class
