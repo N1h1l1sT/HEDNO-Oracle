@@ -23,6 +23,7 @@ Partial Class frmPreProcessing
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPreProcessing))
         Me.btnPreProcess = New System.Windows.Forms.Button()
         Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
@@ -33,10 +34,11 @@ Partial Class frmPreProcessing
         Me.chkShowVariableInfo = New System.Windows.Forms.CheckBox()
         Me.lblLoading = New System.Windows.Forms.Label()
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.chkStatisticsMode = New System.Windows.Forms.CheckBox()
         Me.fswXDFFileExists = New System.IO.FileSystemWatcher()
         Me.tmrXDFExists = New System.Windows.Forms.Timer(Me.components)
-        Me.pbLoading = New System.Windows.Forms.ProgressBar()
+        Me.ttMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.gbOptions.SuspendLayout()
         Me.pnlMain.SuspendLayout()
         CType(Me.fswXDFFileExists, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,6 +53,7 @@ Partial Class frmPreProcessing
         Me.btnPreProcess.Size = New System.Drawing.Size(259, 23)
         Me.btnPreProcess.TabIndex = 0
         Me.btnPreProcess.Text = "Commence Pre-Processing"
+        Me.ttMain.SetToolTip(Me.btnPreProcess, resources.GetString("btnPreProcess.ToolTip"))
         Me.btnPreProcess.UseVisualStyleBackColor = True
         '
         'chkCleanXDFFile
@@ -62,6 +65,8 @@ Partial Class frmPreProcessing
         Me.chkCleanXDFFile.Size = New System.Drawing.Size(189, 17)
         Me.chkCleanXDFFile.TabIndex = 1
         Me.chkCleanXDFFile.Text = "Clean the XDF file after completion"
+        Me.ttMain.SetToolTip(Me.chkCleanXDFFile, "If selected, then the XDF file is going to be deleted when the form closes, meani" &
+        "ng it is going to be unavailable for further and future use")
         Me.chkCleanXDFFile.UseVisualStyleBackColor = True
         '
         'gbOptions
@@ -90,6 +95,7 @@ Partial Class frmPreProcessing
         Me.btnSelectAll.Size = New System.Drawing.Size(170, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects all options in the GroupBox")
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'chkUseExistingXDFFile
@@ -100,6 +106,7 @@ Partial Class frmPreProcessing
         Me.chkUseExistingXDFFile.Size = New System.Drawing.Size(127, 17)
         Me.chkUseExistingXDFFile.TabIndex = 5
         Me.chkUseExistingXDFFile.Text = "Use Existing XDF File"
+        Me.ttMain.SetToolTip(Me.chkUseExistingXDFFile, resources.GetString("chkUseExistingXDFFile.ToolTip"))
         Me.chkUseExistingXDFFile.UseVisualStyleBackColor = True
         '
         'chkShowDataSummary
@@ -110,6 +117,7 @@ Partial Class frmPreProcessing
         Me.chkShowDataSummary.Size = New System.Drawing.Size(125, 17)
         Me.chkShowDataSummary.TabIndex = 4
         Me.chkShowDataSummary.Text = "Show Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowDataSummary, "View a Data Summary of the dataset, such as Min, Max, Mean, etc.")
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
         'chkShowGeoLocGraph
@@ -120,6 +128,8 @@ Partial Class frmPreProcessing
         Me.chkShowGeoLocGraph.Size = New System.Drawing.Size(170, 17)
         Me.chkShowGeoLocGraph.TabIndex = 2
         Me.chkShowGeoLocGraph.Text = "Show the Geo-Location Graph"
+        Me.ttMain.SetToolTip(Me.chkShowGeoLocGraph, "View the Geo-Location Graph as of Pre-Processing's point of view (may contain err" &
+        "oneous latitudes/longitudes outside Greece's region)")
         Me.chkShowGeoLocGraph.UseVisualStyleBackColor = True
         '
         'chkShowVariableInfo
@@ -130,6 +140,7 @@ Partial Class frmPreProcessing
         Me.chkShowVariableInfo.Size = New System.Drawing.Size(149, 17)
         Me.chkShowVariableInfo.TabIndex = 3
         Me.chkShowVariableInfo.Text = "Show Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowVariableInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
         'lblLoading
@@ -141,6 +152,7 @@ Partial Class frmPreProcessing
         Me.lblLoading.TabIndex = 13
         Me.lblLoading.Text = "Loading..."
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblLoading.Visible = False
         '
         'pnlMain
         '
@@ -156,6 +168,16 @@ Partial Class frmPreProcessing
         Me.pnlMain.Size = New System.Drawing.Size(283, 246)
         Me.pnlMain.TabIndex = 4
         '
+        'pbLoading
+        '
+        Me.pbLoading.Location = New System.Drawing.Point(139, 0)
+        Me.pbLoading.MarqueeAnimationSpeed = 10
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
+        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pbLoading.TabIndex = 14
+        Me.pbLoading.Visible = False
+        '
         'chkStatisticsMode
         '
         Me.chkStatisticsMode.AutoSize = True
@@ -166,6 +188,7 @@ Partial Class frmPreProcessing
         Me.chkStatisticsMode.Size = New System.Drawing.Size(98, 17)
         Me.chkStatisticsMode.TabIndex = 12
         Me.chkStatisticsMode.Text = "Statistics Mode"
+        Me.ttMain.SetToolTip(Me.chkStatisticsMode, resources.GetString("chkStatisticsMode.ToolTip"))
         Me.chkStatisticsMode.UseVisualStyleBackColor = True
         '
         'fswXDFFileExists
@@ -177,15 +200,12 @@ Partial Class frmPreProcessing
         '
         Me.tmrXDFExists.Interval = 10
         '
-        'pbLoading
+        'ttMain
         '
-        Me.pbLoading.Location = New System.Drawing.Point(139, 0)
-        Me.pbLoading.MarqueeAnimationSpeed = 10
-        Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
-        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
-        Me.pbLoading.TabIndex = 14
-        Me.pbLoading.Visible = False
+        Me.ttMain.AutoPopDelay = 10000
+        Me.ttMain.InitialDelay = 500
+        Me.ttMain.ReshowDelay = 100
+        Me.ttMain.ShowAlways = True
         '
         'frmPreProcessing
         '
@@ -222,4 +242,5 @@ Partial Class frmPreProcessing
     Friend WithEvents lblLoading As Label
     Friend WithEvents tmrXDFExists As Timer
     Friend WithEvents pbLoading As ProgressBar
+    Friend WithEvents ttMain As ToolTip
 End Class

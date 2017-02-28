@@ -117,6 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>391, 5</value>
+  </metadata>
+  <data name="chkUseExistingXDFFile.ToolTip" xml:space="preserve">
+    <value>[Red background means that an existing Clustering XDF file cannot be located or is unreachable]
+[Green background means that an existing Clustering XDF file is located and is unreachable]
+Instead of Creating the Clustering XDF file file by fetching data from the SQL Server, the file that's been saved in a previous session is used</value>
+  </data>
+  <data name="chkStatisticsMode.ToolTip" xml:space="preserve">
+    <value>[Transparent background means a new XDF file will be created, so it can be either in Statistics Mode or not]
+
+[If the CheckBox is Checked:]
+[Red background means that the existing XDF is not marked for statistics, hence by checking this, the statistics will be nonsense or fail altogether]
+[Green background means that the existing XDF is marked for statistics]
+
+[If the CheckBox is Not Checked:]
+[Red background means that the existing XDF is marked for statistics, hence by not checking, you strip yourself from the option to perform statistics]
+[Green background means that the existing XDF is not marked for statistics]
+
+If selected, then a n% of the clearly labelled data will be marked  for Training and a 100-n% for testing purposes in the XDF file
+Otherwise all clearly labelled data will be marked for Training and all pending projects without a label will be marked for Testing/Prediction.</value>
+  </data>
+  <data name="txtMaxClusterNum.ToolTip" xml:space="preserve">
+    <value>When the Clustering process commences, the algorithm will attempt to compute the optimal k number.
+It will run for k = 1 to this number; i.e. if you type 30, then it will find the optimal k between 1 and 30.
+When the optimal number is found, a graph showing why it was chosen will be shown and the final decision for k will be up to you.</value>
+  </data>
+  <data name="btnClustering1.ToolTip" xml:space="preserve">
+    <value>Needs: R Server or equivalent, an active connection to the SQL Server from R (i.e. valid R SQL Connection String)
+Does: Fetches data from the SQL Server and applies unsupervised learning, exporting an XDF file featuring the Cluster Dataset according to selected options
+--If Statistics Mode is checked, then a n% of the clearly labelled data will be marked for Training and a 100-n% for testing purposes in the XDF file
+--Otherwise all clearly labelled data will be marked for Training and all pending projects without a label will be marked for Testing/Prediction.
+*If 'Show Data Summary' is checked, a Data Summary View of the Clustering dataset is shown, containing features such as Min, Max, Mean, etc.
+*If 'Show Variable Information' is checked, a Variable Information View is shown, containing features such as their types and descriptions.
+*If 'Show the Geo-Located Graph' is checked, a Geo-Location Graph is shown as of Clustering Step1's point of view (Clear Clusters with colour-coding)
+*If 'Save K-Means Model' is checked, the Model is saved in RDS format on the location pointed by the 'Save K-Means at:' textbox</value>
+  </data>
   <metadata name="fbdKMeansModel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>3, 3</value>
   </metadata>

@@ -59,12 +59,16 @@ Partial Class frmNeuralNetworks
         Me.tpAlgorithmOptions = New System.Windows.Forms.TabPage()
         Me.gbSettings = New System.Windows.Forms.GroupBox()
         Me.scSettings = New System.Windows.Forms.SplitContainer()
+        Me.chkminiBatchSize = New System.Windows.Forms.CheckBox()
+        Me.chknormalize = New System.Windows.Forms.CheckBox()
         Me.chkacceleration = New System.Windows.Forms.CheckBox()
         Me.chknumIterations = New System.Windows.Forms.CheckBox()
         Me.chknumHiddenNodes = New System.Windows.Forms.CheckBox()
         Me.chkrowSelection = New System.Windows.Forms.CheckBox()
         Me.chkBlocksPerRead = New System.Windows.Forms.CheckBox()
         Me.chkreportProgress = New System.Windows.Forms.CheckBox()
+        Me.txtminiBatchSize = New System.Windows.Forms.TextBox()
+        Me.cbnormalize = New System.Windows.Forms.ComboBox()
         Me.cbacceleration = New System.Windows.Forms.ComboBox()
         Me.txtrowSelection = New System.Windows.Forms.TextBox()
         Me.txtnumHiddenNodes = New System.Windows.Forms.TextBox()
@@ -79,8 +83,7 @@ Partial Class frmNeuralNetworks
         Me.fswXDFFileExists = New System.IO.FileSystemWatcher()
         Me.tmrXDFExists = New System.Windows.Forms.Timer(Me.components)
         Me.fswTrainAndTest = New System.IO.FileSystemWatcher()
-        Me.chknormalize = New System.Windows.Forms.CheckBox()
-        Me.cbnormalize = New System.Windows.Forms.ComboBox()
+        Me.lblInProgress = New System.Windows.Forms.Label()
         Me.pnlMain.SuspendLayout()
         Me.tcOptions.SuspendLayout()
         Me.tpGeneralOptions.SuspendLayout()
@@ -114,7 +117,7 @@ Partial Class frmNeuralNetworks
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(540, 429)
+        Me.pnlMain.Size = New System.Drawing.Size(540, 456)
         Me.pnlMain.TabIndex = 8
         '
         'pbLoading
@@ -147,7 +150,7 @@ Partial Class frmNeuralNetworks
         Me.tcOptions.Location = New System.Drawing.Point(0, 3)
         Me.tcOptions.Name = "tcOptions"
         Me.tcOptions.SelectedIndex = 0
-        Me.tcOptions.Size = New System.Drawing.Size(537, 383)
+        Me.tcOptions.Size = New System.Drawing.Size(537, 382)
         Me.tcOptions.TabIndex = 17
         '
         'tpGeneralOptions
@@ -156,7 +159,7 @@ Partial Class frmNeuralNetworks
         Me.tpGeneralOptions.Location = New System.Drawing.Point(4, 22)
         Me.tpGeneralOptions.Name = "tpGeneralOptions"
         Me.tpGeneralOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpGeneralOptions.Size = New System.Drawing.Size(529, 357)
+        Me.tpGeneralOptions.Size = New System.Drawing.Size(529, 356)
         Me.tpGeneralOptions.TabIndex = 0
         Me.tpGeneralOptions.Text = "General Options"
         Me.tpGeneralOptions.UseVisualStyleBackColor = True
@@ -176,7 +179,7 @@ Partial Class frmNeuralNetworks
         'scMain.Panel2
         '
         Me.scMain.Panel2.Controls.Add(Me.scColumns)
-        Me.scMain.Size = New System.Drawing.Size(523, 351)
+        Me.scMain.Size = New System.Drawing.Size(523, 350)
         Me.scMain.SplitterDistance = 248
         Me.scMain.TabIndex = 10
         '
@@ -190,6 +193,7 @@ Partial Class frmNeuralNetworks
         Me.chkStatisticsMode.Size = New System.Drawing.Size(101, 17)
         Me.chkStatisticsMode.TabIndex = 11
         Me.chkStatisticsMode.Text = "Statistics Mode:"
+        Me.ttMain.SetToolTip(Me.chkStatisticsMode, resources.GetString("chkStatisticsMode.ToolTip"))
         Me.chkStatisticsMode.UseVisualStyleBackColor = True
         '
         'gbStatistics
@@ -200,7 +204,7 @@ Partial Class frmNeuralNetworks
         Me.gbStatistics.Controls.Add(Me.chkShowROCCurve)
         Me.gbStatistics.Controls.Add(Me.chkShowStatistics)
         Me.gbStatistics.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.gbStatistics.Location = New System.Drawing.Point(0, 231)
+        Me.gbStatistics.Location = New System.Drawing.Point(0, 230)
         Me.gbStatistics.Name = "gbStatistics"
         Me.gbStatistics.Size = New System.Drawing.Size(248, 120)
         Me.gbStatistics.TabIndex = 11
@@ -215,6 +219,7 @@ Partial Class frmNeuralNetworks
         Me.chkOpenGraphDirectory.Size = New System.Drawing.Size(116, 17)
         Me.chkOpenGraphDirectory.TabIndex = 20
         Me.chkOpenGraphDirectory.Text = "Open Graph Folder"
+        Me.ttMain.SetToolTip(Me.chkOpenGraphDirectory, resources.GetString("chkOpenGraphDirectory.ToolTip"))
         Me.chkOpenGraphDirectory.UseVisualStyleBackColor = True
         '
         'lblRoundAt
@@ -235,9 +240,10 @@ Partial Class frmNeuralNetworks
         Me.txtRoundAt.Location = New System.Drawing.Point(67, 88)
         Me.txtRoundAt.Name = "txtRoundAt"
         Me.txtRoundAt.ReadOnly = True
-        Me.txtRoundAt.Size = New System.Drawing.Size(90, 20)
+        Me.txtRoundAt.Size = New System.Drawing.Size(64, 20)
         Me.txtRoundAt.TabIndex = 19
         Me.txtRoundAt.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtRoundAt, "The decimal point that viewed statistics are rounded at.")
         '
         'chkShowROCCurve
         '
@@ -247,6 +253,7 @@ Partial Class frmNeuralNetworks
         Me.chkShowROCCurve.Size = New System.Drawing.Size(110, 17)
         Me.chkShowROCCurve.TabIndex = 13
         Me.chkShowROCCurve.Text = "Show ROC Curve"
+        Me.ttMain.SetToolTip(Me.chkShowROCCurve, "A Plot of the model's ROC Curve is shown along with the calculated AUC")
         Me.chkShowROCCurve.UseVisualStyleBackColor = True
         '
         'chkShowStatistics
@@ -257,6 +264,8 @@ Partial Class frmNeuralNetworks
         Me.chkShowStatistics.Size = New System.Drawing.Size(98, 17)
         Me.chkShowStatistics.TabIndex = 12
         Me.chkShowStatistics.Text = "Show Statistics"
+        Me.ttMain.SetToolTip(Me.chkShowStatistics, "A form is generated with the Model's statistics, such as the Confusion Matrix, Ac" &
+        "curacy, F Measure, G, etc.")
         Me.chkShowStatistics.UseVisualStyleBackColor = True
         '
         'gbOptions
@@ -285,6 +294,7 @@ Partial Class frmNeuralNetworks
         Me.chkSavePredictionModel.Size = New System.Drawing.Size(133, 17)
         Me.chkSavePredictionModel.TabIndex = 13
         Me.chkSavePredictionModel.Text = "Save Prediction Model"
+        Me.ttMain.SetToolTip(Me.chkSavePredictionModel, "Saves the trained model at the location specified below")
         Me.chkSavePredictionModel.UseVisualStyleBackColor = True
         '
         'lblSavePath
@@ -305,6 +315,8 @@ Partial Class frmNeuralNetworks
         Me.txtSavePath.ReadOnly = True
         Me.txtSavePath.Size = New System.Drawing.Size(236, 20)
         Me.txtSavePath.TabIndex = 11
+        Me.ttMain.SetToolTip(Me.txtSavePath, "If 'Save Prediction Model' is checked, the model's .RDS file is saved in this pat" &
+        "h")
         '
         'chkMakePredictions
         '
@@ -314,6 +326,7 @@ Partial Class frmNeuralNetworks
         Me.chkMakePredictions.Size = New System.Drawing.Size(108, 17)
         Me.chkMakePredictions.TabIndex = 6
         Me.chkMakePredictions.Text = "Make Predictions"
+        Me.ttMain.SetToolTip(Me.chkMakePredictions, "Uses the trained model to make prediction upon the Testing Dataset.")
         Me.chkMakePredictions.UseVisualStyleBackColor = True
         '
         'chkUseExistingModel
@@ -335,6 +348,7 @@ Partial Class frmNeuralNetworks
         Me.chkShowDataSummary.Size = New System.Drawing.Size(125, 17)
         Me.chkShowDataSummary.TabIndex = 4
         Me.chkShowDataSummary.Text = "Show Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowDataSummary, "View a Data Summary of the Classification dataset, such as Min, Max, Mean, etc.")
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
         'btnSelectAll
@@ -347,6 +361,7 @@ Partial Class frmNeuralNetworks
         Me.btnSelectAll.Size = New System.Drawing.Size(236, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects all options in the GroupBox")
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'chkShowVariableInfo
@@ -357,6 +372,7 @@ Partial Class frmNeuralNetworks
         Me.chkShowVariableInfo.Size = New System.Drawing.Size(149, 17)
         Me.chkShowVariableInfo.TabIndex = 3
         Me.chkShowVariableInfo.Text = "Show Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowVariableInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
         'scColumns
@@ -380,8 +396,8 @@ Partial Class frmNeuralNetworks
         Me.scColumns.Panel2.Controls.Add(Me.btnSelectAllColumns)
         Me.scColumns.Panel2.Controls.Add(Me.lblCombinationsCount)
         Me.scColumns.Panel2.Controls.Add(Me.chkColumnsCombinations)
-        Me.scColumns.Size = New System.Drawing.Size(271, 351)
-        Me.scColumns.SplitterDistance = 236
+        Me.scColumns.Size = New System.Drawing.Size(271, 350)
+        Me.scColumns.SplitterDistance = 235
         Me.scColumns.TabIndex = 1
         '
         'pbColumnsLoading
@@ -401,7 +417,7 @@ Partial Class frmNeuralNetworks
         Me.lblColumnsLoading.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.lblColumnsLoading.Location = New System.Drawing.Point(0, 0)
         Me.lblColumnsLoading.Name = "lblColumnsLoading"
-        Me.lblColumnsLoading.Size = New System.Drawing.Size(271, 236)
+        Me.lblColumnsLoading.Size = New System.Drawing.Size(271, 235)
         Me.lblColumnsLoading.TabIndex = 1
         Me.lblColumnsLoading.Text = "Loading..."
         Me.lblColumnsLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -412,8 +428,9 @@ Partial Class frmNeuralNetworks
         Me.clbColumns.FormattingEnabled = True
         Me.clbColumns.Location = New System.Drawing.Point(0, 0)
         Me.clbColumns.Name = "clbColumns"
-        Me.clbColumns.Size = New System.Drawing.Size(271, 236)
+        Me.clbColumns.Size = New System.Drawing.Size(271, 235)
         Me.clbColumns.TabIndex = 0
+        Me.ttMain.SetToolTip(Me.clbColumns, "The columns/variables that can be used for the Model Training Process")
         '
         'lblNGrams
         '
@@ -435,6 +452,7 @@ Partial Class frmNeuralNetworks
         Me.txtNGrams.Size = New System.Drawing.Size(44, 20)
         Me.txtNGrams.TabIndex = 17
         Me.txtNGrams.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtNGrams, resources.GetString("txtNGrams.ToolTip"))
         '
         'chkUpToNGramsN
         '
@@ -446,6 +464,7 @@ Partial Class frmNeuralNetworks
         Me.chkUpToNGramsN.Size = New System.Drawing.Size(108, 17)
         Me.chkUpToNGramsN.TabIndex = 16
         Me.chkUpToNGramsN.Text = "Up to n-grams's n"
+        Me.ttMain.SetToolTip(Me.chkUpToNGramsN, resources.GetString("chkUpToNGramsN.ToolTip"))
         Me.chkUpToNGramsN.UseVisualStyleBackColor = True
         '
         'btnSelectAllColumns
@@ -459,6 +478,7 @@ Partial Class frmNeuralNetworks
         Me.btnSelectAllColumns.Size = New System.Drawing.Size(265, 23)
         Me.btnSelectAllColumns.TabIndex = 14
         Me.btnSelectAllColumns.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAllColumns, "Selects all the variables to be used in the Supervised Learning")
         Me.btnSelectAllColumns.UseVisualStyleBackColor = True
         '
         'lblCombinationsCount
@@ -482,6 +502,7 @@ Partial Class frmNeuralNetworks
         Me.chkColumnsCombinations.Size = New System.Drawing.Size(184, 17)
         Me.chkColumnsCombinations.TabIndex = 14
         Me.chkColumnsCombinations.Text = "Iterate over Column Combinations"
+        Me.ttMain.SetToolTip(Me.chkColumnsCombinations, resources.GetString("chkColumnsCombinations.ToolTip"))
         Me.chkColumnsCombinations.UseVisualStyleBackColor = True
         '
         'tpAlgorithmOptions
@@ -490,7 +511,7 @@ Partial Class frmNeuralNetworks
         Me.tpAlgorithmOptions.Location = New System.Drawing.Point(4, 22)
         Me.tpAlgorithmOptions.Name = "tpAlgorithmOptions"
         Me.tpAlgorithmOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpAlgorithmOptions.Size = New System.Drawing.Size(529, 357)
+        Me.tpAlgorithmOptions.Size = New System.Drawing.Size(529, 356)
         Me.tpAlgorithmOptions.TabIndex = 1
         Me.tpAlgorithmOptions.Text = "Algorithm-Specific Options"
         Me.tpAlgorithmOptions.UseVisualStyleBackColor = True
@@ -501,7 +522,7 @@ Partial Class frmNeuralNetworks
         Me.gbSettings.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSettings.Location = New System.Drawing.Point(3, 3)
         Me.gbSettings.Name = "gbSettings"
-        Me.gbSettings.Size = New System.Drawing.Size(523, 351)
+        Me.gbSettings.Size = New System.Drawing.Size(523, 350)
         Me.gbSettings.TabIndex = 7
         Me.gbSettings.TabStop = False
         Me.gbSettings.Text = "Settings:"
@@ -514,6 +535,7 @@ Partial Class frmNeuralNetworks
         '
         'scSettings.Panel1
         '
+        Me.scSettings.Panel1.Controls.Add(Me.chkminiBatchSize)
         Me.scSettings.Panel1.Controls.Add(Me.chknormalize)
         Me.scSettings.Panel1.Controls.Add(Me.chkacceleration)
         Me.scSettings.Panel1.Controls.Add(Me.chknumIterations)
@@ -524,6 +546,7 @@ Partial Class frmNeuralNetworks
         '
         'scSettings.Panel2
         '
+        Me.scSettings.Panel2.Controls.Add(Me.txtminiBatchSize)
         Me.scSettings.Panel2.Controls.Add(Me.cbnormalize)
         Me.scSettings.Panel2.Controls.Add(Me.cbacceleration)
         Me.scSettings.Panel2.Controls.Add(Me.txtrowSelection)
@@ -531,9 +554,31 @@ Partial Class frmNeuralNetworks
         Me.scSettings.Panel2.Controls.Add(Me.txtnumIterations)
         Me.scSettings.Panel2.Controls.Add(Me.txtBlocksPerRead)
         Me.scSettings.Panel2.Controls.Add(Me.txtReportProgress)
-        Me.scSettings.Size = New System.Drawing.Size(517, 332)
+        Me.scSettings.Size = New System.Drawing.Size(517, 331)
         Me.scSettings.SplitterDistance = 191
         Me.scSettings.TabIndex = 8
+        '
+        'chkminiBatchSize
+        '
+        Me.chkminiBatchSize.AutoSize = True
+        Me.chkminiBatchSize.Location = New System.Drawing.Point(3, 189)
+        Me.chkminiBatchSize.Name = "chkminiBatchSize"
+        Me.chkminiBatchSize.Size = New System.Drawing.Size(92, 17)
+        Me.chkminiBatchSize.TabIndex = 35
+        Me.chkminiBatchSize.Text = "miniBatchSize"
+        Me.ttMain.SetToolTip(Me.chkminiBatchSize, resources.GetString("chkminiBatchSize.ToolTip"))
+        Me.chkminiBatchSize.UseVisualStyleBackColor = True
+        '
+        'chknormalize
+        '
+        Me.chknormalize.AutoSize = True
+        Me.chknormalize.Location = New System.Drawing.Point(3, 162)
+        Me.chknormalize.Name = "chknormalize"
+        Me.chknormalize.Size = New System.Drawing.Size(70, 17)
+        Me.chknormalize.TabIndex = 14
+        Me.chknormalize.Text = "normalize"
+        Me.ttMain.SetToolTip(Me.chknormalize, resources.GetString("chknormalize.ToolTip"))
+        Me.chknormalize.UseVisualStyleBackColor = True
         '
         'chkacceleration
         '
@@ -543,6 +588,7 @@ Partial Class frmNeuralNetworks
         Me.chkacceleration.Size = New System.Drawing.Size(84, 17)
         Me.chkacceleration.TabIndex = 34
         Me.chkacceleration.Text = "acceleration"
+        Me.ttMain.SetToolTip(Me.chkacceleration, resources.GetString("chkacceleration.ToolTip"))
         Me.chkacceleration.UseVisualStyleBackColor = True
         '
         'chknumIterations
@@ -553,6 +599,7 @@ Partial Class frmNeuralNetworks
         Me.chknumIterations.Size = New System.Drawing.Size(89, 17)
         Me.chknumIterations.TabIndex = 31
         Me.chknumIterations.Text = "numIterations"
+        Me.ttMain.SetToolTip(Me.chknumIterations, "The number of iterations on the full training set.")
         Me.chknumIterations.UseVisualStyleBackColor = True
         '
         'chknumHiddenNodes
@@ -563,6 +610,7 @@ Partial Class frmNeuralNetworks
         Me.chknumHiddenNodes.Size = New System.Drawing.Size(111, 17)
         Me.chknumHiddenNodes.TabIndex = 33
         Me.chknumHiddenNodes.Text = "numHiddenNodes"
+        Me.ttMain.SetToolTip(Me.chknumHiddenNodes, "The default number of hidden nodes in the neural net.")
         Me.chknumHiddenNodes.UseVisualStyleBackColor = True
         '
         'chkrowSelection
@@ -595,6 +643,29 @@ Partial Class frmNeuralNetworks
         Me.chkreportProgress.Text = "reportProgress"
         Me.chkreportProgress.UseVisualStyleBackColor = True
         '
+        'txtminiBatchSize
+        '
+        Me.txtminiBatchSize.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtminiBatchSize.Location = New System.Drawing.Point(4, 187)
+        Me.txtminiBatchSize.Name = "txtminiBatchSize"
+        Me.txtminiBatchSize.ReadOnly = True
+        Me.txtminiBatchSize.Size = New System.Drawing.Size(315, 20)
+        Me.txtminiBatchSize.TabIndex = 36
+        Me.txtminiBatchSize.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtminiBatchSize, resources.GetString("txtminiBatchSize.ToolTip"))
+        '
+        'cbnormalize
+        '
+        Me.cbnormalize.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbnormalize.FormattingEnabled = True
+        Me.cbnormalize.Location = New System.Drawing.Point(4, 160)
+        Me.cbnormalize.Name = "cbnormalize"
+        Me.cbnormalize.Size = New System.Drawing.Size(315, 21)
+        Me.cbnormalize.TabIndex = 15
+        Me.ttMain.SetToolTip(Me.cbnormalize, resources.GetString("cbnormalize.ToolTip"))
+        '
         'cbacceleration
         '
         Me.cbacceleration.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -604,6 +675,7 @@ Partial Class frmNeuralNetworks
         Me.cbacceleration.Name = "cbacceleration"
         Me.cbacceleration.Size = New System.Drawing.Size(315, 21)
         Me.cbacceleration.TabIndex = 35
+        Me.ttMain.SetToolTip(Me.cbacceleration, resources.GetString("cbacceleration.ToolTip"))
         '
         'txtrowSelection
         '
@@ -625,6 +697,7 @@ Partial Class frmNeuralNetworks
         Me.txtnumHiddenNodes.Size = New System.Drawing.Size(316, 20)
         Me.txtnumHiddenNodes.TabIndex = 34
         Me.txtnumHiddenNodes.Text = "100"
+        Me.ttMain.SetToolTip(Me.txtnumHiddenNodes, "The default number of hidden nodes in the neural net.")
         '
         'txtnumIterations
         '
@@ -636,6 +709,7 @@ Partial Class frmNeuralNetworks
         Me.txtnumIterations.Size = New System.Drawing.Size(315, 20)
         Me.txtnumIterations.TabIndex = 32
         Me.txtnumIterations.Text = "100"
+        Me.ttMain.SetToolTip(Me.txtnumIterations, "The number of iterations on the full training set.")
         '
         'txtBlocksPerRead
         '
@@ -662,11 +736,12 @@ Partial Class frmNeuralNetworks
         Me.btnRunModel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRunModel.Enabled = False
-        Me.btnRunModel.Location = New System.Drawing.Point(12, 394)
+        Me.btnRunModel.Location = New System.Drawing.Point(12, 421)
         Me.btnRunModel.Name = "btnRunModel"
         Me.btnRunModel.Size = New System.Drawing.Size(516, 23)
         Me.btnRunModel.TabIndex = 0
-        Me.btnRunModel.Text = "Apply Decision Trees"
+        Me.btnRunModel.Text = "Apply Neural Networks"
+        Me.ttMain.SetToolTip(Me.btnRunModel, resources.GetString("btnRunModel.ToolTip"))
         Me.btnRunModel.UseVisualStyleBackColor = True
         '
         'tmrLoadColumns
@@ -691,25 +766,16 @@ Partial Class frmNeuralNetworks
         Me.fswTrainAndTest.EnableRaisingEvents = True
         Me.fswTrainAndTest.SynchronizingObject = Me
         '
-        'chknormalize
+        'lblInProgress
         '
-        Me.chknormalize.AutoSize = True
-        Me.chknormalize.Location = New System.Drawing.Point(3, 162)
-        Me.chknormalize.Name = "chknormalize"
-        Me.chknormalize.Size = New System.Drawing.Size(70, 17)
-        Me.chknormalize.TabIndex = 14
-        Me.chknormalize.Text = "normalize"
-        Me.chknormalize.UseVisualStyleBackColor = True
-        '
-        'cbnormalize
-        '
-        Me.cbnormalize.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbnormalize.FormattingEnabled = True
-        Me.cbnormalize.Location = New System.Drawing.Point(3, 160)
-        Me.cbnormalize.Name = "cbnormalize"
-        Me.cbnormalize.Size = New System.Drawing.Size(315, 21)
-        Me.cbnormalize.TabIndex = 15
+        Me.lblInProgress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblInProgress.AutoSize = True
+        Me.lblInProgress.Location = New System.Drawing.Point(13, 397)
+        Me.lblInProgress.Name = "lblInProgress"
+        Me.lblInProgress.Size = New System.Drawing.Size(69, 13)
+        Me.lblInProgress.TabIndex = 19
+        Me.lblInProgress.Text = "In Progress..."
+        Me.lblInProgress.Visible = False
         '
         'frmNeuralNetworks
         '
@@ -717,7 +783,8 @@ Partial Class frmNeuralNetworks
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSelectAll
-        Me.ClientSize = New System.Drawing.Size(540, 429)
+        Me.ClientSize = New System.Drawing.Size(540, 456)
+        Me.Controls.Add(Me.lblInProgress)
         Me.Controls.Add(Me.pnlMain)
         Me.Name = "frmNeuralNetworks"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -751,6 +818,7 @@ Partial Class frmNeuralNetworks
         CType(Me.fswXDFFileExists, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.fswTrainAndTest, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -811,4 +879,7 @@ Partial Class frmNeuralNetworks
     Friend WithEvents cbacceleration As ComboBox
     Friend WithEvents chknormalize As CheckBox
     Friend WithEvents cbnormalize As ComboBox
+    Friend WithEvents lblInProgress As Label
+    Friend WithEvents chkminiBatchSize As CheckBox
+    Friend WithEvents txtminiBatchSize As TextBox
 End Class

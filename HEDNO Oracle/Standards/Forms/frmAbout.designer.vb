@@ -221,7 +221,7 @@ Partial Class frmAbout
         Me.txtCredits.Multiline = True
         Me.txtCredits.Name = "txtCredits"
         Me.txtCredits.ReadOnly = True
-        Me.txtCredits.Size = New System.Drawing.Size(453, 147)
+        Me.txtCredits.Size = New System.Drawing.Size(453, 0)
         Me.txtCredits.TabIndex = 18
         '
         'lblHash
@@ -268,7 +268,7 @@ Partial Class frmAbout
         '
         Me.cmdExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdExit.Location = New System.Drawing.Point(376, 477)
+        Me.cmdExit.Location = New System.Drawing.Point(376, 322)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(89, 20)
         Me.cmdExit.TabIndex = 25
@@ -323,7 +323,7 @@ Partial Class frmAbout
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.CancelButton = Me.cmdExit
-        Me.ClientSize = New System.Drawing.Size(477, 503)
+        Me.ClientSize = New System.Drawing.Size(477, 348)
         Me.Controls.Add(Me.txtTrademark)
         Me.Controls.Add(Me.lblTrademark)
         Me.Controls.Add(Me.txtLicense)
@@ -350,6 +350,7 @@ Partial Class frmAbout
         Me.Controls.Add(Me.lblCopyright)
         Me.Controls.Add(Me.lblCompanyName)
         Me.Controls.Add(Me.lblAssemblyName)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmAbout"
         Me.Text = "About"

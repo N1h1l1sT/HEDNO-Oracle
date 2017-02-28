@@ -143,8 +143,10 @@ Public Class frmClassification
         Try
             If FuncInProgress.Count = 0 Then
                 FuncInProgress.Add("Forming Training and Testing Sets")
+                fswModelExists.EnableRaisingEvents = False
                 pnlMain.Enabled = False
                 Try
+
                     Dim ClassificationColumnNames() As String = {}
                     Dim TrainColumnNames() As String = {}
                     Dim TestColumnNames() As String = {}
@@ -236,6 +238,7 @@ Public Class frmClassification
                     pnlMain.Enabled = True
                 End Try
 
+                fswModelExists.EnableRaisingEvents = True
                 FuncInProgress.Remove("Forming Training and Testing Sets")
                 pnlMain.Enabled = True
                 Close()

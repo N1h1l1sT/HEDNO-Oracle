@@ -106,7 +106,9 @@ Public Class frmClusteringStep0
         Try
             If FuncInProgress.Count = 0 Then
                 FuncInProgress.Add("Clustering Step 0")
+                fswModelExists.EnableRaisingEvents = False
                 pnlMain.Enabled = False
+
                 Try
                     Dim ClusteringColumnNames() As String = {}
                     If RDotNet_Initialization() Then
@@ -149,6 +151,7 @@ Public Class frmClusteringStep0
                     pnlMain.Enabled = True
                 End Try
 
+                fswModelExists.EnableRaisingEvents = True
                 FuncInProgress.Remove("Clustering Step 0")
                 pnlMain.Enabled = True
                 Close()

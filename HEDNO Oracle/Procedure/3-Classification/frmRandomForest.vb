@@ -267,7 +267,9 @@ Public Class frmRandomForest
                         Controls.Add(btnRunModel)
                         btnRunModel.BringToFront()
                         btnRunModel.Enabled = True
-                        pbLoading.Location = New Point(0, btnRunModel.Location.Y - pbLoading.Height - 5)
+                        pbLoading.Location = New Point(lblInProgress.Location.X + lblInProgress.Width + 6, btnRunModel.Location.Y - pbLoading.Height - 6)
+                        pbLoading.Width = pbLoading.Parent.Width - pbLoading.Location.X - 14
+                        lblInProgress.Visible = True
                         pbLoading.Style = ProgressBarStyle.Marquee
                         pbLoading.MarqueeAnimationSpeed = 1
                         pbLoading.Visible = True
@@ -497,6 +499,7 @@ Public Class frmRandomForest
                             pnlMain.Enabled = True
                         End Try
 
+                        lblInProgress.Visible = False
                         pbLoading.MarqueeAnimationSpeed = 0
                         pbLoading.Visible = False
                         FuncInProgress.Remove("Applying Random Forest")

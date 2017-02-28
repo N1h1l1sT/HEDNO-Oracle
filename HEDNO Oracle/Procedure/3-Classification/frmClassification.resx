@@ -117,6 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>259, 4</value>
+  </metadata>
+  <data name="chkStatisticsMode.ToolTip" xml:space="preserve">
+    <value>[Transparent background means a new Classification XDF file will be created from the Clustering XDF, so its mode should be the same as the Clustering dataset]
+
+[If the CheckBox is Checked:]
+[Red background means that the existing Classification XDF is not marked for statistics, hence by checking this, the algorithm will be unable to separate the Training data because it'll search for the wrong variable]
+[Green background means that the existing Classification XDF is marked for statistics]
+
+[If the CheckBox is Not Checked:]
+[Red background means that the existing Classification XDF is marked for statistics, hence by not checking, the algorithm will be unable to separate the Training data because it'll search for the wrong variable]
+[Green background means that the existing Classification XDF is not marked for statistics]</value>
+  </data>
+  <data name="chkFormTestSet.ToolTip" xml:space="preserve">
+    <value>Uses the newly created or existing Classification XDF file to separate projects marked for Testing exporting them into a new Testing XDF file.
+If Statistics Mode is checked, then the variable used to separate the Testing set is 'SelectionRatio', whilst if it isn't the variable used is 'MarkedForTest'
+If the Classification file was created in Statistics mode and you try to form the Testing set in Non-Statistics Mode, then the process will fail because of the difference in selection variables
+Same thing applies to Classification file created in Non-Statistics mode and trying to form the Testing Set in Statistics Mode.</value>
+  </data>
+  <data name="chkFormTrainSet.ToolTip" xml:space="preserve">
+    <value>Uses the newly created or existing Classification XDF file to separate projects marked for Training exporting them into a new Training XDF file.
+If Statistics Mode is checked, then the variable used to separate the Training set is 'SelectionRatio', whilst if it isn't the variable used is 'MarkedForTest'
+If the Classification file was created in Statistics mode and you try to form the Training set in Non-Statistics Mode, then the process will fail because of the difference in selection variables
+Same thing applies to Classification file created in Non-Statistics mode and trying to form the Training Set in Statistics Mode.</value>
+  </data>
+  <data name="chkUseExistingXDFFile.ToolTip" xml:space="preserve">
+    <value>[Red background means that an existing Classification XDF file cannot be located or is unreachable]
+[Green background means that an existing Classification XDF file is located and is unreachable]
+Instead of Creating the Classification XDF file file by manipulating data from the Clustering Dataset, the file that's been saved in a previous session is used</value>
+  </data>
+  <data name="btnClassification.ToolTip" xml:space="preserve">
+    <value>Needs: R Server or equivalent, an active connection to the SQL Server from R (i.e. valid R SQL Connection String)
+Does: Processes the data in the Clustering XFD, exporting an XDF file featuring the Classification Dataset according to selected options
+--If Statistics Mode is checked, then only the clearly labelled projects will be used, according to the percentage you specified on 'Training Set Percentage" ComboBox
+--Otherwise all clearly labelled data will be marked for the Training set and all pending projects without a label will be marked for the Testing/Prediction set.
+*If 'Form Training Set' is checked, then all projects marked as Training will be exported into a Training XDF file
+*If 'Form Testing Set' is checked, then all projects marked as Testing will be exported into a Testing XDF file
+*If 'Show Data Summary' is checked, a Data Summary View of the Classification dataset is shown, containing features such as Min, Max, Mean, etc.
+*If 'Show Variable Information' is checked, a Variable Information View is shown, containing features such as their types and descriptions.
+*If 'Show Training Data Summary' is checked, a Data Summary View of the Training dataset is shown, containing features such as Min, Max, Mean, etc.
+*If 'Show Training Variable Information' is checked, a Variable Information View is shown, containing features such as their types and descriptions.
+*If 'Show Testing Data Summary' is checked, a Data Summary View of the Testing dataset is shown, containing features such as Min, Max, Mean, etc.
+*If 'Show Testing Variable Information' is checked, a Variable Information View is shown, containing features such as their types and descriptions.</value>
+  </data>
   <metadata name="fswModelExists.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>2, 2</value>
   </metadata>

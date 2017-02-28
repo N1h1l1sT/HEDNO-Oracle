@@ -23,7 +23,9 @@ Partial Class frmClusteringStep1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmClusteringStep1))
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.lblLoading = New System.Windows.Forms.Label()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
         Me.scMain = New System.Windows.Forms.SplitContainer()
@@ -43,7 +45,7 @@ Partial Class frmClusteringStep1
         Me.fbdKMeansModel = New System.Windows.Forms.FolderBrowserDialog()
         Me.tmrModelExists = New System.Windows.Forms.Timer(Me.components)
         Me.fswModelExists = New System.IO.FileSystemWatcher()
-        Me.pbLoading = New System.Windows.Forms.ProgressBar()
+        Me.ttMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlMain.SuspendLayout()
         Me.gbOptions.SuspendLayout()
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,6 +67,16 @@ Partial Class frmClusteringStep1
         Me.pnlMain.Size = New System.Drawing.Size(496, 213)
         Me.pnlMain.TabIndex = 6
         '
+        'pbLoading
+        '
+        Me.pbLoading.Location = New System.Drawing.Point(316, 0)
+        Me.pbLoading.MarqueeAnimationSpeed = 10
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
+        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pbLoading.TabIndex = 15
+        Me.pbLoading.Visible = False
+        '
         'lblLoading
         '
         Me.lblLoading.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
@@ -74,6 +86,7 @@ Partial Class frmClusteringStep1
         Me.lblLoading.TabIndex = 14
         Me.lblLoading.Text = "Loading..."
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblLoading.Visible = False
         '
         'gbOptions
         '
@@ -123,6 +136,7 @@ Partial Class frmClusteringStep1
         Me.chkUseExistingXDFFile.Size = New System.Drawing.Size(127, 17)
         Me.chkUseExistingXDFFile.TabIndex = 5
         Me.chkUseExistingXDFFile.Text = "Use Existing XDF File"
+        Me.ttMain.SetToolTip(Me.chkUseExistingXDFFile, resources.GetString("chkUseExistingXDFFile.ToolTip"))
         Me.chkUseExistingXDFFile.UseVisualStyleBackColor = True
         '
         'chkShowGeoLocGraph
@@ -133,6 +147,8 @@ Partial Class frmClusteringStep1
         Me.chkShowGeoLocGraph.Size = New System.Drawing.Size(170, 17)
         Me.chkShowGeoLocGraph.TabIndex = 2
         Me.chkShowGeoLocGraph.Text = "Show the Geo-Location Graph"
+        Me.ttMain.SetToolTip(Me.chkShowGeoLocGraph, "View the Geo-Location Graph as of Clustering Step 1's point of view (Clear Cluste" &
+        "rs with colour-coding)")
         Me.chkShowGeoLocGraph.UseVisualStyleBackColor = True
         '
         'chkShowVariableInfo
@@ -143,6 +159,7 @@ Partial Class frmClusteringStep1
         Me.chkShowVariableInfo.Size = New System.Drawing.Size(149, 17)
         Me.chkShowVariableInfo.TabIndex = 3
         Me.chkShowVariableInfo.Text = "Show Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowVariableInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
         'btnSelectAll
@@ -153,6 +170,7 @@ Partial Class frmClusteringStep1
         Me.btnSelectAll.Size = New System.Drawing.Size(170, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects all options in the GroupBox")
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'chkShowDataSummary
@@ -163,6 +181,7 @@ Partial Class frmClusteringStep1
         Me.chkShowDataSummary.Size = New System.Drawing.Size(125, 17)
         Me.chkShowDataSummary.TabIndex = 4
         Me.chkShowDataSummary.Text = "Show Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowDataSummary, "View a Data Summary of the clustering dataset, such as Min, Max, Mean, etc.")
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
         'chkStatisticsMode
@@ -175,6 +194,7 @@ Partial Class frmClusteringStep1
         Me.chkStatisticsMode.Size = New System.Drawing.Size(98, 17)
         Me.chkStatisticsMode.TabIndex = 14
         Me.chkStatisticsMode.Text = "Statistics Mode"
+        Me.ttMain.SetToolTip(Me.chkStatisticsMode, resources.GetString("chkStatisticsMode.ToolTip"))
         Me.chkStatisticsMode.UseVisualStyleBackColor = True
         '
         'lblSavePath
@@ -206,6 +226,7 @@ Partial Class frmClusteringStep1
         Me.txtSavePath.ReadOnly = True
         Me.txtSavePath.Size = New System.Drawing.Size(229, 20)
         Me.txtSavePath.TabIndex = 9
+        Me.ttMain.SetToolTip(Me.txtSavePath, "The path to save the K-Means Clustering Model")
         '
         'txtMaxClusterNum
         '
@@ -214,6 +235,7 @@ Partial Class frmClusteringStep1
         Me.txtMaxClusterNum.ReadOnly = True
         Me.txtMaxClusterNum.Size = New System.Drawing.Size(51, 20)
         Me.txtMaxClusterNum.TabIndex = 8
+        Me.ttMain.SetToolTip(Me.txtMaxClusterNum, resources.GetString("txtMaxClusterNum.ToolTip"))
         '
         'chkSaveKMeansModel
         '
@@ -223,6 +245,7 @@ Partial Class frmClusteringStep1
         Me.chkSaveKMeansModel.Size = New System.Drawing.Size(128, 17)
         Me.chkSaveKMeansModel.TabIndex = 9
         Me.chkSaveKMeansModel.Text = "Save K-Means Model"
+        Me.ttMain.SetToolTip(Me.chkSaveKMeansModel, "Saves the K-Means Clustering Model to the path specified below")
         Me.chkSaveKMeansModel.UseVisualStyleBackColor = True
         '
         'chkCleanXDFFile
@@ -233,6 +256,8 @@ Partial Class frmClusteringStep1
         Me.chkCleanXDFFile.Size = New System.Drawing.Size(189, 17)
         Me.chkCleanXDFFile.TabIndex = 1
         Me.chkCleanXDFFile.Text = "Clean the XDF file after completion"
+        Me.ttMain.SetToolTip(Me.chkCleanXDFFile, "If selected, then the Clustering XDF file is going to be deleted when the form cl" &
+        "oses, meaning it is going to be unavailable for further and future use")
         Me.chkCleanXDFFile.UseVisualStyleBackColor = True
         '
         'btnClustering1
@@ -244,6 +269,7 @@ Partial Class frmClusteringStep1
         Me.btnClustering1.Size = New System.Drawing.Size(472, 23)
         Me.btnClustering1.TabIndex = 0
         Me.btnClustering1.Text = "Commence Clustering Step 1"
+        Me.ttMain.SetToolTip(Me.btnClustering1, resources.GetString("btnClustering1.ToolTip"))
         Me.btnClustering1.UseVisualStyleBackColor = True
         '
         'tmrModelExists
@@ -255,15 +281,12 @@ Partial Class frmClusteringStep1
         Me.fswModelExists.EnableRaisingEvents = True
         Me.fswModelExists.SynchronizingObject = Me
         '
-        'pbLoading
+        'ttMain
         '
-        Me.pbLoading.Location = New System.Drawing.Point(316, 0)
-        Me.pbLoading.MarqueeAnimationSpeed = 10
-        Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
-        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
-        Me.pbLoading.TabIndex = 15
-        Me.pbLoading.Visible = False
+        Me.ttMain.AutoPopDelay = 10000
+        Me.ttMain.InitialDelay = 500
+        Me.ttMain.ReshowDelay = 100
+        Me.ttMain.ShowAlways = True
         '
         'frmClusteringStep1
         '
@@ -309,4 +332,5 @@ Partial Class frmClusteringStep1
     Friend WithEvents tmrModelExists As Timer
     Friend WithEvents fswModelExists As IO.FileSystemWatcher
     Friend WithEvents pbLoading As ProgressBar
+    Friend WithEvents ttMain As ToolTip
 End Class

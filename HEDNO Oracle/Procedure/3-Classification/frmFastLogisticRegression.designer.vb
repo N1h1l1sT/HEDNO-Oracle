@@ -59,6 +59,10 @@ Partial Class frmFastLogisticRegression
         Me.tpAlgorithmOptions = New System.Windows.Forms.TabPage()
         Me.gbSettings = New System.Windows.Forms.GroupBox()
         Me.scSettings = New System.Windows.Forms.SplitContainer()
+        Me.chkmaxIterations = New System.Windows.Forms.CheckBox()
+        Me.chkinitWtsScale = New System.Windows.Forms.CheckBox()
+        Me.chkmemorySize = New System.Windows.Forms.CheckBox()
+        Me.chkoptTol = New System.Windows.Forms.CheckBox()
         Me.chkl1Weight = New System.Windows.Forms.CheckBox()
         Me.chkl2Weight = New System.Windows.Forms.CheckBox()
         Me.chksgdInitTol = New System.Windows.Forms.CheckBox()
@@ -66,6 +70,10 @@ Partial Class frmFastLogisticRegression
         Me.chkrowSelection = New System.Windows.Forms.CheckBox()
         Me.chkBlocksPerRead = New System.Windows.Forms.CheckBox()
         Me.chkreportProgress = New System.Windows.Forms.CheckBox()
+        Me.txtmaxIterations = New System.Windows.Forms.TextBox()
+        Me.txtinitWtsScale = New System.Windows.Forms.TextBox()
+        Me.txtmemorySize = New System.Windows.Forms.TextBox()
+        Me.txtoptTol = New System.Windows.Forms.TextBox()
         Me.txtl1Weight = New System.Windows.Forms.TextBox()
         Me.txtl2Weight = New System.Windows.Forms.TextBox()
         Me.txtsgdInitTol = New System.Windows.Forms.TextBox()
@@ -81,14 +89,7 @@ Partial Class frmFastLogisticRegression
         Me.fswXDFFileExists = New System.IO.FileSystemWatcher()
         Me.tmrXDFExists = New System.Windows.Forms.Timer(Me.components)
         Me.fswTrainAndTest = New System.IO.FileSystemWatcher()
-        Me.txtoptTol = New System.Windows.Forms.TextBox()
-        Me.chkoptTol = New System.Windows.Forms.CheckBox()
-        Me.txtmemorySize = New System.Windows.Forms.TextBox()
-        Me.chkmemorySize = New System.Windows.Forms.CheckBox()
-        Me.txtinitWtsScale = New System.Windows.Forms.TextBox()
-        Me.txtmaxIterations = New System.Windows.Forms.TextBox()
-        Me.chkinitWtsScale = New System.Windows.Forms.CheckBox()
-        Me.chkmaxIterations = New System.Windows.Forms.CheckBox()
+        Me.lblInProgress = New System.Windows.Forms.Label()
         Me.pnlMain.SuspendLayout()
         Me.tcOptions.SuspendLayout()
         Me.tpGeneralOptions.SuspendLayout()
@@ -122,7 +123,7 @@ Partial Class frmFastLogisticRegression
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(540, 429)
+        Me.pnlMain.Size = New System.Drawing.Size(540, 456)
         Me.pnlMain.TabIndex = 8
         '
         'pbLoading
@@ -155,7 +156,7 @@ Partial Class frmFastLogisticRegression
         Me.tcOptions.Location = New System.Drawing.Point(0, 3)
         Me.tcOptions.Name = "tcOptions"
         Me.tcOptions.SelectedIndex = 0
-        Me.tcOptions.Size = New System.Drawing.Size(537, 383)
+        Me.tcOptions.Size = New System.Drawing.Size(537, 382)
         Me.tcOptions.TabIndex = 17
         '
         'tpGeneralOptions
@@ -164,7 +165,7 @@ Partial Class frmFastLogisticRegression
         Me.tpGeneralOptions.Location = New System.Drawing.Point(4, 22)
         Me.tpGeneralOptions.Name = "tpGeneralOptions"
         Me.tpGeneralOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpGeneralOptions.Size = New System.Drawing.Size(529, 357)
+        Me.tpGeneralOptions.Size = New System.Drawing.Size(529, 356)
         Me.tpGeneralOptions.TabIndex = 0
         Me.tpGeneralOptions.Text = "General Options"
         Me.tpGeneralOptions.UseVisualStyleBackColor = True
@@ -184,7 +185,7 @@ Partial Class frmFastLogisticRegression
         'scMain.Panel2
         '
         Me.scMain.Panel2.Controls.Add(Me.scColumns)
-        Me.scMain.Size = New System.Drawing.Size(523, 351)
+        Me.scMain.Size = New System.Drawing.Size(523, 350)
         Me.scMain.SplitterDistance = 248
         Me.scMain.TabIndex = 10
         '
@@ -198,6 +199,7 @@ Partial Class frmFastLogisticRegression
         Me.chkStatisticsMode.Size = New System.Drawing.Size(101, 17)
         Me.chkStatisticsMode.TabIndex = 11
         Me.chkStatisticsMode.Text = "Statistics Mode:"
+        Me.ttMain.SetToolTip(Me.chkStatisticsMode, resources.GetString("chkStatisticsMode.ToolTip"))
         Me.chkStatisticsMode.UseVisualStyleBackColor = True
         '
         'gbStatistics
@@ -208,7 +210,7 @@ Partial Class frmFastLogisticRegression
         Me.gbStatistics.Controls.Add(Me.chkShowROCCurve)
         Me.gbStatistics.Controls.Add(Me.chkShowStatistics)
         Me.gbStatistics.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.gbStatistics.Location = New System.Drawing.Point(0, 231)
+        Me.gbStatistics.Location = New System.Drawing.Point(0, 230)
         Me.gbStatistics.Name = "gbStatistics"
         Me.gbStatistics.Size = New System.Drawing.Size(248, 120)
         Me.gbStatistics.TabIndex = 11
@@ -223,6 +225,7 @@ Partial Class frmFastLogisticRegression
         Me.chkOpenGraphDirectory.Size = New System.Drawing.Size(116, 17)
         Me.chkOpenGraphDirectory.TabIndex = 20
         Me.chkOpenGraphDirectory.Text = "Open Graph Folder"
+        Me.ttMain.SetToolTip(Me.chkOpenGraphDirectory, resources.GetString("chkOpenGraphDirectory.ToolTip"))
         Me.chkOpenGraphDirectory.UseVisualStyleBackColor = True
         '
         'lblRoundAt
@@ -243,9 +246,10 @@ Partial Class frmFastLogisticRegression
         Me.txtRoundAt.Location = New System.Drawing.Point(67, 88)
         Me.txtRoundAt.Name = "txtRoundAt"
         Me.txtRoundAt.ReadOnly = True
-        Me.txtRoundAt.Size = New System.Drawing.Size(90, 20)
+        Me.txtRoundAt.Size = New System.Drawing.Size(58, 20)
         Me.txtRoundAt.TabIndex = 19
         Me.txtRoundAt.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtRoundAt, "The decimal point that viewed statistics are rounded at.")
         '
         'chkShowROCCurve
         '
@@ -255,6 +259,7 @@ Partial Class frmFastLogisticRegression
         Me.chkShowROCCurve.Size = New System.Drawing.Size(110, 17)
         Me.chkShowROCCurve.TabIndex = 13
         Me.chkShowROCCurve.Text = "Show ROC Curve"
+        Me.ttMain.SetToolTip(Me.chkShowROCCurve, "A Plot of the model's ROC Curve is shown along with the calculated AUC")
         Me.chkShowROCCurve.UseVisualStyleBackColor = True
         '
         'chkShowStatistics
@@ -265,6 +270,8 @@ Partial Class frmFastLogisticRegression
         Me.chkShowStatistics.Size = New System.Drawing.Size(98, 17)
         Me.chkShowStatistics.TabIndex = 12
         Me.chkShowStatistics.Text = "Show Statistics"
+        Me.ttMain.SetToolTip(Me.chkShowStatistics, "A form is generated with the Model's statistics, such as the Confusion Matrix, Ac" &
+        "curacy, F Measure, G, etc.")
         Me.chkShowStatistics.UseVisualStyleBackColor = True
         '
         'gbOptions
@@ -293,6 +300,7 @@ Partial Class frmFastLogisticRegression
         Me.chkSavePredictionModel.Size = New System.Drawing.Size(133, 17)
         Me.chkSavePredictionModel.TabIndex = 13
         Me.chkSavePredictionModel.Text = "Save Prediction Model"
+        Me.ttMain.SetToolTip(Me.chkSavePredictionModel, "Saves the trained model at the location specified below")
         Me.chkSavePredictionModel.UseVisualStyleBackColor = True
         '
         'lblSavePath
@@ -313,6 +321,8 @@ Partial Class frmFastLogisticRegression
         Me.txtSavePath.ReadOnly = True
         Me.txtSavePath.Size = New System.Drawing.Size(236, 20)
         Me.txtSavePath.TabIndex = 11
+        Me.ttMain.SetToolTip(Me.txtSavePath, "If 'Save Prediction Model' is checked, the model's .RDS file is saved in this pat" &
+        "h")
         '
         'chkMakePredictions
         '
@@ -322,6 +332,7 @@ Partial Class frmFastLogisticRegression
         Me.chkMakePredictions.Size = New System.Drawing.Size(108, 17)
         Me.chkMakePredictions.TabIndex = 6
         Me.chkMakePredictions.Text = "Make Predictions"
+        Me.ttMain.SetToolTip(Me.chkMakePredictions, "Uses the trained model to make prediction upon the Testing Dataset.")
         Me.chkMakePredictions.UseVisualStyleBackColor = True
         '
         'chkUseExistingModel
@@ -343,6 +354,7 @@ Partial Class frmFastLogisticRegression
         Me.chkShowDataSummary.Size = New System.Drawing.Size(125, 17)
         Me.chkShowDataSummary.TabIndex = 4
         Me.chkShowDataSummary.Text = "Show Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowDataSummary, "View a Data Summary of the Classification dataset, such as Min, Max, Mean, etc.")
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
         'btnSelectAll
@@ -355,6 +367,7 @@ Partial Class frmFastLogisticRegression
         Me.btnSelectAll.Size = New System.Drawing.Size(236, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects all options in the GroupBox")
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'chkShowVariableInfo
@@ -365,6 +378,7 @@ Partial Class frmFastLogisticRegression
         Me.chkShowVariableInfo.Size = New System.Drawing.Size(149, 17)
         Me.chkShowVariableInfo.TabIndex = 3
         Me.chkShowVariableInfo.Text = "Show Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowVariableInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
         'scColumns
@@ -388,8 +402,8 @@ Partial Class frmFastLogisticRegression
         Me.scColumns.Panel2.Controls.Add(Me.btnSelectAllColumns)
         Me.scColumns.Panel2.Controls.Add(Me.lblCombinationsCount)
         Me.scColumns.Panel2.Controls.Add(Me.chkColumnsCombinations)
-        Me.scColumns.Size = New System.Drawing.Size(271, 351)
-        Me.scColumns.SplitterDistance = 236
+        Me.scColumns.Size = New System.Drawing.Size(271, 350)
+        Me.scColumns.SplitterDistance = 235
         Me.scColumns.TabIndex = 1
         '
         'pbColumnsLoading
@@ -409,7 +423,7 @@ Partial Class frmFastLogisticRegression
         Me.lblColumnsLoading.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.lblColumnsLoading.Location = New System.Drawing.Point(0, 0)
         Me.lblColumnsLoading.Name = "lblColumnsLoading"
-        Me.lblColumnsLoading.Size = New System.Drawing.Size(271, 236)
+        Me.lblColumnsLoading.Size = New System.Drawing.Size(271, 235)
         Me.lblColumnsLoading.TabIndex = 1
         Me.lblColumnsLoading.Text = "Loading..."
         Me.lblColumnsLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -420,8 +434,9 @@ Partial Class frmFastLogisticRegression
         Me.clbColumns.FormattingEnabled = True
         Me.clbColumns.Location = New System.Drawing.Point(0, 0)
         Me.clbColumns.Name = "clbColumns"
-        Me.clbColumns.Size = New System.Drawing.Size(271, 236)
+        Me.clbColumns.Size = New System.Drawing.Size(271, 235)
         Me.clbColumns.TabIndex = 0
+        Me.ttMain.SetToolTip(Me.clbColumns, "The columns/variables that can be used for the Model Training Process")
         '
         'lblNGrams
         '
@@ -443,6 +458,7 @@ Partial Class frmFastLogisticRegression
         Me.txtNGrams.Size = New System.Drawing.Size(44, 20)
         Me.txtNGrams.TabIndex = 17
         Me.txtNGrams.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtNGrams, resources.GetString("txtNGrams.ToolTip"))
         '
         'chkUpToNGramsN
         '
@@ -454,6 +470,7 @@ Partial Class frmFastLogisticRegression
         Me.chkUpToNGramsN.Size = New System.Drawing.Size(108, 17)
         Me.chkUpToNGramsN.TabIndex = 16
         Me.chkUpToNGramsN.Text = "Up to n-grams's n"
+        Me.ttMain.SetToolTip(Me.chkUpToNGramsN, resources.GetString("chkUpToNGramsN.ToolTip"))
         Me.chkUpToNGramsN.UseVisualStyleBackColor = True
         '
         'btnSelectAllColumns
@@ -467,6 +484,7 @@ Partial Class frmFastLogisticRegression
         Me.btnSelectAllColumns.Size = New System.Drawing.Size(265, 23)
         Me.btnSelectAllColumns.TabIndex = 14
         Me.btnSelectAllColumns.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAllColumns, "Selects all the variables to be used in the Supervised Learning")
         Me.btnSelectAllColumns.UseVisualStyleBackColor = True
         '
         'lblCombinationsCount
@@ -490,6 +508,7 @@ Partial Class frmFastLogisticRegression
         Me.chkColumnsCombinations.Size = New System.Drawing.Size(184, 17)
         Me.chkColumnsCombinations.TabIndex = 14
         Me.chkColumnsCombinations.Text = "Iterate over Column Combinations"
+        Me.ttMain.SetToolTip(Me.chkColumnsCombinations, resources.GetString("chkColumnsCombinations.ToolTip"))
         Me.chkColumnsCombinations.UseVisualStyleBackColor = True
         '
         'tpAlgorithmOptions
@@ -498,7 +517,7 @@ Partial Class frmFastLogisticRegression
         Me.tpAlgorithmOptions.Location = New System.Drawing.Point(4, 22)
         Me.tpAlgorithmOptions.Name = "tpAlgorithmOptions"
         Me.tpAlgorithmOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpAlgorithmOptions.Size = New System.Drawing.Size(529, 357)
+        Me.tpAlgorithmOptions.Size = New System.Drawing.Size(529, 356)
         Me.tpAlgorithmOptions.TabIndex = 1
         Me.tpAlgorithmOptions.Text = "Algorithm-Specific Options"
         Me.tpAlgorithmOptions.UseVisualStyleBackColor = True
@@ -509,7 +528,7 @@ Partial Class frmFastLogisticRegression
         Me.gbSettings.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSettings.Location = New System.Drawing.Point(3, 3)
         Me.gbSettings.Name = "gbSettings"
-        Me.gbSettings.Size = New System.Drawing.Size(523, 351)
+        Me.gbSettings.Size = New System.Drawing.Size(523, 350)
         Me.gbSettings.TabIndex = 7
         Me.gbSettings.TabStop = False
         Me.gbSettings.Text = "Settings:"
@@ -547,9 +566,54 @@ Partial Class frmFastLogisticRegression
         Me.scSettings.Panel2.Controls.Add(Me.txtrowSelection)
         Me.scSettings.Panel2.Controls.Add(Me.txtBlocksPerRead)
         Me.scSettings.Panel2.Controls.Add(Me.txtReportProgress)
-        Me.scSettings.Size = New System.Drawing.Size(517, 332)
+        Me.scSettings.Size = New System.Drawing.Size(517, 331)
         Me.scSettings.SplitterDistance = 191
         Me.scSettings.TabIndex = 8
+        '
+        'chkmaxIterations
+        '
+        Me.chkmaxIterations.AutoSize = True
+        Me.chkmaxIterations.Location = New System.Drawing.Point(3, 266)
+        Me.chkmaxIterations.Name = "chkmaxIterations"
+        Me.chkmaxIterations.Size = New System.Drawing.Size(88, 17)
+        Me.chkmaxIterations.TabIndex = 41
+        Me.chkmaxIterations.Text = "maxIterations"
+        Me.ttMain.SetToolTip(Me.chkmaxIterations, "Sets the maximum number of iterations." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "After this number of steps, the algorithm" &
+        " stops even if it has not satisfied convergence criteria.")
+        Me.chkmaxIterations.UseVisualStyleBackColor = True
+        '
+        'chkinitWtsScale
+        '
+        Me.chkinitWtsScale.AutoSize = True
+        Me.chkinitWtsScale.Location = New System.Drawing.Point(3, 240)
+        Me.chkinitWtsScale.Name = "chkinitWtsScale"
+        Me.chkinitWtsScale.Size = New System.Drawing.Size(85, 17)
+        Me.chkinitWtsScale.TabIndex = 40
+        Me.chkinitWtsScale.Text = "initWtsScale"
+        Me.ttMain.SetToolTip(Me.chkinitWtsScale, resources.GetString("chkinitWtsScale.ToolTip"))
+        Me.chkinitWtsScale.UseVisualStyleBackColor = True
+        '
+        'chkmemorySize
+        '
+        Me.chkmemorySize.AutoSize = True
+        Me.chkmemorySize.Location = New System.Drawing.Point(3, 214)
+        Me.chkmemorySize.Name = "chkmemorySize"
+        Me.chkmemorySize.Size = New System.Drawing.Size(82, 17)
+        Me.chkmemorySize.TabIndex = 39
+        Me.chkmemorySize.Text = "memorySize"
+        Me.ttMain.SetToolTip(Me.chkmemorySize, resources.GetString("chkmemorySize.ToolTip"))
+        Me.chkmemorySize.UseVisualStyleBackColor = True
+        '
+        'chkoptTol
+        '
+        Me.chkoptTol.AutoSize = True
+        Me.chkoptTol.Location = New System.Drawing.Point(3, 188)
+        Me.chkoptTol.Name = "chkoptTol"
+        Me.chkoptTol.Size = New System.Drawing.Size(56, 17)
+        Me.chkoptTol.TabIndex = 38
+        Me.chkoptTol.Text = "optTol"
+        Me.ttMain.SetToolTip(Me.chkoptTol, resources.GetString("chkoptTol.ToolTip"))
+        Me.chkoptTol.UseVisualStyleBackColor = True
         '
         'chkl1Weight
         '
@@ -559,6 +623,7 @@ Partial Class frmFastLogisticRegression
         Me.chkl1Weight.Size = New System.Drawing.Size(68, 17)
         Me.chkl1Weight.TabIndex = 37
         Me.chkl1Weight.Text = "l1Weight"
+        Me.ttMain.SetToolTip(Me.chkl1Weight, "The L1 regularization weight.")
         Me.chkl1Weight.UseVisualStyleBackColor = True
         '
         'chkl2Weight
@@ -569,6 +634,7 @@ Partial Class frmFastLogisticRegression
         Me.chkl2Weight.Size = New System.Drawing.Size(68, 17)
         Me.chkl2Weight.TabIndex = 36
         Me.chkl2Weight.Text = "l2Weight"
+        Me.ttMain.SetToolTip(Me.chkl2Weight, "The L2 regularization weight.")
         Me.chkl2Weight.UseVisualStyleBackColor = True
         '
         'chksgdInitTol
@@ -579,6 +645,9 @@ Partial Class frmFastLogisticRegression
         Me.chksgdInitTol.Size = New System.Drawing.Size(72, 17)
         Me.chksgdInitTol.TabIndex = 35
         Me.chksgdInitTol.Text = "sgdInitTol"
+        Me.ttMain.SetToolTip(Me.chksgdInitTol, "Set to a number greater than 0 to use Stochastic Gradient Descent (SGD) to find t" &
+        "he initial parameters." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "A non-zero value set specifies the tolerance SGD uses to" &
+        " determine convergence")
         Me.chksgdInitTol.UseVisualStyleBackColor = True
         '
         'chknormalize
@@ -589,6 +658,7 @@ Partial Class frmFastLogisticRegression
         Me.chknormalize.Size = New System.Drawing.Size(70, 17)
         Me.chknormalize.TabIndex = 16
         Me.chknormalize.Text = "normalize"
+        Me.ttMain.SetToolTip(Me.chknormalize, resources.GetString("chknormalize.ToolTip"))
         Me.chknormalize.UseVisualStyleBackColor = True
         '
         'chkrowSelection
@@ -621,6 +691,56 @@ Partial Class frmFastLogisticRegression
         Me.chkreportProgress.Text = "reportProgress"
         Me.chkreportProgress.UseVisualStyleBackColor = True
         '
+        'txtmaxIterations
+        '
+        Me.txtmaxIterations.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtmaxIterations.Location = New System.Drawing.Point(1, 264)
+        Me.txtmaxIterations.Name = "txtmaxIterations"
+        Me.txtmaxIterations.ReadOnly = True
+        Me.txtmaxIterations.Size = New System.Drawing.Size(316, 20)
+        Me.txtmaxIterations.TabIndex = 42
+        Me.txtmaxIterations.Text = "100"
+        Me.ttMain.SetToolTip(Me.txtmaxIterations, "Sets the maximum number of iterations." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "After this number of steps, the algorithm" &
+        " stops even if it has not satisfied convergence criteria.")
+        '
+        'txtinitWtsScale
+        '
+        Me.txtinitWtsScale.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtinitWtsScale.Location = New System.Drawing.Point(1, 238)
+        Me.txtinitWtsScale.Name = "txtinitWtsScale"
+        Me.txtinitWtsScale.ReadOnly = True
+        Me.txtinitWtsScale.Size = New System.Drawing.Size(316, 20)
+        Me.txtinitWtsScale.TabIndex = 41
+        Me.txtinitWtsScale.Text = "0"
+        Me.ttMain.SetToolTip(Me.txtinitWtsScale, "Sets the initial weights diameter that specifies the range from which values are " &
+        "drawn for the initial weights.")
+        '
+        'txtmemorySize
+        '
+        Me.txtmemorySize.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtmemorySize.Location = New System.Drawing.Point(1, 212)
+        Me.txtmemorySize.Name = "txtmemorySize"
+        Me.txtmemorySize.ReadOnly = True
+        Me.txtmemorySize.Size = New System.Drawing.Size(316, 20)
+        Me.txtmemorySize.TabIndex = 40
+        Me.txtmemorySize.Text = "20"
+        Me.ttMain.SetToolTip(Me.txtmemorySize, resources.GetString("txtmemorySize.ToolTip"))
+        '
+        'txtoptTol
+        '
+        Me.txtoptTol.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtoptTol.Location = New System.Drawing.Point(1, 186)
+        Me.txtoptTol.Name = "txtoptTol"
+        Me.txtoptTol.ReadOnly = True
+        Me.txtoptTol.Size = New System.Drawing.Size(316, 20)
+        Me.txtoptTol.TabIndex = 39
+        Me.txtoptTol.Text = "1e-07"
+        Me.ttMain.SetToolTip(Me.txtoptTol, resources.GetString("txtoptTol.ToolTip"))
+        '
         'txtl1Weight
         '
         Me.txtl1Weight.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -631,6 +751,7 @@ Partial Class frmFastLogisticRegression
         Me.txtl1Weight.Size = New System.Drawing.Size(316, 20)
         Me.txtl1Weight.TabIndex = 38
         Me.txtl1Weight.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtl1Weight, "The L1 regularization weight.")
         '
         'txtl2Weight
         '
@@ -642,6 +763,7 @@ Partial Class frmFastLogisticRegression
         Me.txtl2Weight.Size = New System.Drawing.Size(316, 20)
         Me.txtl2Weight.TabIndex = 37
         Me.txtl2Weight.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtl2Weight, "The L2 regularization weight.")
         '
         'txtsgdInitTol
         '
@@ -653,6 +775,9 @@ Partial Class frmFastLogisticRegression
         Me.txtsgdInitTol.Size = New System.Drawing.Size(316, 20)
         Me.txtsgdInitTol.TabIndex = 36
         Me.txtsgdInitTol.Text = "0"
+        Me.ttMain.SetToolTip(Me.txtsgdInitTol, "Set to a number greater than 0 to use Stochastic Gradient Descent (SGD) to find t" &
+        "he initial parameters." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "A non-zero value set specifies the tolerance SGD uses to" &
+        " determine convergence")
         '
         'cbnormalize
         '
@@ -663,6 +788,7 @@ Partial Class frmFastLogisticRegression
         Me.cbnormalize.Name = "cbnormalize"
         Me.cbnormalize.Size = New System.Drawing.Size(315, 21)
         Me.cbnormalize.TabIndex = 17
+        Me.ttMain.SetToolTip(Me.cbnormalize, resources.GetString("cbnormalize.ToolTip"))
         '
         'txtrowSelection
         '
@@ -699,11 +825,12 @@ Partial Class frmFastLogisticRegression
         Me.btnRunModel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRunModel.Enabled = False
-        Me.btnRunModel.Location = New System.Drawing.Point(12, 394)
+        Me.btnRunModel.Location = New System.Drawing.Point(12, 421)
         Me.btnRunModel.Name = "btnRunModel"
         Me.btnRunModel.Size = New System.Drawing.Size(516, 23)
         Me.btnRunModel.TabIndex = 0
-        Me.btnRunModel.Text = "Apply Decision Trees"
+        Me.btnRunModel.Text = "Apply Fast Logistic Regression"
+        Me.ttMain.SetToolTip(Me.btnRunModel, resources.GetString("btnRunModel.ToolTip"))
         Me.btnRunModel.UseVisualStyleBackColor = True
         '
         'tmrLoadColumns
@@ -728,89 +855,16 @@ Partial Class frmFastLogisticRegression
         Me.fswTrainAndTest.EnableRaisingEvents = True
         Me.fswTrainAndTest.SynchronizingObject = Me
         '
-        'txtoptTol
+        'lblInProgress
         '
-        Me.txtoptTol.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtoptTol.Location = New System.Drawing.Point(1, 186)
-        Me.txtoptTol.Name = "txtoptTol"
-        Me.txtoptTol.ReadOnly = True
-        Me.txtoptTol.Size = New System.Drawing.Size(316, 20)
-        Me.txtoptTol.TabIndex = 39
-        Me.txtoptTol.Text = "1e-07"
-        '
-        'chkoptTol
-        '
-        Me.chkoptTol.AutoSize = True
-        Me.chkoptTol.Location = New System.Drawing.Point(3, 188)
-        Me.chkoptTol.Name = "chkoptTol"
-        Me.chkoptTol.Size = New System.Drawing.Size(56, 17)
-        Me.chkoptTol.TabIndex = 38
-        Me.chkoptTol.Text = "optTol"
-        Me.chkoptTol.UseVisualStyleBackColor = True
-        '
-        'txtmemorySize
-        '
-        Me.txtmemorySize.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtmemorySize.Location = New System.Drawing.Point(1, 212)
-        Me.txtmemorySize.Name = "txtmemorySize"
-        Me.txtmemorySize.ReadOnly = True
-        Me.txtmemorySize.Size = New System.Drawing.Size(316, 20)
-        Me.txtmemorySize.TabIndex = 40
-        Me.txtmemorySize.Text = "20"
-        '
-        'chkmemorySize
-        '
-        Me.chkmemorySize.AutoSize = True
-        Me.chkmemorySize.Location = New System.Drawing.Point(3, 214)
-        Me.chkmemorySize.Name = "chkmemorySize"
-        Me.chkmemorySize.Size = New System.Drawing.Size(82, 17)
-        Me.chkmemorySize.TabIndex = 39
-        Me.chkmemorySize.Text = "memorySize"
-        Me.chkmemorySize.UseVisualStyleBackColor = True
-        '
-        'txtinitWtsScale
-        '
-        Me.txtinitWtsScale.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtinitWtsScale.Location = New System.Drawing.Point(1, 238)
-        Me.txtinitWtsScale.Name = "txtinitWtsScale"
-        Me.txtinitWtsScale.ReadOnly = True
-        Me.txtinitWtsScale.Size = New System.Drawing.Size(316, 20)
-        Me.txtinitWtsScale.TabIndex = 41
-        Me.txtinitWtsScale.Text = "0"
-        '
-        'txtmaxIterations
-        '
-        Me.txtmaxIterations.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtmaxIterations.Location = New System.Drawing.Point(1, 264)
-        Me.txtmaxIterations.Name = "txtmaxIterations"
-        Me.txtmaxIterations.ReadOnly = True
-        Me.txtmaxIterations.Size = New System.Drawing.Size(316, 20)
-        Me.txtmaxIterations.TabIndex = 42
-        Me.txtmaxIterations.Text = "100"
-        '
-        'chkinitWtsScale
-        '
-        Me.chkinitWtsScale.AutoSize = True
-        Me.chkinitWtsScale.Location = New System.Drawing.Point(3, 240)
-        Me.chkinitWtsScale.Name = "chkinitWtsScale"
-        Me.chkinitWtsScale.Size = New System.Drawing.Size(85, 17)
-        Me.chkinitWtsScale.TabIndex = 40
-        Me.chkinitWtsScale.Text = "initWtsScale"
-        Me.chkinitWtsScale.UseVisualStyleBackColor = True
-        '
-        'chkmaxIterations
-        '
-        Me.chkmaxIterations.AutoSize = True
-        Me.chkmaxIterations.Location = New System.Drawing.Point(3, 266)
-        Me.chkmaxIterations.Name = "chkmaxIterations"
-        Me.chkmaxIterations.Size = New System.Drawing.Size(88, 17)
-        Me.chkmaxIterations.TabIndex = 41
-        Me.chkmaxIterations.Text = "maxIterations"
-        Me.chkmaxIterations.UseVisualStyleBackColor = True
+        Me.lblInProgress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblInProgress.AutoSize = True
+        Me.lblInProgress.Location = New System.Drawing.Point(13, 397)
+        Me.lblInProgress.Name = "lblInProgress"
+        Me.lblInProgress.Size = New System.Drawing.Size(69, 13)
+        Me.lblInProgress.TabIndex = 20
+        Me.lblInProgress.Text = "In Progress..."
+        Me.lblInProgress.Visible = False
         '
         'frmFastLogisticRegression
         '
@@ -818,7 +872,8 @@ Partial Class frmFastLogisticRegression
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSelectAll
-        Me.ClientSize = New System.Drawing.Size(540, 429)
+        Me.ClientSize = New System.Drawing.Size(540, 456)
+        Me.Controls.Add(Me.lblInProgress)
         Me.Controls.Add(Me.pnlMain)
         Me.Name = "frmFastLogisticRegression"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -852,6 +907,7 @@ Partial Class frmFastLogisticRegression
         CType(Me.fswXDFFileExists, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.fswTrainAndTest, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -920,4 +976,5 @@ Partial Class frmFastLogisticRegression
     Friend WithEvents chkinitWtsScale As CheckBox
     Friend WithEvents txtmaxIterations As TextBox
     Friend WithEvents txtinitWtsScale As TextBox
+    Friend WithEvents lblInProgress As Label
 End Class

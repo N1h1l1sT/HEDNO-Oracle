@@ -263,7 +263,9 @@ Public Class frmNeuralNetworks
                         Controls.Add(btnRunModel)
                         btnRunModel.BringToFront()
                         btnRunModel.Enabled = True
-                        pbLoading.Location = New Point(0, btnRunModel.Location.Y - pbLoading.Height - 5)
+                        pbLoading.Location = New Point(lblInProgress.Location.X + lblInProgress.Width + 6, btnRunModel.Location.Y - pbLoading.Height - 6)
+                        pbLoading.Width = pbLoading.Parent.Width - pbLoading.Location.X - 14
+                        lblInProgress.Visible = True
                         pbLoading.Style = ProgressBarStyle.Marquee
                         pbLoading.MarqueeAnimationSpeed = 1
                         pbLoading.Visible = True
@@ -377,7 +379,8 @@ Public Class frmNeuralNetworks
                                                                                                 "{6}", "NeuralNetworksModel",
                                                                                                 "{7}", If(chknumHiddenNodes.Checked, txtnumHiddenNodes.Text, "500"),
                                                                                                 "{8}", If(chknumIterations.Checked, txtnumIterations.Text, "25"),
-                                                                                                "{9}", If(chknormalize.Checked, cbnormalize.SelectedItem.ToString, "auto")
+                                                                                                "{9}", If(chknormalize.Checked, cbnormalize.SelectedItem.ToString, "auto"),
+                                                                                                "{10}", If(chkminiBatchSize.Checked, txtminiBatchSize.Text, "1")
                                                                                                 }, True) Then
 
                                             If StopWorking Then
@@ -474,6 +477,7 @@ Public Class frmNeuralNetworks
                             pnlMain.Enabled = True
                         End Try
 
+                        lblInProgress.Visible = False
                         pbLoading.MarqueeAnimationSpeed = 0
                         pbLoading.Visible = False
                         FuncInProgress.Remove("Applying Neural Networks")
@@ -791,5 +795,10 @@ Public Class frmNeuralNetworks
         End If
     End Sub
 
-
+    Private Sub txtminiBatchSize_Click(sender As Object, e As EventArgs) Handles txtminiBatchSize.Click
+        Dim miniBatchSize As Integer = 1
+        If TypeBox("Set the mini-batch size to:", miniBatchSize, False,, 1, 256,,,, miniBatchSize.ToString) Then
+            txtminiBatchSize.Text = miniBatchSize.ToString
+        End If
+    End Sub
 End Class

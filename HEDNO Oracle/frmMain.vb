@@ -273,7 +273,8 @@ Public Class frmMain
                 End If
 
                 RowsPerRead = CInt(strSettings(51).Substring("051RowsPerRead=".Length))
-                strXDF = strSettings(52).Substring("052PathtoSaveLoadXDFFiles=".Length)
+                Dim tmpStrXDF As String = strSettings(52).Substring("052PathtoSaveLoadXDFFiles=".Length)
+                strXDF = If(tmpStrXDF <> "" AndAlso tmpStrXDF.ToLower <> "default" AndAlso Directory.Exists(doProperPathName(tmpStrXDF)), tmpStrXDF, strDesktop)
                 RoundAt = CInt(strSettings(53).Substring("053RoundAt=".Length))
                 RSQLConnStr = strSettings(64).Substring("064RSQLConnStr=".Length) 'If it's not filled in, then it's auto-configured in line 499
 
@@ -1590,20 +1591,22 @@ Public Class frmMain
                                     End If
 
                                 Else
-
+                                    MsgBox(sa("The GeoLocation procedure is trying to upload the longitude and latitude on the SQL Columns {3} on the {1} Table/View on the SQL Server, however one or more columns are unreachable.{0}'{2}' will open for you to create the GeoLocation Columns",
+                                              vbCrLf,
+                                              "[" & DatabaseName & "].[dbo].[" & TablevFinalDataset & "]",
+                                              RemMniHotLetter(mniCreateNeededSQLViews),
+                                              sa("'{0}' and '{1}'", ColvGeoLocX, ColvGeoLocY)))
+                                    Call mniCreateGeoColumns_Click(Nothing, New EventArgs)
                                 End If
-                                MsgBox(sa("The GeoLocation procedure is trying to upload the longitude and latitude on the SQL Columns {3} on the {1} Table/View on the SQL Server, however one or more columns are unreachable.{0}'{2}' will open for you to create the GeoLocation Columns",
-                                          vbCrLf,
-                                          "[" & DatabaseName & "].[dbo].[" & TablevFinalDataset & "]",
-                                          RemMniHotLetter(mniCreateNeededSQLViews),
-                                          sa("'{0}' and '{1}'", ColvGeoLocX, ColvGeoLocY)))
-                                Call mniCreateGeoColumns_Click(Nothing, New EventArgs)
+
                             Else
                                 MsgBox(sa("The GeoLocation procedure is trying to upload the longitude and latitude on {1} on the SQL Server, however the Table/View is unreachable.{0}'{2}' will open for you to create the Table/View",
                                       vbCrLf,
                                       sa("[{0}].dbo.[{1}]", DatabaseName, TablevFinalDataset),
                                       RemMniHotLetter(mniCreateNeededSQLViews)))
+                                FuncInProgress.Remove("Geo-Locating")
                                 Call CreateNeededSQLViews_Click(Nothing, New EventArgs)
+                                Exit Sub
                             End If
 
                         Else
@@ -1728,41 +1731,41 @@ Public Class frmMain
                 FuncInProgress.Add("Acquiring Geo-Location Status")
                 If ConnectedToSQLServer = True Then
                     If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
-                    Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevErga)
+                    Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevFinalDataset)
                     If TableExists Then
-                        If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocX) Then
-                            If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocY) Then
+                        If SQLColumnExists(SQLConn, DatabaseName, TablevFinalDataset, ColvGeoLocX) Then
+                            If SQLColumnExists(SQLConn, DatabaseName, TablevFinalDataset, ColvGeoLocY) Then
                                 Dim Total_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [Total_Rows]
-                                                                  FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]</SQL>.Value))
+                                                                  FROM [<%= DatabaseName %>].[dbo].[<%= TablevFinalDataset %>]</SQL>.Value))
 
                                 Dim GeoLoc_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [GeoLoc_Rows]
-                                                                    FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                    FROM [<%= DatabaseName %>].[dbo].[<%= TablevFinalDataset %>]
                                                                     WHERE <%= ColvGeoLocX %> IS NOT NULL and <%= ColvGeoLocX %> &lt;> '-1'</SQL>.Value))
 
                                 Dim NonGeoLoc_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [NonGeoLoc_Rows]
-                                                                            FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                            FROM [<%= DatabaseName %>].[dbo].[<%= TablevFinalDataset %>]
                                                                             WHERE <%= ColvGeoLocX %> IS NULL</SQL>.Value))
 
                                 Dim Problematic_Rows As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(<%= ColvID_Erga %>) AS [Problematic_Rows]
-                                                                            FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                            FROM [<%= DatabaseName %>].[dbo].[<%= TablevFinalDataset %>]
                                                                             WHERE <%= ColvGeoLocX %> = '-1'</SQL>.Value))
 
                                 Dim ProblematicOnomaPolisCount As Integer = CInt(ExecuteSQLScalar(SQLConn, <SQL>SELECT COUNT(DISTINCT [<%= ColvCityName %>]) AS [ProblematicOnomaPolisCount]
-                                                                                    FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                                    FROM [<%= DatabaseName %>].[dbo].[<%= TablevFinalDataset %>]
                                                                                     WHERE <%= ColvGeoLocX %> = '-1'</SQL>.Value))
 
-                                MsgBox(sa("There is a total of {1} projects.{0}For {2}, the Geo-Location process has been successful, whilst for {4} it has not.{0}{3} projects have yet to be subject to Geo-Location.{0}There is a total of {5} cities/addresses throughout the {4} project for which the Geo-Location failed.",
+                                MsgBox(sa("There is a total of {1} projects.{0}For {2}, the Geo-Location process has been successful, whilst for {4} it has not.{0}{3} projects have yet to undergo Geolocation.{0}There is a total of {5} cities/addresses throughout the {4} project for which the Geo-Location failed.",
                                       vbCrLf, Total_Rows, GeoLoc_Rows, NonGeoLoc_Rows, Problematic_Rows, ProblematicOnomaPolisCount))
 
                             Else
-                                MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                                MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocY, RemMniHotLetter(mniCreateGeoColumns)), MsgBoxStyle.Information)
                             End If
                         Else
-                            MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                            MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)), MsgBoxStyle.Information)
                         End If
 
                     Else
-                        MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
+                        MsgBox(sa("Unfortunately, the Table/View {0} cannot be found", TablevFinalDataset), MsgBoxStyle.Exclamation)
                     End If
 
                 Else
@@ -1781,41 +1784,85 @@ Public Class frmMain
     End Sub
 
     Private Sub mniExportListofProblematicAddresses_Click(sender As Object, e As EventArgs) Handles mniExportListofProblematicAddresses.Click
-
         Try
             If FuncInProgress.Count = 0 Then
                 FuncInProgress.Add("Acquiring Geo-Location Status")
                 If ConnectedToSQLServer = True Then
                     If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
-                    Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevErga)
+                    Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevFinalDataset)
                     If TableExists Then
-                        If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocX) Then
-                            If SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocY) Then
+                        If SQLColumnExists(SQLConn, DatabaseName, TablevFinalDataset, ColvGeoLocX) Then
+                            If SQLColumnExists(SQLConn, DatabaseName, TablevFinalDataset, ColvGeoLocY) Then
                                 Dim dtProblematicAddresses As New DataTable
                                 Dim SQLAdaptrVFinalDataset As SqlDataAdapter = Nothing
 
                                 Dim CityName As String = String.Empty
                                 SQLAdaptrVFinalDataset = New SqlDataAdapter(<SQL>
                                                                                 SELECT DISTINCT [<%= ColvCityName %>]
-                                                                                FROM [<%= DatabaseName %>].[dbo].[<%= TablevErga %>]
+                                                                                FROM [<%= DatabaseName %>].[dbo].[<%= TablevFinalDataset %>]
                                                                                 WHERE <%= ColvGeoLocX %> = '-1'
                                                                                 ORDER BY [<%= ColvCityName %>]
                                                                             </SQL>.Value, SQLConn)
                                 SQLAdaptrVFinalDataset.Fill(dtProblematicAddresses)
 
                                 Dim csvFileName As String = doProperFileName(strXDF & "Problematic_Cities.csv")
-                                Save_Datatable_To_csv(csvFileName, dtProblematicAddresses, True,,, CChar(vbTab))
+                                Save_Datatable_To_csv(csvFileName, dtProblematicAddresses, False,,, CChar(vbTab))
                                 RunOpenDir(csvFileName)
 
                             Else
-                                MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                                MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocY, RemMniHotLetter(mniCreateGeoColumns)), MsgBoxStyle.Information)
                             End If
                         Else
-                            MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)))
+                            MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)), MsgBoxStyle.Information)
                         End If
 
                     Else
-                        MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
+                        MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevFinalDataset), MsgBoxStyle.Exclamation)
+                    End If
+
+                Else
+                    MsgBox(sa("You need to be connected to the SQL Server first"), MsgBoxStyle.Exclamation)
+                End If
+
+                FuncInProgress.Remove("Acquiring Geo-Location Status")
+            Else
+                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            End If
+
+
+        Catch ex As Exception
+            CreateCrashFile(ex, True)
+        End Try
+    End Sub
+
+    Private Sub mniResetInvalidGeolocationEntries_Click(sender As Object, e As EventArgs) Handles mniResetInvalidGeolocationEntries.Click
+        Try
+            If FuncInProgress.Count = 0 Then
+                FuncInProgress.Add("Acquiring Geo-Location Status")
+                If ConnectedToSQLServer = True Then
+                    If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
+                    Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevFinalDataset)
+                    If TableExists Then
+                        If SQLColumnExists(SQLConn, DatabaseName, TablevFinalDataset, ColvGeoLocX) Then
+                            If SQLColumnExists(SQLConn, DatabaseName, TablevFinalDataset, ColvGeoLocY) Then
+                                Dim ErrorMessage As String = String.Empty
+                                ExecuteSQLQuery(SQLConn, <SQL>UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
+                                                                SET [<%= ColGeoLocX %>] = NULL, [<%= ColGeoLocY %>] = NULL
+                                                                WHERE <%= ColGeoLocX %> = -1 AND <%= ColGeoLocY %> = -1 </SQL>.Value, ErrorMessage)
+                                If ErrorMessage = String.Empty Then
+                                    MsgBox("All invalid entries (if any) have been successfully reset.", MsgBoxStyle.Information)
+                                Else
+                                    MsgBox(ErrorMessage, MsgBoxStyle.Exclamation)
+                                End If
+                            Else
+                                MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocY, RemMniHotLetter(mniCreateGeoColumns)), MsgBoxStyle.Information)
+                            End If
+                        Else
+                            MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocX, RemMniHotLetter(mniCreateGeoColumns)), MsgBoxStyle.Information)
+                        End If
+
+                    Else
+                        MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevFinalDataset), MsgBoxStyle.Exclamation)
                     End If
 
                 Else

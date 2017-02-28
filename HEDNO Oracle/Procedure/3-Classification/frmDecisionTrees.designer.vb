@@ -25,6 +25,7 @@ Partial Class frmDecisionTrees
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDecisionTrees))
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblInProgress = New System.Windows.Forms.Label()
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.lblLoading = New System.Windows.Forms.Label()
         Me.tcOptions = New System.Windows.Forms.TabControl()
@@ -107,6 +108,7 @@ Partial Class frmDecisionTrees
         '
         'pnlMain
         '
+        Me.pnlMain.Controls.Add(Me.lblInProgress)
         Me.pnlMain.Controls.Add(Me.pbLoading)
         Me.pnlMain.Controls.Add(Me.lblLoading)
         Me.pnlMain.Controls.Add(Me.tcOptions)
@@ -114,8 +116,19 @@ Partial Class frmDecisionTrees
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(540, 429)
+        Me.pnlMain.Size = New System.Drawing.Size(540, 456)
         Me.pnlMain.TabIndex = 8
+        '
+        'lblInProgress
+        '
+        Me.lblInProgress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblInProgress.AutoSize = True
+        Me.lblInProgress.Location = New System.Drawing.Point(13, 397)
+        Me.lblInProgress.Name = "lblInProgress"
+        Me.lblInProgress.Size = New System.Drawing.Size(69, 13)
+        Me.lblInProgress.TabIndex = 19
+        Me.lblInProgress.Text = "In Progress..."
+        Me.lblInProgress.Visible = False
         '
         'pbLoading
         '
@@ -147,7 +160,7 @@ Partial Class frmDecisionTrees
         Me.tcOptions.Location = New System.Drawing.Point(0, 3)
         Me.tcOptions.Name = "tcOptions"
         Me.tcOptions.SelectedIndex = 0
-        Me.tcOptions.Size = New System.Drawing.Size(537, 383)
+        Me.tcOptions.Size = New System.Drawing.Size(537, 382)
         Me.tcOptions.TabIndex = 17
         '
         'tpGeneralOptions
@@ -156,7 +169,7 @@ Partial Class frmDecisionTrees
         Me.tpGeneralOptions.Location = New System.Drawing.Point(4, 22)
         Me.tpGeneralOptions.Name = "tpGeneralOptions"
         Me.tpGeneralOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpGeneralOptions.Size = New System.Drawing.Size(529, 357)
+        Me.tpGeneralOptions.Size = New System.Drawing.Size(529, 356)
         Me.tpGeneralOptions.TabIndex = 0
         Me.tpGeneralOptions.Text = "General Options"
         Me.tpGeneralOptions.UseVisualStyleBackColor = True
@@ -176,7 +189,7 @@ Partial Class frmDecisionTrees
         'scMain.Panel2
         '
         Me.scMain.Panel2.Controls.Add(Me.scColumns)
-        Me.scMain.Size = New System.Drawing.Size(523, 351)
+        Me.scMain.Size = New System.Drawing.Size(523, 350)
         Me.scMain.SplitterDistance = 248
         Me.scMain.TabIndex = 10
         '
@@ -190,6 +203,7 @@ Partial Class frmDecisionTrees
         Me.chkStatisticsMode.Size = New System.Drawing.Size(101, 17)
         Me.chkStatisticsMode.TabIndex = 11
         Me.chkStatisticsMode.Text = "Statistics Mode:"
+        Me.ttMain.SetToolTip(Me.chkStatisticsMode, resources.GetString("chkStatisticsMode.ToolTip"))
         Me.chkStatisticsMode.UseVisualStyleBackColor = True
         '
         'gbStatistics
@@ -200,7 +214,7 @@ Partial Class frmDecisionTrees
         Me.gbStatistics.Controls.Add(Me.chkShowROCCurve)
         Me.gbStatistics.Controls.Add(Me.chkShowStatistics)
         Me.gbStatistics.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.gbStatistics.Location = New System.Drawing.Point(0, 231)
+        Me.gbStatistics.Location = New System.Drawing.Point(0, 230)
         Me.gbStatistics.Name = "gbStatistics"
         Me.gbStatistics.Size = New System.Drawing.Size(248, 120)
         Me.gbStatistics.TabIndex = 11
@@ -215,6 +229,7 @@ Partial Class frmDecisionTrees
         Me.chkOpenGraphDirectory.Size = New System.Drawing.Size(116, 17)
         Me.chkOpenGraphDirectory.TabIndex = 20
         Me.chkOpenGraphDirectory.Text = "Open Graph Folder"
+        Me.ttMain.SetToolTip(Me.chkOpenGraphDirectory, resources.GetString("chkOpenGraphDirectory.ToolTip"))
         Me.chkOpenGraphDirectory.UseVisualStyleBackColor = True
         '
         'lblRoundAt
@@ -235,9 +250,10 @@ Partial Class frmDecisionTrees
         Me.txtRoundAt.Location = New System.Drawing.Point(67, 88)
         Me.txtRoundAt.Name = "txtRoundAt"
         Me.txtRoundAt.ReadOnly = True
-        Me.txtRoundAt.Size = New System.Drawing.Size(90, 20)
+        Me.txtRoundAt.Size = New System.Drawing.Size(49, 20)
         Me.txtRoundAt.TabIndex = 19
         Me.txtRoundAt.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtRoundAt, "The decimal point that viewed statistics are rounded at.")
         '
         'chkShowROCCurve
         '
@@ -247,6 +263,7 @@ Partial Class frmDecisionTrees
         Me.chkShowROCCurve.Size = New System.Drawing.Size(110, 17)
         Me.chkShowROCCurve.TabIndex = 13
         Me.chkShowROCCurve.Text = "Show ROC Curve"
+        Me.ttMain.SetToolTip(Me.chkShowROCCurve, "A Plot of the model's ROC Curve is shown along with the calculated AUC")
         Me.chkShowROCCurve.UseVisualStyleBackColor = True
         '
         'chkShowStatistics
@@ -257,6 +274,8 @@ Partial Class frmDecisionTrees
         Me.chkShowStatistics.Size = New System.Drawing.Size(98, 17)
         Me.chkShowStatistics.TabIndex = 12
         Me.chkShowStatistics.Text = "Show Statistics"
+        Me.ttMain.SetToolTip(Me.chkShowStatistics, "A form is generated with the Model's statistics, such as the Confusion Matrix, Ac" &
+        "curacy, F Measure, G, etc.")
         Me.chkShowStatistics.UseVisualStyleBackColor = True
         '
         'gbOptions
@@ -285,6 +304,7 @@ Partial Class frmDecisionTrees
         Me.chkSavePredictionModel.Size = New System.Drawing.Size(133, 17)
         Me.chkSavePredictionModel.TabIndex = 13
         Me.chkSavePredictionModel.Text = "Save Prediction Model"
+        Me.ttMain.SetToolTip(Me.chkSavePredictionModel, "Saves the trained model at the location specified below")
         Me.chkSavePredictionModel.UseVisualStyleBackColor = True
         '
         'lblSavePath
@@ -305,6 +325,8 @@ Partial Class frmDecisionTrees
         Me.txtSavePath.ReadOnly = True
         Me.txtSavePath.Size = New System.Drawing.Size(236, 20)
         Me.txtSavePath.TabIndex = 11
+        Me.ttMain.SetToolTip(Me.txtSavePath, "If 'Save Prediction Model' is checked, the model's .RDS file is saved in this pat" &
+        "h")
         '
         'chkMakePredictions
         '
@@ -314,6 +336,7 @@ Partial Class frmDecisionTrees
         Me.chkMakePredictions.Size = New System.Drawing.Size(108, 17)
         Me.chkMakePredictions.TabIndex = 6
         Me.chkMakePredictions.Text = "Make Predictions"
+        Me.ttMain.SetToolTip(Me.chkMakePredictions, "Uses the trained model to make prediction upon the Testing Dataset.")
         Me.chkMakePredictions.UseVisualStyleBackColor = True
         '
         'chkUseExistingModel
@@ -335,6 +358,7 @@ Partial Class frmDecisionTrees
         Me.chkShowDataSummary.Size = New System.Drawing.Size(125, 17)
         Me.chkShowDataSummary.TabIndex = 4
         Me.chkShowDataSummary.Text = "Show Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowDataSummary, "View a Data Summary of the Classification dataset, such as Min, Max, Mean, etc.")
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
         'btnSelectAll
@@ -347,6 +371,7 @@ Partial Class frmDecisionTrees
         Me.btnSelectAll.Size = New System.Drawing.Size(236, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects all options in the GroupBox")
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'chkShowVariableInfo
@@ -357,6 +382,7 @@ Partial Class frmDecisionTrees
         Me.chkShowVariableInfo.Size = New System.Drawing.Size(149, 17)
         Me.chkShowVariableInfo.TabIndex = 3
         Me.chkShowVariableInfo.Text = "Show Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowVariableInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
         'scColumns
@@ -380,8 +406,8 @@ Partial Class frmDecisionTrees
         Me.scColumns.Panel2.Controls.Add(Me.btnSelectAllColumns)
         Me.scColumns.Panel2.Controls.Add(Me.lblCombinationsCount)
         Me.scColumns.Panel2.Controls.Add(Me.chkColumnsCombinations)
-        Me.scColumns.Size = New System.Drawing.Size(271, 351)
-        Me.scColumns.SplitterDistance = 236
+        Me.scColumns.Size = New System.Drawing.Size(271, 350)
+        Me.scColumns.SplitterDistance = 235
         Me.scColumns.TabIndex = 1
         '
         'pbColumnsLoading
@@ -401,7 +427,7 @@ Partial Class frmDecisionTrees
         Me.lblColumnsLoading.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.lblColumnsLoading.Location = New System.Drawing.Point(0, 0)
         Me.lblColumnsLoading.Name = "lblColumnsLoading"
-        Me.lblColumnsLoading.Size = New System.Drawing.Size(271, 236)
+        Me.lblColumnsLoading.Size = New System.Drawing.Size(271, 235)
         Me.lblColumnsLoading.TabIndex = 1
         Me.lblColumnsLoading.Text = "Loading..."
         Me.lblColumnsLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -412,8 +438,9 @@ Partial Class frmDecisionTrees
         Me.clbColumns.FormattingEnabled = True
         Me.clbColumns.Location = New System.Drawing.Point(0, 0)
         Me.clbColumns.Name = "clbColumns"
-        Me.clbColumns.Size = New System.Drawing.Size(271, 236)
+        Me.clbColumns.Size = New System.Drawing.Size(271, 235)
         Me.clbColumns.TabIndex = 0
+        Me.ttMain.SetToolTip(Me.clbColumns, "The columns/variables that can be used for the Model Training Process")
         '
         'lblNGrams
         '
@@ -435,6 +462,7 @@ Partial Class frmDecisionTrees
         Me.txtNGrams.Size = New System.Drawing.Size(44, 20)
         Me.txtNGrams.TabIndex = 17
         Me.txtNGrams.Text = "1"
+        Me.ttMain.SetToolTip(Me.txtNGrams, resources.GetString("txtNGrams.ToolTip"))
         '
         'chkUpToNGramsN
         '
@@ -446,6 +474,7 @@ Partial Class frmDecisionTrees
         Me.chkUpToNGramsN.Size = New System.Drawing.Size(108, 17)
         Me.chkUpToNGramsN.TabIndex = 16
         Me.chkUpToNGramsN.Text = "Up to n-grams's n"
+        Me.ttMain.SetToolTip(Me.chkUpToNGramsN, resources.GetString("chkUpToNGramsN.ToolTip"))
         Me.chkUpToNGramsN.UseVisualStyleBackColor = True
         '
         'btnSelectAllColumns
@@ -459,6 +488,7 @@ Partial Class frmDecisionTrees
         Me.btnSelectAllColumns.Size = New System.Drawing.Size(265, 23)
         Me.btnSelectAllColumns.TabIndex = 14
         Me.btnSelectAllColumns.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAllColumns, "Selects all the variables to be used in the Supervised Learning")
         Me.btnSelectAllColumns.UseVisualStyleBackColor = True
         '
         'lblCombinationsCount
@@ -482,6 +512,7 @@ Partial Class frmDecisionTrees
         Me.chkColumnsCombinations.Size = New System.Drawing.Size(184, 17)
         Me.chkColumnsCombinations.TabIndex = 14
         Me.chkColumnsCombinations.Text = "Iterate over Column Combinations"
+        Me.ttMain.SetToolTip(Me.chkColumnsCombinations, resources.GetString("chkColumnsCombinations.ToolTip"))
         Me.chkColumnsCombinations.UseVisualStyleBackColor = True
         '
         'tpAlgorithmOptions
@@ -490,7 +521,7 @@ Partial Class frmDecisionTrees
         Me.tpAlgorithmOptions.Location = New System.Drawing.Point(4, 22)
         Me.tpAlgorithmOptions.Name = "tpAlgorithmOptions"
         Me.tpAlgorithmOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpAlgorithmOptions.Size = New System.Drawing.Size(529, 357)
+        Me.tpAlgorithmOptions.Size = New System.Drawing.Size(529, 356)
         Me.tpAlgorithmOptions.TabIndex = 1
         Me.tpAlgorithmOptions.Text = "Algorithm-Specific Options"
         Me.tpAlgorithmOptions.UseVisualStyleBackColor = True
@@ -501,7 +532,7 @@ Partial Class frmDecisionTrees
         Me.gbSettings.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSettings.Location = New System.Drawing.Point(3, 3)
         Me.gbSettings.Name = "gbSettings"
-        Me.gbSettings.Size = New System.Drawing.Size(523, 351)
+        Me.gbSettings.Size = New System.Drawing.Size(523, 350)
         Me.gbSettings.TabIndex = 7
         Me.gbSettings.TabStop = False
         Me.gbSettings.Text = "Settings:"
@@ -531,7 +562,7 @@ Partial Class frmDecisionTrees
         Me.scSettings.Panel2.Controls.Add(Me.txtrowSelection)
         Me.scSettings.Panel2.Controls.Add(Me.txtBlocksPerRead)
         Me.scSettings.Panel2.Controls.Add(Me.txtReportProgress)
-        Me.scSettings.Size = New System.Drawing.Size(517, 332)
+        Me.scSettings.Size = New System.Drawing.Size(517, 331)
         Me.scSettings.SplitterDistance = 191
         Me.scSettings.TabIndex = 8
         '
@@ -543,6 +574,8 @@ Partial Class frmDecisionTrees
         Me.chkCP.Size = New System.Drawing.Size(38, 17)
         Me.chkCP.TabIndex = 13
         Me.chkCP.Text = "cp"
+        Me.ttMain.SetToolTip(Me.chkCP, "Numeric scalar specifying the complexity parameter. Any split that does not decre" &
+        "ase overall lack-of-fit by at least cp is not attempted.")
         Me.chkCP.UseVisualStyleBackColor = True
         '
         'chkShowComplexityPlot
@@ -553,6 +586,7 @@ Partial Class frmDecisionTrees
         Me.chkShowComplexityPlot.Size = New System.Drawing.Size(127, 17)
         Me.chkShowComplexityPlot.TabIndex = 12
         Me.chkShowComplexityPlot.Text = "Show Complexity Plot"
+        Me.ttMain.SetToolTip(Me.chkShowComplexityPlot, "Shows the plot of optimal prunings based on complexity")
         Me.chkShowComplexityPlot.UseVisualStyleBackColor = True
         '
         'chkClassMethod
@@ -560,9 +594,10 @@ Partial Class frmDecisionTrees
         Me.chkClassMethod.AutoSize = True
         Me.chkClassMethod.Location = New System.Drawing.Point(3, 110)
         Me.chkClassMethod.Name = "chkClassMethod"
-        Me.chkClassMethod.Size = New System.Drawing.Size(126, 17)
+        Me.chkClassMethod.Size = New System.Drawing.Size(61, 17)
         Me.chkClassMethod.TabIndex = 11
-        Me.chkClassMethod.Text = "Classification Method"
+        Me.chkClassMethod.Text = "method"
+        Me.ttMain.SetToolTip(Me.chkClassMethod, "The splitting method: class for factors, anova otherwise")
         Me.chkClassMethod.UseVisualStyleBackColor = True
         '
         'chkPlotTreeModel
@@ -573,6 +608,8 @@ Partial Class frmDecisionTrees
         Me.chkPlotTreeModel.Size = New System.Drawing.Size(101, 17)
         Me.chkPlotTreeModel.TabIndex = 10
         Me.chkPlotTreeModel.Text = "Plot Tree Model"
+        Me.ttMain.SetToolTip(Me.chkPlotTreeModel, "If True, the Default Web Browser will open, revealing an interactive Tree Structu" &
+        "re for the trained model")
         Me.chkPlotTreeModel.UseVisualStyleBackColor = True
         '
         'chkrowSelection
@@ -615,6 +652,8 @@ Partial Class frmDecisionTrees
         Me.txtCP.Size = New System.Drawing.Size(315, 20)
         Me.txtCP.TabIndex = 20
         Me.txtCP.Text = "0.001"
+        Me.ttMain.SetToolTip(Me.txtCP, "Numeric scalar specifying the complexity parameter. Any split that does not decre" &
+        "ase overall lack-of-fit by at least cp is not attempted.")
         '
         'cbShowComplexityPlot
         '
@@ -625,6 +664,7 @@ Partial Class frmDecisionTrees
         Me.cbShowComplexityPlot.Name = "cbShowComplexityPlot"
         Me.cbShowComplexityPlot.Size = New System.Drawing.Size(315, 21)
         Me.cbShowComplexityPlot.TabIndex = 13
+        Me.ttMain.SetToolTip(Me.cbShowComplexityPlot, "Shows the plot of optimal prunings based on complexity")
         '
         'cbClassMethod
         '
@@ -635,6 +675,7 @@ Partial Class frmDecisionTrees
         Me.cbClassMethod.Name = "cbClassMethod"
         Me.cbClassMethod.Size = New System.Drawing.Size(315, 21)
         Me.cbClassMethod.TabIndex = 12
+        Me.ttMain.SetToolTip(Me.cbClassMethod, "The splitting method: class for factors, anova otherwise")
         '
         'cbPlotTreeModel
         '
@@ -645,6 +686,8 @@ Partial Class frmDecisionTrees
         Me.cbPlotTreeModel.Name = "cbPlotTreeModel"
         Me.cbPlotTreeModel.Size = New System.Drawing.Size(316, 21)
         Me.cbPlotTreeModel.TabIndex = 11
+        Me.ttMain.SetToolTip(Me.cbPlotTreeModel, "If True, the Default Web Browser will open, revealing an interactive Tree Structu" &
+        "re for the trained model" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         '
         'txtrowSelection
         '
@@ -681,11 +724,12 @@ Partial Class frmDecisionTrees
         Me.btnRunModel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRunModel.Enabled = False
-        Me.btnRunModel.Location = New System.Drawing.Point(12, 394)
+        Me.btnRunModel.Location = New System.Drawing.Point(12, 421)
         Me.btnRunModel.Name = "btnRunModel"
         Me.btnRunModel.Size = New System.Drawing.Size(516, 23)
         Me.btnRunModel.TabIndex = 0
         Me.btnRunModel.Text = "Apply Decision Trees"
+        Me.ttMain.SetToolTip(Me.btnRunModel, resources.GetString("btnRunModel.ToolTip"))
         Me.btnRunModel.UseVisualStyleBackColor = True
         '
         'tmrLoadColumns
@@ -716,12 +760,13 @@ Partial Class frmDecisionTrees
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSelectAll
-        Me.ClientSize = New System.Drawing.Size(540, 429)
+        Me.ClientSize = New System.Drawing.Size(540, 456)
         Me.Controls.Add(Me.pnlMain)
         Me.Name = "frmDecisionTrees"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "2. Decision Trees"
         Me.pnlMain.ResumeLayout(False)
+        Me.pnlMain.PerformLayout()
         Me.tcOptions.ResumeLayout(False)
         Me.tpGeneralOptions.ResumeLayout(False)
         Me.scMain.Panel1.ResumeLayout(False)
@@ -810,4 +855,5 @@ Partial Class frmDecisionTrees
     Friend WithEvents cbShowComplexityPlot As ComboBox
     Friend WithEvents chkCP As CheckBox
     Friend WithEvents txtCP As TextBox
+    Friend WithEvents lblInProgress As Label
 End Class

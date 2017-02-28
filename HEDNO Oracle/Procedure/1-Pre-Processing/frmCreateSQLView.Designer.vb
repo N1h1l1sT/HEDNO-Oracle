@@ -22,8 +22,10 @@ Partial Class frmCreateSQLView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.gbSQLViews = New System.Windows.Forms.GroupBox()
         Me.clbSQLViews = New System.Windows.Forms.CheckedListBox()
+        Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.btnCreateSQLViews = New System.Windows.Forms.Button()
         Me.fswSQLViewFiles = New System.IO.FileSystemWatcher()
         Me.gbSQLViewOptions = New System.Windows.Forms.GroupBox()
@@ -32,8 +34,8 @@ Partial Class frmCreateSQLView
         Me.rdbDoNothing = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkDeleteAll = New System.Windows.Forms.CheckBox()
-        Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.lblWarning = New System.Windows.Forms.Label()
+        Me.ttMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.gbSQLViews.SuspendLayout()
         CType(Me.fswSQLViewFiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSQLViewOptions.SuspendLayout()
@@ -63,6 +65,21 @@ Partial Class frmCreateSQLView
         Me.clbSQLViews.Name = "clbSQLViews"
         Me.clbSQLViews.Size = New System.Drawing.Size(173, 184)
         Me.clbSQLViews.TabIndex = 0
+        Me.ttMain.SetToolTip(Me.clbSQLViews, "Select which SQL Views you wish to Create, Alter or Delete." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The corresponding .S" &
+        "QL Files are in the Programme's Install Directory under the folder ""SQL"" and sub" &
+        "folder ""Views""")
+        '
+        'btnSelectAll
+        '
+        Me.btnSelectAll.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSelectAll.Location = New System.Drawing.Point(6, 208)
+        Me.btnSelectAll.Name = "btnSelectAll"
+        Me.btnSelectAll.Size = New System.Drawing.Size(173, 23)
+        Me.btnSelectAll.TabIndex = 3
+        Me.btnSelectAll.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects or Unselects all SQL Views")
+        Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'btnCreateSQLViews
         '
@@ -73,6 +90,9 @@ Partial Class frmCreateSQLView
         Me.btnCreateSQLViews.Size = New System.Drawing.Size(375, 23)
         Me.btnCreateSQLViews.TabIndex = 1
         Me.btnCreateSQLViews.Text = "&Create SQL Views"
+        Me.ttMain.SetToolTip(Me.btnCreateSQLViews, "Needs: An active connection to the SQL Server." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Does: Creates, Alters, or Deletes" &
+        " the SQL Views you've selected from the ListBox according to the option you sele" &
+        "cted from the RadioButtons")
         Me.btnCreateSQLViews.UseVisualStyleBackColor = True
         '
         'fswSQLViewFiles
@@ -104,6 +124,8 @@ Partial Class frmCreateSQLView
         Me.rdbDeleteItAndCreateIt.Size = New System.Drawing.Size(127, 17)
         Me.rdbDeleteItAndCreateIt.TabIndex = 3
         Me.rdbDeleteItAndCreateIt.Text = "D&elete it and Create it"
+        Me.ttMain.SetToolTip(Me.rdbDeleteItAndCreateIt, "If the SQL View is already there, then it will delete the view first, and then cr" &
+        "eate it anew")
         Me.rdbDeleteItAndCreateIt.UseVisualStyleBackColor = True
         '
         'rdbAlterIt
@@ -114,6 +136,7 @@ Partial Class frmCreateSQLView
         Me.rdbAlterIt.Size = New System.Drawing.Size(54, 17)
         Me.rdbAlterIt.TabIndex = 2
         Me.rdbAlterIt.Text = "A&lter it"
+        Me.ttMain.SetToolTip(Me.rdbAlterIt, "If the SQL View is already there, then it will alter it")
         Me.rdbAlterIt.UseVisualStyleBackColor = True
         '
         'rdbDoNothing
@@ -126,6 +149,7 @@ Partial Class frmCreateSQLView
         Me.rdbDoNothing.TabIndex = 1
         Me.rdbDoNothing.TabStop = True
         Me.rdbDoNothing.Text = "Do &Nothing"
+        Me.ttMain.SetToolTip(Me.rdbDoNothing, "If the SQL View is already there, then it will not create, alter or delete it")
         Me.rdbDoNothing.UseVisualStyleBackColor = True
         '
         'Label1
@@ -146,18 +170,9 @@ Partial Class frmCreateSQLView
         Me.chkDeleteAll.Size = New System.Drawing.Size(171, 17)
         Me.chkDeleteAll.TabIndex = 2
         Me.chkDeleteAll.Text = "&Delete All Selected SQL Views"
+        Me.ttMain.SetToolTip(Me.chkDeleteAll, "Instead of creating or altering the selected SQL Views, if this is enabled, selec" &
+        "ted SQL Views will be deleted.")
         Me.chkDeleteAll.UseVisualStyleBackColor = True
-        '
-        'btnSelectAll
-        '
-        Me.btnSelectAll.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelectAll.Location = New System.Drawing.Point(6, 208)
-        Me.btnSelectAll.Name = "btnSelectAll"
-        Me.btnSelectAll.Size = New System.Drawing.Size(173, 23)
-        Me.btnSelectAll.TabIndex = 3
-        Me.btnSelectAll.Text = "Select &All"
-        Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'lblWarning
         '
@@ -166,10 +181,17 @@ Partial Class frmCreateSQLView
         Me.lblWarning.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
         Me.lblWarning.Location = New System.Drawing.Point(199, 148)
         Me.lblWarning.Name = "lblWarning"
-        Me.lblWarning.Size = New System.Drawing.Size(197, 112)
+        Me.lblWarning.Size = New System.Drawing.Size(197, 101)
         Me.lblWarning.TabIndex = 4
         Me.lblWarning.Text = "Remember:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SQL Files must be encoded as UTF8, otherise the operations will fail."
         Me.lblWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ttMain
+        '
+        Me.ttMain.AutoPopDelay = 10000
+        Me.ttMain.InitialDelay = 500
+        Me.ttMain.ReshowDelay = 100
+        Me.ttMain.ShowAlways = True
         '
         'frmCreateSQLView
         '
@@ -204,4 +226,5 @@ Partial Class frmCreateSQLView
     Friend WithEvents Label1 As Label
     Friend WithEvents btnSelectAll As Button
     Friend WithEvents lblWarning As Label
+    Friend WithEvents ttMain As ToolTip
 End Class

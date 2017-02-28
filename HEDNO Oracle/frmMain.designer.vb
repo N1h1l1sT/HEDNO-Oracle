@@ -23,6 +23,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.mniFileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniSettings = New System.Windows.Forms.ToolStripMenuItem()
@@ -37,8 +38,9 @@ Partial Class frmMain
         Me.mniCreateNeededSQLViews = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniGeoLocate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniGeoLocationStatus = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mniPreProcessTheData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniExportListofProblematicAddresses = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniResetInvalidGeolocationEntries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mniPreProcessTheData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClustering = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClusteringStep0 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mniClusteringStep1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -191,7 +193,7 @@ Partial Class frmMain
         '
         'mniPreProcessing
         '
-        Me.mniPreProcessing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniCreateGeoColumns, Me.mniCreateNeededSQLViews, Me.mniGeoLocate, Me.mniGeoLocationStatus, Me.mniPreProcessTheData, Me.mniExportListofProblematicAddresses})
+        Me.mniPreProcessing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniCreateGeoColumns, Me.mniCreateNeededSQLViews, Me.mniGeoLocate, Me.mniGeoLocationStatus, Me.mniExportListofProblematicAddresses, Me.mniResetInvalidGeolocationEntries, Me.mniPreProcessTheData})
         Me.mniPreProcessing.Name = "mniPreProcessing"
         Me.mniPreProcessing.Size = New System.Drawing.Size(103, 20)
         Me.mniPreProcessing.Text = "Pre-Processing"
@@ -201,36 +203,52 @@ Partial Class frmMain
         Me.mniCreateGeoColumns.Name = "mniCreateGeoColumns"
         Me.mniCreateGeoColumns.Size = New System.Drawing.Size(273, 22)
         Me.mniCreateGeoColumns.Text = "Create Geolocation SQL Columns"
+        Me.mniCreateGeoColumns.ToolTipText = "Needs: An active connection to the SQL Server and Main SQL Table" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Does: If they d" &
+    "on't already exist, it creates the 2 SQL Columns needed for the process on the M" &
+    "ain SQL Table (not the view!)"
         '
         'mniCreateNeededSQLViews
         '
         Me.mniCreateNeededSQLViews.Name = "mniCreateNeededSQLViews"
         Me.mniCreateNeededSQLViews.Size = New System.Drawing.Size(273, 22)
         Me.mniCreateNeededSQLViews.Text = "Create Needed SQL Views"
+        Me.mniCreateNeededSQLViews.ToolTipText = "Opens the 'Create SQL View' form so that you may create, modify or delete needed " &
+    "SQL Views"
         '
         'mniGeoLocate
         '
         Me.mniGeoLocate.Name = "mniGeoLocate"
         Me.mniGeoLocate.Size = New System.Drawing.Size(273, 22)
         Me.mniGeoLocate.Text = "&Geo-Locate"
+        Me.mniGeoLocate.ToolTipText = resources.GetString("mniGeoLocate.ToolTipText")
         '
         'mniGeoLocationStatus
         '
         Me.mniGeoLocationStatus.Name = "mniGeoLocationStatus"
         Me.mniGeoLocationStatus.Size = New System.Drawing.Size(273, 22)
         Me.mniGeoLocationStatus.Text = "Geo-Location Status"
-        '
-        'mniPreProcessTheData
-        '
-        Me.mniPreProcessTheData.Name = "mniPreProcessTheData"
-        Me.mniPreProcessTheData.Size = New System.Drawing.Size(273, 22)
-        Me.mniPreProcessTheData.Text = "&Pre-Process The Data"
+        Me.mniGeoLocationStatus.ToolTipText = resources.GetString("mniGeoLocationStatus.ToolTipText")
         '
         'mniExportListofProblematicAddresses
         '
         Me.mniExportListofProblematicAddresses.Name = "mniExportListofProblematicAddresses"
         Me.mniExportListofProblematicAddresses.Size = New System.Drawing.Size(273, 22)
         Me.mniExportListofProblematicAddresses.Text = "&Export List of Problematic Addresses"
+        Me.mniExportListofProblematicAddresses.ToolTipText = resources.GetString("mniExportListofProblematicAddresses.ToolTipText")
+        '
+        'mniResetInvalidGeolocationEntries
+        '
+        Me.mniResetInvalidGeolocationEntries.Name = "mniResetInvalidGeolocationEntries"
+        Me.mniResetInvalidGeolocationEntries.Size = New System.Drawing.Size(273, 22)
+        Me.mniResetInvalidGeolocationEntries.Text = "Reset Invalid Geolocation Entries"
+        Me.mniResetInvalidGeolocationEntries.ToolTipText = resources.GetString("mniResetInvalidGeolocationEntries.ToolTipText")
+        '
+        'mniPreProcessTheData
+        '
+        Me.mniPreProcessTheData.Name = "mniPreProcessTheData"
+        Me.mniPreProcessTheData.Size = New System.Drawing.Size(273, 22)
+        Me.mniPreProcessTheData.Text = "&Pre-Process The Data"
+        Me.mniPreProcessTheData.ToolTipText = resources.GetString("mniPreProcessTheData.ToolTipText")
         '
         'mniClustering
         '
@@ -244,12 +262,14 @@ Partial Class frmMain
         Me.mniClusteringStep0.Name = "mniClusteringStep0"
         Me.mniClusteringStep0.Size = New System.Drawing.Size(274, 22)
         Me.mniClusteringStep0.Text = "Step 0: Process Data"
+        Me.mniClusteringStep0.ToolTipText = resources.GetString("mniClusteringStep0.ToolTipText")
         '
         'mniClusteringStep1
         '
         Me.mniClusteringStep1.Name = "mniClusteringStep1"
         Me.mniClusteringStep1.Size = New System.Drawing.Size(274, 22)
         Me.mniClusteringStep1.Text = "Step 1: Apply Unsupervised Learning"
+        Me.mniClusteringStep1.ToolTipText = resources.GetString("mniClusteringStep1.ToolTipText")
         '
         'mniClassification
         '
@@ -263,66 +283,77 @@ Partial Class frmMain
         Me.mniFormTrainAndTestSets.Name = "mniFormTrainAndTestSets"
         Me.mniFormTrainAndTestSets.Size = New System.Drawing.Size(277, 22)
         Me.mniFormTrainAndTestSets.Text = "&Form Train and Test sets"
+        Me.mniFormTrainAndTestSets.ToolTipText = resources.GetString("mniFormTrainAndTestSets.ToolTipText")
         '
         'mniLogisticRegression
         '
         Me.mniLogisticRegression.Name = "mniLogisticRegression"
         Me.mniLogisticRegression.Size = New System.Drawing.Size(277, 22)
         Me.mniLogisticRegression.Text = "&1) Logistic Regression"
+        Me.mniLogisticRegression.ToolTipText = resources.GetString("mniLogisticRegression.ToolTipText")
         '
         'mniDecisionTrees
         '
         Me.mniDecisionTrees.Name = "mniDecisionTrees"
         Me.mniDecisionTrees.Size = New System.Drawing.Size(277, 22)
-        Me.mniDecisionTrees.Text = "2) Decision Trees"
+        Me.mniDecisionTrees.Text = "&2) Decision Trees"
+        Me.mniDecisionTrees.ToolTipText = resources.GetString("mniDecisionTrees.ToolTipText")
         '
         'mniNaiveBayes
         '
         Me.mniNaiveBayes.Name = "mniNaiveBayes"
         Me.mniNaiveBayes.Size = New System.Drawing.Size(277, 22)
-        Me.mniNaiveBayes.Text = "3) Naive Bayes"
+        Me.mniNaiveBayes.Text = "&3) Naive Bayes"
+        Me.mniNaiveBayes.ToolTipText = resources.GetString("mniNaiveBayes.ToolTipText")
         '
         'mniRandomForest
         '
         Me.mniRandomForest.Name = "mniRandomForest"
         Me.mniRandomForest.Size = New System.Drawing.Size(277, 22)
-        Me.mniRandomForest.Text = "4) Random Forest"
+        Me.mniRandomForest.Text = "&4) Random Forest"
+        Me.mniRandomForest.ToolTipText = resources.GetString("mniRandomForest.ToolTipText")
         '
         'mniStochasticGradientBoosting
         '
         Me.mniStochasticGradientBoosting.Name = "mniStochasticGradientBoosting"
         Me.mniStochasticGradientBoosting.Size = New System.Drawing.Size(277, 22)
-        Me.mniStochasticGradientBoosting.Text = "5) Stochastic Gradient Boosting"
+        Me.mniStochasticGradientBoosting.Text = "&5) Stochastic Gradient Boosting"
+        Me.mniStochasticGradientBoosting.ToolTipText = resources.GetString("mniStochasticGradientBoosting.ToolTipText")
         '
         'mniStochasticDualCoordinateAscent
         '
         Me.mniStochasticDualCoordinateAscent.Name = "mniStochasticDualCoordinateAscent"
         Me.mniStochasticDualCoordinateAscent.Size = New System.Drawing.Size(277, 22)
-        Me.mniStochasticDualCoordinateAscent.Text = "6) Stochastic Dual Coordinate Ascent"
+        Me.mniStochasticDualCoordinateAscent.Text = "&6) Stochastic Dual Coordinate Ascent"
+        Me.mniStochasticDualCoordinateAscent.ToolTipText = resources.GetString("mniStochasticDualCoordinateAscent.ToolTipText")
         '
         'mniBoostedDecisionTrees
         '
         Me.mniBoostedDecisionTrees.Name = "mniBoostedDecisionTrees"
         Me.mniBoostedDecisionTrees.Size = New System.Drawing.Size(277, 22)
-        Me.mniBoostedDecisionTrees.Text = "7) Boosted Decision Trees"
+        Me.mniBoostedDecisionTrees.Text = "&7) Boosted Decision Trees"
+        Me.mniBoostedDecisionTrees.ToolTipText = resources.GetString("mniBoostedDecisionTrees.ToolTipText")
         '
         'mniEnsambleOfDecisionTrees
         '
         Me.mniEnsambleOfDecisionTrees.Name = "mniEnsambleOfDecisionTrees"
         Me.mniEnsambleOfDecisionTrees.Size = New System.Drawing.Size(277, 22)
-        Me.mniEnsambleOfDecisionTrees.Text = "8) Ensamble of Decision Trees"
+        Me.mniEnsambleOfDecisionTrees.Text = "&8) Ensamble of Decision Trees"
+        Me.mniEnsambleOfDecisionTrees.ToolTipText = resources.GetString("mniEnsambleOfDecisionTrees.ToolTipText")
         '
         'mniNeuralNetworks
         '
         Me.mniNeuralNetworks.Name = "mniNeuralNetworks"
         Me.mniNeuralNetworks.Size = New System.Drawing.Size(277, 22)
-        Me.mniNeuralNetworks.Text = "9) Neural Networks"
+        Me.mniNeuralNetworks.Text = "&9) Neural Networks"
+        Me.mniNeuralNetworks.ToolTipText = resources.GetString("mniNeuralNetworks.ToolTipText")
         '
         'mniFastLogisticRegression
         '
         Me.mniFastLogisticRegression.Name = "mniFastLogisticRegression"
         Me.mniFastLogisticRegression.Size = New System.Drawing.Size(277, 22)
-        Me.mniFastLogisticRegression.Text = "10) Fast Logistic Regression"
+        Me.mniFastLogisticRegression.Text = "1&0) Fast Logistic Regression"
+        Me.mniFastLogisticRegression.ToolTipText = resources.GetString("mniFastLogisticRegression.ToolTipText")
         '
         'mniDirectoriesMenu
         '
@@ -476,6 +507,7 @@ Partial Class frmMain
         Me.mniCredits.Name = "mniCredits"
         Me.mniCredits.Size = New System.Drawing.Size(236, 22)
         Me.mniCredits.Text = "&Credits"
+        Me.mniCredits.Visible = False
         '
         'mniAbout
         '
@@ -809,7 +841,11 @@ Partial Class frmMain
         '
         'tltMain
         '
+        Me.tltMain.AutoPopDelay = 10000
+        Me.tltMain.InitialDelay = 500
         Me.tltMain.IsBalloon = True
+        Me.tltMain.ReshowDelay = 100
+        Me.tltMain.ShowAlways = True
         Me.tltMain.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.tltMain.ToolTipTitle = "Tip:"
         '
@@ -961,4 +997,5 @@ Partial Class frmMain
     Friend WithEvents mniGeoLocationStatus As ToolStripMenuItem
     Friend WithEvents mniExportListofProblematicAddresses As ToolStripMenuItem
     Friend WithEvents mniFastLogisticRegression As ToolStripMenuItem
+    Friend WithEvents mniResetInvalidGeolocationEntries As ToolStripMenuItem
 End Class

@@ -23,8 +23,11 @@ Partial Class frmClassification
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmClassification))
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.lblLoading = New System.Windows.Forms.Label()
+        Me.chkStatisticsMode = New System.Windows.Forms.CheckBox()
         Me.scMain = New System.Windows.Forms.SplitContainer()
         Me.gbOptions = New System.Windows.Forms.GroupBox()
         Me.chkFormTestSet = New System.Windows.Forms.CheckBox()
@@ -41,12 +44,11 @@ Partial Class frmClassification
         Me.chkShowTrainVarInfo = New System.Windows.Forms.CheckBox()
         Me.lblTrainPercent = New System.Windows.Forms.Label()
         Me.cbTrainPercent = New System.Windows.Forms.ComboBox()
-        Me.chkStatisticsMode = New System.Windows.Forms.CheckBox()
         Me.chkCleanXDFFile = New System.Windows.Forms.CheckBox()
         Me.btnClassification = New System.Windows.Forms.Button()
         Me.fswModelExists = New System.IO.FileSystemWatcher()
         Me.tmrModelExists = New System.Windows.Forms.Timer(Me.components)
-        Me.pbLoading = New System.Windows.Forms.ProgressBar()
+        Me.ttMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlMain.SuspendLayout()
         CType(Me.scMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scMain.Panel1.SuspendLayout()
@@ -70,6 +72,16 @@ Partial Class frmClassification
         Me.pnlMain.Size = New System.Drawing.Size(496, 248)
         Me.pnlMain.TabIndex = 7
         '
+        'pbLoading
+        '
+        Me.pbLoading.Location = New System.Drawing.Point(326, 0)
+        Me.pbLoading.MarqueeAnimationSpeed = 10
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
+        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.pbLoading.TabIndex = 15
+        Me.pbLoading.Visible = False
+        '
         'lblLoading
         '
         Me.lblLoading.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
@@ -79,6 +91,20 @@ Partial Class frmClassification
         Me.lblLoading.TabIndex = 14
         Me.lblLoading.Text = "Loading..."
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblLoading.Visible = False
+        '
+        'chkStatisticsMode
+        '
+        Me.chkStatisticsMode.AutoSize = True
+        Me.chkStatisticsMode.Checked = True
+        Me.chkStatisticsMode.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStatisticsMode.Location = New System.Drawing.Point(248, 12)
+        Me.chkStatisticsMode.Name = "chkStatisticsMode"
+        Me.chkStatisticsMode.Size = New System.Drawing.Size(101, 17)
+        Me.chkStatisticsMode.TabIndex = 11
+        Me.chkStatisticsMode.Text = "Statistics Mode:"
+        Me.ttMain.SetToolTip(Me.chkStatisticsMode, resources.GetString("chkStatisticsMode.ToolTip"))
+        Me.chkStatisticsMode.UseVisualStyleBackColor = True
         '
         'scMain
         '
@@ -124,6 +150,7 @@ Partial Class frmClassification
         Me.chkFormTestSet.Size = New System.Drawing.Size(106, 17)
         Me.chkFormTestSet.TabIndex = 7
         Me.chkFormTestSet.Text = "Form Testing Set"
+        Me.ttMain.SetToolTip(Me.chkFormTestSet, resources.GetString("chkFormTestSet.ToolTip"))
         Me.chkFormTestSet.UseVisualStyleBackColor = True
         '
         'chkFormTrainSet
@@ -134,6 +161,7 @@ Partial Class frmClassification
         Me.chkFormTrainSet.Size = New System.Drawing.Size(109, 17)
         Me.chkFormTrainSet.TabIndex = 6
         Me.chkFormTrainSet.Text = "Form Training Set"
+        Me.ttMain.SetToolTip(Me.chkFormTrainSet, resources.GetString("chkFormTrainSet.ToolTip"))
         Me.chkFormTrainSet.UseVisualStyleBackColor = True
         '
         'chkUseExistingXDFFile
@@ -144,6 +172,7 @@ Partial Class frmClassification
         Me.chkUseExistingXDFFile.Size = New System.Drawing.Size(127, 17)
         Me.chkUseExistingXDFFile.TabIndex = 5
         Me.chkUseExistingXDFFile.Text = "Use Existing XDF File"
+        Me.ttMain.SetToolTip(Me.chkUseExistingXDFFile, resources.GetString("chkUseExistingXDFFile.ToolTip"))
         Me.chkUseExistingXDFFile.UseVisualStyleBackColor = True
         '
         'chkShowDataSummary
@@ -154,6 +183,7 @@ Partial Class frmClassification
         Me.chkShowDataSummary.Size = New System.Drawing.Size(125, 17)
         Me.chkShowDataSummary.TabIndex = 4
         Me.chkShowDataSummary.Text = "Show Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowDataSummary, "View a Data Summary of the Classification dataset, such as Min, Max, Mean, etc.")
         Me.chkShowDataSummary.UseVisualStyleBackColor = True
         '
         'chkVisualiseClassImbal
@@ -164,6 +194,7 @@ Partial Class frmClassification
         Me.chkVisualiseClassImbal.Size = New System.Drawing.Size(147, 17)
         Me.chkVisualiseClassImbal.TabIndex = 2
         Me.chkVisualiseClassImbal.Text = "Visualise Class Imbalance"
+        Me.ttMain.SetToolTip(Me.chkVisualiseClassImbal, "If selected, a graph visualisation of the class imbalance is shown")
         Me.chkVisualiseClassImbal.UseVisualStyleBackColor = True
         '
         'btnSelectAll
@@ -174,6 +205,7 @@ Partial Class frmClassification
         Me.btnSelectAll.Size = New System.Drawing.Size(170, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
+        Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects all options in the GroupBox")
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'chkShowVariableInfo
@@ -184,6 +216,7 @@ Partial Class frmClassification
         Me.chkShowVariableInfo.Size = New System.Drawing.Size(149, 17)
         Me.chkShowVariableInfo.TabIndex = 3
         Me.chkShowVariableInfo.Text = "Show Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowVariableInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowVariableInfo.UseVisualStyleBackColor = True
         '
         'gbStatistics
@@ -210,6 +243,7 @@ Partial Class frmClassification
         Me.chkShowTestDataSummary.Size = New System.Drawing.Size(163, 17)
         Me.chkShowTestDataSummary.TabIndex = 16
         Me.chkShowTestDataSummary.Text = "Show Testing Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowTestDataSummary, "View a Data Summary of the Testing dataset, such as Min, Max, Mean, etc." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         Me.chkShowTestDataSummary.UseVisualStyleBackColor = True
         '
         'chkShowTestVarInfo
@@ -220,6 +254,7 @@ Partial Class frmClassification
         Me.chkShowTestVarInfo.Size = New System.Drawing.Size(187, 17)
         Me.chkShowTestVarInfo.TabIndex = 15
         Me.chkShowTestVarInfo.Text = "Show Testing Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowTestVarInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowTestVarInfo.UseVisualStyleBackColor = True
         '
         'chkShowTrainDataSummary
@@ -230,6 +265,7 @@ Partial Class frmClassification
         Me.chkShowTrainDataSummary.Size = New System.Drawing.Size(166, 17)
         Me.chkShowTrainDataSummary.TabIndex = 14
         Me.chkShowTrainDataSummary.Text = "Show Training Data Summary"
+        Me.ttMain.SetToolTip(Me.chkShowTrainDataSummary, "View a Data Summary of the Training dataset, such as Min, Max, Mean, etc.")
         Me.chkShowTrainDataSummary.UseVisualStyleBackColor = True
         '
         'chkShowTrainVarInfo
@@ -240,6 +276,7 @@ Partial Class frmClassification
         Me.chkShowTrainVarInfo.Size = New System.Drawing.Size(190, 17)
         Me.chkShowTrainVarInfo.TabIndex = 13
         Me.chkShowTrainVarInfo.Text = "Show Training Variable Information"
+        Me.ttMain.SetToolTip(Me.chkShowTrainVarInfo, "View Variable Information such as their types and descriptions.")
         Me.chkShowTrainVarInfo.UseVisualStyleBackColor = True
         '
         'lblTrainPercent
@@ -260,18 +297,8 @@ Partial Class frmClassification
         Me.cbTrainPercent.Name = "cbTrainPercent"
         Me.cbTrainPercent.Size = New System.Drawing.Size(101, 21)
         Me.cbTrainPercent.TabIndex = 8
-        '
-        'chkStatisticsMode
-        '
-        Me.chkStatisticsMode.AutoSize = True
-        Me.chkStatisticsMode.Checked = True
-        Me.chkStatisticsMode.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkStatisticsMode.Location = New System.Drawing.Point(248, 12)
-        Me.chkStatisticsMode.Name = "chkStatisticsMode"
-        Me.chkStatisticsMode.Size = New System.Drawing.Size(101, 17)
-        Me.chkStatisticsMode.TabIndex = 11
-        Me.chkStatisticsMode.Text = "Statistics Mode:"
-        Me.chkStatisticsMode.UseVisualStyleBackColor = True
+        Me.ttMain.SetToolTip(Me.cbTrainPercent, "When creating a new XDF file in Statistics Mode, what is the percentage of projec" &
+        "ts to be marked for the Training Set?")
         '
         'chkCleanXDFFile
         '
@@ -281,6 +308,8 @@ Partial Class frmClassification
         Me.chkCleanXDFFile.Size = New System.Drawing.Size(189, 17)
         Me.chkCleanXDFFile.TabIndex = 1
         Me.chkCleanXDFFile.Text = "Clean the XDF file after completion"
+        Me.ttMain.SetToolTip(Me.chkCleanXDFFile, "If selected, then the Classification XDF file is going to be deleted when the for" &
+        "m closes, meaning it is going to be unavailable for further and future use.")
         Me.chkCleanXDFFile.UseVisualStyleBackColor = True
         '
         'btnClassification
@@ -293,6 +322,7 @@ Partial Class frmClassification
         Me.btnClassification.Size = New System.Drawing.Size(472, 23)
         Me.btnClassification.TabIndex = 0
         Me.btnClassification.Text = "Form Training and Test Sets"
+        Me.ttMain.SetToolTip(Me.btnClassification, resources.GetString("btnClassification.ToolTip"))
         Me.btnClassification.UseVisualStyleBackColor = True
         '
         'fswModelExists
@@ -304,15 +334,12 @@ Partial Class frmClassification
         '
         Me.tmrModelExists.Interval = 10
         '
-        'pbLoading
+        'ttMain
         '
-        Me.pbLoading.Location = New System.Drawing.Point(326, 0)
-        Me.pbLoading.MarqueeAnimationSpeed = 10
-        Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(100, 23)
-        Me.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee
-        Me.pbLoading.TabIndex = 15
-        Me.pbLoading.Visible = False
+        Me.ttMain.AutoPopDelay = 10000
+        Me.ttMain.InitialDelay = 500
+        Me.ttMain.ReshowDelay = 100
+        Me.ttMain.ShowAlways = True
         '
         'frmClassification
         '
@@ -365,4 +392,5 @@ Partial Class frmClassification
     Friend WithEvents tmrModelExists As Timer
     Friend WithEvents lblLoading As Label
     Friend WithEvents pbLoading As ProgressBar
+    Friend WithEvents ttMain As ToolTip
 End Class

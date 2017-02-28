@@ -115,7 +115,9 @@ Public Class frmPreProcessing
         Try
             If FuncInProgress.Count = 0 Then
                 FuncInProgress.Add("Pre-Processing Data")
+                fswXDFFileExists.EnableRaisingEvents = False
                 pnlMain.Enabled = False
+
                 Try
                     Dim vErgaColumnNames() As String = {}
                     If RDotNet_Initialization() Then
@@ -134,13 +136,13 @@ Public Class frmPreProcessing
 
                                 If chkShowDataSummary.Checked Then
                                     Dim DataSummary As DataFrame = Rdo.GetSymbol("vErgaDataSummary").AsDataFrame
-                                    Dim DataSummaryVisualiserForm As New frmDataSummaryVisualiser With {.dfDataSummary = DataSummary, .DatasetName = "Clustering"}
+                                    Dim DataSummaryVisualiserForm As New frmDataSummaryVisualiser With {.dfDataSummary = DataSummary, .DatasetName = "vErga"}
                                     DataSummaryVisualiserForm.Show()
                                 End If
 
                                 If chkShowVariableInfo.Checked Then
                                     Dim VariableInfo = Rdo.GetSymbol("vErgaVarInfo").AsList
-                                    Dim VariableInfoVisualiserForm As New frmVariableInfoVisualiser With {.rlstVariableInfo = VariableInfo, .ColumnNames = vErgaColumnNames, .DatasetName = "Clustering"}
+                                    Dim VariableInfoVisualiserForm As New frmVariableInfoVisualiser With {.rlstVariableInfo = VariableInfo, .ColumnNames = vErgaColumnNames, .DatasetName = "vErga"}
                                     VariableInfoVisualiserForm.Show()
                                 End If
                             End If
@@ -155,6 +157,7 @@ Public Class frmPreProcessing
                     pnlMain.Enabled = True
                 End Try
 
+                fswXDFFileExists.EnableRaisingEvents = True
                 FuncInProgress.Remove("Pre-Processing Data")
                 pnlMain.Enabled = True
                 Close()
