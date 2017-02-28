@@ -120,6 +120,7 @@ Partial Class frmMain
         Me.tmrHideReEnable = New System.Windows.Forms.Timer(Me.components)
         Me.tmrUpdatePB = New System.Windows.Forms.Timer(Me.components)
         Me.tmrFunctInProgress = New System.Windows.Forms.Timer(Me.components)
+        Me.btnGeoLocate = New System.Windows.Forms.Button()
         Me.mnuMain.SuspendLayout()
         Me.gbCommands.SuspendLayout()
         Me.pnlCommands.SuspendLayout()
@@ -731,6 +732,7 @@ Partial Class frmMain
         Me.pnlFunctions.AutoScroll = True
         Me.pnlFunctions.AutoSize = True
         Me.pnlFunctions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnlFunctions.Controls.Add(Me.btnGeoLocate)
         Me.pnlFunctions.Controls.Add(Me.lblFuncInProgress)
         Me.pnlFunctions.Controls.Add(Me.pbGeneralProgress)
         Me.pnlFunctions.Dock = System.Windows.Forms.DockStyle.Fill
@@ -867,6 +869,18 @@ Partial Class frmMain
         '
         Me.tmrFunctInProgress.Interval = 1000
         '
+        'btnGeoLocate
+        '
+        Me.btnGeoLocate.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
+        Me.btnGeoLocate.Location = New System.Drawing.Point(18, 25)
+        Me.btnGeoLocate.Name = "btnGeoLocate"
+        Me.btnGeoLocate.Size = New System.Drawing.Size(150, 120)
+        Me.btnGeoLocate.TabIndex = 13
+        Me.btnGeoLocate.Text = "&Stop Geo-Location"
+        Me.btnGeoLocate.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGeoLocate.UseVisualStyleBackColor = True
+        Me.btnGeoLocate.Visible = False
+        '
         'frmMain
         '
         Me.AcceptButton = Me.cmdGo
@@ -998,4 +1012,5 @@ Partial Class frmMain
     Friend WithEvents mniExportListofProblematicAddresses As ToolStripMenuItem
     Friend WithEvents mniFastLogisticRegression As ToolStripMenuItem
     Friend WithEvents mniResetInvalidGeolocationEntries As ToolStripMenuItem
+    Friend WithEvents btnGeoLocate As Button
 End Class

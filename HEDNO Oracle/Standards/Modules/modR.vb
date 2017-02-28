@@ -268,7 +268,7 @@ Module modR
             Rdo.Evaluate("source(""" & strAuxiliaryFile.Replace("\", "\\") & """)")
             'DelFileFolder(strAuxiliaryFile, False, 100)
             Try
-                'File.Delete(strAuxiliaryFile)
+                File.Delete(strAuxiliaryFile)
             Catch ex As Exception
             End Try
             Return True
@@ -305,7 +305,7 @@ Module modR
             Rdo.Evaluate("source(""" & strAuxiliaryFile.Replace("\", "\\") & """)")
             'DelFileFolder(strAuxiliaryFile, False, 100)
             Try
-                'File.Delete(strAuxiliaryFile)
+                File.Delete(strAuxiliaryFile)
             Catch ex As Exception
             End Try
             Return True
