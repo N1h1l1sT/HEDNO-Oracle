@@ -7,14 +7,14 @@ Public Class frmClusteringStep1
 
     Private Const DefaultMaxKNum As Integer = 30
     Private MaxKNum As Integer = DefaultMaxKNum
-    Private Shared KMeansModelSavePath As String = strXDF
+    Private Shared KMeansModelSavePath As String = doProperPathNameLinux(strXDF)
     Private XDFFileExists As Boolean = False
     Private isStatisticsXDF As Boolean = True
 
     '!Put on frm_Load
     'pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
     'pbLoading.Width = pbLoading.Parent.Width
-    'fswModelExists.Path = strXDF
+    'fswModelExists.Path = doProperPathName(strXDF)
     'fswModelExists.Filter = "vErga_DS.xdf"
     'Call CheckXDFFileExists()
     '
@@ -100,7 +100,7 @@ Public Class frmClusteringStep1
 
             pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
             pbLoading.Width = pbLoading.Parent.Width
-            fswModelExists.Path = strXDF
+            fswModelExists.Path = doProperPathName(strXDF)
             fswModelExists.Filter = "Clustering_DS.xdf"
             Call CheckXDFFileExists()
 

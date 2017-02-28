@@ -10,7 +10,7 @@ Public Class frmClusteringStep0
     '!Put on frm_Load
     'pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
     'pbLoading.Width = pbLoading.Parent.Width
-    'fswModelExists.Path = strXDF
+    'fswModelExists.Path = doProperPathName(strXDF)
     'fswModelExists.Filter = "Clustering_DS.xdf"
     'Call CheckXDFFileExists()
     '
@@ -93,7 +93,7 @@ Public Class frmClusteringStep0
 
             pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
             pbLoading.Width = pbLoading.Parent.Width
-            fswModelExists.Path = strXDF
+            fswModelExists.Path = doProperPathName(strXDF)
             fswModelExists.Filter = "Clustering_DS.xdf"
             Call CheckXDFFileExists()
 

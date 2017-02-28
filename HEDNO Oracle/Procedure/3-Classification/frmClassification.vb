@@ -12,7 +12,7 @@ Public Class frmClassification
     '!Put on frm_Load
     'pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
     'pbLoading.Width = pbLoading.Parent.Width
-    'fswModelExists.Path = strXDF
+    'fswModelExists.Path = doProperPathName(strXDF)
     'fswModelExists.Filter = "Classification_DS.xdf"
     'Call CheckXDFFileExists()
     '
@@ -102,22 +102,22 @@ Public Class frmClassification
 
             pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
             pbLoading.Width = pbLoading.Parent.Width
-            fswModelExists.Path = strXDF
+            fswModelExists.Path = doProperPathName(strXDF)
             fswModelExists.Filter = "Classification_DS.xdf"
             Call CheckXDFFileExists()
 
-            If File.Exists(strXDF & "Clustering_DS.xdf") Then
+            If File.Exists(doProperPathName(strXDF) & "Clustering_DS.xdf") Then
                 btnClassification.Enabled = True
             Else
-                If File.Exists(strXDF & "Classification_DS.xdf") Then
-                    Notify(sa("The Clustering Dataset file '{1}' does not exist or is not reachable, however the Classification one '{2}' is found, hence the button '{3}' will remain locked on checked.{0}{0}If you wish to uncheck it so that the Classification file is created anew, please do the Clustering first.", vbCrLf, strXDF & "Clustering_DS.xdf", strXDF & "Classification_DS.xdf", RemCtrHotLetter(chkUseExistingXDFFile)),
+                If File.Exists(doProperPathName(strXDF) & "Classification_DS.xdf") Then
+                    Notify(sa("The Clustering Dataset file '{1}' does not exist or is not reachable, however the Classification one '{2}' is found, hence the button '{3}' will remain locked on checked.{0}{0}If you wish to uncheck it so that the Classification file is created anew, please do the Clustering first.", vbCrLf, doProperPathName(strXDF) & "Clustering_DS.xdf", doProperPathName(strXDF) & "Classification_DS.xdf", RemCtrHotLetter(chkUseExistingXDFFile)),
                            Red, Black, 30)
                     chkUseExistingXDFFile.Checked = True
                     chkUseExistingXDFFile.Enabled = False
                     btnClassification.Enabled = True
 
                 Else
-                    MsgBox(sa("For the classification process to commence, clustering must have already occurred.{0}Unfortunately the file '{1}' cannot be reached.{0}The Clustering form will now open for you to perform clustering with the CleanXDF option disabled so that the file needed remains.", vbCrLf, strXDF & "Clustering_DS.xdf"))
+                    MsgBox(sa("For the classification process to commence, clustering must have already occurred.{0}Unfortunately the file '{1}' cannot be reached.{0}The Clustering form will now open for you to perform clustering with the CleanXDF option disabled so that the file needed remains.", vbCrLf, doProperPathName(strXDF) & "Clustering_DS.xdf"))
                     Dim ClusteringForm As New frmClusteringStep1
                     ClusteringForm.chkCleanXDFFile.Checked = False
                     ClusteringForm.chkCleanXDFFile.Enabled = False
@@ -191,7 +191,7 @@ Public Class frmClassification
                                 End If
                             End If
 
-                            If chkFormTrainSet.Checked OrElse File.Exists(strXDF & "Training_DS.xdf") Then
+                            If chkFormTrainSet.Checked OrElse File.Exists(doProperPathName(strXDF) & "Training_DS.xdf") Then
                                 If chkShowTrainDataSummary.Checked OrElse chkShowTrainVarInfo.Checked Then
                                     TrainColumnNames = Rdo.GetSymbol("TrainColumnNames").AsCharacter.ToArray
 
@@ -209,7 +209,7 @@ Public Class frmClassification
                                 End If
                             End If
 
-                            If chkFormTestSet.Checked OrElse File.Exists(strXDF & "Test_DS.xdf") Then
+                            If chkFormTestSet.Checked OrElse File.Exists(doProperPathName(strXDF) & "Test_DS.xdf") Then
                                 If chkShowTestDataSummary.Checked OrElse chkShowTestVarInfo.Checked Then
                                     TestColumnNames = Rdo.GetSymbol("TestColumnNames").AsCharacter.ToArray
 

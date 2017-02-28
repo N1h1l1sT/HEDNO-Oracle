@@ -10,7 +10,7 @@ Public Class frmPreProcessing
     '!Put on frm_Load
     'pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
     'pbLoading.Width = pbLoading.Parent.Width
-    'fswXDFFileExists.Path = strXDF
+    'fswXDFFileExists.Path = doProperPathName(strXDF)
     'fswXDFFileExists.Filter = "vErga_DS.xdf"
     'Call CheckXDFFileExists()
     '
@@ -94,7 +94,7 @@ Public Class frmPreProcessing
 
             pbLoading.Location = New Point(0, CInt(pbLoading.Parent.Height / 2) + 15)
             pbLoading.Width = pbLoading.Parent.Width
-            fswXDFFileExists.Path = strXDF
+            fswXDFFileExists.Path = doProperPathName(strXDF)
             fswXDFFileExists.Filter = "vErga_DS.xdf"
             Call CheckXDFFileExists()
 

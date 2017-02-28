@@ -76,8 +76,11 @@ Public Class frmCreateSQLView
                                     If Succeeded Then sbResultsInfo.Append(SQLViewName & ": Altered") Else sbResultsInfo.Append(SQLViewName & ": Failed to Alter it")
                                 ElseIf Not ViewExists Then
                                     sbResultsInfo.AppendLine()
-                                    If Succeeded Then sbResultsInfo.Append(SQLViewName & ": Created") Else sbResultsInfo.Append(SQLViewName & ": Failed to Create it")
+                                    If Succeeded Then sbResultsInfo.Append(SQLViewName & ": Created") Else sbResultsInfo.Append(SQLViewName & ": Failed to Create it" & vbCrLf)
                                 End If
+
+                            ElseIf ViewExists AndAlso rdbDoNothing.Checked Then
+                                sbResultsInfo.Append(SQLViewName & ": No Action" & vbCrLf)
                             Else
                                 sbResultsInfo.Append(SQLViewName & ": No Action")
                             End If

@@ -1,4 +1,5 @@
 ﻿Option Strict On
+Imports System.IO
 'Version 2.0 2013-04-22
 'Updated frmLicenseViewer
 'Added frmLicenseViewer
@@ -225,7 +226,10 @@ Module modChangeLanguage
             .Text = strLanguage_FirstTime(1)
             .btnNext.Text = strLanguage_FirstTime(2)
 
-            Uri.TryCreate(strLanguageFolders & CurrentLanguage & "\" & .Name & "_txtInfo.html", UriKind.RelativeOrAbsolute, .wbWelcome.Url)
+            Dim WelcomeHTMLFile As String = strLanguageFolders & CurrentLanguage & "\" & .Name & "_txtInfo.html"
+            If File.Exists(WelcomeHTMLFile) AndAlso File.ReadAllText(WelcomeHTMLFile) <> "" Then
+                Uri.TryCreate(WelcomeHTMLFile, UriKind.RelativeOrAbsolute, .wbWelcome.Url)
+            End If
 
         End With
     End Sub

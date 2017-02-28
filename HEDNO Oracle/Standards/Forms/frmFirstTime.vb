@@ -1,9 +1,10 @@
-﻿'Version 1.4 2013-04-29
+﻿Option Strict On
+'Version 1.4 2013-04-29
 'Fixed a bug that the programme could be used even if the licenses were not agreed upon
 'Removed frmSettings from appearing on first time
 'Fixed a bug that temporary files were also opened, causing problems
 'Changed TextBox to WebBrowser, Runs Licenses; Changed txtLanguage to strLanguage_FirstTime
-Option Strict On
+Imports System.IO
 
 Public Class frmFirstTime
     Public LicenseAccepted As Boolean
@@ -16,7 +17,27 @@ Public Class frmFirstTime
 
         Call frmSkin(Me)
 
-        If isFirstTime AndAlso Visible Then
+        Dim WelcomeHTMLFile As String = strLanguageFolders & CurrentLanguage & "\" & Name & "_txtInfo.html"
+        If Not File.Exists(WelcomeHTMLFile) OrElse File.ReadAllText(WelcomeHTMLFile).Trim() = "" Then
+            If isFirstTime Then
+                Visible = False
+
+                Dim LicenseViewerForm As New frmLicenseViewer
+                LicenseViewerForm.ShowDialog()
+                LicenseAccepted = LicenseViewerForm.AcceptedLicenses
+
+                'frmSettings.TopMost = True
+                'frmSettings.cmdApply.Enabled = False
+                'ShowForm(frmSettings, , True)
+                'frmSettings.cmdApply.Enabled = False
+                'frmSettings.TopMost = False
+
+                ShowForm(frmPresentation, , True)
+            End If
+
+            Close()
+
+        ElseIf isFirstTime AndAlso Visible Then
             tmrNext.Enabled = True
         Else
             btnNext.Text = strLanguage_FirstTime(2).Substring(4) '&Next

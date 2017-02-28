@@ -211,7 +211,7 @@ Public Class frmBoostedDecisionTrees
                     Exit Sub
 
                 Else
-                    MsgBox(sa("In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Clustering & Classification Datasets appear to exist, the Clustering Form will now open with needed options locked on for you to create the Clustering Dataset.{0}Please proceed to creating the rest using the Menu '{2}→{3}' afterwards", vbCrLf, strXDF, RemMniHotLetter(frmMain.mniClustering), RemMniHotLetter(frmMain.mniFormTrainAndTestSets)))
+                    MsgBox(sa("In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Clustering & Classification Datasets appear to exist, the Clustering Form will now open with needed options locked on for you to create the Clustering Dataset.{0}Please proceed to creating the rest using the Menu '{4}→{3}' afterwards", vbCrLf, strXDF, RemMniHotLetter(frmMain.mniClustering), RemMniHotLetter(frmMain.mniFormTrainAndTestSets), RemMniHotLetter(frmMain.mniClassification)))
                     Dim ClusteringForm As New frmClusteringStep1
                     ClusteringForm.chkCleanXDFFile.Checked = False
                     ClusteringForm.chkCleanXDFFile.Enabled = False

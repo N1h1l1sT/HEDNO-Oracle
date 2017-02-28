@@ -267,7 +267,10 @@ Module modR
             'RunOpenDir(strAuxiliaryFile) ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             Rdo.Evaluate("source(""" & strAuxiliaryFile.Replace("\", "\\") & """)")
             'DelFileFolder(strAuxiliaryFile, False, 100)
-            File.Delete(strAuxiliaryFile)
+            Try
+                'File.Delete(strAuxiliaryFile)
+            Catch ex As Exception
+            End Try
             Return True
 
         Catch ex As Exception
@@ -301,7 +304,10 @@ Module modR
             'RunOpenDir(strAuxiliaryFile) ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             Rdo.Evaluate("source(""" & strAuxiliaryFile.Replace("\", "\\") & """)")
             'DelFileFolder(strAuxiliaryFile, False, 100)
-            File.Delete(strAuxiliaryFile)
+            Try
+                'File.Delete(strAuxiliaryFile)
+            Catch ex As Exception
+            End Try
             Return True
 
         Catch ex As Exception

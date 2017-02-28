@@ -8,6 +8,7 @@
 '22 =   Error
 Option Strict On
 
+Imports RDotNet
 Imports System.IO
 Imports System.Threading
 Imports Microsoft.Win32
@@ -983,6 +984,9 @@ Public Class frmSettings
                 If Directory.Exists(doProperPathName(txtXDFPath.Text)) Then
                     strSettings(52) = "052PathtoSaveLoadXDFFiles=" & doProperPathNameLinux(txtXDFPath.Text)
                     strXDF = strSettings(52).Substring("052PathtoSaveLoadXDFFiles=".Length)
+                    If RDotNet_Initialization() Then
+                        Rdo.SetSymbol("strXDF", New CharacterVector(Rdo, {strXDF}))
+                    End If
                 Else
                     MsgBox(sa("There specified directory: ""{0}"" does not exist and is therefore not saved", doProperPathName(txtXDFPath.Text)), MsgBoxStyle.Exclamation)
                 End If

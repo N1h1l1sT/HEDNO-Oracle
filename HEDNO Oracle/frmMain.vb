@@ -102,6 +102,13 @@ Public Class frmMain
             OriginalWindowWidth = Width
             OriginalWindowHeight = Height
 
+            Try
+                If Not Directory.Exists(strDocumentsProgDir) Then
+                    Directory.CreateDirectory(strDocumentsProgDir)
+                End If
+            Catch ex As Exception
+            End Try
+
             If Args.Length > 1 Then
                 For i = 1 To Args.Length - 1
                     Select Case Args(i).ToLower
@@ -274,7 +281,7 @@ Public Class frmMain
 
                 RowsPerRead = CInt(strSettings(51).Substring("051RowsPerRead=".Length))
                 Dim tmpStrXDF As String = strSettings(52).Substring("052PathtoSaveLoadXDFFiles=".Length)
-                strXDF = If(tmpStrXDF <> "" AndAlso tmpStrXDF.ToLower <> "default" AndAlso Directory.Exists(doProperPathName(tmpStrXDF)), tmpStrXDF, strDesktop)
+                strXDF = If(tmpStrXDF <> "" AndAlso tmpStrXDF.ToLower <> "default" AndAlso Directory.Exists(doProperPathName(tmpStrXDF)), doProperPathNameLinux(tmpStrXDF), doProperPathNameLinux(strDesktop))
                 RoundAt = CInt(strSettings(53).Substring("053RoundAt=".Length))
                 RSQLConnStr = strSettings(64).Substring("064RSQLConnStr=".Length) 'If it's not filled in, then it's auto-configured in line 499
 
@@ -464,8 +471,6 @@ Public Class frmMain
             '=============================
 
             Try
-                If strXDF = "" OrElse strXDF.ToLower = "default" Then strXDF = strDesktop
-
                 SQLServerUserID = strSettings(65).Substring("065DBUsername=".Length)
                 SQLServerPass = strSettings(17).Substring("017DataBasePass=".Length)
 
@@ -484,7 +489,7 @@ Public Class frmMain
                                                                        "{2}", RSQLConnStr,
                                                                        "{3}", """" & doProperPathNameLinux(strGraphs) & """"}, False)
                     Else
-                        MsgBox(sa("Unfortunately, although some version of R has been found in your system, you need R_Server or equivalent for this programme to run{0}This requirement is imposed because the code hereinafter requires the RevoScaleR R Package to bypass R's limitations in computer Memory (RAM) and CPU.{0}{0}Please update your Registry and Environment ", vbCrLf))
+                        MsgBox(sa("Unfortunately, although some version of R has been found in your system, you need R_Server or equivalent for this programme to run{0}This requirement is imposed because the code hereinafter requires the RevoScaleR R Package to bypass R's limitations in computer Memory (RAM) and CPU.{0}{0}Please install R Server and update your Registry and Environment to it", vbCrLf))
                     End If
                 End If
 
@@ -1755,7 +1760,7 @@ Public Class frmMain
                                                                                     WHERE <%= ColvGeoLocX %> = '-1'</SQL>.Value))
 
                                 MsgBox(sa("There is a total of {1} projects.{0}For {2}, the Geo-Location process has been successful, whilst for {4} it has not.{0}{3} projects have yet to undergo Geolocation.{0}There is a total of {5} cities/addresses throughout the {4} project for which the Geo-Location failed.",
-                                      vbCrLf, Total_Rows, GeoLoc_Rows, NonGeoLoc_Rows, Problematic_Rows, ProblematicOnomaPolisCount))
+                                      vbCrLf, Total_Rows, GeoLoc_Rows, NonGeoLoc_Rows, Problematic_Rows, ProblematicOnomaPolisCount), MsgBoxStyle.Information)
 
                             Else
                                 MsgBox(sa("Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it", ColvGeoLocY, RemMniHotLetter(mniCreateGeoColumns)), MsgBoxStyle.Information)
