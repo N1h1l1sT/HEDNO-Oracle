@@ -585,6 +585,8 @@ Partial Class frmEnsembleofDecisionTrees
         Me.chktype.Size = New System.Drawing.Size(46, 17)
         Me.chktype.TabIndex = 11
         Me.chktype.Text = "type"
+        Me.ttMain.SetToolTip(Me.chktype, "Specifies the model type with a string: ""binary"" for the default binary classific" &
+        "ation or ""regression"" for linear regression")
         Me.chktype.UseVisualStyleBackColor = True
         '
         'chknumLeaves
@@ -660,6 +662,8 @@ Partial Class frmEnsembleofDecisionTrees
         Me.cbtype.Name = "cbtype"
         Me.cbtype.Size = New System.Drawing.Size(315, 21)
         Me.cbtype.TabIndex = 12
+        Me.ttMain.SetToolTip(Me.cbtype, "Specifies the model type with a string: ""binary"" for the default binary classific" &
+        "ation or ""regression"" for linear regression")
         '
         'txtnumLeaves
         '

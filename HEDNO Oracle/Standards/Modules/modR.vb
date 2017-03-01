@@ -225,7 +225,7 @@ Module modR
 
         If Not LeaveDatabaseBlankIfBlank AndAlso Database = "" Then Database = DatabaseName
 
-        Result &= "driver={SQL Server};server=" & Server & ";"
+        Result &= "driver={SQL Server};server=" & Server.Replace("\", "\\") & ";"
         If Database <> "" Then Result &= "database=" & Database & ";"
 
         If IntegratedSecurity = "" AndAlso SQLUserID = "" AndAlso SQLPass = "" Then
@@ -237,8 +237,8 @@ Module modR
             If SQLPass <> "" Then Result &= "pwd=" & SQLPass & ";"
         End If
 
-        Result &= """"
         Result = Result.Trim
+        Result &= """"
 
         Return Result
     End Function

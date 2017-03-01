@@ -151,7 +151,7 @@ Partial Class frmSettings
         'lblDelayTime
         '
         Me.lblDelayTime.AutoSize = True
-        Me.lblDelayTime.Location = New System.Drawing.Point(4, 94)
+        Me.lblDelayTime.Location = New System.Drawing.Point(6, 94)
         Me.lblDelayTime.Name = "lblDelayTime"
         Me.lblDelayTime.Size = New System.Drawing.Size(63, 13)
         Me.lblDelayTime.TabIndex = 39
@@ -172,7 +172,7 @@ Partial Class frmSettings
         'lblStartWithWin
         '
         Me.lblStartWithWin.AutoSize = True
-        Me.lblStartWithWin.Location = New System.Drawing.Point(5, 70)
+        Me.lblStartWithWin.Location = New System.Drawing.Point(6, 70)
         Me.lblStartWithWin.Name = "lblStartWithWin"
         Me.lblStartWithWin.Size = New System.Drawing.Size(101, 13)
         Me.lblStartWithWin.TabIndex = 33
@@ -250,7 +250,7 @@ Partial Class frmSettings
         'lblShowStartupForm
         '
         Me.lblShowStartupForm.AutoSize = True
-        Me.lblShowStartupForm.Location = New System.Drawing.Point(4, 123)
+        Me.lblShowStartupForm.Location = New System.Drawing.Point(6, 123)
         Me.lblShowStartupForm.Name = "lblShowStartupForm"
         Me.lblShowStartupForm.Size = New System.Drawing.Size(100, 13)
         Me.lblShowStartupForm.TabIndex = 16
@@ -321,7 +321,7 @@ Partial Class frmSettings
         'lblRemWindowState
         '
         Me.lblRemWindowState.AutoSize = True
-        Me.lblRemWindowState.Location = New System.Drawing.Point(4, 177)
+        Me.lblRemWindowState.Location = New System.Drawing.Point(6, 177)
         Me.lblRemWindowState.Name = "lblRemWindowState"
         Me.lblRemWindowState.Size = New System.Drawing.Size(131, 13)
         Me.lblRemWindowState.TabIndex = 66
@@ -359,7 +359,7 @@ Partial Class frmSettings
         'lblWindowResolution
         '
         Me.lblWindowResolution.AutoSize = True
-        Me.lblWindowResolution.Location = New System.Drawing.Point(5, 258)
+        Me.lblWindowResolution.Location = New System.Drawing.Point(6, 258)
         Me.lblWindowResolution.Name = "lblWindowResolution"
         Me.lblWindowResolution.Size = New System.Drawing.Size(102, 13)
         Me.lblWindowResolution.TabIndex = 62
@@ -381,7 +381,7 @@ Partial Class frmSettings
         'lblFullScreenResolutions
         '
         Me.lblFullScreenResolutions.AutoSize = True
-        Me.lblFullScreenResolutions.Location = New System.Drawing.Point(5, 230)
+        Me.lblFullScreenResolutions.Location = New System.Drawing.Point(6, 230)
         Me.lblFullScreenResolutions.Name = "lblFullScreenResolutions"
         Me.lblFullScreenResolutions.Size = New System.Drawing.Size(113, 13)
         Me.lblFullScreenResolutions.TabIndex = 60
@@ -402,7 +402,7 @@ Partial Class frmSettings
         'lblWindowState
         '
         Me.lblWindowState.AutoSize = True
-        Me.lblWindowState.Location = New System.Drawing.Point(5, 203)
+        Me.lblWindowState.Location = New System.Drawing.Point(6, 203)
         Me.lblWindowState.Name = "lblWindowState"
         Me.lblWindowState.Size = New System.Drawing.Size(77, 13)
         Me.lblWindowState.TabIndex = 58
@@ -423,7 +423,7 @@ Partial Class frmSettings
         'lblCheckForNewVersion
         '
         Me.lblCheckForNewVersion.AutoSize = True
-        Me.lblCheckForNewVersion.Location = New System.Drawing.Point(5, 150)
+        Me.lblCheckForNewVersion.Location = New System.Drawing.Point(6, 150)
         Me.lblCheckForNewVersion.Name = "lblCheckForNewVersion"
         Me.lblCheckForNewVersion.Size = New System.Drawing.Size(119, 13)
         Me.lblCheckForNewVersion.TabIndex = 46
@@ -443,7 +443,7 @@ Partial Class frmSettings
         'lblSkin
         '
         Me.lblSkin.AutoSize = True
-        Me.lblSkin.Location = New System.Drawing.Point(5, 43)
+        Me.lblSkin.Location = New System.Drawing.Point(6, 43)
         Me.lblSkin.Name = "lblSkin"
         Me.lblSkin.Size = New System.Drawing.Size(31, 13)
         Me.lblSkin.TabIndex = 23
@@ -534,7 +534,7 @@ Partial Class frmSettings
         'lblProtectedTables
         '
         Me.lblProtectedTables.AutoSize = True
-        Me.lblProtectedTables.Location = New System.Drawing.Point(5, 180)
+        Me.lblProtectedTables.Location = New System.Drawing.Point(6, 180)
         Me.lblProtectedTables.Name = "lblProtectedTables"
         Me.lblProtectedTables.Size = New System.Drawing.Size(91, 13)
         Me.lblProtectedTables.TabIndex = 73
@@ -555,7 +555,7 @@ Partial Class frmSettings
         'lblDatabaseTables
         '
         Me.lblDatabaseTables.AutoSize = True
-        Me.lblDatabaseTables.Location = New System.Drawing.Point(5, 154)
+        Me.lblDatabaseTables.Location = New System.Drawing.Point(6, 154)
         Me.lblDatabaseTables.Name = "lblDatabaseTables"
         Me.lblDatabaseTables.Size = New System.Drawing.Size(92, 13)
         Me.lblDatabaseTables.TabIndex = 64
@@ -639,7 +639,7 @@ Partial Class frmSettings
         'lblDBFile
         '
         Me.lblDBFile.AutoSize = True
-        Me.lblDBFile.Location = New System.Drawing.Point(5, 125)
+        Me.lblDBFile.Location = New System.Drawing.Point(6, 125)
         Me.lblDBFile.Name = "lblDBFile"
         Me.lblDBFile.Size = New System.Drawing.Size(76, 13)
         Me.lblDBFile.TabIndex = 48
@@ -648,7 +648,7 @@ Partial Class frmSettings
         'lblDBtype
         '
         Me.lblDBtype.AutoSize = True
-        Me.lblDBtype.Location = New System.Drawing.Point(5, 98)
+        Me.lblDBtype.Location = New System.Drawing.Point(6, 98)
         Me.lblDBtype.Name = "lblDBtype"
         Me.lblDBtype.Size = New System.Drawing.Size(83, 13)
         Me.lblDBtype.TabIndex = 51

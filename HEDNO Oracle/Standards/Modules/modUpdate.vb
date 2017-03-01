@@ -85,29 +85,39 @@ Module modUpdate
                         Dim YearVersionIndex As Integer = YearVersionSubString.IndexOf(".")
                         Dim YearVersionOnline As Integer = CInt(YearVersionSubString.Substring(0, YearVersionIndex))
                         Dim MonthVersionOnline As Integer
-                        Dim DayVersionOnline As Integer
+                        Dim DayVersionOnline As Integer = 0
 
-                        If (strNewVersion.Length - strNewVersion.LastIndexOf(".") - 1) = 3 Then 'if month starts with 0, the 0 is omitted in the version string, hence, MDD instead of MMDD
-                            MonthVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 3, 1))
-                            DayVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 2, 2))
-                        Else
+                        If (strNewVersion.Length - strNewVersion.LastIndexOf(".") - 1) = 4 Then 'if month starts with 0, the 0 is omitted in the version string, hence, MDD instead of MMDD
                             MonthVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 4, 2))
                             DayVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 2, 2))
+                        ElseIf (strNewVersion.Length - strNewVersion.LastIndexOf(".") - 1) = 3 Then
+                            MonthVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 3, 1))
+                            DayVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 2, 2))
+                        ElseIf (strNewVersion.Length - strNewVersion.LastIndexOf(".") - 1) = 2 Then
+                            MonthVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 2, 1))
+                            DayVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 1, 1))
+                        ElseIf (strNewVersion.Length - strNewVersion.LastIndexOf(".") - 1) = 1 Then
+                            MonthVersionOnline = CInt(strNewVersion.Substring(strNewVersion.Length - 1, 1))
                         End If
 
 
                         Dim MajorVersionLocal As Integer = My.Application.Info.Version.Major
                         Dim MinorVersionLocal As Integer = My.Application.Info.Version.Minor
                         Dim YearVersionLocal As Integer = My.Application.Info.Version.Build
-                        Dim MonthVersionLocal As Integer
-                        Dim DayVersionLocal As Integer
+                        Dim MonthVersionLocal As Integer = 0
+                        Dim DayVersionLocal As Integer = 0
 
-                        If My.Application.Info.Version.MinorRevision.ToString.Length = 3 Then
-                            MonthVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(0, 1))
-                            DayVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(1, 2))
-                        Else
+                        If My.Application.Info.Version.MinorRevision.ToString.Length = 4 Then
                             MonthVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(0, 2))
                             DayVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(2, 2))
+                        ElseIf My.Application.Info.Version.MinorRevision.ToString.Length = 3 Then
+                            MonthVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(0, 1))
+                            DayVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(1, 2))
+                        ElseIf My.Application.Info.Version.MinorRevision.ToString.Length = 2 Then
+                            MonthVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(0, 1))
+                            DayVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(1, 1))
+                        ElseIf My.Application.Info.Version.MinorRevision.ToString.Length = 1 Then
+                            MonthVersionLocal = CInt(My.Application.Info.Version.MinorRevision.ToString.Substring(0, 1))
                         End If
 
                         If (MajorVersionLocal > MajorVersionOnline) OrElse
@@ -115,7 +125,9 @@ Module modUpdate
                             (MajorVersionLocal = MajorVersionOnline And MinorVersionLocal = MinorVersionOnline And YearVersionLocal > YearVersionOnline) OrElse
                             (MajorVersionLocal = MajorVersionOnline And MinorVersionLocal = MinorVersionOnline And YearVersionLocal = YearVersionOnline And MonthVersionLocal > MonthVersionOnline) OrElse
                             (MajorVersionLocal = MajorVersionOnline And MinorVersionLocal = MinorVersionOnline And YearVersionLocal = YearVersionOnline And MonthVersionLocal = MonthVersionOnline And DayVersionLocal > DayVersionOnline) Then
-                            Return True
+                            isProgramUpdated = True
+                            Call UpdateTexts(frm)
+                            Return False
 
                         Else
 
@@ -124,7 +136,7 @@ Module modUpdate
                                 Try
                                     My.Settings.UpdateFile = DownloadClient.DownloadString(MainFolderOnline & "update.ini")   'in case there is no more space for the program i will upload it elsewhere and make the program download it from there
                                 Catch ex As Exception
-                                    MsgBox(strModLanguage(11) & vbCrLf & strModLanguage(12) & My.Application.Info.CompanyName & strModLanguage(13), MsgBoxStyle.Exclamation) 'There was an error during the out-update process.
+                                    MsgBox(strModLanguage(11) & vbCrLf & strModLanguage(12) & My.Application.Info.CompanyName & strModLanguage(13), MsgBoxStyle.Exclamation) 'There was an error during the auto-update process.
                                     isProgramUpdated = False
                                     .lblProgUpdated.Visible = False
                                     Return False

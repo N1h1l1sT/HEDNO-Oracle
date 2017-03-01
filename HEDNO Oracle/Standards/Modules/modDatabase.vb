@@ -48,16 +48,17 @@ Module modDatabase
     Public SQLServerUserID As String = ""
     Public SQLServerPass As String = ""
     Public ServerList() As String = {
-                                        "'{ComputerName}\SQLEXPRESS'".Replace("{ComputerName}", My.Computer.Name),
-                                        "'{ComputerName}'".Replace("{ComputerName}", My.Computer.Name),
-                                        "'{ComputerName}\{ComputerUserName}'".Replace("{ComputerName}\{ComputerUserName}", My.User.Name),
+                                        sa("'{0}\{1}'", My.Computer.Name, My.User.Name),
+                                        sa("'{0}'", My.Computer.Name),
+                                        sa("'{0}\SQLEXPRESS'", My.Computer.Name),
+                                        "'.\SQLEXPRESS'",
+                                        "'.\MSSQLLocalDB'",
+                                        "'(localdb)\SQLEXPRESS'",
                                         "'(localdb)\v11.0'",
                                         "'(localdb)\v12.0'",
                                         "'(localdb)\v13.0'",
-                                        "'(localdb)\MSSQLLocalDB'",
-                                        "'(localdb)\SQLEXPRESS'",
-                                        "'.\MSSQLLocalDB'",
-                                        "'.\SQLEXPRESS'"
+                                        "'(localdb)\v14.0'",
+                                        "'(localdb)\MSSQLLocalDB'"
                                     }
 #End Region
 

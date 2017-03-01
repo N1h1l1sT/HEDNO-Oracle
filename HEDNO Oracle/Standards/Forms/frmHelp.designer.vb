@@ -38,9 +38,9 @@ Partial Class frmHelp
         '
         Me.btnClose.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Location = New System.Drawing.Point(12, 413)
+        Me.btnClose.Location = New System.Drawing.Point(12, 394)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(570, 23)
+        Me.btnClose.Size = New System.Drawing.Size(544, 23)
         Me.btnClose.TabIndex = 2
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -60,8 +60,8 @@ Partial Class frmHelp
         'scHelp.Panel2
         '
         Me.scHelp.Panel2.Controls.Add(Me.wbUseage)
-        Me.scHelp.Size = New System.Drawing.Size(570, 378)
-        Me.scHelp.SplitterDistance = 190
+        Me.scHelp.Size = New System.Drawing.Size(544, 359)
+        Me.scHelp.SplitterDistance = 181
         Me.scHelp.TabIndex = 3
         '
         'lsbCommands
@@ -70,7 +70,7 @@ Partial Class frmHelp
         Me.lsbCommands.FormattingEnabled = True
         Me.lsbCommands.Location = New System.Drawing.Point(0, 0)
         Me.lsbCommands.Name = "lsbCommands"
-        Me.lsbCommands.Size = New System.Drawing.Size(190, 378)
+        Me.lsbCommands.Size = New System.Drawing.Size(181, 359)
         Me.lsbCommands.TabIndex = 0
         '
         'wbUseage
@@ -79,7 +79,7 @@ Partial Class frmHelp
         Me.wbUseage.Location = New System.Drawing.Point(0, 0)
         Me.wbUseage.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wbUseage.Name = "wbUseage"
-        Me.wbUseage.Size = New System.Drawing.Size(376, 378)
+        Me.wbUseage.Size = New System.Drawing.Size(359, 359)
         Me.wbUseage.TabIndex = 0
         '
         'lblCommands
@@ -107,7 +107,7 @@ Partial Class frmHelp
         Me.AcceptButton = Me.btnClose
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(594, 448)
+        Me.ClientSize = New System.Drawing.Size(568, 429)
         Me.Controls.Add(Me.lblUsage)
         Me.Controls.Add(Me.lblCommands)
         Me.Controls.Add(Me.scHelp)

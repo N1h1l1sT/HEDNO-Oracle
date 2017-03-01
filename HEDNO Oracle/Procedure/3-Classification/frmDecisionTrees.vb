@@ -799,7 +799,7 @@ Public Class frmDecisionTrees
 
     Private Sub txtCP_Click(sender As Object, e As EventArgs) Handles txtCP.Click
         Dim Complexity As Decimal = 0.001D
-        If TypeBox("Round decimal points at:", Complexity, False,, 0D, 1D,,,,,,, Complexity.ToString) Then
+        If TypeBox("Set the complexity parameter to:", Complexity, False,, 0D, 1D,,,,,,, Complexity.ToString) Then
             txtCP.Text = Complexity.ToString
         End If
     End Sub

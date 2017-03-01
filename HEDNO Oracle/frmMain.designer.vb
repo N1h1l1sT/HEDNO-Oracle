@@ -100,6 +100,7 @@ Partial Class frmMain
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.gbFunctions = New System.Windows.Forms.GroupBox()
         Me.pnlFunctions = New System.Windows.Forms.Panel()
+        Me.btnGeoLocate = New System.Windows.Forms.Button()
         Me.lblFuncInProgress = New System.Windows.Forms.Label()
         Me.pbGeneralProgress = New System.Windows.Forms.ProgressBar()
         Me.tmrMinimizationDelay = New System.Windows.Forms.Timer(Me.components)
@@ -120,7 +121,6 @@ Partial Class frmMain
         Me.tmrHideReEnable = New System.Windows.Forms.Timer(Me.components)
         Me.tmrUpdatePB = New System.Windows.Forms.Timer(Me.components)
         Me.tmrFunctInProgress = New System.Windows.Forms.Timer(Me.components)
-        Me.btnGeoLocate = New System.Windows.Forms.Button()
         Me.mnuMain.SuspendLayout()
         Me.gbCommands.SuspendLayout()
         Me.pnlCommands.SuspendLayout()
@@ -741,6 +741,18 @@ Partial Class frmMain
         Me.pnlFunctions.Size = New System.Drawing.Size(730, 275)
         Me.pnlFunctions.TabIndex = 20
         '
+        'btnGeoLocate
+        '
+        Me.btnGeoLocate.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
+        Me.btnGeoLocate.Location = New System.Drawing.Point(18, 25)
+        Me.btnGeoLocate.Name = "btnGeoLocate"
+        Me.btnGeoLocate.Size = New System.Drawing.Size(150, 120)
+        Me.btnGeoLocate.TabIndex = 13
+        Me.btnGeoLocate.Text = "&Stop Geo-Location"
+        Me.btnGeoLocate.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGeoLocate.UseVisualStyleBackColor = True
+        Me.btnGeoLocate.Visible = False
+        '
         'lblFuncInProgress
         '
         Me.lblFuncInProgress.AutoSize = True
@@ -868,18 +880,6 @@ Partial Class frmMain
         'tmrFunctInProgress
         '
         Me.tmrFunctInProgress.Interval = 1000
-        '
-        'btnGeoLocate
-        '
-        Me.btnGeoLocate.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(161, Byte))
-        Me.btnGeoLocate.Location = New System.Drawing.Point(18, 25)
-        Me.btnGeoLocate.Name = "btnGeoLocate"
-        Me.btnGeoLocate.Size = New System.Drawing.Size(150, 120)
-        Me.btnGeoLocate.TabIndex = 13
-        Me.btnGeoLocate.Text = "&Stop Geo-Location"
-        Me.btnGeoLocate.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnGeoLocate.UseVisualStyleBackColor = True
-        Me.btnGeoLocate.Visible = False
         '
         'frmMain
         '

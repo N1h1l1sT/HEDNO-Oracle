@@ -1454,23 +1454,23 @@ Public Class frmMain
 
                                                             If dtAlreadyFoundCityGeoLoc.Rows.Count > 0 AndAlso Not IsDBNull(dtAlreadyFoundCityGeoLoc(0)(ColGeoLocX)) AndAlso Not IsDBNull(dtAlreadyFoundCityGeoLoc(0)(ColGeoLocY)) Then
                                                                 LongitudeX = CDbl(dtAlreadyFoundCityGeoLoc.Rows(0)(ColGeoLocX)).ToString 'To ensure that it is a number. If it is not then an error will be thrown,
-                                                                    LatitudeY = CDbl(dtAlreadyFoundCityGeoLoc.Rows(0)(ColGeoLocY)).ToString 'and the procedure will cease without saving the non-number to the DB
+                                                                LatitudeY = CDbl(dtAlreadyFoundCityGeoLoc.Rows(0)(ColGeoLocY)).ToString 'and the procedure will cease without saving the non-number to the DB
 
-                                                                Else
-                                                                    'Initialise
-                                                                    Dim Tries As Integer = 0
+                                                            Else
+                                                                'Initialise
+                                                                Dim Tries As Integer = 0
                                                                 strJSON = String.Empty
                                                                 joGeoLoc = Nothing
 
-                                                                    'Download the JSON GeoLocation from the API and convert it to a JSON Object.
-                                                                    'If something goes wrong try again pausing each time
-                                                                    Dim tmpJSONObjectNames As New List(Of String)
+                                                                'Download the JSON GeoLocation from the API and convert it to a JSON Object.
+                                                                'If something goes wrong try again pausing each time
+                                                                Dim tmpJSONObjectNames As New List(Of String)
                                                                 Do Until Tries >= 5
                                                                     Try
                                                                         Dim CityNameHasChanged As Boolean = False
                                                                         Dim tmpCityName As String = CityName.ToLower
                                                                         For i As Integer = 0 To CityOrigName.Count - 1 'The list has to already be in lowercase letters (programmatically)!
-                                                                                If tmpCityName = CityOrigName(i) AndAlso CityCorrespName(i) <> "" Then
+                                                                            If tmpCityName = CityOrigName(i) AndAlso CityCorrespName(i) <> "" Then
                                                                                 tmpCityName = CityCorrespName(i)
                                                                                 CityNameHasChanged = True
                                                                                 Exit For
@@ -1478,11 +1478,11 @@ Public Class frmMain
                                                                         Next
 
                                                                         If CityNameHasChanged Then
-                                                                                'From "Agios Nikolaos" to "Agios%20Nikolaos
-                                                                                strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", tmpCityName.Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
+                                                                            'From "Agios Nikolaos" to "Agios%20Nikolaos
+                                                                            strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", tmpCityName.Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
                                                                         Else
-                                                                                'From "Agios Nikolaos" to "Agios%20Nikolaos,%20Ελλάδα"
-                                                                                strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", (CityName & CityFieldSuffix).Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
+                                                                            'From "Agios Nikolaos" to "Agios%20Nikolaos,%20Ελλάδα"
+                                                                            strJSON = DlClinet.DownloadString(GeoLocationAPILink.Replace("{Address}", (CityName & CityFieldSuffix).Replace(" ", "%20")).Replace("{APIKey}", GeoLocAPIKey))
                                                                         End If
                                                                         joGeoLoc = JObject.Parse(strJSON)
                                                                         Tries = 5
@@ -1509,15 +1509,15 @@ Public Class frmMain
                                                                             Tries += 1
                                                                             WriteToLog("Try No.:" & Tries.ToString & ", Exception: " & exc.Message)
                                                                             Thread.Sleep(2000) 'APIs can reject it if it's tried to connect too many times per second. Waiting 2 seconds allows the API to 'calm itself down'
-                                                                            End If
+                                                                        End If
                                                                     End Try
                                                                 Loop
 
                                                                 Try
                                                                     If joGeoLoc("results").HasValues Then
                                                                         LongitudeX = CDbl(joGeoLoc("results")(0)("geometry")("location")("lng")).ToString 'To ensure that it is a number. If it is not then an error will be thrown,
-                                                                            LatitudeY = CDbl(joGeoLoc("results")(0)("geometry")("location")("lat")).ToString 'and the procedure will cease without saving the non-number to the DB
-                                                                        ElseIf Not tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) Or
+                                                                        LatitudeY = CDbl(joGeoLoc("results")(0)("geometry")("location")("lat")).ToString 'and the procedure will cease without saving the non-number to the DB
+                                                                    ElseIf Not tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) Or
                                                                             (tmpJSONObjectNames.Contains(ErrorMessageIdentifierInJSON) AndAlso Not joGeoLoc(ErrorMessageIdentifierInJSON).ToString.ToLower = APIExceededQuotaError.ToLower) Then
                                                                         LongitudeX = "-1"
                                                                         LatitudeY = "-1"
@@ -1527,16 +1527,16 @@ Public Class frmMain
 
                                                             End If
 
-                                                                'No matter how the Geolocation was loaded, now push it into the Database
-                                                                If LatitudeY <> String.Empty AndAlso LongitudeX <> String.Empty Then 'If they are numbers, then save them
-                                                                    'Dim SQLCmd As New SqlCommand(<SQL>  USE [<%= DatabaseName %>];
-                                                                    '                                    UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
-                                                                    '                                    SET [<%= ColGeoLocX %>] = <%= LongitudeX %>,
-                                                                    '                                        [<%= ColGeoLocY %>] = <%= LatitudeY %>
-                                                                    '                                    WHERE [<%= TableErga %>].[<%= ColID_Erga %>] = N'<%= row(columnName:=ColvID_Erga) %>';
-                                                                    '                             </SQL>.Value, SQLConn)
-                                                                    'SQLCmd.ExecuteNonQuery()
-                                                                    ExecuteSQLQuery(<SQL>  USE [<%= DatabaseName %>];
+                                                            'No matter how the Geolocation was loaded, now push it into the Database
+                                                            If LatitudeY <> String.Empty AndAlso LongitudeX <> String.Empty Then 'If they are numbers, then save them
+                                                                'Dim SQLCmd As New SqlCommand(<SQL>  USE [<%= DatabaseName %>];
+                                                                '                                    UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
+                                                                '                                    SET [<%= ColGeoLocX %>] = <%= LongitudeX %>,
+                                                                '                                        [<%= ColGeoLocY %>] = <%= LatitudeY %>
+                                                                '                                    WHERE [<%= TableErga %>].[<%= ColID_Erga %>] = N'<%= row(columnName:=ColvID_Erga) %>';
+                                                                '                             </SQL>.Value, SQLConn)
+                                                                'SQLCmd.ExecuteNonQuery()
+                                                                ExecuteSQLQuery(<SQL>  USE [<%= DatabaseName %>];
                                                                                             UPDATE [<%= DatabaseName %>].[dbo].[<%= TableErga %>]
                                                                                             SET [<%= ColGeoLocX %>] = <%= LongitudeX %>,
                                                                                                 [<%= ColGeoLocY %>] = <%= LatitudeY %>
@@ -1718,6 +1718,11 @@ Public Class frmMain
     Private Sub mniNeuralNetworks_Click(sender As Object, e As EventArgs) Handles mniNeuralNetworks.Click
         Dim NeuralNetworksForm As New frmNeuralNetworks
         NeuralNetworksForm.Show()
+    End Sub
+
+    Private Sub mniNaiveBayes_Click(sender As Object, e As EventArgs) Handles mniNaiveBayes.Click
+        Dim NaiveBayesForm As New frmNaiveBayes
+        NaiveBayesForm.Show()
     End Sub
 
     Private Sub mniFastLogisticRegression_Click(sender As Object, e As EventArgs) Handles mniFastLogisticRegression.Click
