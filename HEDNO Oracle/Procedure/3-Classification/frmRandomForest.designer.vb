@@ -617,9 +617,9 @@ Partial Class frmRandomForest
         Me.chkShowOOBEPlot.AutoSize = True
         Me.chkShowOOBEPlot.Location = New System.Drawing.Point(3, 137)
         Me.chkShowOOBEPlot.Name = "chkShowOOBEPlot"
-        Me.chkShowOOBEPlot.Size = New System.Drawing.Size(178, 17)
+        Me.chkShowOOBEPlot.Size = New System.Drawing.Size(173, 17)
         Me.chkShowOOBEPlot.TabIndex = 12
-        Me.chkShowOOBEPlot.Text = "Out-Of-Bags Error VS nTree Plot"
+        Me.chkShowOOBEPlot.Text = "Out-Of-Bag Error VS nTree Plot"
         Me.ttMain.SetToolTip(Me.chkShowOOBEPlot, "Plot the out-of-bags error (Y) VS  the Number of Trees (X)")
         Me.chkShowOOBEPlot.UseVisualStyleBackColor = True
         '

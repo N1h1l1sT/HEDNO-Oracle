@@ -138,8 +138,9 @@ Module modIO
                     End If
                 Next
                 ExportationText &= Mid(CurrentLine, 1, CurrentLine.Length - SeparationCharacter.ToString.Length) 'so as not to save the last comma
-
             Next
+
+            If Not IncludeColumnNames Then ExportationText = ExportationText.Substring(vbCrLf.Length)
 
             WriteText(FileNamePath, ExportationText, System.Text.Encoding.UTF8)
             LastSaveFile = FileNamePath
@@ -178,8 +179,9 @@ Module modIO
                     End If
                 Next
                 ExportationText &= Mid(CurrentLine, 1, CurrentLine.Length - SeparationCharacter.ToString.Length) 'so as not to save the last comma
-
             Next
+
+            If Not IncludeColumnNames Then ExportationText = ExportationText.Substring(vbCrLf.Length)
 
             WriteText(FileNamePath, ExportationText, System.Text.Encoding.UTF8)
             If ShowMessageWhenSaved Then MsgBox(strModLanguage(65) & FileNamePath, MsgBoxStyle.Information) 'The file has been successfully saved on:

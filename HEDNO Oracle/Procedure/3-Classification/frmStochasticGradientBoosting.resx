@@ -120,19 +120,14 @@
   <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>418, 6</value>
   </metadata>
-  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>418, 6</value>
-  </metadata>
   <data name="chkmTry.ToolTip" xml:space="preserve">
     <value>A positive integer specifying the number of variables to sample as split candidates at each tree node.
-The default values is sqrt(num of vars) for classification and (num of vars)/3 for regression, which is the pre-loaded value when you click the textbox.</value>
+The default value is sqrt(num of vars) for classification and (num of vars)/3 for regression, which is the pre-loaded value when you click the textbox.</value>
   </data>
-  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>418, 6</value>
-  </metadata>
   <data name="txtmTry.ToolTip" xml:space="preserve">
     <value>A positive integer specifying the number of variables to sample as split candidates at each tree node.
-The default values is sqrt(num of vars) for classification and (num of vars)/3 for regression, which is the pre-loaded value when you click the textbox.</value>
+The default value is sqrt(num of vars) for classification and (num of vars)/3 for regression, which is the pre-loaded value when you click the textbox.
+</value>
   </data>
   <data name="btnRunModel.ToolTip" xml:space="preserve">
     <value>Trains a Stochastic Gradient Boosting model using R's rxBTrees algorithm and according to the Algorithm-Specific Options selected, or loads an existing model if 'Use Existing Model' is checked
@@ -187,7 +182,7 @@ If this option is checked, the containing folder is opened when the procedure co
   </data>
   <data name="chkUseExistingModel.ToolTip" xml:space="preserve">
     <value>Instead of Training the model, a previously saved model is loaded.
-Using an existing, model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procude will fail!
+Using an existing model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procedure will fail!
 In that case, please just uncheck this CheckBox to create the model anew.</value>
   </data>
   <metadata name="fbdModelPath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

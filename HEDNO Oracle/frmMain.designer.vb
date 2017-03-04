@@ -339,7 +339,7 @@ Partial Class frmMain
         '
         Me.mniEnsambleOfDecisionTrees.Name = "mniEnsambleOfDecisionTrees"
         Me.mniEnsambleOfDecisionTrees.Size = New System.Drawing.Size(277, 22)
-        Me.mniEnsambleOfDecisionTrees.Text = "&8) Ensamble of Decision Trees"
+        Me.mniEnsambleOfDecisionTrees.Text = "&8) Ensemble of Decision Trees"
         Me.mniEnsambleOfDecisionTrees.ToolTipText = resources.GetString("mniEnsambleOfDecisionTrees.ToolTipText")
         '
         'mniNeuralNetworks

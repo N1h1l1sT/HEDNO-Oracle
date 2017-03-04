@@ -1811,7 +1811,7 @@ Public Class frmMain
                                 SQLAdaptrVFinalDataset.Fill(dtProblematicAddresses)
 
                                 Dim csvFileName As String = doProperFileName(strXDF & "Problematic_Cities.csv")
-                                Save_Datatable_To_csv(csvFileName, dtProblematicAddresses, False,,, CChar(vbTab))
+                                Save_Datatable_To_csv(csvFileName, dtProblematicAddresses)
                                 RunOpenDir(csvFileName)
 
                             Else

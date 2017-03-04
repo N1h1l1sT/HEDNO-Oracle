@@ -138,7 +138,7 @@ If this option is checked, the containing folder is opened when the procedure co
   </data>
   <data name="chkUseExistingModel.ToolTip" xml:space="preserve">
     <value>Instead of Training the model, a previously saved model is loaded.
-Using an existing, model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procude will fail!
+Using an existing, model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procedure will fail!
 In that case, please just uncheck this CheckBox to create the model anew.</value>
   </data>
   <data name="txtNGrams.ToolTip" xml:space="preserve">

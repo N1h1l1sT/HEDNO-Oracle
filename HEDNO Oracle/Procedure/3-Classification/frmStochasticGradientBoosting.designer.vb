@@ -582,9 +582,9 @@ Partial Class frmStochasticGradientBoosting
         Me.chkShowOOBEPlot.AutoSize = True
         Me.chkShowOOBEPlot.Location = New System.Drawing.Point(3, 241)
         Me.chkShowOOBEPlot.Name = "chkShowOOBEPlot"
-        Me.chkShowOOBEPlot.Size = New System.Drawing.Size(178, 17)
+        Me.chkShowOOBEPlot.Size = New System.Drawing.Size(173, 17)
         Me.chkShowOOBEPlot.TabIndex = 16
-        Me.chkShowOOBEPlot.Text = "Out-Of-Bags Error VS nTree Plot"
+        Me.chkShowOOBEPlot.Text = "Out-Of-Bag Error VS nTree Plot"
         Me.ttMain.SetToolTip(Me.chkShowOOBEPlot, "Plot the out-of-bags error (Y) VS  the Number of Trees (X)")
         Me.chkShowOOBEPlot.UseVisualStyleBackColor = True
         '
@@ -643,7 +643,7 @@ Partial Class frmStochasticGradientBoosting
         Me.chkPlotVarImportance.TabIndex = 14
         Me.chkPlotVarImportance.Text = "Plot Variables Importance"
         Me.ttMain.SetToolTip(Me.chkPlotVarImportance, "This algorithm can show which variables were most important for its formation." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "C" &
-        "hecking this will show the plot." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        "hecking this will show the plot.")
         Me.chkPlotVarImportance.UseVisualStyleBackColor = True
         '
         'chkrowSelection

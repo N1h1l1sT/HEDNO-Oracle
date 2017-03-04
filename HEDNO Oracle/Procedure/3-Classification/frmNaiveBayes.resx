@@ -132,13 +132,9 @@
 [Green background means that the existing XDF is not marked for statistics]
 </value>
   </data>
-  <data name="chkOpenGraphDirectory.ToolTip" xml:space="preserve">
-    <value>Because R.NET does not support multiple Graph Plots simultaneously, when predictions from multiple models are applied, the ROC Curve plots are saved as .png files.
-If this option is checked, the containing folder is opened when the procedure comes to an end.</value>
-  </data>
   <data name="chkUseExistingModel.ToolTip" xml:space="preserve">
     <value>Instead of Training the model, a previously saved model is loaded.
-Using an existing, model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procude will fail!
+Using an existing model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procedure will fail!
 In that case, please just uncheck this CheckBox to create the model anew.</value>
   </data>
   <data name="txtNGrams.ToolTip" xml:space="preserve">
@@ -175,6 +171,10 @@ If the dataset is created using Statistics Mode (i.e. n% of labelled data for Tr
 --If 'Show ROC Curve' is checked, the model's ROC Curve with AUC value is plotted
 Otherwise
 --The predictions are exported into a .csv containing: 1) Their respective SQL Server project ID, 2) Their Probability of being approved, 3) Their Class (0/1)</value>
+  </data>
+  <data name="chkOpenGraphDirectory.ToolTip" xml:space="preserve">
+    <value>Because R.NET does not support multiple Graph Plots simultaneously, when predictions from multiple models are applied, the ROC Curve plots are saved as .png files.
+If this option is checked, the containing folder is opened when the procedure comes to an end.</value>
   </data>
   <metadata name="fbdModelPath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>4, 6</value>

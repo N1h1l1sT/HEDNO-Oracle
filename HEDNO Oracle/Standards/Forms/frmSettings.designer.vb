@@ -1022,9 +1022,9 @@ Partial Class frmSettings
         Me.lblColID_Erga.AutoSize = True
         Me.lblColID_Erga.Location = New System.Drawing.Point(6, 280)
         Me.lblColID_Erga.Name = "lblColID_Erga"
-        Me.lblColID_Erga.Size = New System.Drawing.Size(146, 13)
+        Me.lblColID_Erga.Size = New System.Drawing.Size(144, 13)
         Me.lblColID_Erga.TabIndex = 33
-        Me.lblColID_Erga.Text = "Suffix for each Address Entry:"
+        Me.lblColID_Erga.Text = "SQL Table Column ID Name:"
         '
         'txtColvGeoLocY
         '
