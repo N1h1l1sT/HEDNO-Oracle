@@ -1,0 +1,6 @@
+cmdApply=LightCyan
+cmdExit=LightCyan
+lblInfo=Gold
+gbCommands=LightCyan
+cmdCurrent=LightCyan
+cmdDefault=LightCyan

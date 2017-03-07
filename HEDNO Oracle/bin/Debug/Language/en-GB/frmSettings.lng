@@ -1,0 +1,61 @@
+﻿<Language:English;Version 1.8.3>
+False
+True
+Unknown
+Auto
+None
+The path "
+" does not exist! Therefore this specific alteration will not take place.
+Caution: Resetting your settings to default will erase your account information; hence it should only be used if the program cannot function correctly
+Are you sure you want to reset the settings?
+Settings
+Would you like to reset all settings to the default values, thus losing any changes you made but fixing the problem?
+&Cancel
+&Apply And Close
+Original Settings Applied, You need to restart the program for the settings to take effect!
+Would you like the program to restart now?
+Commands:
+&Read Current Settings
+Reset &Default Settings
+General Settings
+Language:
+Default
+<Error>
+Skin
+Check for New Version:
+DatabasePass:
+Database Type:
+Start with Windows:
+Access Type:
+Delay Time:
+Seconds
+Split Database Every Month:
+DataBase File:
+Show Startup Form:
+Database Settings
+DataBase Tables:
+Type in the Table Names, one on each line, without delimitation.
+The designated "Database" Path (
+) does not exist, therefore the path will not change.
+Window State:
+FullScreen
+FullScreen Windowed
+Windowed
+Minimized
+Maximized
+FullScreen Resolution:
+Remember Window State:
+Please input a numeric value for the Form's Width:
+Please input a numeric value for the Form's Height:
+Some of the settings you changed needs the program to restart.
+Those Settings are:
+Would you like to restart the programme now (any pending operations will be terminated)?
+Window Resolution:
+Protected Tables:
+Type in the Databases Names you wish to protect one on each line without delimitation.
+You need to select one of the available values on the "{ComboBox}" ComboBox.
+
+
+
+
+

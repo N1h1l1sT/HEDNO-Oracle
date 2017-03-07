@@ -1,0 +1,50 @@
+﻿<Language:English;Version custom>
+Via the Settings Form one may customise the application to one's needs
+Closes the programme
+This form allows one to make changes to the database
+Push this if you want to give feedback on the programme, or if you want to make a complaint
+Opens the Settings File (directly) for editing
+Navigates to the Programme's Folder inside "My Documents"
+Navigates to the Programme's directory
+Navigates to the Database's directory
+Navigates to the Extra's directory
+Navigates to the Languages' directory
+Navigates to the Settings' directory
+Navigates to the Skins' directory
+Launches the default browser and navigates the Programme's Website
+Launches the default browser and navigates the Programmer's Website
+Launches the default browser and navigates the Company's Website
+Show the Presentation Form wherein lie tips and insight into how to use the programme
+Show the "Welcome Screen" that was shown the first time you run the programme.
+View the End User's License Agreement
+View the Changelog to see what changes were done by each new version
+This form holds all the available commands as well as tips and explanations on how to use the programme
+Checks to see if there are any updates available, and if so prompts you to download it
+View the programme's Credits
+View programme related information
+
+
+
+
+
+Parses the command you typed and executes it (alerting you if the command you typed is invalid)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

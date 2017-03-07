@@ -1,0 +1,5 @@
+﻿<Language=English;Version=1.0>
+Runs your default browser and navigates to the Official R Website so you can download the free programme "R".
+A browse dialog fires up, allowing you to navigate to the R's installation folder and click it.
+Cancels the attempt to locate R.%vbcrlf%This might come at the cost of some functions being disabled, or the programme to close altogether.
+Tries to automatically locate the R folder now that you've installed R, and if it fails, you will be prompted to locate the R Folder yourself.

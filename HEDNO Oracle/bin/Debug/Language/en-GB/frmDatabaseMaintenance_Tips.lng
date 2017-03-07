@@ -1,0 +1,5 @@
+﻿<Language:English; Version 1.0>
+Compacts and repairs the database, making it considerably smaller and faster
+Deletes all records on all tables of the database, except for the protected ones
+Clears all records of the table you choose
+Closes this form

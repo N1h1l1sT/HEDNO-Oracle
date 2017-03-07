@@ -1,0 +1,5 @@
+gbMaintenanceOptions=LightCyan
+btnCompactDB=LightCyan
+btnClearAll=LightCyan
+btnClearSingleTable=LightCyan
+btnExit=LightCyan

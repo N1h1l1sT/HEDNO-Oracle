@@ -1,0 +1,100 @@
+﻿<Language=English;Version custom>
+&File
+&Settings
+E&xit
+&Help
+&Credits
+&About
+&Program's Directory
+E&xit
+
+&EULA
+Are you sure you want to quit the program?
+&Directories
+&Database
+&Links
+&Programme's Website
+The Registration Key provided is either of an older version (obsolete) or invalid, and has been deleted to prevent the repetition of this message.
+Your new key has been sent to your email account (if applicable), otherwise please ask for a new Registration Key (for free if applicable).
+
+
+
+Pro&grammer's Website
+&Show Presentation Again
+Show &Welcome Screen Again
+&Database Maintenance
+&Help
+You may type commands here. For a list of available commands, please type "Help()"
+
+&Go
+&Changelog
+Commands:
+Unknown Command
+&Suggest or Complain
+&Open Settings File
+Manually Editing the Settings file is risky as it could render the program inoperable; therefore using the Settings Form instead is recommended.
+Are you sure you want to edit the settings file itself?
+&Extras
+&Language
+&Settings
+S&kin
+An error occurred while trying to Split this month's database.
+The Database file cannot be accessed correctly.
+If you are currently viewing the database, please close the file and restart this programme.
+Company's Site
+Program's D&ocuments
+There is a problem with the settings file; would you like to restore the original settings?
+It seems like the settings problem is persistent; Please contact for support via email at 
+The program will now attempt to ignore the problem and continue.
+
+Check for &Updates
+There are no available variables
+A variable with this name already exists!
+The variable has been successfully added.
+Equation Mode has been turned On, therefore you may use variables and no prefix is necessary.
+Add Variable mode has been turned On, no prefix is necessary
+Add Function mode has been turned On, no prefix is necessary
+Equation Mode has been turned Off, therefore a prefix is necessary for use of variables.
+Add Variable mode has been turned Off, a prefix is necessary
+Add Function mode has been turned Off, a prefix is necessary
+All variables have been erased
+The specified variable has been deleted
+The specified variable wasn't found!
+Any other mode that might have been on is now turned off.
+Mode: 
+Equation
+Add Variable
+Add Function
+The specified Mode was is already off.
+There are no available functions
+A Function with this name already exists!
+The Function has been successfully added.
+The specified function has been deleted
+The specified function wasn't found!
+All functions have been erased
+&Show
+&Hide
+&Website
+Functions:
+&Donation ID
+L&icenses
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

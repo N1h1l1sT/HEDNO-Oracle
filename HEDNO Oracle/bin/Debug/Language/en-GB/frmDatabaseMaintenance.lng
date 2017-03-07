@@ -1,0 +1,22 @@
+﻿<Language:English; Version 1.0>
+Database Maintenance
+E&xit
+Maintenance Options
+Clear &All Tables
+Clear a &Single Table
+Compact Database
+Are you sure you want to compact the database?
+The database has been successfully compacted.
+The database has not been compacted!
+The Database file is currently busy, please finish any pending process and try again.
+WARNING! All data of all tables will be permanently deleted!
+Are you sure you want to clear the whole database?
+The database in now cleared.
+The database could not be cleared!
+Are you sure you want to clear the "
+" table?
+The "
+" table has been cleared!
+" table could not be cleared!
+There are no tables in the settings file, hence no table can be cleared.
+Please Select which table to erase:

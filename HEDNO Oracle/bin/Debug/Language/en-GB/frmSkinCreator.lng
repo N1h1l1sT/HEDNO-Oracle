@@ -1,0 +1,31 @@
+﻿<Language=English;Version 1.0>
+Skin Creator
+Skins:
+Items to skin:
+Select Form to Skin:
+Select Control to Skin:
+Actions:
+SplashScreen Image:
+Form's Image:
+Form's Big Image:
+Fore Colour:
+Back Colour:
+Commands:
+&New Skin
+&Rename Skin
+&Delete Skin
+&Apply
+&Close
+Image Found
+Do you want to search for an image, or clear the existing one?
+Push Yes to search for one, or No to clear the image.
+Input the name of the skin.
+This name already exists! No change was made.
+No skin is selected!
+Are you sure you want to delete "
+" ?
+Control's Image:
+Done!
+It is possible that this error is due to your trying to change elements of the currently in use skin.
+This skin cannot be renamed because it is currently in use.
+Please change the skin and then rename it.

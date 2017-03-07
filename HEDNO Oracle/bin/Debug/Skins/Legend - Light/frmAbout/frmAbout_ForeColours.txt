@@ -1,0 +1,13 @@
+lblAssemblyName=LightCyan
+lblCompanyName=LightCyan
+lblCopyright=LightCyan
+lblDirectoryPath=LightCyan
+lblProductName=LightCyan
+lblTitle=LightCyan
+lblVersion=LightCyan
+lblWorkingSet=LightCyan
+lblHash=LightCyan
+lblUser=LightCyan
+cmdExit=LightCyan
+lblLicense=LightCyan
+lblTrademark=LightCyan

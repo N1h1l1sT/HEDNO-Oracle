@@ -11,7 +11,7 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
+#[Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
@@ -19,7 +19,7 @@
 [Xx]86/
 [Bb]uild/
 bld/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
 
 # Visual Studio 2015 cache/options directory
@@ -240,3 +240,25 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/HEDNO Oracle/bin/Debug/bin/Debug/Database
+/HEDNO Oracle/bin/Debug/Graphs/3.6.3 StochasticGradientBoostingModel_OutOfBagError.png
+/HEDNO Oracle/bin/Debug/Graphs/StochasticGradientBoostingModel_OutOfBagError.png
+/HEDNO Oracle/bin/Debug/Graphs/RandomForestModel_VariablesImportance.png
+/HEDNO Oracle/bin/Debug/Graphs/RandomForestModel_OutOfBagError.png
+/HEDNO Oracle/bin/Debug/Language/el-GR
+/HEDNO Oracle/bin/Debug/Models/StochasticGradientBoostingModel.RDS
+/HEDNO Oracle/bin/Debug/Models/StochasticDualCoordinateAscentModel.RDS
+/HEDNO Oracle/bin/Debug/Models/RandomForestModel.RDS
+/HEDNO Oracle/bin/Debug/Models/NeuralNetworksModel.RDS
+/HEDNO Oracle/bin/Debug/Models/NaiveBayesModel.RDS
+/HEDNO Oracle/bin/Debug/Models/LogisticRegressionModel.RDS
+/HEDNO Oracle/bin/Debug/Models/FastLogisticRegressionModel.RDS
+/HEDNO Oracle/bin/Debug/Models/EnsembleofDecisionTreesModel.RDS
+/HEDNO Oracle/bin/Debug/Models/DecisionTreesModel.RDS
+/HEDNO Oracle/bin/Debug/Models/BoostedDecisionTreesModel.RDS
+/HEDNO Oracle/bin/Debug/Settings/Settings.ini
+/HEDNO Oracle/bin/Debug/HEDNO Oracle.xml
+/HEDNO Oracle/bin/Debug/HEDNO Oracle.vshost.exe.config
+/HEDNO Oracle/bin/Debug/HEDNO Oracle.vshost.exe
+/HEDNO Oracle/bin/Debug/HEDNO Oracle.exe.config
+/HEDNO Oracle/bin/Debug/HEDNO Oracle.exe

@@ -1,0 +1,4 @@
+lblApplicationTitle=Azure
+lblCopyright=Azure
+lblVersion=Azure
+lblLicense=Azure

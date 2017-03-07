@@ -1,0 +1,70 @@
+{"Tables": [
+{
+	"TableName": "{Table1}",
+	"TableVars": [
+		{
+			"ColumnName": "{Column1}",
+			"Type": "INT",
+			"Default": "0",
+			"NullBehaviour": "NOT NULL",
+			"Identity": "IDENTITY(1,1)"
+		},
+		{
+			"ColumnName": "{Column2}",
+			"Type": "DATETIME",
+			"Default": "getdate()",
+			"NullBehaviour": "NOT NULL",
+			"Identity": ""
+		},
+		{
+			"ColumnName": "{Column3}",
+			"Type": "VARCHAR(255)",
+			"Default": "",
+			"NullBehaviour": "NULL",
+			"Identity": ""
+		}
+	],
+	"PrimaryKey": {
+		"ColumnName": "{Column1}",
+		"ClusterType": "CLUSTERED",
+		"Order": "ASC"
+	},
+	"Indexes": [
+		{
+			"ColumnName": "{Column3}",
+			"ClusterType": "NONCLUSTERED",
+			"Order": "ASC"
+		}
+	]
+},{
+	"TableName": "{Table2}",
+	"TableVars": [
+		{
+			"ColumnName": "{Column1}",
+			"Type": "VARCHAR (255)",
+			"Default": "",
+			"NullBehaviour": "NOT NULL",
+			"Identity": ""
+		},
+		{
+			"ColumnName": "{Column2}",
+			"Type": "INT",
+			"Default": "",
+			"NullBehaviour": "NULL",
+			"Identity": ""
+		}
+	],
+	"PrimaryKey": {
+		"ColumnName": "",
+		"ClusterType": "",
+		"Order": ""
+	},
+	"Indexes": [
+		{
+			"ColumnName": "",
+			"ClusterType": "",
+			"Order": ""
+		}
+	]
+}
+]}

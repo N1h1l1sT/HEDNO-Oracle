@@ -1,0 +1,179 @@
+﻿<Language=English;Version=1.5.7>
+
+[-- modUpdate.vb --]
+The Program is up to date
+An update is available; would you like to download it?
+The Program is obsolete
+ATTENTION
+Unavailable Update information
+Latest Release confirmed
+Newer Release version available
+Program Upgrade: N/A
+There was an error during the auto-update process.
+Please install the new version manually, or contact an employee of the 
+ company to apply the update for you.
+An update to this version, that will be available soon, is being uploaded to the remote server. 
+The update check could not be properly performed, hence the program shall be seen as "obsolete" for the time being.
+The downloading procedure of the updated version might take several minutes.
+There are no updates available for download.
+
+[-- modSecurity.vb --]
+The Program's framework is currently down. Please try again later.
+There is a problem with your license! Please contact Giannis_Mamalikidis@msn.com
+Your Registration Code has been blacklisted; this could be due to a leak (whether intentional or not).
+If you believe your registration key should not have been blacklisted, please contact: 
+Your Registration Key has been deleted from your computer, and you may type a new one now.
+Would you like to restore the original license so that you can re-type your credentials?
+An inconsistency was detected on the Registration Information.
+To avoid corruption all Registration info will be deleted and you will be prompted to type them anew.
+Your license privileges (whether usage or upgrade) end on: 
+Unable to retrieve your license's expiration date.
+Account has been closed
+There are 
+ days left
+Your activation capacity (if applicable) will be incremented.
+However if you wish to have your credentials οn this computer as well, you will need to retype them.
+Are you sure you want to revoke your credentials?
+It seems like your computer time has been tampered with, which prevents this program from operating correctly.
+Please restore your computer's time to its original state, and restart this application.
+
+[-- modCommon.vb --]
+The architecture of the program or of the windows is unknown (not 32bit nor 64bit).
+It is possible that some operations malfunction.
+An Error has occurred: 
+An error report file has been stored on: 
+to
+(The "to" above is for Range/Span: From 1 to 100)
+ Days
+ Hours
+ Minutes
+ Seconds
+ Milliseconds
+ Less than a millisecond
+Either your key is expired, or the key never expires, or an expiration time is not applicable altogether.
+The procedure finished in: 
+R could not be initialised!
+
+
+
+
+[-- modIO.vb --]
+is not a known excel extension
+Page 
+This file appears to be far too big for a dataset.
+Are you sure this is the right file, and that you want to load it into the programme?
+There are no retrievable data inside the file: 
+The file has been successfully saved on: 
+Unknown File Format
+The file "
+" does not exist.
+No file was selected!
+There already are data inside the dataset. Would you like to append the new columns, or erase the old data, keeping only the new columns?
+Push "Yes" to keep the data and append. Push "No" to erase the old data and add the new columns.
+
+
+
+
+
+
+
+[-- modDatabase.vb --]
+No tables found on the settings file
+
+
+No tables found, therefore nothing could be cleaned!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[-- modChangeResolution.vb --]
+You must restart your computer to apply these changes.
+Screen Resolution has Changed
+Screen Resolution change was Successful.
+Screen Resolution Change Failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[--modChangeLanguage.vb--]
+Tip:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[--modSecurity#2.vb--]
+Your Donation ID appears to be invalid, please type it again.
+The Beta Period has expired!
+Your Donation ID has expired! To continue using the program you need to acquire a new Donation ID.
+If you believe your Donation ID should be valid still, and this message shouldn't be appearing, please email me at Giannis_Mamalikidis@msn.com
+The time Stamp cannot be retrieved. Please re-enter your Donation ID
+There are no registration data on this computer, therefore a revocation is not possible.
+The registration has already been completed.
+
+
+
+
+
+
+
+
+
+
+
+
+[--modR.vb--]
+Please locate the R folder on your computer, usually on C:\Program Files\R\
+The folder you've chosen is not the R's Installation folder.
+Please Try again
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

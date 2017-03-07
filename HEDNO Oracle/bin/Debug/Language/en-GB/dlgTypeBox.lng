@@ -1,0 +1,49 @@
+﻿<Language=English;Version 1.5>
+The text cannot be left blank.
+If you want to cancel this operation, please push the 
+ button
+OK
+Cancel
+This is not a valid numeric value!
+Please try again.
+The text must not start with a number!
+Text's characters number must be greater than or equal to: 
+Text's characters number must be lower than or equal to: 
+Unknown procedure on Typebox
+You must specify a date no earlier than: 
+You must specify a date no later than: 
+The date must span between: 
+ and 
+This is not a valid numeric range format.
+Please write something along the lines of: 1,5 or 1 to 5
+You must only type numbers, no letters are allowed.
+ on line {Line} is not a valid numeric range format.
+The numeric range you typed is outside the bounds of the valid range: 
+The minimum allowed length per line is: 
+Please continue typing on line: 
+You may type up to 
+ characters on each line.
+You have exceeded the limit on line: 
+The number you typed is outside the bounds of the valid range: 
+No line may begin with a numeric value
+The beginning numeric value is lower than the valid lower limit
+The ending numeric value is greater than the valid upper limit
+to
+Valid Range: 
+Any Date
+-Infinity
++Infinity
+Text's Characters Bounds: 
+Per Line Characters Bounds: 
+You need to select an item first!
+You must select a date first!
+ (exempting the null lines)
+The number you typed on the line {Line} ({Num}) is outside the bounds of the valid range: 
+The beginning numeric value on line {Line} ({Num}) is lower than the valid lower limit
+The ending numeric value on line {Line} ({Num}) is greater than the valid upper limit
+You must specify at least one date
+Line 
+ (
+) is outside the lower bound: 
+) is outside the upper bound: 
+) cannot be converted to a date/time

@@ -1,0 +1,7 @@
+﻿<Language=English;Version=1.0>
+Locating R
+After several attempts %ProgrammeName% was unable to locate R on your system.%vbcrlf%If R is installed, please locate it via the %browse% button.%vbcrlf%If it is not yet installed, you may, if you want, download it and install it yourself by pushing the %RWebpage% button
+&Visit R's Website
+&Browse...
+&Cancel
+&I've just installed it
