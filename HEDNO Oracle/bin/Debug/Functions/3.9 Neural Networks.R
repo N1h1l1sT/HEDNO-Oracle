@@ -23,15 +23,15 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
 						
                          ,type = "binary"
-                         ,numHiddenNodes = {7} #The default number of hidden nodes in the neural net. The default value is 100
-                         ,numIterations = {8} #The number of iterations on the full training set. The default value is 100
+                         ,numHiddenNodes = {7}
+                         ,numIterations = {8}
                          ,acceleration = acceleration #[sse/gpu]
-                         ,optimizer = sgd() #[sgd()/adaDeltaSgd()] A list specifying either the sgd or adaptive optimization algorithm. This list can be created using sgd or adaDeltaSgd. The default value is sgd.
-                         ,normalize = "{9}" #[auto/no/yes/warn] "warn": if normalization is needed, a warning message is displayed, but normalization is not performed. Normalization rescales disparate data ranges to a standard scale. Feature scaling insures the distances between data points are proportional and enables various optimization methods such as gradient descent to converge much faster. If normalization is performed, a MaxMin normalizer is used. It normalizes values in an interval [a, b] where -1 <= a <= 0 and 0 <= b <= 1 and b - a = 1. This normalizer preserves sparsity by mapping zero to zero
-                         ,miniBatchSize = {10} #[1/256] Sets the mini-batch size. Recommended values are between 1 and 256. This parameter is only used when the acceleration is GPU. Setting this parameter to a higher value improves the speed of training, but it might negatively affect the accuracy. The default value is 1.
-                         # ,netDefinition = #The Net# definition of the structure of the neural network. For more information about the Net# language, see https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-azure-ml-netsharp-reference-guide
-                         # ,initWtsDiameter = 0.1 #Sets the initial weights diameter that specifies the range from which values are drawn for the initial learning weights. The weights are initialized randomly from within this range. The default value is 0.1.
-                         # ,maxNorm = #Specifies an upper bound to constrain the norm of the incoming weight vector at each hidden unit. This can be very important in maxout neural networks as well as in cases where training produces unbounded weights
+                         ,optimizer = sgd()
+                         ,normalize = "{9}"
+                         ,miniBatchSize = {10}
+                         # ,netDefinition =
+                         # ,initWtsDiameter = 0.1
+                         # ,maxNorm =
 
 						,reportProgress = {reportProgress}
 						,blocksPerRead = {blocksPerRead}

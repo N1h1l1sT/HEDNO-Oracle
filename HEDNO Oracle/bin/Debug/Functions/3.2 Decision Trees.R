@@ -27,21 +27,21 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 	  {6}{5} <- rxDTree(Label ~ {0}
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
 						
-                        ,xVal = 10 #this controls the number of folds used to perform cross-validation. The default of 2 allows for some pruning; once you have closed in a model you may want to increase the value for final fitting and pruning.
-                        ,maxDepth = 15 #this sets the maximum depth of any node of the tree. Computations grow rapidly more expensive as the depth increases, so we recommend a maxDepth of 10 to 15.
+                        ,xVal = 10
+                        ,maxDepth = 15
                         ,method = ClassMethod
                         ,maxNumBins = round(min(1001, max(101, sqrt(n_Train))))
 						,cp = {8}
 						,pruneCp = "auto"
-						#,maxCompete = 0 #this specifies the number of “competitor splits” retained in the output. By default, rxDTree sets this to 0, but a setting of 3 or 4 can be useful for diagnostic purposes in determining why a particular split was chosen.
-						#,useSurrogate = #0, 1 or 2
-						#,maxSurrogate = 0 #this specifies the number of surrogate splits retained in the output. Again, by default rxDTree sets this to 0. Surrogate splits are used to assign an observation when the primary split variable is missing for that observation.
+						#,maxCompete = 0
+						#,useSurrogate = 
+						#,maxSurrogate = 0
 						#,surrogateStyle = #0 or 1, 0 penalises surrogates with many missing values
-					    #,minSplit = #determines how many observations must be in a node before a split is attempted
-					    #,minBucket =  #determines how many observations must remain in a terminal node.
-					    #,fweights = #If duplicate rows have been eliminated, creating a new variable of how many duplicate rows were, then this Variable/Column can be used as Frequency Weight
-					    #,pweights = #Probability weights for the observations
-					    #,cost = c("") #a vector of non-negative costs, containing one element for each variable in the model. Defaults to one for all variables. When deciding which split	to choose, the improvement on splitting on a variable is divided by its cost
+					    #,minSplit = 
+					    #,minBucket =  
+					    #,fweights = 
+					    #,pweights = 
+					    #,cost = c("")
 					    #,parms = list(loss = c(0, 3, 1, 0))
 					   
 						,reportProgress = {reportProgress}
@@ -49,7 +49,7 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 						,rowSelection = {rowSelection}
 						
                         ,xdfCompressionLevel = rxGetOption("xdfCompressionLevel")
-						# ,variableSelection = #rxStepControl(method="stepwise", scope = ~ Age + Start + Number )); parameters that control aspects of stepwise regression; cube must be FALSE
+						# ,variableSelection = #rxStepControl(method="stepwise", scope = ~ Age + Start + Number)
 	  )
 	)
 # {6}{5} #The Tree model

@@ -28,13 +28,13 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
 						
 						,type = type
-						,convergenceTolerance = {7} #Specifies the tolerance threshold used as a convergence criterion. It must be between 0 and 1. The default value is 0.1. The algorithm is considered to have converged if the relative duality gap, which is the ratio between the duality gap and the primal loss, falls below the specified convergence tolerance.
-						,normalize = "{8}" #Specifies the type of automatic normalization used: [auto/no/yes/warn] "warn": if normalization is needed, a warning message is displayed, but normalization is not performed. Normalization rescales disparate data ranges to a standard scale. Feature scaling insures the distances between data points are proportional and enables various optimization methods such as gradient descent to converge much faster. If normalization is performed, a MaxMin normalizer is used. It normalizes values in an interval [a, b] where -1 <= a <= 0 and 0 <= b <= 1 and b - a = 1. This normalizer preserves sparsity by mapping zero to zero
-						# ,maxIterations = 25 #Specifies an upper bound on the number of training iterations. This parameter must be positive or NULL. If NULL is specified, the actual value is automatically computed based on data set. Each iteration requires a complete pass over the training data. Training terminates after the total number of iterations reaches the specified upper bound or when the loss function converges, whichever happens earlier.
-						# ,lossFunction = #Specifies the empirical loss function to optimize. For binary classification, the following choices are available: logLoss: The log-loss. This is the default. hingeLoss: The SVM hinge loss. Its parameter represents the margin size. smoothHingeLoss: The smoothed hinge loss. Its parameter represents the smoothing constant. For linear regression, squared loss squaredLoss is currently supported.
-						# ,l2Weight = #Specifies the L2 regularization weight. The value must be either non-negative or NULL. If NULL is specified, the actual value is automatically computed based on data set
-						# ,l1Weight = #Specifies the L1 regularization weight. The value must be either non-negative or NULL. If NULL is specified, the actual value is automatically computed based on data set
-						# ,shuffle = FALSE #Specifies whether to shuffle the training data. Set TRUE to shuffle the data; FALSE not to shuffle. The default value is FALSE. SDCA is a stochastic optimization algorithm. If shuffling is turned on, the training data is shuffled on each iteration.
+						,convergenceTolerance = {7}
+						,normalize = "{8}"
+						# ,maxIterations = 25
+						# ,lossFunction =
+						# ,l2Weight =
+						# ,l1Weight =
+						# ,shuffle = FALSE
 
 					   
 						,reportProgress = {reportProgress}

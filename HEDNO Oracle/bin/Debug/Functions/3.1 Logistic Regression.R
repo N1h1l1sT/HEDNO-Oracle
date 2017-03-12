@@ -21,9 +21,9 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
 						, covCoef = TRUE
 						# ,maxIterations =
-						# ,variableSelection = #rxStepControl(method="stepwise", scope = ~ Age + Start + Number )); parameters that control aspects of stepwise regression; cube must be FALSE
-						# ,fweights = #If duplicate rows have been eliminated, creating a new variable of how many duplicate rows were, then this Variable/Column can be used as Frequency Weight
-						# ,pweights = #Probability weights for the observations
+						# ,variableSelection = 
+						# ,fweights = 
+						# ,pweights = 
 						,reportProgress = {reportProgress}
 						,blocksPerRead = {blocksPerRead}
 						,rowSelection = {rowSelection}

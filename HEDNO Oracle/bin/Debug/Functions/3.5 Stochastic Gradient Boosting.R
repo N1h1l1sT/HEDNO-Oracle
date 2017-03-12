@@ -29,26 +29,26 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 	  {6}{5} <- rxBTrees(Label ~ {0}
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
 						
-					    ,cp = {8} #this is a complexity parameter and sets the bar for how much a split must reduce the complexity before being accepted. We have set the default to 0 and recommend using maxDepth and minBucket to control your tree sizes. If you want to specify a cp value, start with a conservative value, such as rpart’s 0.01; if you don’t see an adequate number of splits, decrease the cp by powers of 10 until you do. For our large airline data, we have found interesting models begin with a cp of about 1e-4.
+					    ,cp = {8}
 					    ,nTree = {9}
 					    ,mTry = {10}
-					    ,maxDepth = {11} #this sets the maximum depth of any node of the tree. Computations grow rapidly more expensive as the depth increases, so we recommend a maxDepth of 10 to 15.
+					    ,maxDepth = {11}
 					    ,lossFunction = lossFunction
 					    ,importance = TRUE
-					    ,maxNumBins = round(min(1001, max(101, sqrt(n_Train)))) #this controls the maximum number of bins used for each variable. Managing the number of bins is important in controlling memory usage. The default is min(1001, max(101, sqrt(num of obs))). For small data sets with continuous predictors, you may find that you need to increase the maxNumBins to obtain models that resemble those from rpart.
-                         # ,learningRate = 0.1 #(shrinkage) is used to scale the contribution of each tree when it is added to the ensemble. The default learning rate is 0.1.. numeric scalar specifying the learning rate of the boosting procedure
+					    ,maxNumBins = round(min(1001, max(101, sqrt(n_Train))))
+                         # ,learningRate = 0.1
                          # ,findSplitsInParallel = TRUE
-                         # ,replace = #a logical value specifying if the sampling of observations should be done with or without replacement
-                         # ,strata = #a character string specifying the (factor) variable to use for stratified sampling.
-                         # ,cost = c("") #a vector of non-negative costs, containing one element for each variable in the model. Defaults to one for all variables. When deciding which split	to choose, the improvement on splitting on a variable is divided by its cost
-                         # ,minSplit = #determines how many observations must be in a node before a split is attempted
-                         # ,minBucket =  #the minimum number of observations in a terminal node (or leaf). By default, this is minSplit/3
-                         # ,maxCompete = 0 #this specifies the number of “competitor splits” retained in the output. By default, rxDTree sets this to 0, but a setting of 3 or 4 can be useful for diagnostic purposes in determining why a particular split was chosen.
-                         # ,useSurrogate = #0, 1 or 2
-                         # ,maxSurrogate = 0 #this specifies the number of surrogate splits retained in the output. Again, by default rxDTree sets this to 0. Surrogate splits are used to assign an observation when the primary split variable is missing for that observation.
-                         # ,surrogateStyle = #0 or 1, 0 penalises surrogates with many missing values
-                         # ,fweights = #If duplicate rows have been eliminated, creating a new variable of how many duplicate rows were, then this Variable/Column can be used as Frequency Weight
-                         # ,pweights = #Probability weights for the observations
+                         # ,replace =
+                         # ,strata =
+                         # ,cost = c("")
+                         # ,minSplit =
+                         # ,minBucket =
+                         # ,maxCompete = 0
+                         # ,useSurrogate =
+                         # ,maxSurrogate = 0
+                         # ,surrogateStyle =
+                         # ,fweights =
+                         # ,pweights =
 					   
 						,reportProgress = {reportProgress}
 						,blocksPerRead = {blocksPerRead}

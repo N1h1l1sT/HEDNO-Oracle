@@ -23,16 +23,16 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
 						
 						,type = "binary"
-						,sgdInitTol = {7} #Set to a number greater than 0 to use Stochastic Gradient Descent (SGD) to find the initial parameters. A non-zero value set specifies the tolerance SGD uses to determine convergence. The default value is 0 specifying that SGD is not used.
-						,l2Weight = {8} #The L2 regularization weight. Its value must be greater than or equal to 0 and the default value is set to 1; is preferable for data that is not sparse. It pulls large weights towards zero
-						,l1Weight = {9} #The L1 regularization weight. Its value must be greater than or equal to 0 and the default value is set to 1; can be applied to sparse models, when working with high-dimensional data. It pulls small weights associated features that are relatively unimportant towards 0
-						,optTol = {10} #Threshold value for optimizer convergence. If the improvement between iterations is less than the threshold, the algorithm stops and returns the current model. Smaller values are slower, but more accurate. The default value is 1e-07
-						,memorySize = {11} #Memory size for L-BFGS, specifying the number of past positions and gradients to store for the computation of the next step. This optimization parameter limits the amount of memory that is used to compute the magnitude and direction of the next step. When you specify less memory, training is faster but less accurate. Must be greater than or equal to 1 and the default value is 20.
-						,initWtsScale = {12} #Sets the initial weights diameter that specifies the range from which values are drawn for the initial weights. These weights are initialized randomly from within this range. For example, if the diameter is specified to be d, then the weights are uniformly distributed between -d/2 and d/2. The default value is 0, which specifies that all the weights are initialized to 0.
-						,maxIterations = {13} #Sets the maximum number of iterations. After this number of steps, the algorithm stops even if it has not satisfied convergence criteria
-						,normalize = "{14}" #[auto/no/yes/warn] "warn": if normalization is needed, a warning message is displayed, but normalization is not performed. Normalization rescales disparate data ranges to a standard scale. Feature scaling insures the distances between data points are proportional and enables various optimization methods such as gradient descent to converge much faster. If normalization is performed, a MaxMin normalizer is used. It normalizes values in an interval [a, b] where -1 <= a <= 0 and 0 <= b <= 1 and b - a = 1. This normalizer preserves sparsity by mapping zero to zero
-						#trainThreads = NULL #The number of threads to use in training the model. This should be set to the number of cores on the machine. Note that L-BFGS multi-threading attempts to load dataset into memory. In case of out-of-memory issues, set trainThreads to 1 to turn off multi-threading. If NULL the number of threads to use is determined internally. The default value is NULL
-						#denseOptimizer = #If TRUE, forces densification of the internal optimization vectors. If FALSE, enables the logistic regression optimizer use sparse or dense internal states as it finds appropriate. Setting denseOptimizer to TRUE requires the internal optimizer to use a dense internal state, which may help alleviate load on the garbage collector for some varieties of larger problems
+						,sgdInitTol = {7}
+						,l2Weight = {8}
+						,l1Weight = {9}
+						,optTol = {10}
+						,memorySize = {11}
+						,initWtsScale = {12}
+						,maxIterations = {13}
+						,normalize = "{14}"
+						#trainThreads = NULL
+						#denseOptimizer =
 
 						,reportProgress = {reportProgress}
 						,blocksPerRead = {blocksPerRead}

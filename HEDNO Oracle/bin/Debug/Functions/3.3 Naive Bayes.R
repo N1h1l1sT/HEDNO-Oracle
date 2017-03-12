@@ -22,16 +22,16 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 	  {6}{5} <- rxNaiveBayes(LabelFactorial ~ {0}
 								, data = paste(strXDF, "Training_DS.xdf", sep = "")
 								
-							    ,smoothingFactor = 1 #If we try to use our classifier on the test data without specifying a smoothing factor in our call to rxNaiveBayes the function rxPredict produces no results since our test data only has data from 2009. In general, smoothing is used to avoid over-fitting your model. It follows that to achieve the optimal classifier you may want to smooth the conditional probabilities even if every level of each variable is observed. perform Laplace smoothing. A positive smoothing factor to account for cases not present in the training data. It avoids modelling issues by preventing zero conditional probability estimates. Since the conditional probabilities are being multiplied in the model, adding a small number to 0 probabilities, precludes missing categories from wiping out the calculation.
-							    #,fweights = #If duplicate rows have been eliminated, creating a new variable of how many duplicate rows were, then this Variable/Column can be used as Frequency Weight
-							    #,pweights = #Probability weights for the observations
+							    ,smoothingFactor = 1
+							    #,fweights =
+							    #,pweights =
 							    
 								,reportProgress = {reportProgress}
 								,blocksPerRead = {blocksPerRead}
 								,rowSelection = {rowSelection}
 								
 								,xdfCompressionLevel = rxGetOption("xdfCompressionLevel")
-								# ,variableSelection = #rxStepControl(method="stepwise", scope = ~ Age + Start + Number )); parameters that control aspects of stepwise regression; cube must be FALSE
+								# ,variableSelection = #rxStepControl(method="stepwise", scope = ~ Age + Start + Number )
 	  )
 	)
 # NaiveBayesModel #The Naive Bayes model

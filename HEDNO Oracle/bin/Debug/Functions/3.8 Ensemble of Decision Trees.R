@@ -27,15 +27,15 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
 						
 						,type = type
-						,numTrees = {7} #Specifies the total number of decision trees to create in the ensemble.By creating more decision trees, you can potentially get better coverage, but the training time increases. The default value is 100
-						,numLeaves = {8} #The maximum number of leaves (terminal nodes) that can be created in any tree. Higher values potentially increase the size of the tree and get better precision, but risk over-fitting and requiring longer training times. The default value is 20.
-						,numBins = round(min(1001, max(101, sqrt(n_Train)))) #this controls the maximum number of bins used for each variable. Managing the number of bins is important in controlling memory usage. The default is min(1001, max(101, sqrt(num of obs))). For small data sets with continuous predictors, you may find that you need to increase the maxNumBins to obtain models that resemble those from rpart.
-						,gainConfLevel = {9} #Tree fitting gain confidence requirement (should be in the range [0,1)). The default value is 0.
-						#,minSplit = 10 #Minimum number of training instances required to form a leaf. That is, the minimal number of documents allowed in a leaf of a regression tree, out of the sub-sampled data. A 'split' means that features in each level of the tree (node) are randomly divided. The default value is 10. Only the number of instances is counted even if instances are weighted.
-						#,exampleFraction = 0.7 #The fraction of randomly chosen instances to use for each tree. The default value is 0.7
-						#,featureFraction = 0.7 #The fraction of randomly chosen features to use for each tree. The default value is 1
-						#,splitFraction = 0.7 #The fraction of randomly chosen features to use on each split. The default value is 1
-						#,firstUsePenalty = 0 #The feature first use penalty coefficient. This is a form of regularization that incurs a penalty for using a new feature when creating the tree. Increase this value to create trees that don't use many features. The default value is 0.
+						,numTrees = {7}
+						,numLeaves = {8}
+						,numBins = round(min(1001, max(101, sqrt(n_Train))))
+						,gainConfLevel = {9}
+						#,minSplit = 10
+						#,exampleFraction = 0.7
+						#,featureFraction = 0.7
+						#,splitFraction = 0.7
+						#,firstUsePenalty = 0
 						#,trainThreads = 8
 					   
 						,reportProgress = {reportProgress}
