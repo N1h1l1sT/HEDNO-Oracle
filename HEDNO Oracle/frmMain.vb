@@ -1331,40 +1331,40 @@ Public Class frmMain
             FuncInProgress.Add("Creating Geo-Location Columns")
             If ConnectedToSQLServer = True Then
                 If SQLConn.State <> ConnectionState.Open Then SQLConn.Open()
-                Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TablevErga)
+                Dim TableExists As Boolean = SQLTableExists(SQLConn, DatabaseName, TableErga)
                 If TableExists Then
-                    Dim GeoLocXExists As Boolean = SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocX)
+                    Dim GeoLocXExists As Boolean = SQLColumnExists(SQLConn, DatabaseName, TableErga, ColvGeoLocX)
                     If Not GeoLocXExists Then
                         Dim curSQLCmd As New SqlCommand(<SQL>
                                                         USE [<%= DatabaseName %>]
-                                                        ALTER TABLE [dbo].<%= TablevErga %>
+                                                        ALTER TABLE [dbo].<%= TableErga %>
                                                         ADD <%= ColvGeoLocX %> INT NULL
                                                     </SQL>.Value, SQLConn)
                         curSQLCmd.ExecuteNonQuery()
                     End If
 
-                    Dim GeoLocYExists As Boolean = SQLColumnExists(SQLConn, DatabaseName, TablevErga, ColvGeoLocY)
+                    Dim GeoLocYExists As Boolean = SQLColumnExists(SQLConn, DatabaseName, TableErga, ColvGeoLocY)
                     If Not GeoLocYExists Then
                         Dim curSQLCmd As New SqlCommand(<SQL>
                                                         USE [<%= DatabaseName %>]
-                                                        ALTER TABLE [dbo].<%= TablevErga %>
+                                                        ALTER TABLE [dbo].<%= TableErga %>
                                                         ADD <%= ColvGeoLocY %> INT NULL
                                                     </SQL>.Value, SQLConn)
                         curSQLCmd.ExecuteNonQuery()
                     End If
 
                     If GeoLocXExists AndAlso GeoLocYExists Then
-                        MsgBox(sa("The Variables {0} and {1} already existed in {2}.{3}.{4}No action was taken.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga, vbNewLine), MsgBoxStyle.Information)
+                        MsgBox(sa("The Variables {0} and {1} already existed in {2}.{3}.{4}No action was taken.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TableErga, vbNewLine), MsgBoxStyle.Information)
                     ElseIf GeoLocXExists AndAlso Not GeoLocYExists Then
-                        MsgBox(sa("{0} was successfully created; {1} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
+                        MsgBox(sa("{0} was successfully created; {1} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TableErga), MsgBoxStyle.Information)
                     ElseIf GeoLocXExists AndAlso Not GeoLocYExists Then
-                        MsgBox(sa("{1} was successfully created; {0} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
+                        MsgBox(sa("{1} was successfully created; {0} already existed in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TableErga), MsgBoxStyle.Information)
                     Else
-                        MsgBox(sa("{0} and {1} have been successfully created in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TablevErga), MsgBoxStyle.Information)
+                        MsgBox(sa("{0} and {1} have been successfully created in {2}.{3}.", ColvGeoLocX, ColvGeoLocY, DatabaseName, TableErga), MsgBoxStyle.Information)
                     End If
 
                 Else
-                    MsgBox(sa("Unfortunately, the table {0} cannot be found", TablevErga), MsgBoxStyle.Exclamation)
+                    MsgBox(sa("Unfortunately, the table {0} cannot be found", TableErga), MsgBoxStyle.Exclamation)
                 End If
 
             Else

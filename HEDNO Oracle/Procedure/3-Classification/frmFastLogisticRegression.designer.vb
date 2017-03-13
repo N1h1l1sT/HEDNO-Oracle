@@ -623,7 +623,9 @@ Partial Class frmFastLogisticRegression
         Me.chkl1Weight.Size = New System.Drawing.Size(68, 17)
         Me.chkl1Weight.TabIndex = 37
         Me.chkl1Weight.Text = "l1Weight"
-        Me.ttMain.SetToolTip(Me.chkl1Weight, "The L1 regularization weight.")
+        Me.ttMain.SetToolTip(Me.chkl1Weight, "The L1 regularization weight (lasso)." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Applied to sparse models, when working wit" &
+        "h high-dimensional data." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Pulls small weights associated features that are relat" &
+        "ively unimportant towards 0.")
         Me.chkl1Weight.UseVisualStyleBackColor = True
         '
         'chkl2Weight
@@ -634,7 +636,8 @@ Partial Class frmFastLogisticRegression
         Me.chkl2Weight.Size = New System.Drawing.Size(68, 17)
         Me.chkl2Weight.TabIndex = 36
         Me.chkl2Weight.Text = "l2Weight"
-        Me.ttMain.SetToolTip(Me.chkl2Weight, "The L2 regularization weight.")
+        Me.ttMain.SetToolTip(Me.chkl2Weight, "The L2 regularization weight (ridge)." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Preferable for data that is not sparse." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P" &
+        "ulls large weights towards zero.")
         Me.chkl2Weight.UseVisualStyleBackColor = True
         '
         'chksgdInitTol
