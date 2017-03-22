@@ -5,6 +5,8 @@ Imports System.Text
 
 Public Class frmLogisticRegression
     Public strLanguage_LogisticRegression As String()
+    Public strLanguage_LogisticRegression_Tips As String()
+    Private isInitialising As Boolean = True
     Private XDFFileExists As Boolean = False
     Private isStatisticsXDF As Boolean = True
 
@@ -100,25 +102,27 @@ Public Class frmLogisticRegression
 
 #Region "Functions"
     Private Sub UpdateCombinations()
-        If CInt(txtNGrams.Text) > clbColumns.CheckedIndices.Count Then
-            If clbColumns.CheckedIndices.Count >= 1 Then
-                txtNGrams.Text = clbColumns.CheckedIndices.Count.ToString
-            Else
-                txtNGrams.Text = "1"
+        If Not isInitialising Then
+            If CInt(txtNGrams.Text) > clbColumns.CheckedIndices.Count Then
+                If clbColumns.CheckedIndices.Count >= 1 Then
+                    txtNGrams.Text = clbColumns.CheckedIndices.Count.ToString
+                Else
+                    txtNGrams.Text = "1"
+                End If
             End If
-        End If
 
-        If clbColumns.CheckedIndices.Count <= 1 Or Not chkColumnsCombinations.Checked Then
-            lblCombinationsCount.Text = "1 Combination"
-        Else
-            If chkUpToNGramsN.Checked Then
-                Dim CombSum As Double = 0
-                For i = 1 To CInt(txtNGrams.Text)
-                    CombSum += NChooseK(clbColumns.CheckedIndices.Count, i)
-                Next
-                lblCombinationsCount.Text = (CombSum).ToString("n0") & " Combinations"
+            If clbColumns.CheckedIndices.Count <= 1 Or Not chkColumnsCombinations.Checked Then
+                lblCombinationsCount.Text = "1" & strLanguage_LogisticRegression(19) ' Combination
             Else
-                lblCombinationsCount.Text = (NChooseK(clbColumns.CheckedIndices.Count, CInt(txtNGrams.Text))).ToString("n0") & " Combinations"
+                If chkUpToNGramsN.Checked Then
+                    Dim CombSum As Double = 0
+                    For i = 1 To CInt(txtNGrams.Text)
+                        CombSum += NChooseK(clbColumns.CheckedIndices.Count, i)
+                    Next
+                    lblCombinationsCount.Text = (CombSum).ToString("n0") & strLanguage_LogisticRegression(20) ' Combinations
+                Else
+                    lblCombinationsCount.Text = (NChooseK(clbColumns.CheckedIndices.Count, CInt(txtNGrams.Text))).ToString("n0") & strLanguage_LogisticRegression(20) ' Combinations
+                End If
             End If
         End If
     End Sub
@@ -161,11 +165,15 @@ Public Class frmLogisticRegression
 #End Region
 
     Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
-        If FuncInProgress.Count <> 0 Then
-            If MsgBox(sa("Procedure '{1}' is in process and closing the form now might have unexpected results as the rsession is independent and could continue working in the background even after the form and all its code is over.{0}Are you sure you wish to close this form?", vbCrLf, ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                e.Cancel = True
+        Try
+            If FuncInProgress.Count <> 0 Then
+                'Procedure '{1}' is in process and closing the form now might have unexpected results as the rsession is independent and could continue working in the background even after the form and all its code is over.{0}Are you sure you wish to close this form?
+                If MsgBox(sa(strLanguage_LogisticRegression(30), vbCrLf, ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+                    e.Cancel = True
+                End If
             End If
-        End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub frmLogisticRegression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -197,13 +205,16 @@ Public Class frmLogisticRegression
 
                     If File.Exists(strXDF & "Classification_DS.xdf") Then
                         If File.Exists(strXDF & "Training_DS.xdf") OrElse File.Exists(strXDF & "Test_DS.xdf") Then
-                            MsgBox(sa("In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}', however, only one of the 2 is reachable.{0}As the Classification Dataset is found, the Classification Form will now open with needed options locked on for you, to create them anew", vbCrLf, strXDF))
+                            'In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}', however, only one of the 2 is reachable.{0}As the Classification Dataset is found, the Classification Form will now open with needed options locked on for you, to create them anew
+                            MsgBox(sa(strLanguage_LogisticRegression(33), vbCrLf, strXDF))
                         Else
-                            MsgBox(sa("In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'; none of which is reachable.{0}However, the Classification Dataset is found and hence the Classification Form will now open with needed options locked on for you to create them", vbCrLf, strXDF))
+                            'In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'; none of which is reachable.{0}However, the Classification Dataset is found and hence the Classification Form will now open with needed options locked on for you to create them
+                            MsgBox(sa(strLanguage_LogisticRegression(34), vbCrLf, strXDF))
                         End If
 
                     ElseIf File.Exists(strXDF & "Clustering_DS.xdf") Then
-                        MsgBox(sa("In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Classification Datasets appear to exist, the Classification Form will now open with needed options locked on for you to create them.", vbCrLf, strXDF))
+                        'In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Classification Datasets appear to exist, the Classification Form will now open with needed options locked on for you to create them.
+                        MsgBox(sa(strLanguage_LogisticRegression(35), vbCrLf, strXDF))
                     End If
 
                     ClassificationForm.Show()
@@ -211,7 +222,8 @@ Public Class frmLogisticRegression
                     Exit Sub
 
                 Else
-                    MsgBox(sa("In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Clustering & Classification Datasets appear to exist, the Clustering Form will now open with needed options locked on for you to create the Clustering Dataset.{0}Please proceed to creating the rest using the Menu '{2}→{3}' afterwards", vbCrLf, strXDF, RemMniHotLetter(frmMain.mniClustering), RemMniHotLetter(frmMain.mniFormTrainAndTestSets)))
+                    'In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Clustering & Classification Datasets appear to exist, the Clustering Form will now open with needed options locked on for you to create the Clustering Dataset.{0}Please proceed to creating the rest using the Menu '{4}→{3}' afterwards
+                    MsgBox(sa(strLanguage_LogisticRegression(36), vbCrLf, strXDF, RemMniHotLetter(frmMain.mniClustering), RemMniHotLetter(frmMain.mniFormTrainAndTestSets), RemMniHotLetter(frmMain.mniClassification)))
                     Dim ClusteringForm As New frmClusteringStep1
                     ClusteringForm.chkCleanXDFFile.Checked = False
                     ClusteringForm.chkCleanXDFFile.Enabled = False
@@ -233,6 +245,8 @@ Public Class frmLogisticRegression
 
             fswTrainAndTest.Path = doProperPathName(strXDF)
             fswModelFileExists.Filter = "*.xdf"
+
+            isInitialising = False
 
         Catch ex As Exception
             CreateCrashFile(ex, True)
@@ -262,17 +276,17 @@ Public Class frmLogisticRegression
                         pbLoading.Style = ProgressBarStyle.Marquee
                         pbLoading.MarqueeAnimationSpeed = 1
                         pbLoading.Visible = True
-                        btnRunModel.Text = "&Cancel"
+                        btnRunModel.Text = strLanguage_LogisticRegression(37) '&Cancel
                         fswModelFileExists.EnableRaisingEvents = False
                         fswTrainAndTest.EnableRaisingEvents = False
                         fswXDFFileExists.EnableRaisingEvents = False
-                        FuncInProgress.Add("Applying Logistic Regression")
+                        FuncInProgress.Add(strLanguage_LogisticRegression(24)) 'Applying Logistic Regression
                         Try
                             Dim TestColumnNames() As String = {}
 
                             If RDotNet_Initialization() Then
                                 If StopWorking Then
-                                    FuncInProgress.Remove("Applying Logistic Regression")
+                                    FuncInProgress.Remove(strLanguage_LogisticRegression(24)) 'Applying Logistic Regression
                                     Close()
                                     Exit Sub
                                 End If
@@ -339,7 +353,7 @@ Public Class frmLogisticRegression
                                     WriteToLog("", doProperPathName(strGraphs) & "Models.log", False)
                                     For i As Integer = 0 To ColumnNamesFormula.Count - 1
                                         If StopWorking Then
-                                            FuncInProgress.Remove("Applying Logistic Regression")
+                                            FuncInProgress.Remove(strLanguage_LogisticRegression(24)) 'Applying Logistic Regression
                                             Close()
                                             Exit Sub
                                         End If
@@ -366,11 +380,12 @@ Public Class frmLogisticRegression
                                                                                                     "{3}", ResultsFileName,
                                                                                                     "{4}", SinkFilePathLinux,
                                                                                                     "{5}", If(chkColumnsCombinations.Checked, (i + 1).ToString, ""),
-                                                                                                    "{6}", "LogisticRegressionModel"
+                                                                                                    "{6}", "LogisticRegressionModel",
+                                                                                                    "{7}", If(chkcovCoef.Checked, cbCovCoef.SelectedItem.ToString, "FALSE")
                                                                                                     }, True) Then
 
                                             If StopWorking Then
-                                                FuncInProgress.Remove("Applying Logistic Regression")
+                                                FuncInProgress.Remove(strLanguage_LogisticRegression(24)) 'Applying Logistic Regression
                                                 Close()
                                                 Exit Sub
                                             End If
@@ -381,13 +396,14 @@ Public Class frmLogisticRegression
 
                                                     'StatisticsResults GenericVector was to be used to extract the info and mold it to a better shape, but this is too time consuming to do at the moment, so 'sink()' is used instead.
                                                     If Not LabelPredictionExist Then 'If those don't exist, then the Statistics will crash
-                                                        MsgBox(sa("'{1}' was checked, however the Testing Dataset did not have the needed variables.{0}Have you forgotten applying the Predictions from the Machine Learning Algorithm?", vbCrLf, RemCtrHotLetter(chkShowStatistics)))
+                                                        '         '{1}' was checked, however the Testing Dataset did not have the needed variables.{0}Have you forgotten applying the Predictions from the Machine Learning Algorithm?
+                                                        MsgBox(sa(strLanguage_LogisticRegression(38), vbCrLf, RemCtrHotLetter(chkShowStatistics)))
                                                     Else
                                                         Dim StatisticsResults As GenericVector = Rdo.GetSymbol("StatisticsResults").AsList
                                                     End If
 
                                                     If chkShowStatistics.Checked Then
-                                                        Dim StatisticsForm As New frmStatistics With {.SinkFilePath = SinkFilePathLinux}
+                                                        Dim StatisticsForm As New frmStatistics With {.SinkFilePath = SinkFilePathLinux, .ClassificationModelName = "LogisticRegressionModel"}
                                                         StatisticsForm.Show()
                                                     End If
 
@@ -397,7 +413,8 @@ Public Class frmLogisticRegression
                                                     Dim PredictionRealExist As Boolean = Rdo.GetSymbol("PredictionRealExist").AsLogical.First
 
                                                     If Not PredictionRealExist Then 'If this doesn't exist, then the ROC curve will crash
-                                                        MsgBox(sa("'{1}' was checked, however the Testing Dataset did not have the needed variables.{0}Have you forgotten applying the Predictions from the Machine Learning Algorithm?", vbCrLf, RemCtrHotLetter(chkShowROCCurve)))
+                                                        '         '{1}' was checked, however the Testing Dataset did not have the needed variables.{0}Have you forgotten applying the Predictions from the Machine Learning Algorithm?
+                                                        MsgBox(sa(strLanguage_LogisticRegression(38), vbCrLf, RemCtrHotLetter(chkShowROCCurve)))
                                                     End If
                                                 End If
                                             End If
@@ -419,7 +436,8 @@ Public Class frmLogisticRegression
                                             End If
 
                                             Dim RDSCreatedOutOfNecessity As Boolean = Rdo.GetSymbol("RDSCreatedOutOfNecessity").AsLogical.First
-                                            If RDSCreatedOutOfNecessity Then MsgBox(sa("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingModel)))
+                                            'The option '{1}' was checked but the file was unreachable and was created instead.
+                                            If RDSCreatedOutOfNecessity Then MsgBox(sa(strLanguage_LogisticRegression(28), vbCrLf, RemCtrHotLetter(chkUseExistingModel)))
 
                                             If chkMakePredictions.Checked AndAlso Not chkStatisticsMode.Checked Then
                                                 Dim ResultsFilePath As String = doProperFileName(strXDF & ResultsFileName)
@@ -444,12 +462,14 @@ Public Class frmLogisticRegression
                                         If Not RSource({strFunctions & "[Multiple_ROC_Comparisons].R"}, , {"{0}", predVarName,
                                                                                                     "{1}", CurRoundAt.ToString
                                                                                                     }, True) Then
-                                            MsgBox(sa("Either '{1}' is not reachable, or it did not contain the expected Columns:{0}{2}", vbCrLf, strXDF & "Test_DS.xdf", predVarName), MsgBoxStyle.Critical)
+                                            '         Either '{1}' is not reachable, or it did not contain the expected Columns:{0}{2}
+                                            MsgBox(sa(strLanguage_LogisticRegression(39), vbCrLf, strXDF & "Test_DS.xdf", predVarName), MsgBoxStyle.Critical)
                                         End If
                                     End If
 
                                 Else
-                                    MsgBox(sa("Not all of the Columns you checked exist in the Testing file, which means that they represent different Datasets and hence this Training set Cannot be used to predict this Testing set.{0}{0}Please create them anew.", vbCrLf))
+                                    '         Not all of the Columns you checked exist in the Testing file, which means that they represent different Datasets and hence this Training set Cannot be used to predict this Testing set.{0}{0}Please create them anew.
+                                    MsgBox(sa(strLanguage_LogisticRegression(40), vbCrLf))
                                 End If
 
                             End If
@@ -466,26 +486,28 @@ Public Class frmLogisticRegression
                         lblInProgress.Visible = False
                         pbLoading.MarqueeAnimationSpeed = 0
                         pbLoading.Visible = False
-                        FuncInProgress.Remove("Applying Logistic Regression")
+                        FuncInProgress.Remove(strLanguage_LogisticRegression(24)) 'Applying Logistic Regression
                         fswModelFileExists.EnableRaisingEvents = False
                         fswTrainAndTest.EnableRaisingEvents = False
                         fswXDFFileExists.EnableRaisingEvents = False
                         pnlMain.Enabled = True
                         Close()
                     Else
-                        MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                        '         Please wait for: {0} to finish
+                        MsgBox(sa(strLanguage_LogisticRegression(26), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation) '
                     End If
 
 
                 Else
-                    MsgBox(sa("You haven't selected any Dependent Variables, ergo the operation is cancelled"), MsgBoxStyle.Exclamation)
+                    '         You haven't selected any Dependent Variables, ergo the operation is cancelled
+                    MsgBox(sa(strLanguage_LogisticRegression(41)), MsgBoxStyle.Exclamation)
                 End If
 
 
             Else '#If isWorking
                 StopWorking = True
                 btnRunModel.Enabled = False
-                btnRunModel.Text = "Cancelling..."
+                btnRunModel.Text = strLanguage_LogisticRegression(42) 'Cancelling...
 
             End If
         Catch ex As Exception
@@ -557,16 +579,16 @@ Public Class frmLogisticRegression
            (chkMakePredictions.Checked OrElse Not chkMakePredictions.Enabled) AndAlso
            (chkSavePredictionModel.Checked OrElse Not chkSavePredictionModel.Enabled) Then
 
-            btnSelectAll.Text = "Unselect &All"
+            btnSelectAll.Text = strLanguage_LogisticRegression(25) 'Unselect &All
         Else
-            btnSelectAll.Text = "Select &All"
+            btnSelectAll.Text = strLanguage_LogisticRegression(12) 'Select &All
         End If
     End Sub
     Private Sub clbColumns_SelectedIndexChanged(sender As Object, e As EventArgs) Handles clbColumns.SelectedIndexChanged, clbColumns.DoubleClick
         If clbColumns.CheckedIndices.Count = clbColumns.Items.Count Then
-            btnSelectAllColumns.Text = "&Unselect All"
+            btnSelectAllColumns.Text = strLanguage_LogisticRegression(43) 'Unselect All &Columns
         Else
-            btnSelectAllColumns.Text = "&Select All"
+            btnSelectAllColumns.Text = strLanguage_LogisticRegression(29) 'Select &All Columns
         End If
 
         If clbColumns.CheckedIndices.Count > 0 Then
@@ -587,12 +609,12 @@ Public Class frmLogisticRegression
             For i = 0 To clbColumns.Items.Count - 1
                 clbColumns.SetItemChecked(i, False)
             Next
-            btnSelectAllColumns.Text = "&Select All"
+            btnSelectAllColumns.Text = strLanguage_LogisticRegression(29) 'Select &All Columns
         Else
             For i = 0 To clbColumns.Items.Count - 1
                 clbColumns.SetItemChecked(i, True)
             Next
-            btnSelectAllColumns.Text = "&Unselect All"
+            btnSelectAllColumns.Text = strLanguage_LogisticRegression(43) 'Unselect All &Columns
 
             If chkColumnsCombinations.Checked AndAlso chkUpToNGramsN.Checked = False Then
                 txtNGrams.Text = If((clbColumns.CheckedIndices.Count > 1), ((clbColumns.CheckedIndices.Count - 1).ToString), "1")
@@ -672,7 +694,7 @@ Public Class frmLogisticRegression
         Call ColourChkStatisticsMode()
     End Sub
     Private Sub txtSavePath_Click(sender As Object, e As EventArgs) Handles txtSavePath.Click
-        fbdModelPath.Description = "Where would you like your K-Means Model to be saved?"
+        fbdModelPath.Description = strLanguage_LogisticRegression(44) 'Where would you like your Model to be saved?
         fbdModelPath.RootFolder = Environment.SpecialFolder.Desktop
         fbdModelPath.ShowNewFolderButton = True
         If fbdModelPath.ShowDialog() = DialogResult.OK Then
@@ -694,7 +716,8 @@ Public Class frmLogisticRegression
                 clbColumns.DataSource = Nothing
                 clbColumns.DataSource = TrainingColumnNames
             Catch ex As Exception
-                MsgBox(sa("Unfortunately R was unable to provide the variable '{1}' as requested by '{2}', which is needed for the classification to take place.{0}The form will now close", vbCrLf, "TrainingColumnNames", strFunctions & "[ColumnNames_For_Classification].R"))
+                'Unfortunately R was unable to provide the variable '{1}' as requested by '{2}', which is needed for the classification to take place.{0}The form will now close
+                MsgBox(sa(strLanguage_LogisticRegression(45), vbCrLf, "TrainingColumnNames", strFunctions & "[ColumnNames_For_Classification].R"))
                 Close()
                 Exit Sub
             End Try
@@ -714,7 +737,8 @@ Public Class frmLogisticRegression
     Private Sub txtNGrams_Click(sender As Object, e As EventArgs) Handles txtNGrams.Click
         If clbColumns.CheckedIndices.Count > 0 Then
             Dim NGram As Integer = -1
-            If TypeBox("Type a number for the 'n' for n-grams:", NGram, False,, 1, clbColumns.CheckedIndices.Count,,,,
+            '          Type a number for the 'n' for n-grams:
+            If TypeBox(strLanguage_LogisticRegression(46), NGram, False,, 1, clbColumns.CheckedIndices.Count,,,,
                        If((clbColumns.CheckedIndices.Count > 1), (clbColumns.CheckedIndices.Count - 1).ToString, "1")) Then
                 txtNGrams.Text = NGram.ToString
             End If
@@ -725,7 +749,8 @@ Public Class frmLogisticRegression
     End Sub
 
     Private Sub txtRoundAt_Click(sender As Object, e As EventArgs) Handles txtRoundAt.Click
-        If TypeBox("Round decimal points at:", CurRoundAt, False,, 1, Integer.MaxValue,,,, RoundAt.ToString) Then
+        '          Round decimal points at:
+        If TypeBox(strLanguage_LogisticRegression(17), CurRoundAt, False,, 1, Integer.MaxValue,,,, RoundAt.ToString) Then
             txtRoundAt.Text = CurRoundAt.ToString
         End If
     End Sub
@@ -748,7 +773,8 @@ Public Class frmLogisticRegression
 
                 CheckXDFFileExists()
             Else
-                ShowMTNonInterruptingMsgbox(Me, sa("The Training or Testing XDF file have been deleted; without them the Classification Procedure cannot commence and the form has therefore been disabled.{0}{0}Please replace them for the form to be re-enabled.", vbCrLf), MsgBoxStyle.Exclamation)
+                'The Training or Testing XDF file have been deleted; without them the Classification Procedure cannot commence and the form has therefore been disabled.{0}{0}Please replace them for the form to be re-enabled.
+                ShowMTNonInterruptingMsgbox(Me, sa(strLanguage_LogisticRegression(47), vbCrLf), MsgBoxStyle.Exclamation)
                 'MsgBox(sa("The Training or Testing XDF file have been deleted; without them the Classification Procedure cannot commence and the form has therefore been disabled.{0}{0}Please replace them for the form to be re-enabled.", vbCrLf), MsgBoxStyle.Exclamation)
                 pnlMain.Enabled = False
             End If
@@ -764,4 +790,23 @@ Public Class frmLogisticRegression
         End If
     End Sub
 
+    Private Sub lblRoundAt_SizeChanged(sender As Object, e As EventArgs) Handles lblRoundAt.SizeChanged
+        txtRoundAt.Location = New Point(lblRoundAt.Location.X + lblRoundAt.Width + 6, txtRoundAt.Location.Y)
+    End Sub
+
+    Private Sub txtReportProgress_TextChanged(sender As Object, e As EventArgs) Handles txtReportProgress.TextChanged
+        If Not isInitialising Then chkreportProgress.Checked = True
+    End Sub
+
+    Private Sub txtBlocksPerRead_TextChanged(sender As Object, e As EventArgs) Handles txtBlocksPerRead.TextChanged
+        If Not isInitialising Then chkBlocksPerRead.Checked = True
+    End Sub
+
+    Private Sub txtrowSelection_TextChanged(sender As Object, e As EventArgs) Handles txtrowSelection.TextChanged
+        If Not isInitialising Then chkrowSelection.Checked = True
+    End Sub
+
+    Private Sub cbCovCoef_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCovCoef.SelectedIndexChanged
+        If Not isInitialising Then chkcovCoef.Checked = True
+    End Sub
 End Class

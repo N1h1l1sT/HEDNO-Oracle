@@ -1,1 +1,63 @@
 ﻿<Language:English; Version 1.0>
+6. Stochastic Dual Coordinate Ascent
+Loading...
+General Options
+Algorithm-Specific Options
+Main Options:
+Use Existing Model
+Make Predictions
+Save Model
+Save Model at:
+Show Data Summary
+Show Variable Information
+Select &All
+Statistics Mode
+Show Statistics
+Show ROC Curve
+Open Graph Folder
+Round At:
+-grams
+ Combination
+ Combinations
+Iterate over Column Combinations
+Up to n-grams's n
+In Progress...
+Applying Stochastic Dual Coordinate Ascent
+Unselect &All
+Please wait for: {0} to finish
+Stochastic Dual Coordinate Ascent
+The option '{0}' was checked but the model was unreachable and was created instead.
+Select All &Columns
+Procedure '{1}' is in process and closing the form now might have unexpected results as the rsession is independent and could continue working in the background even after the form and all its code is over.{0}Are you sure you wish to close this form?
+False
+True
+In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}', however, only one of the 2 is reachable.{0}As the Classification Dataset is found, the Classification Form will now open with needed options locked on for you, to create them anew
+In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'; none of which is reachable.{0}However, the Classification Dataset is found and hence the Classification Form will now open with needed options locked on for you to create them
+In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Classification Datasets appear to exist, the Classification Form will now open with needed options locked on for you to create them.
+In order to apply the Machine Learning Algorithm, the Training & Testing sets need to be on '{1}'{0}Because neither the Training & Test, nor the Clustering & Classification Datasets appear to exist, the Clustering Form will now open with needed options locked on for you to create the Clustering Dataset.{0}Please proceed to creating the rest using the Menu '{4}→{3}' afterwards
+&Cancel
+'{1}' was checked, however the Testing Dataset did not have the needed variables.{0}Have you forgotten applying the Predictions from the Machine Learning Algorithm?
+Either '{1}' is not reachable, or it did not contain the expected Columns:{0}{2}
+Not all of the Columns you checked exist in the Testing file, which means that they represent different Datasets and hence this Training set Cannot be used to predict this Testing set.{0}{0}Please create them anew.
+You haven't selected any Dependent Variables, ergo the operation is cancelled
+Cancelling...
+Unselect All &Columns
+Where would you like your Model to be saved?
+Unfortunately R was unable to provide the variable '{1}' as requested by '{2}', which is needed for the classification to take place.{0}The form will now close
+Type a number for the 'n' for n-grams:
+The Training or Testing XDF file have been deleted; without them the Classification Procedure cannot commence and the form has therefore been disabled.{0}{0}Please replace them for the form to be re-enabled.
+Settings:
+
+
+
+
+
+
+
+
+
+
+
+The maximum number of leaves (terminal nodes) in any tree:
+Grow this number of trees:
+Tree fitting gain confidence requirement:

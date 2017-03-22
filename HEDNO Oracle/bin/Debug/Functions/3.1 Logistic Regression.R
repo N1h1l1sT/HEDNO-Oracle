@@ -19,7 +19,7 @@ if ((!(UseExistingModel)) || (!file.exists("{1}{6}{5}.RDS"))) {
 	  #--Dependent Variables
 	  {6}{5} <- rxLogit(Label ~ {0}
 						, data = paste(strXDF, "Training_DS.xdf", sep = "")
-						, covCoef = TRUE
+						, covCoef = {7}
 						# ,maxIterations =
 						# ,variableSelection = 
 						# ,fweights = 

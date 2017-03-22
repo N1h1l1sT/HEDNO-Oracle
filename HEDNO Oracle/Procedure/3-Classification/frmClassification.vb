@@ -4,6 +4,7 @@ Imports RDotNet
 
 Public Class frmClassification
     Public strLanguage_Classification As String()
+    Public strLanguage_Classification_Tips As String()
     Private XDFFileExists As Boolean = False
     Private isStatisticsXDF As Boolean = True
 
@@ -110,14 +111,16 @@ Public Class frmClassification
                 btnClassification.Enabled = True
             Else
                 If File.Exists(doProperPathName(strXDF) & "Classification_DS.xdf") Then
-                    Notify(sa("The Clustering Dataset file '{1}' does not exist or is not reachable, however the Classification one '{2}' is found, hence the button '{3}' will remain locked on checked.{0}{0}If you wish to uncheck it so that the Classification file is created anew, please do the Clustering first.", vbCrLf, doProperPathName(strXDF) & "Clustering_DS.xdf", doProperPathName(strXDF) & "Classification_DS.xdf", RemCtrHotLetter(chkUseExistingXDFFile)),
+                    'The Clustering Dataset file '{1}' does not exist or is not reachable, however the Classification one '{2}' is found, hence the button '{3}' will remain locked on checked.{0}{0}If you wish to uncheck it so that the Classification file is created anew, please do the Clustering first.
+                    Notify(sa(strLanguage_Classification(7), vbCrLf, doProperPathName(strXDF) & "Clustering_DS.xdf", doProperPathName(strXDF) & "Classification_DS.xdf", RemCtrHotLetter(chkUseExistingXDFFile)),
                            Red, Black, 30)
                     chkUseExistingXDFFile.Checked = True
                     chkUseExistingXDFFile.Enabled = False
                     btnClassification.Enabled = True
 
                 Else
-                    MsgBox(sa("For the classification process to commence, clustering must have already occurred.{0}Unfortunately the file '{1}' cannot be reached.{0}The Clustering form will now open for you to perform clustering with the CleanXDF option disabled so that the file needed remains.", vbCrLf, doProperPathName(strXDF) & "Clustering_DS.xdf"))
+                    'For the classification process to commence, clustering must have already occurred.{0}Unfortunately the file '{1}' cannot be reached.{0}The Clustering form will now open for you to perform clustering with the CleanXDF option disabled so that the file needed remains.
+                    MsgBox(sa(strLanguage_Classification(24), vbCrLf, doProperPathName(strXDF) & "Clustering_DS.xdf"))
                     Dim ClusteringForm As New frmClusteringStep1
                     ClusteringForm.chkCleanXDFFile.Checked = False
                     ClusteringForm.chkCleanXDFFile.Enabled = False
@@ -135,14 +138,14 @@ Public Class frmClassification
     Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
         If FuncInProgress.Count <> 0 Then
             e.Cancel = True
-            MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            MsgBox(sa(strLanguage_Classification(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation) 'Please wait for: {0} to finish
         End If
     End Sub
 
     Private Sub btnClassification_Click(sender As Object, e As EventArgs) Handles btnClassification.Click
         Try
             If FuncInProgress.Count = 0 Then
-                FuncInProgress.Add("Forming Training and Testing Sets")
+                FuncInProgress.Add(strLanguage_Classification(11)) 'Forming Training and Test Sets
                 fswModelExists.EnableRaisingEvents = False
                 pnlMain.Enabled = False
                 Try
@@ -228,7 +231,8 @@ Public Class frmClassification
                             End If
 
                             Dim XDFCreatedOutOfNecessity As Boolean = Rdo.GetSymbol("XDFCreatedOutOfNecessity").AsLogical.First
-                            If XDFCreatedOutOfNecessity Then MsgBox(sa("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
+                            '                                          The option '{0}' was checked but the file was unreachable and was created instead.
+                            If XDFCreatedOutOfNecessity Then MsgBox(sa(strLanguage_Classification(15), RemCtrHotLetter(chkUseExistingXDFFile)))
 
                         End If
                     End If
@@ -239,11 +243,11 @@ Public Class frmClassification
                 End Try
 
                 fswModelExists.EnableRaisingEvents = True
-                FuncInProgress.Remove("Forming Training and Testing Sets")
+                FuncInProgress.Remove(strLanguage_Classification(11)) 'Forming Training and Test Sets
                 pnlMain.Enabled = True
                 Close()
             Else
-                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                MsgBox(sa(strLanguage_Classification(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation) 'Please wait for: {0} to finish
             End If
 
         Catch ex As Exception
@@ -256,9 +260,9 @@ Public Class frmClassification
                                                                                     chkFormTrainSet.CheckedChanged, chkFormTestSet.CheckedChanged
         If chkShowDataSummary.Checked And chkVisualiseClassImbal.Checked And chkShowVariableInfo.Checked And chkUseExistingXDFFile.Checked And
             chkFormTrainSet.Checked And chkFormTestSet.Checked Then
-            btnSelectAll.Text = "Unselect &All"
+            btnSelectAll.Text = strLanguage_Classification(12) 'Unselect &All
         Else
-            btnSelectAll.Text = "Select &All"
+            btnSelectAll.Text = strLanguage_Classification(8) 'Select &All
         End If
 
         Call ColourChkStatisticsMode()
@@ -297,4 +301,25 @@ Public Class frmClassification
         End If
     End Sub
 
+    Private Sub scMain_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles scMain.SplitterMoved
+        chkStatisticsMode.Location = New Point(scMain.SplitterDistance + 16, chkStatisticsMode.Location.Y)
+        cbTrainPercent.Location = New Point(lblTrainPercent.Location.X + lblTrainPercent.Width + 6, cbTrainPercent.Location.Y)
+        Dim cbWidth As Integer = 50
+        Try
+            cbWidth = cbTrainPercent.Parent.Width - cbTrainPercent.Location.X - 3
+            cbTrainPercent.Width = cbWidth
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub lblTrainPercent_SizeChanged(sender As Object, e As EventArgs) Handles lblTrainPercent.SizeChanged
+        chkStatisticsMode.Location = New Point(scMain.SplitterDistance + 16, chkStatisticsMode.Location.Y)
+        cbTrainPercent.Location = New Point(lblTrainPercent.Location.X + lblTrainPercent.Width + 6, cbTrainPercent.Location.Y)
+        Dim cbWidth As Integer = 50
+        Try
+            cbWidth = cbTrainPercent.Parent.Width - cbTrainPercent.Location.X - 3
+            cbTrainPercent.Width = cbWidth
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

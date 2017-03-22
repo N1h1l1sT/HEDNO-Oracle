@@ -1,1 +1,25 @@
 ﻿<Language:English; Version 1.0>
+Classification Options
+Loading...
+Main Options:
+Use Existing XDF File
+Show Data Summary
+Show Variable Information
+The Clustering Dataset file '{1}' does not exist or is not reachable, however the Classification one '{2}' is found, hence the CheckBox '{3}' will remain locked on checked.{0}{0}If you wish to uncheck it so that the Classification file is created anew, please crate the Clustering Dataset first.
+Select &All
+Statistics Mode
+Clean the XDF file after completion
+Forming Training and Test Sets
+Unselect &All
+Please wait for: {0} to finish
+Forming Training and Test Sets
+The option '{0}' was checked but the file was unreachable and was created instead.
+Form Training Set
+Form Testing Set
+Visualise Class Imbalance
+Training Set Percentage:
+Show Training Data Summary
+Show Training Variable Information
+Show Testing Data Summary
+Show Testing Variable Information
+For the classification process to commence, clustering must have already occurred.{0}Unfortunately the file '{1}' cannot be reached.{0}The Clustering form will now open for you to perform clustering with the CleanXDF option disabled so that the file needed remains.

@@ -69,7 +69,7 @@ Partial Class frmClassification
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(496, 248)
+        Me.pnlMain.Size = New System.Drawing.Size(615, 248)
         Me.pnlMain.TabIndex = 7
         '
         'pbLoading
@@ -98,7 +98,7 @@ Partial Class frmClassification
         Me.chkStatisticsMode.AutoSize = True
         Me.chkStatisticsMode.Checked = True
         Me.chkStatisticsMode.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkStatisticsMode.Location = New System.Drawing.Point(248, 12)
+        Me.chkStatisticsMode.Location = New System.Drawing.Point(304, 12)
         Me.chkStatisticsMode.Name = "chkStatisticsMode"
         Me.chkStatisticsMode.Size = New System.Drawing.Size(101, 17)
         Me.chkStatisticsMode.TabIndex = 11
@@ -121,8 +121,8 @@ Partial Class frmClassification
         'scMain.Panel2
         '
         Me.scMain.Panel2.Controls.Add(Me.gbStatistics)
-        Me.scMain.Size = New System.Drawing.Size(472, 195)
-        Me.scMain.SplitterDistance = 224
+        Me.scMain.Size = New System.Drawing.Size(591, 195)
+        Me.scMain.SplitterDistance = 279
         Me.scMain.TabIndex = 10
         '
         'gbOptions
@@ -137,7 +137,7 @@ Partial Class frmClassification
         Me.gbOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbOptions.Location = New System.Drawing.Point(0, 0)
         Me.gbOptions.Name = "gbOptions"
-        Me.gbOptions.Size = New System.Drawing.Size(224, 195)
+        Me.gbOptions.Size = New System.Drawing.Size(279, 195)
         Me.gbOptions.TabIndex = 2
         Me.gbOptions.TabStop = False
         Me.gbOptions.Text = "Main Options:"
@@ -231,7 +231,7 @@ Partial Class frmClassification
         Me.gbStatistics.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbStatistics.Location = New System.Drawing.Point(0, 0)
         Me.gbStatistics.Name = "gbStatistics"
-        Me.gbStatistics.Size = New System.Drawing.Size(244, 195)
+        Me.gbStatistics.Size = New System.Drawing.Size(308, 195)
         Me.gbStatistics.TabIndex = 11
         Me.gbStatistics.TabStop = False
         '
@@ -295,7 +295,7 @@ Partial Class frmClassification
         Me.cbTrainPercent.FormattingEnabled = True
         Me.cbTrainPercent.Location = New System.Drawing.Point(137, 20)
         Me.cbTrainPercent.Name = "cbTrainPercent"
-        Me.cbTrainPercent.Size = New System.Drawing.Size(101, 21)
+        Me.cbTrainPercent.Size = New System.Drawing.Size(165, 21)
         Me.cbTrainPercent.TabIndex = 8
         Me.ttMain.SetToolTip(Me.cbTrainPercent, "When creating a new XDF file in Statistics Mode, what is the percentage of projec" &
         "ts to be marked for the Training Set?")
@@ -319,7 +319,7 @@ Partial Class frmClassification
         Me.btnClassification.Enabled = False
         Me.btnClassification.Location = New System.Drawing.Point(12, 213)
         Me.btnClassification.Name = "btnClassification"
-        Me.btnClassification.Size = New System.Drawing.Size(472, 23)
+        Me.btnClassification.Size = New System.Drawing.Size(591, 23)
         Me.btnClassification.TabIndex = 0
         Me.btnClassification.Text = "Form Training and Test Sets"
         Me.ttMain.SetToolTip(Me.btnClassification, resources.GetString("btnClassification.ToolTip"))
@@ -347,7 +347,7 @@ Partial Class frmClassification
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSelectAll
-        Me.ClientSize = New System.Drawing.Size(496, 248)
+        Me.ClientSize = New System.Drawing.Size(615, 248)
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Name = "frmClassification"

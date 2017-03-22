@@ -16,7 +16,7 @@ Public Class frmVariableInfoVisualiser
             frmSkin(Me, False)
             '/initialization
 
-            If DatasetName <> "" Then Text = DatasetName & " Variables Information"
+            If DatasetName <> "" Then Text = sa(strLanguage_VariableInfoVisualiser(1), DatasetName) '{0} Variables Information
 
             Location = New Point(My.Computer.Screen.Bounds.Left + My.Computer.Screen.Bounds.Width - Width,
                                  My.Computer.Screen.Bounds.Top + My.Computer.Screen.Bounds.Height - Height)
@@ -25,7 +25,8 @@ Public Class frmVariableInfoVisualiser
                 Dim sbVariableInfoText As New StringBuilder
 
                 If ColumnNames IsNot Nothing Then
-                    Dim VarStringLength As Integer = "Var : ".Length + (ColumnNames.Length - 1).ToString.Length
+                    '                                                               Var :
+                    Dim VarStringLength As Integer = strLanguage_VariableInfoVisualiser(2).Length + (ColumnNames.Length - 1).ToString.Length
                     Dim VarInitialSpace As String = SpaceAString("", VarStringLength)
                     For i = 0 To ColumnNames.Length - 1
                         Dim VarDescription As String = String.Empty
@@ -40,14 +41,17 @@ Public Class frmVariableInfoVisualiser
 
                         sbVariableInfoText.AppendLine()
                         sbVariableInfoText.AppendLine()
-                        sbVariableInfoText.Append(SpaceAString(sa("Var {0}: ", (i + 1).ToString), VarStringLength)) '           Var 1:
+                        '                                         Var {0}:
+                        sbVariableInfoText.Append(SpaceAString(sa(strLanguage_VariableInfoVisualiser(3), (i + 1).ToString), VarStringLength)) '           Var 1:
                         sbVariableInfoText.Append(sa("{0}", ColumnNames(i))) '                                                      Label
                         If VarDescription <> String.Empty Then sbVariableInfoText.Append(sa(", {0}", VarDescription)) '                 , The Label for the supervised......
                         sbVariableInfoText.AppendLine()
 
                         If VarType.ToLower = "integer".ToLower OrElse VarType.ToLower = "numeric".ToLower Then
-                            sbVariableInfoText.Append(sa("{0}Type: {1}", VarInitialSpace, VarType))
-                            sbVariableInfoText.Append(sa(", Min: {0}, Max: {1}", VarLow, Varhigh))
+                            '                            '{0}Type: {1}
+                            sbVariableInfoText.Append(sa(strLanguage_VariableInfoVisualiser(4), VarInitialSpace, VarType))
+                            '                             , Min: {0}, Max: {1}
+                            sbVariableInfoText.Append(sa(strLanguage_VariableInfoVisualiser(5), VarLow, Varhigh))
 
                         ElseIf VarType.ToLower = "factor".ToLower Then
                             'Dim AllLevels As String = rlstVariableInfo(ColumnNames(i)).AsCharacter("levels")
@@ -56,12 +60,14 @@ Public Class frmVariableInfoVisualiser
                             'Varlevels = ArrayBox(False, ",", 0, False, tmpFirstValues) & " ... " & tmpLastValue
 
                             'sbVariableInfoText.Append(sa("{2}{0} Factor Levels: [{1}],", Varhigh, Varlevels, VarInitialSpace))
-                            sbVariableInfoText.Append(sa("{2}{0} Factor Levels.", Varhigh, Varlevels, VarInitialSpace))
+                            '                            {2}{0} Factor Levels.
+                            sbVariableInfoText.Append(sa(strLanguage_VariableInfoVisualiser(6), Varhigh, Varlevels, VarInitialSpace))
                         End If
 
                     Next
                 Else
-                    Dim VarStringLength As Integer = "Var : ".Length + (rlstVariableInfo.Length - 1).ToString.Length
+                    '                                                               Var :
+                    Dim VarStringLength As Integer = strLanguage_VariableInfoVisualiser(2).Length + (rlstVariableInfo.Length - 1).ToString.Length
                     Dim VarInitialSpace As String = SpaceAString("", VarStringLength)
                     For i = 0 To rlstVariableInfo.Length - 1
                         Dim VarDescription As String = String.Empty
@@ -76,14 +82,17 @@ Public Class frmVariableInfoVisualiser
 
                         sbVariableInfoText.AppendLine()
                         sbVariableInfoText.AppendLine()
-                        sbVariableInfoText.Append(SpaceAString(sa("Var {0}: ", (i + 1).ToString), VarStringLength)) '           Var 1:
+                        '                                         Var {0}:
+                        sbVariableInfoText.Append(SpaceAString(sa(strLanguage_VariableInfoVisualiser(3), (i + 1).ToString), VarStringLength)) '           Var 1:
                         sbVariableInfoText.Append(sa("{0}", rlstVariableInfo.Names(i))) '                                           Label
                         If VarDescription <> String.Empty Then sbVariableInfoText.Append(sa(", {0}", VarDescription)) '                 , The Label for the supervised......
                         sbVariableInfoText.AppendLine()
 
                         If VarType.ToLower = "integer".ToLower OrElse VarType.ToLower = "numeric".ToLower Then
-                            sbVariableInfoText.Append(sa("{0}Type: {1}", VarInitialSpace, VarType))
-                            sbVariableInfoText.Append(sa(", Min: {0}, Max: {1}", VarLow, Varhigh))
+                            '                            '{0}Type: {1}
+                            sbVariableInfoText.Append(sa(strLanguage_VariableInfoVisualiser(4), VarInitialSpace, VarType))
+                            '                             , Min: {0}, Max: {1}
+                            sbVariableInfoText.Append(sa(strLanguage_VariableInfoVisualiser(5), VarLow, Varhigh))
 
                         ElseIf VarType.ToLower = "factor".ToLower Then
                             'Dim tmpFirstValues() As String = (From Level As String In (rlstVariableInfo(i).AsCharacter)("levels") Select Level).Take(3).ToArray
@@ -91,7 +100,8 @@ Public Class frmVariableInfoVisualiser
                             'Varlevels = ArrayBox(False, ",", 0, False, tmpFirstValues) & " ... " & tmpLastValue
 
                             'sbVariableInfoText.Append(sa("{2}{0} Factor Levels: [{1}],", Varhigh, Varlevels, VarInitialSpace))
-                            sbVariableInfoText.Append(sa("{2}{0} Factor Levels.", Varhigh, Varlevels, VarInitialSpace))
+                            '                            {2}{0} Factor Levels.
+                            sbVariableInfoText.Append(sa(strLanguage_VariableInfoVisualiser(6), Varhigh, Varlevels, VarInitialSpace))
                         End If
                     Next
                 End If

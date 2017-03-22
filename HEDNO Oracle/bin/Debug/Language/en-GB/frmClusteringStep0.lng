@@ -1,16 +1,16 @@
-﻿<Language:English; Version 1.0>
-Report
-The file has been successfully saved on: 
-Average: 
-Comma-Separated Values Files
-Sum: 
-Selected Cells: 
-Selected Rows: 
-Selected Columns: 
-Report
-Do you want the report to be centered on the page?
-File Name:
-Rows Count: 
-Columns Count: 
-Current Row: 
-Current Column: 
+﻿<Language:English;Version 1.0>
+Clustering Step 0 Options
+Loading...
+Main Options:
+Use Existing XDF File
+Show Data Summary
+Show Variable Information
+Show the Geo-Location Graph
+Select &All
+Statistics Mode
+Clean the XDF file after completion
+Commence Clustering Step 0
+Unselect &All
+Please wait for: {0} to finish
+Clustering Step 0
+The option '{0}' was checked but the file was unreachable and was created instead.

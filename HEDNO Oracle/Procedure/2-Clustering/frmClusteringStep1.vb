@@ -4,6 +4,7 @@ Imports RDotNet
 
 Public Class frmClusteringStep1
     Public strLanguage_ClusteringStep1 As String()
+    Public strLanguage_ClusteringStep1_Tips As String()
 
     Private Const DefaultMaxKNum As Integer = 30
     Private MaxKNum As Integer = DefaultMaxKNum
@@ -112,14 +113,14 @@ Public Class frmClusteringStep1
     Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
         If FuncInProgress.Count <> 0 Then
             e.Cancel = True
-            MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            MsgBox(sa(strLanguage_ClusteringStep1(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation) 'Please wait for: {0} to finish
         End If
     End Sub
 
     Private Sub btnClustering_Click(sender As Object, e As EventArgs) Handles btnClustering1.Click
         Try
             If FuncInProgress.Count = 0 Then
-                FuncInProgress.Add("Clustering Step 1")
+                FuncInProgress.Add(strLanguage_ClusteringStep1(14)) 'Clustering Step 1
                 fswModelExists.EnableRaisingEvents = False
                 pnlMain.Enabled = False
 
@@ -143,10 +144,11 @@ Public Class frmClusteringStep1
                                                                                   "{4}", KMeansModelSavePath}, True) Then
 
                             Dim k As Integer = Rdo.GetSymbol("k").AsInteger.First
-                            If TypeBox(sa("How many clusters should the database be separated into?{0}After analysis, the Recommended Value for this dataset is: [{1}].", vbCrLf, k),
+                            '             How many clusters should the dataset be separated into?{0}After analysis, the Recommended Value for this dataset is: [{1}].
+                            If TypeBox(sa(strLanguage_ClusteringStep1(17), vbCrLf, k),
                                        k,
                                        False,
-                                       "Choosing k for K-Means",
+                                       strLanguage_ClusteringStep1(18), 'Choosing k for K-Means
                                        2,,,,, k.ToString) Then
                                 Rdo.SetSymbol("k", Rdo.CreateIntegerVector({k}))
 
@@ -176,11 +178,13 @@ Public Class frmClusteringStep1
                                     End If
 
                                     Dim XDFCreatedOutOfNecessity As Boolean = Rdo.GetSymbol("XDFCreatedOutOfNecessity").AsLogical.First
-                                    If XDFCreatedOutOfNecessity Then MsgBox(sa("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
+                                    '                                          The option '{0}' was checked but the file was unreachable and was created instead.
+                                    If XDFCreatedOutOfNecessity Then MsgBox(sa(strLanguage_ClusteringStep1(15), RemCtrHotLetter(chkUseExistingXDFFile)))
                                 End If
 
                             Else
-                                MsgBox(sa("Operation Cancelled."), MsgBoxStyle.Exclamation)
+                                '         Operation Cancelled.
+                                MsgBox(sa(strLanguage_ClusteringStep1(19)), MsgBoxStyle.Exclamation)
                             End If
                         End If
                     End If
@@ -191,11 +195,12 @@ Public Class frmClusteringStep1
                 End Try
 
                 fswModelExists.EnableRaisingEvents = True
-                FuncInProgress.Remove("Clustering Step 1")
+                FuncInProgress.Remove(strLanguage_ClusteringStep1(14)) 'Clustering Step 1
                 pnlMain.Enabled = True
                 Close()
             Else
-                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                '         Please wait for: {0} to finish
+                MsgBox(sa(strLanguage_ClusteringStep1(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
             End If
 
         Catch ex As Exception
@@ -220,16 +225,17 @@ Public Class frmClusteringStep1
     Private Sub chkOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowDataSummary.CheckedChanged, chkShowGeoLocGraph.CheckedChanged,
                                                                                     chkShowVariableInfo.CheckedChanged, chkUseExistingXDFFile.CheckedChanged
         If chkShowDataSummary.Checked And chkShowGeoLocGraph.Checked And chkShowVariableInfo.Checked And chkUseExistingXDFFile.Checked Then
-            btnSelectAll.Text = "Unselect &All"
+            btnSelectAll.Text = strLanguage_ClusteringStep1(12) 'Unselect &All
         Else
-            btnSelectAll.Text = "Select &All"
+            btnSelectAll.Text = strLanguage_ClusteringStep1(8) 'Select &All
         End If
 
         Call ColourChkStatisticsMode()
     End Sub
 
     Private Sub txtMaxClusterNum_Click(sender As Object, e As EventArgs) Handles txtMaxClusterNum.Click
-        If TypeBox(sa("Which is the maximum number of clusters you wish to test for?{0}The Default Value is: {1}", vbCrLf, DefaultMaxKNum), MaxKNum, False,, 3, MaxInteger,,,, DefaultMaxKNum.ToString) Then
+        '             Which is the maximum number of clusters you wish to test for?{0}The Default Value is: {1}
+        If TypeBox(sa(strLanguage_ClusteringStep1(20), vbCrLf, DefaultMaxKNum), MaxKNum, False,, 3, MaxInteger,,,, DefaultMaxKNum.ToString) Then
             txtMaxClusterNum.Text = MaxKNum.ToString
         End If
     End Sub
@@ -241,7 +247,8 @@ Public Class frmClusteringStep1
     End Sub
 
     Private Sub txtSavePath_Click(sender As Object, e As EventArgs) Handles txtSavePath.Click
-        fbdKMeansModel.Description = "Where would you like your K-Means Model to be saved?"
+        '                            Where would you like your K-Means Model to be saved?
+        fbdKMeansModel.Description = strLanguage_ClusteringStep1(21)
         fbdKMeansModel.RootFolder = Environment.SpecialFolder.Desktop
         fbdKMeansModel.ShowNewFolderButton = True
         If fbdKMeansModel.ShowDialog() = DialogResult.OK Then
@@ -258,5 +265,9 @@ Public Class frmClusteringStep1
             lblSavePath.Enabled = False
             txtSavePath.Enabled = False
         End If
+    End Sub
+
+    Private Sub lblMaxClusterNum_SizeChanged(sender As Object, e As EventArgs) Handles lblMaxClusterNum.SizeChanged
+        txtMaxClusterNum.Location = New Point(lblMaxClusterNum.Location.X + lblMaxClusterNum.Size.Width + 6, txtMaxClusterNum.Location.Y - 3)
     End Sub
 End Class

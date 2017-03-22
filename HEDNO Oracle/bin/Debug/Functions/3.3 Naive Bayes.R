@@ -51,7 +51,7 @@ if (MakePredictions) {
 			  data = paste(strXDF, "Test_DS.xdf", sep = ""),
 			  outData = paste(strXDF, "Test_DS.xdf", sep = ""),
 			  overwrite = TRUE
-			  ,predVarNames = c("NBCancelledProbabil", "NB_PredictionReal")
+			  ,predVarNames = c("NBCancelledProbabil", "NB_PredictionReal{5}")
 			  ,type = "prob" #To get probabilities instead of 0/1
 			  # ,computeStdErr = TRUE
 			  # ,stdErrorsVarNames = "NB_StdError"
@@ -66,7 +66,7 @@ if (MakePredictions) {
 	)
 	rxDataStep(inData = paste(strXDF, "Test_DS.xdf", sep = ""),
 			   outFile = paste(strXDF, "tmp.xdf", sep = ""),
-			   transforms = list(NB_Prediction = as.logical(round(NB_PredictionReal))),
+			   transforms = list(NB_Prediction{5} = as.logical(round(NB_PredictionReal{5}))),
 			   overwrite = TRUE
 	)
 	rxDataStep(inData = paste(strXDF, "tmp.xdf", sep = ""),

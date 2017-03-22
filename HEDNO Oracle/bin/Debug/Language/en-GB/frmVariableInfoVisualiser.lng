@@ -1,1 +1,7 @@
-<Language=English;Version=1.0>
+<Language=English;>
+{0} Variables Information
+Var : 
+Var {0}: 
+{0}Type: {1}
+, Min: {0}, Max: {1}
+{2}{0} Factor Levels.

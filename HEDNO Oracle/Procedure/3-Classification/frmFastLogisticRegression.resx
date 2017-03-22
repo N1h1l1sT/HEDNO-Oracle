@@ -132,9 +132,6 @@ When you specify less memory, training is faster but less accurate.</value>
 If the improvement between iterations is less than the threshold, the algorithm stops and returns the current model.
 Smaller values are slower, but more accurate.</value>
   </data>
-  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>418, 6</value>
-  </metadata>
   <data name="chknormalize.ToolTip" xml:space="preserve">
     <value>Specifies the type of automatic normalisation used:
 --"auto": if normalization is needed, it is automatically performed. This is the default value.
@@ -148,6 +145,12 @@ If normalization is performed, a MaxMin normalizer is used.
 It normalizes values in an interval [a, b] where -1 &lt;= a &lt;= 0 and 0 &lt;= b &lt;= 1 and b - a = 1.
 This normalizer preserves sparsity by mapping zero to zero.</value>
   </data>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
   <data name="txtmemorySize.ToolTip" xml:space="preserve">
     <value>Memory size for L-BFGS, specifying the number of past positions and gradients to store for the computation of the next step.
 This optimization parameter limits the amount of memory that is used to compute the magnitude and direction of the next step.
@@ -158,6 +161,15 @@ When you specify less memory, training is faster but less accurate.</value>
 If the improvement between iterations is less than the threshold, the algorithm stops and returns the current model.
 Smaller values are slower, but more accurate.</value>
   </data>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
   <data name="cbnormalize.ToolTip" xml:space="preserve">
     <value>Specifies the type of automatic normalisation used:
 --"auto": if normalization is needed, it is automatically performed. This is the default value.

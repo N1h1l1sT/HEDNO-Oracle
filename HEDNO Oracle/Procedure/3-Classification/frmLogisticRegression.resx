@@ -120,6 +120,19 @@
   <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>418, 6</value>
   </metadata>
+  <data name="btnRunModel.ToolTip" xml:space="preserve">
+    <value>Trains a Logistic Regression model using R's rxLogit algorithm and according to the Algorithm-Specific Options selected, or loads an existing model if 'Use Existing Model' is checked
+*If 'Make Predictions' is selected, it makes prediction on the Testing File
+*If 'Save Prediction Model' is checked, it save the trained model in a file using R's RDS format which can then be used to import the trained model into this programme or to an R client
+*If 'Show Data Summary' is checked, you can view a Data Summary of the Classification dataset, such as Min, Max, Mean, etc.
+*If 'Show Variable Information' is checked, you can view Variable Information such as their types and descriptions.
+
+If the dataset is created using Statistics Mode (i.e. n% of labelled data for Training and 100-n% for Testing:
+--If 'Show Statistics' is checked, you can view Model's statistics, such as Confusion Matrix, Accuracy, F Measure, G, etc.
+--If 'Show ROC Curve' is checked, the model's ROC Curve with AUC value is plotted
+Otherwise
+--The predictions are exported into a .csv containing: 1) Their respective SQL Server project ID, 2) Their Probability of being approved, 3) Their Class (0/1)</value>
+  </data>
   <data name="chkStatisticsMode.ToolTip" xml:space="preserve">
     <value>[Transparent background means a new Model will be trained, so it can be either in Statistics Mode or not]
 
@@ -130,11 +143,6 @@
 [If the CheckBox is Not Checked:]
 [Red background means that the existing Training/Testing XDF files are marked for statistics, hence by not checking it, you strip yourself from the option to perform statistics]
 [Green background means that the existing XDF is not marked for statistics]</value>
-  </data>
-  <data name="chkUseExistingModel.ToolTip" xml:space="preserve">
-    <value>Instead of Training the model, a previously saved model is loaded.
-Using an existing model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procedure will fail!
-In that case, please just uncheck this CheckBox to create the model anew.</value>
   </data>
   <data name="txtNGrams.ToolTip" xml:space="preserve">
     <value>Type a n-grams to perform with the variables.
@@ -157,22 +165,14 @@ If, for instance, 3 columns are selected and n-gram is set to 3, then 7 results 
   <data name="chkColumnsCombinations.ToolTip" xml:space="preserve">
     <value>Instead of Training only 1 model with selected columns above, use n-grams to produce multiple combinations for them (according to n'-gram's n set above) and train multiple models, 1 for each combination</value>
   </data>
-  <data name="btnRunModel.ToolTip" xml:space="preserve">
-    <value>Trains a Logistic Regression model using R's rxLogit algorithm and according to the Algorithm-Specific Options selected, or loads an existing model if 'Use Existing Model' is checked
-*If 'Make Predictions' is selected, it makes prediction on the Testing File
-*If 'Save Prediction Model' is checked, it save the trained model in a file using R's RDS format which can then be used to import the trained model into this programme or to an R client
-*If 'Show Data Summary' is checked, you can view a Data Summary of the Classification dataset, such as Min, Max, Mean, etc.
-*If 'Show Variable Information' is checked, you can view Variable Information such as their types and descriptions.
-
-If the dataset is created using Statistics Mode (i.e. n% of labelled data for Training and 100-n% for Testing:
---If 'Show Statistics' is checked, you can view Model's statistics, such as Confusion Matrix, Accuracy, F Measure, G, etc.
---If 'Show ROC Curve' is checked, the model's ROC Curve with AUC value is plotted
-Otherwise
---The predictions are exported into a .csv containing: 1) Their respective SQL Server project ID, 2) Their Probability of being approved, 3) Their Class (0/1)</value>
-  </data>
   <data name="chkOpenGraphDirectory.ToolTip" xml:space="preserve">
     <value>Because R.NET does not support multiple Graph Plots simultaneously, when predictions from multiple models are applied, the ROC Curve plots are saved as .png files.
 If this option is checked, the containing folder is opened when the procedure comes to an end.</value>
+  </data>
+  <data name="chkUseExistingModel.ToolTip" xml:space="preserve">
+    <value>Instead of Training the model, a previously saved model is loaded.
+Using an existing model is faster, but beware that if the data changes significantly (in particular, if the Factor Level Order changes), then the whole procedure will fail!
+In that case, please just uncheck this CheckBox to create the model anew.</value>
   </data>
   <metadata name="fbdModelPath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>4, 6</value>

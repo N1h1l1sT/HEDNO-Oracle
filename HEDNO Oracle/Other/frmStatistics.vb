@@ -16,7 +16,7 @@ Public Class frmStatistics
             Call Statistics_Language(Me)
             frmSkin(Me, False)
 
-            If ClassificationModelName <> "" Then Text = ClassificationModelName & " Statistics"
+            If ClassificationModelName <> "" Then Text = sa(strLanguage_Statistics(1), ClassificationModelName) '{0} Statistics
             '/initialization
 
 

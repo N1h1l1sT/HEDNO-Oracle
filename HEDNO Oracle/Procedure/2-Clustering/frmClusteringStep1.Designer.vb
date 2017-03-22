@@ -226,7 +226,7 @@ Partial Class frmClusteringStep1
         Me.txtSavePath.ReadOnly = True
         Me.txtSavePath.Size = New System.Drawing.Size(229, 20)
         Me.txtSavePath.TabIndex = 9
-        Me.ttMain.SetToolTip(Me.txtSavePath, "The path to save the K-Means Clustering Model")
+        Me.ttMain.SetToolTip(Me.txtSavePath, "The path to save the K-Means Model")
         '
         'txtMaxClusterNum
         '
@@ -245,7 +245,7 @@ Partial Class frmClusteringStep1
         Me.chkSaveKMeansModel.Size = New System.Drawing.Size(128, 17)
         Me.chkSaveKMeansModel.TabIndex = 9
         Me.chkSaveKMeansModel.Text = "Save K-Means Model"
-        Me.ttMain.SetToolTip(Me.chkSaveKMeansModel, "Saves the K-Means Clustering Model to the path specified below")
+        Me.ttMain.SetToolTip(Me.chkSaveKMeansModel, "Saves the K-Means Model to the path specified below")
         Me.chkSaveKMeansModel.UseVisualStyleBackColor = True
         '
         'chkCleanXDFFile

@@ -250,7 +250,7 @@ Partial Class frmBoostedDecisionTrees
         Me.txtRoundAt.Location = New System.Drawing.Point(67, 88)
         Me.txtRoundAt.Name = "txtRoundAt"
         Me.txtRoundAt.ReadOnly = True
-        Me.txtRoundAt.Size = New System.Drawing.Size(64, 20)
+        Me.txtRoundAt.Size = New System.Drawing.Size(30, 20)
         Me.txtRoundAt.TabIndex = 19
         Me.txtRoundAt.Text = "1"
         Me.ttMain.SetToolTip(Me.txtRoundAt, "The decimal point that viewed statistics are rounded at.")
@@ -301,9 +301,9 @@ Partial Class frmBoostedDecisionTrees
         Me.chkSavePredictionModel.AutoSize = True
         Me.chkSavePredictionModel.Location = New System.Drawing.Point(9, 65)
         Me.chkSavePredictionModel.Name = "chkSavePredictionModel"
-        Me.chkSavePredictionModel.Size = New System.Drawing.Size(133, 17)
+        Me.chkSavePredictionModel.Size = New System.Drawing.Size(83, 17)
         Me.chkSavePredictionModel.TabIndex = 13
-        Me.chkSavePredictionModel.Text = "Save Prediction Model"
+        Me.chkSavePredictionModel.Text = "Save Model"
         Me.ttMain.SetToolTip(Me.chkSavePredictionModel, "Saves the trained model at the location specified below")
         Me.chkSavePredictionModel.UseVisualStyleBackColor = True
         '

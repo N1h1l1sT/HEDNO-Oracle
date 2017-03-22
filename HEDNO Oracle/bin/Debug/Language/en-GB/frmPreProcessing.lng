@@ -1,1 +1,16 @@
 <Language:English;Version 1.0>
+Pre-Processing Options
+Loading...
+Main Options:
+Use Existing XDF File
+Show Data Summary
+Show Variable Information
+Show the Geo-Location Graph
+Select &All
+Statistics Mode
+Clean the XDF file after completion
+Commence Pre-Processing
+Unselect &All
+Please wait for: {0} to finish
+Pre-Processing Data
+The option '{0}' was checked but the file was unreachable and was created instead.

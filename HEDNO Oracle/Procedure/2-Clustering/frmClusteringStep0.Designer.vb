@@ -55,7 +55,7 @@ Partial Class frmClusteringStep0
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(283, 246)
+        Me.pnlMain.Size = New System.Drawing.Size(303, 246)
         Me.pnlMain.TabIndex = 5
         '
         'pbLoading
@@ -104,18 +104,18 @@ Partial Class frmClusteringStep0
         Me.gbOptions.Controls.Add(Me.chkShowGeoLocGraph)
         Me.gbOptions.Location = New System.Drawing.Point(12, 12)
         Me.gbOptions.Name = "gbOptions"
-        Me.gbOptions.Size = New System.Drawing.Size(259, 142)
+        Me.gbOptions.Size = New System.Drawing.Size(279, 142)
         Me.gbOptions.TabIndex = 2
         Me.gbOptions.TabStop = False
         Me.gbOptions.Text = "Main Options:"
         '
         'btnSelectAll
         '
-        Me.btnSelectAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSelectAll.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnSelectAll.Location = New System.Drawing.Point(6, 113)
+        Me.btnSelectAll.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.btnSelectAll.Location = New System.Drawing.Point(3, 116)
         Me.btnSelectAll.Name = "btnSelectAll"
-        Me.btnSelectAll.Size = New System.Drawing.Size(170, 23)
+        Me.btnSelectAll.Size = New System.Drawing.Size(273, 23)
         Me.btnSelectAll.TabIndex = 3
         Me.btnSelectAll.Text = "Select &All"
         Me.ttMain.SetToolTip(Me.btnSelectAll, "Selects all options in the GroupBox")
@@ -172,7 +172,7 @@ Partial Class frmClusteringStep0
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClustering0.Location = New System.Drawing.Point(12, 211)
         Me.btnClustering0.Name = "btnClustering0"
-        Me.btnClustering0.Size = New System.Drawing.Size(259, 23)
+        Me.btnClustering0.Size = New System.Drawing.Size(279, 23)
         Me.btnClustering0.TabIndex = 0
         Me.btnClustering0.Text = "Commence Clustering Step 0"
         Me.ttMain.SetToolTip(Me.btnClustering0, resources.GetString("btnClustering0.ToolTip"))
@@ -213,7 +213,7 @@ Partial Class frmClusteringStep0
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSelectAll
-        Me.ClientSize = New System.Drawing.Size(283, 246)
+        Me.ClientSize = New System.Drawing.Size(303, 246)
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Name = "frmClusteringStep0"

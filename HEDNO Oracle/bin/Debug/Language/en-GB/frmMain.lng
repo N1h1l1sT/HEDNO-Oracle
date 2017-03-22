@@ -98,3 +98,61 @@ L&icenses
 
 
 
+Unfortunately, although some version of R has been found in your system, you need R_Server or equivalent for this programme to run{0}This requirement is imposed because the code hereinafter requires the RevoScaleR R Package to bypass R's limitations in computer Memory (RAM) and CPU.{0}{0}Please install R Server and update your Registry and Environment Variables before proceeding.
+The Variables {0} and {1} already existed in {2}.{3}.{4}No action was taken.
+{0} was successfully created; {1} already existed in {2}.{3}.
+{1} was successfully created; {0} already existed in {2}.{3}.
+{0} and {1} have been successfully created in {2}.{3}.
+Unfortunately, the table {0} cannot be found
+Creating Geo-Location Columns
+Please wait for: {0} to finish
+&Geo-Locate
+&Stop GeoLocating
+The API returned the Error: {1}{0}Do you want to stop this procedure?{0}'Yes' will stop the procedure, 'No' will let it continue ignoring future warning, 'Cancel' will ask for a new API key in case there is something wrong with the current one.
+Type in a valid Google Geolocation API
+Procedure Successful!
+Procedure Cancelled!
+Something went wrong whilst trying to download the Geo-Location of [{1}]{0}Either your internet is down, or the API is unresponsive{0}{2}
+Something went wrong whilst trying to push the Geo-Location of [{1}] to the SQL Server!
+The procedure Is cancelled because it's failed too many times in a row
+The GeoLocation API Key is empty!{0}Please change it from the Settings form and try again
+The GeoLocation API Link is empty!{0}Please change it from the Settings form and try again
+The GeoLocation procedure is trying to upload the longitude and latitude on the SQL Columns {3} on the {1} Table/View on the SQL Server, however one or more columns are unreachable.{0}'{2}' will run for you to create the GeoLocation Columns.
+'{0}' and '{1}'
+The GeoLocation procedure is trying to upload the longitude and latitude on {1} on the SQL Server, however the Table/View is unreachable.{0}'{2}' will open for you to create the Table/View
+There is no connection to the SQL Server!
+Acquiring Geo-Location Status
+There is a total of {1} projects.{0}For {2}, the Geo-Location process has been successful, whilst for {4} it has not.{0}{3} projects have yet to undergo Geolocation.{0}There is a total of {5} cities/addresses throughout the {4} project for which the Geo-Location failed.
+Unfortunately, the {0} column cannot be accessed; use '{1}' from the Menu to create it
+The Geo-Location procedure is about to begin, proceed?
+Unfortunately, the Table/View {0} cannot be found
+You need to be connected to the SQL Server first
+Please wait for: {0} to finish
+Exporting List of Problematic Addresses
+Please Wait...
+
+
+Resetting Invalid Geolocation Entries
+All invalid entries (if any) have been successfully reset.
+&Pre-Processing
+&Create Geolocation SQL Columns
+Create &Needed SQL Views
+Geo-Location &Status
+&Export List of Problematic Addresses
+&Reset Invalid Geolocation Entries
+Pre-Process &The Data
+&Clustering
+Step &0: Process Data
+Step 1&: Apply Unsupervised Learning
+Classi&fication
+&Form Train and Test sets
+&1) Logistic Regression
+&2) Decision Trees
+&3) Naive Bayes
+&4) Random Forest
+&5) Stochastic Gradient Boosting
+&6) Stochastic Dual Coordinate Ascent
+&7) Boosted Decision Trees
+&8) Ensemble of Decision Trees
+&9) Neural Networks
+1&0) Fast Logistic Regression

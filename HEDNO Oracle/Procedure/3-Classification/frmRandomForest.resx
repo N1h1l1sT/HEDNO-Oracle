@@ -129,6 +129,18 @@ The default value is sqrt(num of vars) for classification and (num of vars)/3 fo
 The default value is sqrt(num of vars) for classification and (num of vars)/3 for regression, which is the pre-loaded value when you click the textbox.
 </value>
   </data>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
+  <metadata name="ttMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>418, 6</value>
+  </metadata>
   <data name="btnRunModel.ToolTip" xml:space="preserve">
     <value>Trains a Random Forest model using R's rxDForest algorithm and according to the Algorithm-Specific Options selected, or loads an existing model if 'Use Existing Model' is checked
 *If 'Make Predictions' is selected, it makes prediction on the Testing File

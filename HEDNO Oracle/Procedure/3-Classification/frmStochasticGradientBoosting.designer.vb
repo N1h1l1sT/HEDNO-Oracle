@@ -721,7 +721,7 @@ Partial Class frmStochasticGradientBoosting
         Me.cbShowOOBEPlot.Name = "cbShowOOBEPlot"
         Me.cbShowOOBEPlot.Size = New System.Drawing.Size(296, 21)
         Me.cbShowOOBEPlot.TabIndex = 17
-        Me.ttMain.SetToolTip(Me.cbShowOOBEPlot, "Plot the out-of-bags error (Y) VS  the Number of Trees (X)")
+        Me.ttMain.SetToolTip(Me.cbShowOOBEPlot, "Plot the out-of-bag error (Y) VS  the Number of Trees (X)")
         '
         'txtnTree
         '

@@ -5,6 +5,7 @@ Imports System.Text
 
 Public Class frmCreateSQLView
     Public strLanguage_CreateSQLView As String()
+    Public strLanguage_CreateSQLView_Tips As String()
 
     Dim SQLFiles() As String
     Dim SQLFileNames() As String
@@ -38,6 +39,7 @@ Public Class frmCreateSQLView
         Try
             If clbSQLViews.CheckedIndices.Count > 0 Then
                 If ConnectedToSQLServer = True Then
+                    btnCreateSQLViews.Enabled = False
                     Dim sbResultsInfo As New StringBuilder
                     For i As Integer = 0 To clbSQLViews.CheckedIndices.Count - 1
                         Dim RowIndex As Integer = -1
@@ -55,10 +57,12 @@ Public Class frmCreateSQLView
                             If ViewExists Then
                                 Dim DeletionResult As Boolean = DeleteSQLView(SQLViewName)
                                 sbResultsInfo.AppendLine()
-                                If DeletionResult = True Then sbResultsInfo.Append(SQLViewName & ": Deleted") Else sbResultsInfo.Append(SQLViewName & ": Failed to Delete")
+                                '                                                                 : Deleted                                                             : Failed to be Deleted
+                                If DeletionResult = True Then sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(15)) Else sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(16))
                             ElseIf chkDeleteAll.Checked Then
                                 sbResultsInfo.AppendLine()
-                                sbResultsInfo.Append(SQLViewName & ": Didn't exist in the first place")
+                                '                                  : Didn't exist in the first place
+                                sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(17))
                             End If
                         End If
 
@@ -70,44 +74,53 @@ Public Class frmCreateSQLView
                             If Not ViewExists OrElse Not rdbDoNothing.Checked Then
                                 Dim Succeeded As Boolean = ExecuteSQLQuery(ArrayBox(SQLTextStingAr))
                                 If rdbDeleteItAndCreateIt.Checked AndAlso ViewExists Then
-                                    If Succeeded Then sbResultsInfo.Append(" and re-Created") Else sbResultsInfo.Append(" but Failed to Create it")
+                                    '                                       and re-Created                                          but Failed to Create it
+                                    If Succeeded Then sbResultsInfo.Append(strLanguage_CreateSQLView(18)) Else sbResultsInfo.Append(strLanguage_CreateSQLView(19))
                                 ElseIf ViewExists And rdbAlterIt.Checked Then
                                     sbResultsInfo.AppendLine()
-                                    If Succeeded Then sbResultsInfo.Append(SQLViewName & ": Altered") Else sbResultsInfo.Append(SQLViewName & ": Failed to Alter it")
+                                    '                                                    : Altered                                                              : Failed to Alter it
+                                    If Succeeded Then sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(20)) Else sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(21))
                                 ElseIf Not ViewExists Then
                                     sbResultsInfo.AppendLine()
-                                    If Succeeded Then sbResultsInfo.Append(SQLViewName & ": Created") Else sbResultsInfo.Append(SQLViewName & ": Failed to Create it" & vbCrLf)
+                                    '                                                    : Created                                                              : Failed to Create it
+                                    If Succeeded Then sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(22)) Else sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(23) & vbCrLf)
                                 End If
 
                             ElseIf ViewExists AndAlso rdbDoNothing.Checked Then
-                                sbResultsInfo.Append(SQLViewName & ": No Action" & vbCrLf)
+                                '                                   : No Action
+                                sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(24) & vbCrLf)
                             Else
-                                sbResultsInfo.Append(SQLViewName & ": No Action")
+                                '                                   : No Action
+                                sbResultsInfo.Append(SQLViewName & strLanguage_CreateSQLView(24))
                             End If
                         End If
                     Next
-                    MsgBox(sbResultsInfo.ToString.Substring(2), MsgBoxStyle.Information)
+                    MsgBox(sbResultsInfo.ToString, MsgBoxStyle.Information)
+                    btnCreateSQLViews.Enabled = True
 
                 Else
-                    MsgBox("There is no connection to the SQL Server!", MsgBoxStyle.Exclamation)
+                    '      There is no connection to the SQL Server!
+                    MsgBox(strLanguage_CreateSQLView(25), MsgBoxStyle.Exclamation)
                 End If
 
             Else
-                MsgBox("You've selected no views from the Checked List Box and there's therefore nothing to do.", MsgBoxStyle.Information)
+                '      You've selected no views from the Checked List Box and there's therefore nothing to do.
+                MsgBox(strLanguage_CreateSQLView(26), MsgBoxStyle.Information)
             End If
 
         Catch ex As Exception
             CreateCrashFile(ex, True)
+            btnCreateSQLViews.Enabled = True
         End Try
     End Sub
 
     Private Sub chkDeleteAll_CheckedChanged(sender As Object, e As EventArgs) Handles chkDeleteAll.CheckedChanged
         If chkDeleteAll.Checked = True Then
             gbSQLViewOptions.Enabled = False
-            btnCreateSQLViews.Text = "Delete SQL &Views"
+            btnCreateSQLViews.Text = strLanguage_CreateSQLView(13) 'Delete SQL &Views
         Else
             gbSQLViewOptions.Enabled = True
-            btnCreateSQLViews.Text = "&Create SQL Views"
+            btnCreateSQLViews.Text = strLanguage_CreateSQLView(14) '&Create SQL Views
         End If
     End Sub
 
@@ -116,20 +129,20 @@ Public Class frmCreateSQLView
             For i = 0 To clbSQLViews.Items.Count - 1
                 clbSQLViews.SetItemChecked(i, False)
             Next
-            btnSelectAll.Text = "&Select All"
+            btnSelectAll.Text = strLanguage_CreateSQLView(3) '&Select All
         Else
             For i = 0 To clbSQLViews.Items.Count - 1
                 clbSQLViews.SetItemChecked(i, True)
             Next
-            btnSelectAll.Text = "&Unselect All"
+            btnSelectAll.Text = strLanguage_CreateSQLView(12) '&Unselect All
         End If
     End Sub
 
     Private Sub clbSQLViews_SelectedIndexChanged(sender As Object, e As EventArgs) Handles clbSQLViews.SelectedIndexChanged, clbSQLViews.DoubleClick
         If clbSQLViews.CheckedIndices.Count = clbSQLViews.Items.Count Then
-            btnSelectAll.Text = "&Unselect All"
+            btnSelectAll.Text = strLanguage_CreateSQLView(12) '&Unselect All
         Else
-            btnSelectAll.Text = "&Select All"
+            btnSelectAll.Text = strLanguage_CreateSQLView(3) '&Select All
         End If
     End Sub
 End Class

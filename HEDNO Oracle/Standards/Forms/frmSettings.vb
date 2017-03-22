@@ -1000,14 +1000,14 @@ Public Class frmSettings
             End If
             '/Round numbers at
 
-            'Round numbers at
+            'RSQLConnStr
             If txtRSQLConnStr.Tag.ToString = "1" Then
                 If Not txtRSQLConnStr.Text.Trim().StartsWith("""") AndAlso Not txtRSQLConnStr.Text.Trim() = "" Then txtRSQLConnStr.Text = """" & txtRSQLConnStr.Text
                 If Not txtRSQLConnStr.Text.Trim().EndsWith("""") AndAlso Not txtRSQLConnStr.Text.Trim() = "" Then txtRSQLConnStr.Text &= """"
                 strSettings(64) = "064RSQLConnStr=" & txtRSQLConnStr.Text
                 RSQLConnStr = strSettings(64).Substring("064RSQLConnStr=".Length)
             End If
-            '/Round numbers at
+            '/RSQLConnStr
 
 
             'Tab: GeoLocation

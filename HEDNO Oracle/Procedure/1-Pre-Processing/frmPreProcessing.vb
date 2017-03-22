@@ -4,6 +4,8 @@ Imports RDotNet
 
 Public Class frmPreProcessing
     Public strLanguage_PreProcessing As String()
+    Public strLanguage_PreProcessing_Tips As String()
+
     Private XDFFileExists As Boolean = False
     Private isStatisticsXDF As Boolean = True
 
@@ -107,14 +109,15 @@ Public Class frmPreProcessing
     Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
         If FuncInProgress.Count <> 0 Then
             e.Cancel = True
-            MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            '         Please wait for: {0} to finish
+            MsgBox(sa(strLanguage_PreProcessing(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
         End If
     End Sub
 
     Private Sub btnPreProcess_Click(sender As Object, e As EventArgs) Handles btnPreProcess.Click
         Try
             If FuncInProgress.Count = 0 Then
-                FuncInProgress.Add("Pre-Processing Data")
+                FuncInProgress.Add(strLanguage_PreProcessing(14)) 'Pre-Processing Data
                 fswXDFFileExists.EnableRaisingEvents = False
                 pnlMain.Enabled = False
 
@@ -148,7 +151,8 @@ Public Class frmPreProcessing
                             End If
 
                             Dim XDFCreatedOutOfNecessity As Boolean = Rdo.GetSymbol("XDFCreatedOutOfNecessity").AsLogical.First
-                            If XDFCreatedOutOfNecessity Then MsgBox(sa("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
+                            '                                          The option '{0}' was checked but the file was unreachable and was created instead.
+                            If XDFCreatedOutOfNecessity Then MsgBox(sa(strLanguage_PreProcessing(15), RemCtrHotLetter(chkUseExistingXDFFile)))
                         End If
                     End If
                 Catch ex As Exception
@@ -158,11 +162,12 @@ Public Class frmPreProcessing
                 End Try
 
                 fswXDFFileExists.EnableRaisingEvents = True
-                FuncInProgress.Remove("Pre-Processing Data")
+                FuncInProgress.Remove(strLanguage_PreProcessing(14)) 'Pre-Processing Data
                 pnlMain.Enabled = True
                 Close()
             Else
-                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                '         Please wait for: {0} to finish
+                MsgBox(sa(strLanguage_PreProcessing(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
             End If
 
         Catch ex As Exception
@@ -188,9 +193,9 @@ Public Class frmPreProcessing
     Private Sub chkOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowDataSummary.CheckedChanged, chkShowGeoLocGraph.CheckedChanged,
                                                                                     chkShowVariableInfo.CheckedChanged, chkUseExistingXDFFile.CheckedChanged
         If chkShowDataSummary.Checked And chkShowGeoLocGraph.Checked And chkShowVariableInfo.Checked And chkUseExistingXDFFile.Checked Then
-            btnSelectAll.Text = "Unselect &All"
+            btnSelectAll.Text = strLanguage_PreProcessing(9) 'Unselect &All
         Else
-            btnSelectAll.Text = "Select &All"
+            btnSelectAll.Text = strLanguage_PreProcessing(8) 'Select &All
         End If
 
         Call ColourChkStatisticsMode()

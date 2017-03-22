@@ -1,0 +1,9 @@
+<Language:English;>
+Select which SQL Views you wish to Create, Alter or Delete.{0}The corresponding .SQL Files are in the Programme's Install Directory under the folder "SQL" and sub-folder "Views"
+Selects or Unselects all SQL Views
+If the SQL View is already there, then it will not create, alter or delete it
+If the SQL View is already there, then it will alter it
+If the SQL View is already there, then it will delete the view first, and then create it anew
+Instead of creating or altering the selected SQL Views, if this is enabled, selected SQL Views will be deleted.
+Needs: An active connection to the SQL Server.{0}Does: Creates, Alters, or Deletes the SQL Views you've selected from the ListBox according to the option you selected from the RadioButtons
+Create SQL Views

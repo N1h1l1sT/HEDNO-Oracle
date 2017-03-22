@@ -1,1 +1,28 @@
-<Language:English;Version 1.0>
+<Language:English;>
+Create SQL Views
+Select which SQL Views you wish to Create, Alter or Delete.{0}The corresponding .SQL Files are in the Programme's Install Directory under the folder "SQL" and subfolder "Views"
+Select &All
+Options for SQL View creation:
+If SQL View is already created:
+Do &Nothing
+A&lter it
+D&elete it and Create it
+&Delete All Selected SQL Views
+Remember:{0}SQL Files must be encoded as UTF8, otherwise the operations will fail.
+&Create SQL Views
+&Unselect All
+Delete SQL &Views
+Create SQL &Views
+: Deleted
+: Failed to be Deleted
+: Didn't exist in the first place
+ and re-Created
+ but Failed to Create it
+: Altered
+: Failed to Alter it
+: Created
+: Failed to Create it
+: No Action
+There is no connection to the SQL Server!
+You've selected no views from the CheckListBox and there's therefore nothing to do.
+Create SQL View for:

@@ -25,7 +25,7 @@ Public Class frmDataSummaryVisualiser
             frmSkin(Me, False)
             '/initialization
 
-            If DatasetName <> "" Then Text = DatasetName & " Data Summary"
+            If DatasetName <> "" Then Text = sa(strLanguage_DataSummaryVisualiser(1), DatasetName) '{0} Data Summary
 
             Location = New Point(My.Computer.Screen.Bounds.Left, My.Computer.Screen.Bounds.Top)
 

@@ -1,16 +1,24 @@
 ﻿<Language:English; Version 1.0>
-Report
-The file has been successfully saved on: 
-Average: 
-Comma-Separated Values Files
-Sum: 
-Selected Cells: 
-Selected Rows: 
-Selected Columns: 
-Report
-Do you want the report to be centered on the page?
-File Name:
-Rows Count: 
-Columns Count: 
-Current Row: 
-Current Column: 
+Clustering Step 1 Options
+Loading...
+Main Options:
+Use Existing XDF File
+Show Data Summary
+Show Variable Information
+Show the Geo-Location Graph
+Select &All
+Statistics Mode
+Clean the XDF file after completion
+Commence Clustering Step 1
+Unselect &All
+Please wait for: {0} to finish
+Clustering Step 1
+The option '{0}' was checked but the file was unreachable and was created instead.
+Save K-Means Model
+How many clusters should the dataset be separated into?{0}After analysis, the Recommended Value for this dataset is: [{1}].
+Choosing k for K-Means
+Operation Cancelled.
+Which is the maximum number of clusters you wish to test for?{0}The Default Value is: {1}
+Where would you like your K-Means Model to be saved?
+Save K-Means at:
+Maximum # of Clusters:

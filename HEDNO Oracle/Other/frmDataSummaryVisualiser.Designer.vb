@@ -23,8 +23,8 @@ Partial Class frmDataSummaryVisualiser
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDataSummaryVisualiser))
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.dgvDataSummary = New System.Windows.Forms.DataGridView()
@@ -63,7 +63,7 @@ Partial Class frmDataSummaryVisualiser
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(602, 657)
+        Me.pnlMain.Size = New System.Drawing.Size(649, 657)
         Me.pnlMain.TabIndex = 0
         '
         'dgvDataSummary
@@ -75,29 +75,29 @@ Partial Class frmDataSummaryVisualiser
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvDataSummary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvDataSummary.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDataSummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDataSummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvDataSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvDataSummary.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvDataSummary.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvDataSummary.Location = New System.Drawing.Point(0, 0)
         Me.dgvDataSummary.Name = "dgvDataSummary"
         Me.dgvDataSummary.ReadOnly = True
         Me.dgvDataSummary.RowHeadersWidth = 50
         Me.dgvDataSummary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgvDataSummary.Size = New System.Drawing.Size(602, 654)
+        Me.dgvDataSummary.Size = New System.Drawing.Size(649, 654)
         Me.dgvDataSummary.TabIndex = 0
         '
         'ssMain
@@ -107,25 +107,25 @@ Partial Class frmDataSummaryVisualiser
         Me.ssMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblSelectedCells, Me.lblSelectedColumns, Me.lblSelectedRows, Me.lblColumnsCount, Me.lblRowsCount, Me.lblCurColumn, Me.lblCurRow})
         Me.ssMain.Location = New System.Drawing.Point(0, 657)
         Me.ssMain.Name = "ssMain"
-        Me.ssMain.Size = New System.Drawing.Size(602, 22)
+        Me.ssMain.Size = New System.Drawing.Size(649, 22)
         Me.ssMain.TabIndex = 3
         '
         'lblSelectedCells
         '
         Me.lblSelectedCells.Name = "lblSelectedCells"
-        Me.lblSelectedCells.Size = New System.Drawing.Size(88, 17)
+        Me.lblSelectedCells.Size = New System.Drawing.Size(85, 17)
         Me.lblSelectedCells.Text = "Cells Selected: "
         '
         'lblSelectedColumns
         '
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
-        Me.lblSelectedColumns.Size = New System.Drawing.Size(111, 17)
+        Me.lblSelectedColumns.Size = New System.Drawing.Size(108, 17)
         Me.lblSelectedColumns.Text = "Selected Columns: "
         '
         'lblSelectedRows
         '
         Me.lblSelectedRows.Name = "lblSelectedRows"
-        Me.lblSelectedRows.Size = New System.Drawing.Size(93, 17)
+        Me.lblSelectedRows.Size = New System.Drawing.Size(88, 17)
         Me.lblSelectedRows.Text = "Selected Rows: "
         '
         'lblColumnsCount
@@ -137,19 +137,19 @@ Partial Class frmDataSummaryVisualiser
         'lblRowsCount
         '
         Me.lblRowsCount.Name = "lblRowsCount"
-        Me.lblRowsCount.Size = New System.Drawing.Size(79, 17)
+        Me.lblRowsCount.Size = New System.Drawing.Size(77, 17)
         Me.lblRowsCount.Text = "Rows Count: "
         '
         'lblCurColumn
         '
         Me.lblCurColumn.Name = "lblCurColumn"
-        Me.lblCurColumn.Size = New System.Drawing.Size(101, 17)
+        Me.lblCurColumn.Size = New System.Drawing.Size(99, 17)
         Me.lblCurColumn.Text = "Current Column: "
         '
         'lblCurRow
         '
         Me.lblCurRow.Name = "lblCurRow"
-        Me.lblCurRow.Size = New System.Drawing.Size(83, 14)
+        Me.lblCurRow.Size = New System.Drawing.Size(79, 17)
         Me.lblCurRow.Text = "Current Row: "
         '
         'mnuMain
@@ -166,7 +166,7 @@ Partial Class frmDataSummaryVisualiser
         '
         Me.mniFileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mniSave, Me.mniSaveAs, Me.toolStripSeparator1, Me.mniPrintTool, Me.mniPrintPreview, Me.toolStripSeparator2, Me.mniExit})
         Me.mniFileMenu.Name = "mniFileMenu"
-        Me.mniFileMenu.Size = New System.Drawing.Size(36, 20)
+        Me.mniFileMenu.Size = New System.Drawing.Size(37, 20)
         Me.mniFileMenu.Text = "&File"
         '
         'mniSave
@@ -175,7 +175,7 @@ Partial Class frmDataSummaryVisualiser
         Me.mniSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mniSave.Name = "mniSave"
         Me.mniSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mniSave.Size = New System.Drawing.Size(219, 22)
+        Me.mniSave.Size = New System.Drawing.Size(216, 22)
         Me.mniSave.Text = "&Save"
         '
         'mniSaveAs
@@ -183,13 +183,13 @@ Partial Class frmDataSummaryVisualiser
         Me.mniSaveAs.Name = "mniSaveAs"
         Me.mniSaveAs.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mniSaveAs.Size = New System.Drawing.Size(219, 22)
+        Me.mniSaveAs.Size = New System.Drawing.Size(216, 22)
         Me.mniSaveAs.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(216, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(213, 6)
         '
         'mniPrintTool
         '
@@ -197,7 +197,7 @@ Partial Class frmDataSummaryVisualiser
         Me.mniPrintTool.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mniPrintTool.Name = "mniPrintTool"
         Me.mniPrintTool.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mniPrintTool.Size = New System.Drawing.Size(219, 22)
+        Me.mniPrintTool.Size = New System.Drawing.Size(216, 22)
         Me.mniPrintTool.Text = "&Print"
         '
         'mniPrintPreview
@@ -207,19 +207,19 @@ Partial Class frmDataSummaryVisualiser
         Me.mniPrintPreview.Name = "mniPrintPreview"
         Me.mniPrintPreview.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mniPrintPreview.Size = New System.Drawing.Size(219, 22)
+        Me.mniPrintPreview.Size = New System.Drawing.Size(216, 22)
         Me.mniPrintPreview.Text = "Print Pre&view"
         '
         'toolStripSeparator2
         '
         Me.toolStripSeparator2.Name = "toolStripSeparator2"
-        Me.toolStripSeparator2.Size = New System.Drawing.Size(216, 6)
+        Me.toolStripSeparator2.Size = New System.Drawing.Size(213, 6)
         '
         'mniExit
         '
         Me.mniExit.Name = "mniExit"
         Me.mniExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.Q), System.Windows.Forms.Keys)
-        Me.mniExit.Size = New System.Drawing.Size(219, 22)
+        Me.mniExit.Size = New System.Drawing.Size(216, 22)
         Me.mniExit.Text = "E&xit"
         '
         'cmsColumnRen
@@ -252,7 +252,7 @@ Partial Class frmDataSummaryVisualiser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(602, 679)
+        Me.ClientSize = New System.Drawing.Size(649, 679)
         Me.Controls.Add(Me.mnuMain)
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.ssMain)

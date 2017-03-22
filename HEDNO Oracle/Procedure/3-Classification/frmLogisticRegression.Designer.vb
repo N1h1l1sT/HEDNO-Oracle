@@ -60,7 +60,7 @@ Partial Class frmLogisticRegression
         Me.gbSettings = New System.Windows.Forms.GroupBox()
         Me.scSettings = New System.Windows.Forms.SplitContainer()
         Me.chkrowSelection = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.chkcovCoef = New System.Windows.Forms.CheckBox()
         Me.chkBlocksPerRead = New System.Windows.Forms.CheckBox()
         Me.chkreportProgress = New System.Windows.Forms.CheckBox()
         Me.txtrowSelection = New System.Windows.Forms.TextBox()
@@ -527,7 +527,7 @@ Partial Class frmLogisticRegression
         'scSettings.Panel1
         '
         Me.scSettings.Panel1.Controls.Add(Me.chkrowSelection)
-        Me.scSettings.Panel1.Controls.Add(Me.CheckBox2)
+        Me.scSettings.Panel1.Controls.Add(Me.chkcovCoef)
         Me.scSettings.Panel1.Controls.Add(Me.chkBlocksPerRead)
         Me.scSettings.Panel1.Controls.Add(Me.chkreportProgress)
         '
@@ -551,17 +551,17 @@ Partial Class frmLogisticRegression
         Me.chkrowSelection.Text = "rowSelection"
         Me.chkrowSelection.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'chkcovCoef
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(3, 83)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(66, 17)
-        Me.CheckBox2.TabIndex = 8
-        Me.CheckBox2.Text = "covCoef"
-        Me.ttMain.SetToolTip(Me.CheckBox2, "logical flag. If TRUE and if cube is FALSE, the variance-covariance matrix of the" &
+        Me.chkcovCoef.AutoSize = True
+        Me.chkcovCoef.Location = New System.Drawing.Point(3, 83)
+        Me.chkcovCoef.Name = "chkcovCoef"
+        Me.chkcovCoef.Size = New System.Drawing.Size(66, 17)
+        Me.chkcovCoef.TabIndex = 8
+        Me.chkcovCoef.Text = "covCoef"
+        Me.ttMain.SetToolTip(Me.chkcovCoef, "logical flag. If TRUE and if cube is FALSE, the variance-covariance matrix of the" &
         " regression coefficients is returned")
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.chkcovCoef.UseVisualStyleBackColor = True
         '
         'chkBlocksPerRead
         '
@@ -762,7 +762,7 @@ Partial Class frmLogisticRegression
     Friend WithEvents chkreportProgress As CheckBox
     Friend WithEvents txtReportProgress As TextBox
     Friend WithEvents txtBlocksPerRead As TextBox
-    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents chkcovCoef As CheckBox
     Friend WithEvents chkBlocksPerRead As CheckBox
     Friend WithEvents cbCovCoef As ComboBox
     Friend WithEvents chkrowSelection As CheckBox

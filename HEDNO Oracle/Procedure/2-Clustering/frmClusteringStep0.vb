@@ -4,6 +4,7 @@ Imports RDotNet
 
 Public Class frmClusteringStep0
     Public strLanguage_ClusteringStep0 As String()
+    Public strLanguage_ClusteringStep0_Tips As String()
     Private XDFFileExists As Boolean = False
     Private isStatisticsXDF As Boolean = True
 
@@ -105,7 +106,7 @@ Public Class frmClusteringStep0
     Private Sub btnClustering_Click(sender As Object, e As EventArgs) Handles btnClustering0.Click
         Try
             If FuncInProgress.Count = 0 Then
-                FuncInProgress.Add("Clustering Step 0")
+                FuncInProgress.Add(strLanguage_ClusteringStep0(14)) 'Clustering Step 0
                 fswModelExists.EnableRaisingEvents = False
                 pnlMain.Enabled = False
 
@@ -142,7 +143,7 @@ Public Class frmClusteringStep0
                             End If
 
                             Dim XDFCreatedOutOfNecessity As Boolean = Rdo.GetSymbol("XDFCreatedOutOfNecessity").AsLogical.First
-                            If XDFCreatedOutOfNecessity Then MsgBox(sa("The option '{0}' was checked but the file was unreachable and was created instead.", RemCtrHotLetter(chkUseExistingXDFFile)))
+                            If XDFCreatedOutOfNecessity Then MsgBox(sa(strLanguage_ClusteringStep0(15), RemCtrHotLetter(chkUseExistingXDFFile))) 'The option '{0}' was checked but the file was unreachable and was created instead.
                         End If
                     End If
                 Catch ex As Exception
@@ -152,11 +153,11 @@ Public Class frmClusteringStep0
                 End Try
 
                 fswModelExists.EnableRaisingEvents = True
-                FuncInProgress.Remove("Clustering Step 0")
+                FuncInProgress.Remove(strLanguage_ClusteringStep0(14)) 'Clustering Step 0
                 pnlMain.Enabled = True
                 Close()
             Else
-                MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+                MsgBox(sa(strLanguage_ClusteringStep0(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation) 'Please wait for: {0} to finish
             End If
 
         Catch ex As Exception
@@ -182,9 +183,9 @@ Public Class frmClusteringStep0
     Private Sub chkOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowDataSummary.CheckedChanged, chkShowGeoLocGraph.CheckedChanged,
                                                                                     chkShowVariableInfo.CheckedChanged, chkUseExistingXDFFile.CheckedChanged
         If chkShowDataSummary.Checked And chkShowGeoLocGraph.Checked And chkShowVariableInfo.Checked And chkUseExistingXDFFile.Checked Then
-            btnSelectAll.Text = "Unselect &All"
+            btnSelectAll.Text = strLanguage_ClusteringStep0(8) 'Unselect &All
         Else
-            btnSelectAll.Text = "Select &All"
+            btnSelectAll.Text = strLanguage_ClusteringStep0(12) 'Select &All
         End If
 
         Call ColourChkStatisticsMode()
@@ -193,7 +194,7 @@ Public Class frmClusteringStep0
     Private Shadows Sub FormClosing(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs) Handles MyBase.Closing
         If FuncInProgress.Count <> 0 Then
             e.Cancel = True
-            MsgBox(sa("Please wait for: {0} to finish", ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation)
+            MsgBox(sa(strLanguage_ClusteringStep0(13), ArrayBox(False, ";", 0, True, FuncInProgress)), MsgBoxStyle.Exclamation) 'Please wait for: {0} to finish
         End If
     End Sub
 
